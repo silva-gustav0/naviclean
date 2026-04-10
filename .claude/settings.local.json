@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.mindmeister.com)",
+      "Bash(npx supabase:*)",
+      "Bash(SUPABASE_ACCESS_TOKEN=\"sbp_71acd9e15b84d845dfd0b732d033355e413f3929\" npx supabase:*)",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(cp /tmp/naviclean-temp/eslint.config.mjs /c/git/naviclean/)",
+      "Bash(cp /tmp/naviclean-temp/next-env.d.ts /c/git/naviclean/)",
+      "Bash(cp /tmp/naviclean-temp/next.config.ts /c/git/naviclean/)",
+      "Bash(cp /tmp/naviclean-temp/tsconfig.json /c/git/naviclean/)",
+      "Bash(cp -r /tmp/naviclean-temp/public /c/git/naviclean/)",
+      "Bash(npm install:*)",
+      "Bash(npx shadcn@latest init --yes --base-color blue)",
+      "Bash(npx shadcn@latest init --yes)",
+      "Bash(npx shadcn@latest add button card input label form sonner separator)",
+      "Bash(npx shadcn@latest add button card input label form)",
+      "Bash(npx shadcn@latest add button card input label form separator badge avatar dropdown-menu sheet dialog alert-dialog tabs table skeleton scroll-area select textarea checkbox switch tooltip popover command calendar)",
+      "Bash(npm run:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/login)",
+      "Bash(curl -s -o /dev/null -w \" %{http_code}\" http://localhost:3000/cadastro)",
+      "Bash(curl -s -o /dev/null -w \" %{http_code}\" http://localhost:3000/dashboard)",
+      "Bash(curl -s http://localhost:3000/login)",
+      "Bash(python3 -c \"import sys,json; d=json.loads\\(sys.stdin.read\\(\\).split\\('__NEXT_DATA__'\\)[1].split\\('</script>'\\)[0].lstrip\\(' type=\\\\\"application/json\\\\\">'\\)\\); print\\(d.get\\('err',{}\\).get\\('message',''\\)[:500]\\)\")",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(curl -s -X POST https://stitch.googleapis.com/mcp -H 'Content-Type: application/json' -H 'X-Goog-Api-Key: AQ.Ab8RN6Ius9oBO2MZkJ0No1746vUa1PC-KFfKIp8vQQhVakF3bw' -d '{:*)",
+      "Bash(python3 -c ':*)",
+      "Bash(python3:*)"
+    ]
+  }
+}

@@ -1,30 +1,38 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { Navbar } from "@/components/landing/Navbar"
+import { HeroSection } from "@/components/landing/HeroSection"
+import { SocialProof } from "@/components/landing/SocialProof"
+import { FeaturesSection } from "@/components/landing/FeaturesSection"
+import { PricingSection } from "@/components/landing/PricingSection"
+import { TestimonialsSection } from "@/components/landing/TestimonialsSection"
+import { CTASection } from "@/components/landing/CTASection"
+import { Footer } from "@/components/landing/Footer"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "NaviClean — Gestão Odontológica com Precisão Clínica",
+  description:
+    "Plataforma SaaS completa para clínicas odontológicas. Agendamento online, prontuário digital, controle financeiro e muito mais. Comece grátis por 14 dias.",
+  openGraph: {
+    title: "NaviClean — Gestão Odontológica com Precisão Clínica",
+    description:
+      "A plataforma definitiva para dentistas de alta performance. +500 clínicas confiam no NaviClean.",
+    type: "website",
+  },
+}
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center gap-8 p-8 text-center">
-      <div className="space-y-4 max-w-2xl">
-        <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center mx-auto">
-          <span className="text-primary-foreground font-bold text-2xl">N</span>
-        </div>
-        <h1 className="text-4xl font-bold tracking-tight">
-          Gerencie sua clinica odontologica com inteligencia
-        </h1>
-        <p className="text-xl text-muted-foreground">
-          Agendamentos online, prontuarios digitais, controle financeiro e muito mais.
-          Tudo em uma so plataforma.
-        </p>
-        <div className="flex gap-3 justify-center pt-2">
-          <Link href="/cadastro">
-            <Button size="lg">Comecar 14 dias gratis</Button>
-          </Link>
-          <Link href="/planos">
-            <Button size="lg" variant="outline">Ver planos</Button>
-          </Link>
-        </div>
-        <p className="text-sm text-muted-foreground">Sem cartao de credito. Cancele quando quiser.</p>
-      </div>
-    </main>
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      <main className="pt-20">
+        <HeroSection />
+        <SocialProof />
+        <FeaturesSection />
+        <PricingSection />
+        <TestimonialsSection />
+        <CTASection />
+      </main>
+      <Footer />
+    </div>
   )
 }

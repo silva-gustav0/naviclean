@@ -46,7 +46,7 @@ export default function CadastroPage() {
   async function onSubmit(data: CadastroForm) {
     setIsLoading(true)
 
-    const { error } = await supabase.auth.signUp({
+    const { data: signUpData, error } = await supabase.auth.signUp({
       email: data.email,
       password: data.password,
       options: {
@@ -58,15 +58,25 @@ export default function CadastroPage() {
     })
 
     if (error) {
-      toast.error("Erro ao criar conta", { description: error.message })
+      const msg = error.message.includes("already registered")
+        ? "Este email já está cadastrado. Tente fazer login."
+        : error.message
+      toast.error("Erro ao criar conta", { description: msg })
       setIsLoading(false)
       return
     }
 
-    toast.success("Conta criada!", {
-      description: "Verifique seu email para confirmar o cadastro.",
-    })
-    router.push("/onboarding")
+    // Conta criada e auto-confirmada — redirecionar com hard reload
+    if (signUpData.session) {
+      toast.success("Conta criada com sucesso!")
+      window.location.href = "/onboarding"
+    } else {
+      // Caso email confirmation ainda esteja ativo
+      toast.success("Conta criada!", {
+        description: "Verifique seu email para confirmar o cadastro e depois faça login.",
+      })
+      setIsLoading(false)
+    }
   }
 
   return (

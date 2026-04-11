@@ -47,13 +47,19 @@ export default function LoginPage() {
     })
 
     if (error) {
-      toast.error("Erro ao entrar", { description: "Email ou senha incorretos." })
+      const msg =
+        error.message.includes("Email not confirmed")
+          ? "Confirme seu email antes de entrar."
+          : error.message.includes("Invalid login")
+          ? "Email ou senha incorretos."
+          : error.message
+      toast.error("Erro ao entrar", { description: msg })
       setIsLoading(false)
       return
     }
 
-    router.push("/dashboard")
-    router.refresh()
+    // Hard redirect para garantir que os cookies de sessão sejam enviados ao servidor
+    window.location.href = "/dashboard"
   }
 
   return (

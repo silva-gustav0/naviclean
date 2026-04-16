@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
-import { Settings, Clock, Building2, Bell, Shield, CreditCard, ChevronRight, User } from "lucide-react"
+import { Clock, Building2, Bell, Shield, CreditCard, ChevronRight, User, Heart, Tag, Percent } from "lucide-react"
 
 const settingsSections = [
   {
@@ -21,12 +21,36 @@ const settingsSections = [
     bg: "bg-emerald-50 dark:bg-emerald-950",
   },
   {
+    icon: Heart,
+    label: "Convênios",
+    description: "Planos e convênios aceitos pela clínica",
+    href: "/configuracoes/convenios",
+    color: "text-rose-600",
+    bg: "bg-rose-50 dark:bg-rose-950",
+  },
+  {
+    icon: Tag,
+    label: "Tabelas de Preço",
+    description: "Particular, convênios e preços por serviço",
+    href: "/configuracoes/tabelas-preco",
+    color: "text-cyan-600",
+    bg: "bg-cyan-50 dark:bg-cyan-950",
+  },
+  {
+    icon: Percent,
+    label: "Comissões e Split",
+    description: "Regras de comissão e custos diretos",
+    href: "/configuracoes/comissoes",
+    color: "text-violet-600",
+    bg: "bg-violet-50 dark:bg-violet-950",
+  },
+  {
     icon: User,
     label: "Meu Perfil",
     description: "Nome, foto e dados pessoais",
     href: "/configuracoes/perfil",
-    color: "text-violet-600",
-    bg: "bg-violet-50 dark:bg-violet-950",
+    color: "text-indigo-600",
+    bg: "bg-indigo-50 dark:bg-indigo-950",
   },
   {
     icon: Bell,

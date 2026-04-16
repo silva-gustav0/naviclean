@@ -11,7 +11,7 @@ export function SocialProof() {
     <section className="bg-slate-50 py-12 border-y border-slate-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <p className="text-center text-xs font-bold tracking-[0.2em] text-slate-400 mb-10 uppercase">
-          +500 clínicas confiam no NaviClean
+          +500 clínicas confiam no NaviClin
         </p>
         <div className="flex flex-wrap justify-center items-center gap-10 lg:gap-16 opacity-40 grayscale hover:opacity-60 hover:grayscale-0 transition-all duration-500">
           {logos.map((logo) => (

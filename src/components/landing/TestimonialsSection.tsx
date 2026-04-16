@@ -1,7 +1,7 @@
 const testimonials = [
   {
     quote:
-      "A transição para o NaviClean foi o divisor de águas na minha clínica. O prontuário digital é intuitivo e me economiza pelo menos 1 hora de burocracia por dia.",
+      "A transição para o NaviClin foi o divisor de águas na minha clínica. O prontuário digital é intuitivo e me economiza pelo menos 1 hora de burocracia por dia.",
     name: "Dra. Camila Santos",
     role: "CEO, SmileCare Clinic — São Paulo",
     avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuAR43bX0FCoyWxHUE9cmnEEbbqHeiMwgvdsKQV7YIuolNEpzEO3HQjDIKGQNS8VSvBbAlRarf5Ndhn5881266jdKz42_JhlFOmDP0iQvuyCprXI2cRf077SUhI-gZbgRzLzuvzgh9EtIWxzHvHfmc5-ZmW2lD9wbC_pnmwwXFEMw2YmYRq4-oUtSyccOCG5NBvBzNbV7DYeTmxjZn1nwLKWHTlUZPj21omkH4KMnC1jhTxrCq3yMy6ce7KOBZhFq55-oliGFZHdoWc",
@@ -9,7 +9,7 @@ const testimonials = [
   },
   {
     quote:
-      "O controle financeiro do NaviClean é incomparável. Finalmente tenho clareza sobre meus repasses e lucratividade real de cada procedimento.",
+      "O controle financeiro do NaviClin é incomparável. Finalmente tenho clareza sobre meus repasses e lucratividade real de cada procedimento.",
     name: "Dr. Ricardo Menezes",
     role: "Diretor Clínico, Menezes Odontologia — Curitiba",
     avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuBMMzgAf2GVFCNA7WepFo4XGveDlauvuSJfFa8B9kh5oWXLXOyi4HPmXnTxD0BwyHUTU1p_DbVxUdcPkxpXA3jKAuTHkIcNYqRwsBq3tSRjXyeqQQIATYjoS81T_wWD1rFf-zudV0_7M0Hd3n-HWo2NsEXwCXVqHlwogeEqJM9dL2fKOXZfsgQr00aeBCcW-vWyiDoESx3nZd65nG3JsW3Ok2WE3r9OUmE-14Owoi8TW5u-G-qxU6-bRPZWu6J9LVrmIawPJn5gWVs",
@@ -26,7 +26,7 @@ const testimonials = [
   },
   {
     quote:
-      "Gerenciar 3 unidades ao mesmo tempo parecia impossível. Com o NaviClean, tenho uma visão consolidada de tudo em tempo real. Recomendo para qualquer rede.",
+      "Gerenciar 3 unidades ao mesmo tempo parecia impossível. Com o NaviClin, tenho uma visão consolidada de tudo em tempo real. Recomendo para qualquer rede.",
     name: "Dr. Felipe Andrade",
     role: "Diretor, Grupo DentalPro — São Paulo",
     avatar: "FA",

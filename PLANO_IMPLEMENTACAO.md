@@ -1,4 +1,4 @@
-# NaviClean - Plano de Implementacao Completo
+# NaviClin - Plano de Implementacao Completo
 ## Plataforma SaaS para Clinicas Odontologicas
 
 ---
@@ -18,7 +18,7 @@
 
 ### Estrutura de Pastas
 ```
-naviclean/
+naviclin/
 ├── public/
 │   ├── images/
 │   ├── icons/
@@ -201,7 +201,7 @@ CREATE TABLE clinics (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     owner_id UUID NOT NULL REFERENCES profiles(id),
     name TEXT NOT NULL,
-    slug TEXT UNIQUE NOT NULL, -- URL amigavel: naviclean.com/c/minha-clinica
+    slug TEXT UNIQUE NOT NULL, -- URL amigavel: naviclin.com/c/minha-clinica
     description TEXT,
     logo_url TEXT,
     cover_image_url TEXT,
@@ -1016,7 +1016,7 @@ WHATSAPP_API_TOKEN=
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_APP_NAME=NaviClean
+NEXT_PUBLIC_APP_NAME=NaviClin
 ```
 
 ### Supabase Storage Buckets

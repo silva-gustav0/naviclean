@@ -21,7 +21,7 @@ export function CTASection() {
           </h2>
 
           <p className="text-lg text-white/80 leading-relaxed">
-            Junte-se a centenas de clínicas que já transformaram seu atendimento com o NaviClean.
+            Junte-se a centenas de clínicas que já transformaram seu atendimento com o NaviClin.
             14 dias grátis, sem cartão de crédito.
           </p>
 

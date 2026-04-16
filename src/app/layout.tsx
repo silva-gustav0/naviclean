@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "NaviClean - Plataforma para Clinicas Odontologicas",
-    template: "%s | NaviClean",
+    default: "NaviClin - Plataforma para Clinicas Odontologicas",
+    template: "%s | NaviClin",
   },
   description:
     "Gerencie sua clinica odontologica com facilidade. Agendamentos, prontuarios, financeiro e muito mais em uma so plataforma.",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    siteName: "NaviClean",
+    siteName: "NaviClin",
   },
 }
 

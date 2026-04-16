@@ -9,13 +9,13 @@ import { Footer } from "@/components/landing/Footer"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "NaviClean — Gestão Odontológica com Precisão Clínica",
+  title: "NaviClin — Gestão Odontológica com Precisão Clínica",
   description:
     "Plataforma SaaS completa para clínicas odontológicas. Agendamento online, prontuário digital, controle financeiro e muito mais. Comece grátis por 14 dias.",
   openGraph: {
-    title: "NaviClean — Gestão Odontológica com Precisão Clínica",
+    title: "NaviClin — Gestão Odontológica com Precisão Clínica",
     description:
-      "A plataforma definitiva para dentistas de alta performance. +500 clínicas confiam no NaviClean.",
+      "A plataforma definitiva para dentistas de alta performance. +500 clínicas confiam no NaviClin.",
     type: "website",
   },
 }

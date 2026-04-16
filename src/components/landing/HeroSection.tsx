@@ -56,7 +56,7 @@ export function HeroSection() {
             ))}
           </div>
           <p className="text-sm text-slate-500">
-            <span className="font-bold text-slate-800">+500 dentistas</span> já usam o NaviClean
+            <span className="font-bold text-slate-800">+500 dentistas</span> já usam o NaviClin
           </p>
         </div>
       </div>
@@ -67,7 +67,7 @@ export function HeroSection() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz6Y2Z_eDUp_D2QYOKRs39Tf4-ZQg1lt4i1FPydQZVt8bbiuOtlqCwGIfLLC8jBvSK-OWy9eSi-TJIA8a0Q77jkiel4OAWIk6ik1Y8zW5gUNA2j57JWhCOEH9vvzRht2fSKUsJGJ9g-KzVd-gFh6B0zzMH5kE6qKAvbk2VrYZyWO439H7xPhk9NAqqU7kzB2El_HNfE4_4OtBdpQZ2fOmq1A7GdpVwvzP_rjwK6QlTZr_oFZnLA2M4rUzEQ24M33iL_PtkT2w7x_A"
-          alt="Dashboard NaviClean - painel de gestão odontológica"
+          alt="Dashboard NaviClin - painel de gestão odontológica"
           className="relative rounded-2xl shadow-2xl border border-slate-100 object-cover w-full"
         />
       </div>

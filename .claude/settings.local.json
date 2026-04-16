@@ -26,7 +26,8 @@
       "Bash(curl -s -X POST https://stitch.googleapis.com/mcp -H 'Content-Type: application/json' -H 'X-Goog-Api-Key: AQ.Ab8RN6Ius9oBO2MZkJ0No1746vUa1PC-KFfKIp8vQQhVakF3bw' -d '{:*)",
       "Bash(python3 -c ':*)",
       "Bash(python3:*)",
-      "Bash(npx vercel:*)"
+      "Bash(npx vercel:*)",
+      "Bash(npx tsc *)"
     ]
   }
 }

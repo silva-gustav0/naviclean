@@ -35,7 +35,7 @@ export function Footer() {
               >
                 N
               </div>
-              <span className="text-white font-black text-lg tracking-tight">NaviClean</span>
+              <span className="text-white font-black text-lg tracking-tight">NaviClin</span>
             </Link>
             <p className="text-sm leading-relaxed text-slate-500">
               A plataforma de gestão odontológica mais completa do Brasil.
@@ -55,7 +55,7 @@ export function Footer() {
               </a>
               {/* Instagram */}
               <a
-                href="https://instagram.com/naviclean"
+                href="https://instagram.com/naviclin"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-pink-600 transition-colors"
@@ -67,7 +67,7 @@ export function Footer() {
               </a>
               {/* LinkedIn */}
               <a
-                href="https://linkedin.com/company/naviclean"
+                href="https://linkedin.com/company/naviclin"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-blue-600 transition-colors"
@@ -102,7 +102,7 @@ export function Footer() {
 
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-slate-600">
-            © 2026 NaviClean. Todos os direitos reservados.
+            © 2026 NaviClin. Todos os direitos reservados.
           </p>
           <p className="text-xs text-slate-700">
             Feito com ❤️ para a odontologia brasileira

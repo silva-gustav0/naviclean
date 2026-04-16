@@ -1,27 +1,7 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
-import Link from "next/link"
-import {
-  LayoutDashboard,
-  Calendar,
-  Users,
-  DollarSign,
-  UserCog,
-  Stethoscope,
-  Megaphone,
-  Settings,
-} from "lucide-react"
-
-const navItems = [
-  { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-  { href: "/agenda", icon: Calendar, label: "Agenda" },
-  { href: "/pacientes", icon: Users, label: "Pacientes" },
-  { href: "/financeiro", icon: DollarSign, label: "Financeiro" },
-  { href: "/equipe", icon: UserCog, label: "Equipe" },
-  { href: "/tratamentos", icon: Stethoscope, label: "Tratamentos" },
-  { href: "/marketing", icon: Megaphone, label: "Marketing" },
-  { href: "/configuracoes", icon: Settings, label: "Configuracoes" },
-]
+import { SidebarNav } from "@/components/dashboard/sidebar-nav"
+import { Bell, Search } from "lucide-react"
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -29,49 +9,50 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   if (!user) redirect("/login")
 
+  const { data: clinic } = await supabase
+    .from("clinics")
+    .select("name")
+    .eq("owner_id", user.id)
+    .single()
+
+  const fullName: string = (user.user_metadata?.full_name as string) ?? user.email ?? ""
+  const initials = fullName
+    .split(" ")
+    .slice(0, 2)
+    .map((n: string) => n[0])
+    .join("")
+    .toUpperCase() || "?"
+
   return (
-    <div className="flex h-screen overflow-hidden">
-      {/* Sidebar */}
-      <aside className="hidden md:flex w-60 flex-col border-r bg-sidebar">
-        <div className="flex h-14 items-center px-4 border-b">
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xs">N</span>
-            </div>
-            <span className="font-bold">NaviClean</span>
-          </Link>
-        </div>
+    <div className="flex h-screen overflow-hidden bg-slate-50 dark:bg-slate-900">
+      <SidebarNav
+        clinicName={clinic?.name ?? "Minha Clínica"}
+        userEmail={user.email ?? ""}
+        userInitials={initials}
+      />
 
-        <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
-            >
-              <item.icon className="h-4 w-4 shrink-0" />
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="p-3 border-t">
-          <form action="/api/auth/signout" method="post">
-            <button
-              type="submit"
-              className="w-full text-left flex items-center gap-3 px-3 py-2 rounded-md text-sm text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
-            >
-              Sair
-            </button>
-          </form>
-        </div>
-      </aside>
-
-      {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <header className="h-14 border-b flex items-center px-6 shrink-0">
-          <div className="ml-auto flex items-center gap-3">
-            <span className="text-sm text-muted-foreground">{user.email}</span>
+        {/* Topbar */}
+        <header className="h-16 border-b bg-white dark:bg-slate-950 flex items-center px-6 shrink-0 gap-4">
+          <div className="flex-1 max-w-sm">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Buscar paciente, agendamento..."
+                className="w-full pl-9 pr-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+
+          <div className="ml-auto flex items-center gap-2">
+            <button className="relative w-9 h-9 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center transition-colors">
+              <Bell className="h-4 w-4 text-muted-foreground" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-blue-600" />
+            </button>
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-white text-xs font-bold">
+              {initials}
+            </div>
           </div>
         </header>
 

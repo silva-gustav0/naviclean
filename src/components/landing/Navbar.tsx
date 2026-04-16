@@ -25,7 +25,7 @@ export function Navbar() {
           >
             N
           </div>
-          <span className="text-xl font-black tracking-tight text-slate-900">NaviClean</span>
+          <span className="text-xl font-black tracking-tight text-slate-900">NaviClin</span>
         </Link>
 
         {/* Desktop nav */}

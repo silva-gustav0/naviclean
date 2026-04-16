@@ -66,7 +66,42 @@ export default async function ClinicProfilePage({ params }: Props) {
 
   const fmt = (v: number) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://naviclin.com.br"
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    name: clinic.name,
+    description: clinic.description ?? undefined,
+    url: `${baseUrl}/c/${slug}`,
+    image: clinic.logo_url ?? undefined,
+    telephone: clinic.phone ?? undefined,
+    email: clinic.email ?? undefined,
+    address: clinic.address_street
+      ? {
+          "@type": "PostalAddress",
+          streetAddress: clinic.address_street,
+          addressLocality: clinic.address_city,
+          addressRegion: clinic.address_state,
+          postalCode: clinic.address_zip,
+          addressCountry: "BR",
+        }
+      : undefined,
+    aggregateRating:
+      avgRating && reviews && reviews.length > 0
+        ? {
+            "@type": "AggregateRating",
+            ratingValue: avgRating.toFixed(1),
+            reviewCount: reviews.length,
+          }
+        : undefined,
+  }
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     <div className="space-y-8">
       {/* Hero */}
       <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#0D3A6B] to-[#1A5599] text-white">
@@ -229,5 +264,6 @@ export default async function ClinicProfilePage({ params }: Props) {
         </div>
       </div>
     </div>
+    </>
   )
 }

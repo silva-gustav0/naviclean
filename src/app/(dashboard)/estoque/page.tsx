@@ -3,6 +3,8 @@ import { redirect } from "next/navigation"
 import { Package, AlertTriangle, Plus } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
+import { StockItemModal } from "@/components/dashboard/modals/stock-item-modal"
+import { StockEntryModal } from "@/components/dashboard/modals/stock-entry-modal"
 
 export default async function EstoquePage() {
   const supabase = await createClient()
@@ -55,12 +57,8 @@ export default async function EstoquePage() {
           >
             Importar NF-e
           </Link>
-          <Link
-            href="/estoque/novo"
-            className="flex items-center gap-1.5 text-xs px-3 py-2 bg-[#0D3A6B] text-white rounded-lg hover:bg-[#1A5599] transition-colors font-medium"
-          >
-            <Plus className="h-3.5 w-3.5" />Novo item
-          </Link>
+          <StockEntryModal items={(items ?? []).map((i) => ({ id: i.id, name: i.name, unit: i.unit }))} />
+          <StockItemModal />
         </div>
       </div>
 
@@ -92,9 +90,7 @@ export default async function EstoquePage() {
             </div>
             <h3 className="font-semibold text-base mb-1">Estoque vazio</h3>
             <p className="text-muted-foreground text-sm mb-4">Cadastre itens ou importe uma NF-e para começar.</p>
-            <Link href="/estoque/novo" className="inline-flex items-center gap-1.5 text-sm px-4 py-2 bg-[#0D3A6B] text-white rounded-lg">
-              <Plus className="h-4 w-4" />Novo item
-            </Link>
+            <StockItemModal />
           </div>
         ) : (
           <table className="w-full text-sm">
@@ -106,6 +102,7 @@ export default async function EstoquePage() {
                 <th className="text-right font-medium text-xs text-muted-foreground px-4 py-3">Mínimo</th>
                 <th className="text-left font-medium text-xs text-muted-foreground px-4 py-3">Vencimento</th>
                 <th className="text-center font-medium text-xs text-muted-foreground px-4 py-3">Status</th>
+                <th className="px-4 py-3"></th>
               </tr>
             </thead>
             <tbody className="divide-y">
@@ -134,6 +131,9 @@ export default async function EstoquePage() {
                     ) : (
                       <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200 text-[10px]">OK</Badge>
                     )}
+                  </td>
+                  <td className="px-4 py-3 text-right">
+                    <StockItemModal item={item} />
                   </td>
                 </tr>
               ))}

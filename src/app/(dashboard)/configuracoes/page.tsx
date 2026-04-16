@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
-import { Clock, Building2, Bell, Shield, CreditCard, ChevronRight, User, Heart, Tag, Percent } from "lucide-react"
+import { Clock, Building2, Bell, Shield, CreditCard, ChevronRight, User, Heart, Tag, Percent, ScrollText } from "lucide-react"
 
 const settingsSections = [
   {
@@ -75,6 +75,14 @@ const settingsSections = [
     href: "/configuracoes/seguranca",
     color: "text-slate-600",
     bg: "bg-slate-50 dark:bg-slate-800",
+  },
+  {
+    icon: ScrollText,
+    label: "Auditoria LGPD",
+    description: "Log de acessos e modificações sensíveis",
+    href: "/configuracoes/auditoria",
+    color: "text-orange-600",
+    bg: "bg-orange-50 dark:bg-orange-950",
   },
 ]
 

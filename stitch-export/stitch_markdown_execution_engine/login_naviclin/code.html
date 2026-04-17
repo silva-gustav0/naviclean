@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | NaviClin</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Manrope & Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#f6faff",
+                      "secondary": "#775928",
+                      "tertiary": "#00244b",
+                      "secondary-fixed-dim": "#e8c085",
+                      "surface-container-high": "#e1e9f2",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#293138",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-container": "#785a29",
+                      "primary-fixed-dim": "#a6c8ff",
+                      "on-secondary-fixed": "#281800",
+                      "on-background": "#151c23",
+                      "tertiary-container": "#003a72",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#fdd497",
+                      "tertiary-fixed": "#d5e3ff",
+                      "surface": "#f6faff",
+                      "on-primary": "#ffffff",
+                      "surface-variant": "#dbe3ec",
+                      "outline": "#737780",
+                      "surface-container-highest": "#dbe3ec",
+                      "tertiary-fixed-dim": "#a7c8ff",
+                      "surface-container-low": "#ecf4fd",
+                      "secondary-fixed": "#ffddaf",
+                      "surface-dim": "#d3dbe4",
+                      "primary": "#00244a",
+                      "background": "#f6faff",
+                      "on-error-container": "#93000a",
+                      "surface-tint": "#3b5f92",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#d5e3ff",
+                      "on-surface-variant": "#43474f",
+                      "error": "#ba1a1a",
+                      "inverse-primary": "#a6c8ff",
+                      "inverse-on-surface": "#eaf2fb",
+                      "on-surface": "#151c23",
+                      "on-tertiary-container": "#75a5ef",
+                      "surface-container": "#e7eff8",
+                      "on-primary-fixed-variant": "#204779",
+                      "primary-container": "#0d3a6b",
+                      "outline-variant": "#c3c6d0",
+                      "on-tertiary-fixed": "#001b3c",
+                      "on-primary-container": "#81a5dd",
+                      "on-tertiary-fixed-variant": "#004788",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#5d4212",
+                      "on-primary-fixed": "#001c3b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .btn-primary-gradient {
+            background: linear-gradient(135deg, #00244a 0%, #0d3a6b 100%);
+        }
+        .shadow-premium {
+            box-shadow: 0px 12px 32px -4px rgba(21, 28, 35, 0.06);
+        }
+        .ghost-border {
+            border: 1px solid rgba(195, 198, 208, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex flex-col">
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-stretch min-h-screen">
+<!-- Left Section: Authentication Form -->
+<section class="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 bg-surface py-12">
+<!-- Brand Anchor (Identity from JSON: NaviClin) -->
+<div class="mb-12">
+<span class="text-2xl font-extrabold tracking-tight text-primary font-headline">NaviClin</span>
+</div>
+<div class="max-w-md w-full">
+<!-- Editorial Typography Hierarchy -->
+<h1 class="text-4xl font-extrabold font-headline text-primary mb-2 tracking-tight">Welcome back</h1>
+<p class="text-on-surface-variant font-body mb-10">Access your clinical dashboard and patient records.</p>
+<form class="space-y-6">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-label" for="email">Email Address</label>
+<div class="relative">
+<input class="w-full px-4 py-3 bg-surface-container-lowest ghost-border rounded-lg focus:ring-2 focus:ring-primary-fixed focus:border-primary outline-none transition-all duration-200 placeholder:text-outline/50" id="email" name="email" placeholder="dr.smith@naviclin.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-label" for="password">Password</label>
+<a class="text-xs font-semibold text-primary hover:text-secondary transition-colors font-label" href="#">Forgot Password?</a>
+</div>
+<div class="relative">
+<input class="w-full px-4 py-3 bg-surface-container-lowest ghost-border rounded-lg focus:ring-2 focus:ring-primary-fixed focus:border-primary outline-none transition-all duration-200" id="password" name="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me & Login -->
+<div class="flex items-center space-x-2 py-2">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" id="remember" type="checkbox"/>
+<label class="text-sm text-on-surface-variant font-body" for="remember">Remember this device for 30 days</label>
+</div>
+<!-- Primary Action (Surgical Glow Gradient) -->
+<button class="w-full py-4 px-6 btn-primary-gradient text-on-primary font-headline font-bold rounded-lg shadow-premium hover:opacity-90 active:scale-[0.98] transition-all duration-200" type="submit">
+                        Login to Dashboard
+                    </button>
+</form>
+<!-- Divider -->
+<div class="relative my-10">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/30"></div>
+</div>
+<div class="relative flex justify-center text-xs uppercase">
+<span class="bg-surface px-4 text-on-surface-variant font-label tracking-widest font-semibold">Or continue with</span>
+</div>
+</div>
+<!-- Secondary Action (Google Login) -->
+<button class="w-full flex items-center justify-center gap-3 py-3.5 px-6 bg-surface-container-low ghost-border rounded-lg text-primary font-body font-semibold hover:bg-surface-container-high active:scale-[0.98] transition-all duration-200" type="button">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="currentColor"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="currentColor"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="currentColor"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z" fill="currentColor"></path>
+</svg>
+                    Sign in with Google
+                </button>
+<p class="mt-10 text-center text-sm text-on-surface-variant font-body">
+                    Don't have an account? <a class="text-primary font-bold hover:underline underline-offset-4 transition-all" href="#">Start a free trial</a>
+</p>
+</div>
+<!-- Footer from JSON Blueprint (Suppressed in Shell, rendered manually here) -->
+<div class="mt-auto pt-12 flex items-center gap-6 text-[10px] text-outline font-label uppercase tracking-widest">
+<span class="font-bold text-primary">© 2024 NaviClin</span>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Security</a>
+</div>
+</section>
+<!-- Right Section: Curated Image & Testimonial -->
+<section class="hidden lg:flex w-1/2 bg-primary relative overflow-hidden flex-col justify-end p-20">
+<!-- Background Image with Detailed Prompt -->
+<div class="absolute inset-0 z-0">
+<img alt="Premium Dental Clinic Interior" class="w-full h-full object-cover opacity-40 mix-blend-luminosity scale-110" data-alt="Modern high-end dental clinic with warm ambient lighting, marble surfaces, and professional medical equipment in soft focus background, editorial architectural photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqUCtIUx2KI6i-jJwEQNfQwdLqEZ-7iBYCrU0DjPzHnrijPar-2RvpiLS_TLSLzRLyGMKJ3_-D1xx43pyVX0yFCfz54QT_DioWRT-rx7Dp1ubrAnc_AaT5EH_rm1Ksck5sXWgIhBoCpsho8SF1QHhx3P48jvhf4t95DsDNg11p1gCAuPDmPfHqGVUya4OLpxnlJq4zo-bEgGIa0ZY4ycjH_Zcv9WDakxUOIkxt0DPrzhctzeNEwcoXxzwYXv7XpOqlsKFFPEMPVBw"/>
+<!-- Tonal Layering Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent"></div>
+</div>
+<!-- Testimonial Content (Editorial Style) -->
+<div class="relative z-10 max-w-lg">
+<!-- Surgical Gold Accent -->
+<div class="w-12 h-1 bg-secondary mb-8"></div>
+<h2 class="text-4xl font-extrabold font-headline text-on-primary mb-6 leading-tight">
+                    "The transition to NaviClin has redefined our practice's efficiency. It's the gold standard in dental SaaS."
+                </h2>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary/30">
+<img alt="Dr. Elena Rossi" class="w-full h-full object-cover" data-alt="Professional portrait of a female doctor in a white coat smiling confidently against a soft neutral background, premium lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArGvliaOew8yEWzA32b7iGqkvRdRhkMisSrOb6zgGnlbMqDANtRnO6l3KCnqJEkd0XnsO9Y55Zc279GplQ-M_el9QujreIUT7ANNM3fDmxOirrgha0bYBEIQaniymmmXWUUetuYkTXOenj4Ye9slw1rqAKCaK_FWZKxat-tc_Lvb2eEb8LYpF4ATOHpudH9sad7gMNcFb3xshvX5DZ2LYIR_c0TXLQTh7M6BDwY3o_GirxXkWV12Ca_kLvgNkk92obJ5aAEtfKiJw"/>
+</div>
+<div>
+<p class="text-on-primary font-bold font-headline">Dr. Elena Rossi</p>
+<p class="text-on-primary-container text-sm font-label uppercase tracking-wider">Clinical Director, City Dental Center</p>
+</div>
+</div>
+</div>
+<!-- Subtle Decorative Elements -->
+<div class="absolute top-20 right-20 z-10 opacity-10">
+<span class="material-symbols-outlined text-[180px] text-on-primary">medical_services</span>
+</div>
+</section>
+</main>
+<!-- Navigation suppression check: This is a task-focused Transactional screen. Shared BottomNavBar/SideNav are suppressed per guidelines. -->
+</body></html>

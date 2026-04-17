@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NaviClin - Sala de Espera</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#a7c8ff",
+                        "surface-container-high": "#e1e9f2",
+                        "on-primary-container": "#81a5dd",
+                        "surface-container-highest": "#dbe3ec",
+                        "primary-fixed": "#d5e3ff",
+                        "on-tertiary-container": "#75a5ef",
+                        "secondary-container": "#fdd497",
+                        "on-primary-fixed": "#001c3b",
+                        "on-primary-fixed-variant": "#204779",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#293138",
+                        "primary-fixed-dim": "#a6c8ff",
+                        "tertiary-container": "#003a72",
+                        "on-secondary-container": "#785a29",
+                        "background": "#f6faff",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#3b5f92",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#d5e3ff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#5d4212",
+                        "inverse-on-surface": "#eaf2fb",
+                        "outline-variant": "#c3c6d0",
+                        "on-secondary-fixed": "#281800",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#e7eff8",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffddaf",
+                        "on-tertiary-fixed": "#001b3c",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#a6c8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#43474f",
+                        "tertiary": "#00244b",
+                        "outline": "#737780",
+                        "primary": "#00244a",
+                        "secondary-fixed-dim": "#e8c085",
+                        "surface-variant": "#dbe3ec",
+                        "surface": "#f6faff",
+                        "secondary": "#775928",
+                        "on-tertiary-fixed-variant": "#004788",
+                        "primary-container": "#0d3a6b",
+                        "on-surface": "#151c23",
+                        "surface-dim": "#d3dbe4",
+                        "on-background": "#151c23",
+                        "surface-bright": "#f6faff",
+                        "surface-container-low": "#ecf4fd",
+                        "success": "#10B981",
+                        "success-container": "#D1FAE5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen flex selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SideNavBar (from JSON) -->
+<nav class="bg-[#ecf4fd] dark:bg-slate-900 text-[#00244a] dark:text-blue-400 font-[Inter] h-screen w-64 fixed left-0 top-0 border-r-0 flex flex-col p-4 gap-2 z-40">
+<!-- Header -->
+<div class="mb-8 px-2 mt-4">
+<h1 class="text-lg font-bold text-[#00244a] dark:text-blue-100 font-headline tracking-tight">NaviClin</h1>
+<p class="text-xs text-on-surface-variant">Clinical Curator</p>
+</div>
+<!-- CTA -->
+<button class="mb-6 w-full py-3 px-4 rounded-lg bg-gradient-to-br from-primary to-primary-container text-on-primary font-label text-[0.75rem] uppercase tracking-wider font-medium shadow-[0px_12px_32px_-4px_rgba(21,28,35,0.06)] hover:opacity-90 transition-opacity flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            Novo Agendamento
+        </button>
+<!-- Main Tabs -->
+<div class="flex-1 flex flex-col gap-2">
+<a class="text-slate-600 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="calendar_month">calendar_month</span>
+<span>Agenda</span>
+</a>
+<!-- Active Tab -->
+<a class="bg-[#ffffff] dark:bg-slate-800 text-[#00244a] dark:text-blue-200 rounded-lg shadow-sm opacity-80 hover:translate-x-1 transition-transform duration-200 flex items-center gap-3 px-3 py-2.5 text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+<span>Sala de Espera</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="assignment_ind">assignment_ind</span>
+<span>Pacientes</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="payments">payments</span>
+<span>Financeiro</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 flex items-center gap-3 px-3 py-2.5 rounded-lg text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="analytics">analytics</span>
+<span>Relatórios</span>
+</a>
+</div>
+<!-- Footer Tabs -->
+<div class="mt-auto border-t border-outline-variant/20 pt-4 flex flex-col gap-2">
+<a class="text-slate-600 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 flex items-center gap-3 px-3 py-2 rounded-lg text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="contact_support">contact_support</span>
+<span>Suporte</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 flex items-center gap-3 px-3 py-2 rounded-lg text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="logout">logout</span>
+<span>Sair</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col relative min-h-screen">
+<!-- TopNavBar (from JSON, modified for inner page context) -->
+<header class="bg-[#f6faff]/80 dark:bg-slate-950/80 backdrop-blur-md text-[#00244a] dark:text-blue-400 docked full-width top-0 sticky z-30 shadow-[0px_12px_32px_-4px_rgba(21,28,35,0.04)] flex justify-between items-center px-10 py-4 w-full">
+<div class="flex items-center gap-4">
+<h2 class="font-headline font-bold text-2xl tracking-tight text-primary">Sala de Espera</h2>
+<div class="h-6 w-px bg-outline-variant/30"></div>
+<span class="font-label text-sm text-on-surface-variant font-medium flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-success">fiber_manual_record</span>
+                     8 Pacientes Aguardando
+                 </span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-sm focus:outline-none focus:border-outline-variant focus:ring-2 focus:ring-primary-fixed transition-all w-64 placeholder:text-outline/70" placeholder="Buscar paciente..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-500 hover:text-[#00244a] transition-colors rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-[#00244a] transition-colors rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-container-high overflow-hidden ml-2 border-2 border-surface-container-lowest shadow-sm">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="professional confident male doctor portrait close up bright clinical setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLLTehPAK91-lGKCZo7JlWsknSCaFv6QOaq5BgfitqtkDcQpUEbHGso_T947tThjYLhw_Xph8MEzotgnifANqx4k75ZdoOFy4XjIE9OevfYCVZA5p8MkclwhgnYqZJDA5g19YY8eHLwLWubtUHt_QRVqN0-552aPbzkGEv2sIttlHv-uXaxyDKXQZ-vfRllBNuandfPCzDOquTUMQi8HxsnaIWRoiK0WdxBpe2reJp4SYepTBLia_6UI5HZe7qq5W7JXewePBYv_Y"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="p-10 flex-1">
+<!-- Bento Grid Layout for Waiting Room -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Main Queue Column (Spans 2) -->
+<div class="xl:col-span-2 space-y-6">
+<div class="flex justify-between items-end mb-2">
+<h3 class="font-headline font-bold text-xl text-primary">Fila Principal</h3>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-lowest rounded-full text-xs font-label font-medium text-on-surface-variant border border-outline-variant/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">filter_list</span> Filtrar
+                            </span>
+<span class="px-3 py-1 bg-surface-container-lowest rounded-full text-xs font-label font-medium text-on-surface-variant border border-outline-variant/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">sort</span> Ordenar
+                            </span>
+</div>
+</div>
+<!-- Patient Card: Critical/Long Wait -->
+<div class="bg-surface-container-lowest rounded-2xl p-5 flex items-center gap-6 shadow-[0px_12px_32px_-4px_rgba(21,28,35,0.04)] relative overflow-hidden group">
+<!-- Alert indicator line -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+<div class="relative">
+<img alt="Maria Clara" class="w-16 h-16 rounded-full object-cover border-2 border-surface" data-alt="portrait of elderly confident hispanic woman smiling gently clinical background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6L_ayvae4D26tkDudHRREP8MXXN0VUTgB3KyFXI0w6_17eTxuXqaLH5X50zsoN19vFzaH1YFWv0xyJmAN5PArSpQWvkFc7a4zzKLZbMIvNTBBS8w20F1LBAPaiu6BTMziXhTOs062dTrO8zpTqn4ctYt2Adq3cmXc5eBqdbHHl0vOuHWle2UKfUKm78Zd3RD419Ottl3NygOAUc_CZeytCjNgGuij-ANQwO-OQVAbKvF0JeJXEvosjsF-S9cJBceZqPm-CnU6KLg"/>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-error rounded-full border-2 border-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] text-on-error">priority_high</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-headline font-bold text-lg text-primary">Maria Clara Oliveira</h4>
+<p class="font-body text-sm text-on-surface-variant">Consulta de Rotina • Particular</p>
+</div>
+<div class="text-right">
+<div class="font-headline font-bold text-error text-lg tracking-tight">45:12</div>
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider">Tempo de Espera</p>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="flex items-center gap-4 text-sm font-body text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">schedule</span>
+                                        Chegada: 08:15
+                                    </div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">stethoscope</span>
+                                        Dra. Ana Silva
+                                    </div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-transparent text-primary hover:bg-surface-container-low rounded-lg font-label text-sm font-medium transition-colors">
+                                        Pular
+                                    </button>
+<button class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label text-sm font-medium hover:opacity-90 transition-opacity shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">campaign</span>
+                                        Chamar
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Patient Card: Normal -->
+<div class="bg-surface-container-lowest rounded-2xl p-5 flex items-center gap-6 shadow-[0px_12px_32px_-4px_rgba(21,28,35,0.04)] relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<img alt="João Mendes" class="w-16 h-16 rounded-full object-cover" data-alt="portrait of middle aged caucasian man glasses calm expression bright clinical background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSxHsbndO6xERgwINOx6-FX3LSM9gybH7A7gZOE9MjLYQ3yL8kcjf56C-ecxD8nIcFKi5n9tH88ezJJeQIad79FP0Pu_7iaQTmeHde558m6oVaWymJBiorGgyy_cj_Y1AeJUzjJ0tUD3xJOqYdkj3pjMhvuxxL99eJWKmi9yp1XygKxpl-Hfa3Nyb-WFZaaMZ7h64pXA8D0UZgZmRZjQ_tC2iz2eKT-o_meRwP4HIXT9rE6QcIYFglHm8jigb_EfRpeo5lOFcU3aI"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-headline font-bold text-lg text-primary">João Mendes Costa</h4>
+<p class="font-body text-sm text-on-surface-variant">Retorno • Unimed</p>
+</div>
+<div class="text-right">
+<div class="font-headline font-bold text-secondary text-lg tracking-tight">12:05</div>
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider">Tempo de Espera</p>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="flex items-center gap-4 text-sm font-body text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">schedule</span>
+                                        Chegada: 08:45
+                                    </div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">stethoscope</span>
+                                        Dr. Carlos Eduardo
+                                    </div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-transparent text-primary hover:bg-surface-container-low rounded-lg font-label text-sm font-medium transition-colors">
+                                        Pular
+                                    </button>
+<button class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label text-sm font-medium hover:opacity-90 transition-opacity shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">campaign</span>
+                                        Chamar
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Column (Status/Quick Actions) -->
+<div class="space-y-6">
+<h3 class="font-headline font-bold text-xl text-primary mb-2">Painel de Status</h3>
+<!-- Stats Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-[0px_12px_32px_-4px_rgba(21,28,35,0.04)]">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-1">Tempo Médio</p>
+<div class="font-headline font-bold text-2xl text-primary">18m</div>
+</div>
+<div>
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-1">Em Atendimento</p>
+<div class="font-headline font-bold text-2xl text-success">3</div>
+</div>
+</div>
+</div>
+<!-- Doctors Status -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-[0px_12px_32px_-4px_rgba(21,28,35,0.04)]">
+<h4 class="font-headline font-bold text-base text-primary mb-4">Profissionais Disponíveis</h4>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-sm font-bold text-primary">AS</div>
+<div class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-success rounded-full border-2 border-surface"></div>
+</div>
+<span class="font-body text-sm font-medium text-on-surface">Dra. Ana Silva</span>
+</div>
+<span class="font-label text-xs px-2 py-1 bg-success-container text-success rounded-md font-medium">Livre</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-sm font-bold text-primary">CE</div>
+<div class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-secondary rounded-full border-2 border-surface"></div>
+</div>
+<span class="font-body text-sm font-medium text-on-surface">Dr. Carlos Eduardo</span>
+</div>
+<span class="font-label text-xs px-2 py-1 bg-secondary-container text-on-secondary-container rounded-md font-medium">Em Consulta</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

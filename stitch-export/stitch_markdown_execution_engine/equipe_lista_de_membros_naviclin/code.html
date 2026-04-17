@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NaviClin - Equipe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#151c23",
+                    "surface-container-high": "#e1e9f2",
+                    "on-tertiary-container": "#75a5ef",
+                    "tertiary-container": "#003a72",
+                    "tertiary": "#00244b",
+                    "surface-bright": "#f6faff",
+                    "surface": "#f6faff",
+                    "primary-container": "#0d3a6b",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001c3b",
+                    "inverse-surface": "#293138",
+                    "background": "#f6faff",
+                    "on-tertiary-fixed-variant": "#004788",
+                    "on-primary-container": "#81a5dd",
+                    "inverse-on-surface": "#eaf2fb",
+                    "surface-container-low": "#ecf4fd",
+                    "primary": "#00244a",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#785a29",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#151c23",
+                    "surface-dim": "#d3dbe4",
+                    "surface-tint": "#3b5f92",
+                    "secondary-container": "#fdd497",
+                    "tertiary-fixed-dim": "#a7c8ff",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#43474f",
+                    "secondary-fixed-dim": "#e8c085",
+                    "secondary-fixed": "#ffddaf",
+                    "outline": "#737780",
+                    "tertiary-fixed": "#d5e3ff",
+                    "outline-variant": "#c3c6d0",
+                    "on-secondary-fixed": "#281800",
+                    "surface-container-highest": "#dbe3ec",
+                    "inverse-primary": "#a6c8ff",
+                    "surface-variant": "#dbe3ec",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#001b3c",
+                    "on-secondary-fixed-variant": "#5d4212",
+                    "surface-container": "#e7eff8",
+                    "on-primary-fixed-variant": "#204779",
+                    "primary-fixed": "#d5e3ff",
+                    "on-tertiary": "#ffffff",
+                    "secondary": "#775928",
+                    "primary-fixed-dim": "#a6c8ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": [
+                            "Manrope"
+                    ],
+                    "body": [
+                            "Inter"
+                    ],
+                    "label": [
+                            "Inter"
+                    ]
+            }
+        },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom Shadow for Premium Feel */
+        .shadow-premium {
+            box-shadow: 0px 12px 32px -4px rgba(21, 28, 35, 0.05); /* Tinted with on-surface */
+        }
+        .ghost-border {
+            border: 1px solid rgba(195, 198, 208, 0.2); /* outline-variant at 20% */
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body min-h-screen flex antialiased">
+<!-- SideNavBar (from JSON) -->
+<nav class="fixed left-0 top-0 h-full w-64 z-50 bg-[#ecf4fd] dark:bg-slate-950 flex flex-col p-6 space-y-2 hidden md:flex">
+<div class="mb-8">
+<h1 class="text-lg font-black text-[#00244a] tracking-wider font-headline">NaviClin</h1>
+<p class="text-sm text-outline font-body">Dental Management</p>
+</div>
+<button class="mb-6 w-full py-3 px-4 rounded-lg bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-medium text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-shadow">
+<span class="material-symbols-outlined text-[20px]">add</span>
+            New Appointment
+        </button>
+<div class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+                Agenda
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">airline_seat_recline_normal</span>
+                Sala de Espera
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+                Pacientes
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+                Financeiro
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                Estoque
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                Relatórios
+            </a>
+<!-- Adding Equipe as the active state for this specific page intent -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white dark:bg-slate-800 text-[#00244a] dark:text-blue-400 font-bold shadow-sm font-['Inter'] text-[0.875rem] hover:translate-x-1 transition-transform duration-200 mt-1" href="#">
+<span class="material-symbols-outlined icon-fill">groups</span>
+                Equipe
+            </a>
+</div>
+<div class="mt-auto space-y-1 pt-6">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Sign Out
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 bg-surface min-h-screen">
+<!-- TopNavBar (from JSON) -->
+<header class="fixed top-0 right-0 w-full z-40 bg-[#f6faff]/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm shadow-blue-900/5 flex justify-between items-center h-16 px-8 md:ml-64" style="width: calc(100% - 16rem);">
+<div class="flex-1 flex items-center">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest ghost-border rounded-lg text-sm font-body text-on-surface focus:outline-none focus:border-outline-variant focus:ring-1 focus:ring-primary-fixed transition-all placeholder:text-outline/70" placeholder="Buscar na clínica..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#00244a] dark:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-[#00244a] dark:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-container-highest overflow-hidden ml-2 ghost-border">
+<img alt="Clinician profile" class="w-full h-full object-cover" data-alt="professional headshot of female doctor in medical setting soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD54vPkoNHublhBNPOef-3N02aIWZDmSHLz9VY_aWoKHq3vQtREowVxWqalOZ7K8aUAtrlHnWGeVW2t1YSeOrEs6guZb8RZRxs5gwACM7bJ1mggzPqe0rFYSZcuUNE1hfHeJlIfSnROtNux6LCXdlvNcD1_LZJqLlfDbfvCmypQTY1E0La8-2XinQ6jH2E3yUraJ4uZuePsDpX0vLkw3ScFddDBndZmwYtkgVAcH94892CEvb12lyD1TfKUZn3dLU8Y6iQshdr1X8c"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="pt-24 px-8 pb-12 max-w-7xl mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pl-2">
+<div>
+<h2 class="font-headline font-bold text-[1.75rem] text-primary tracking-tight mb-2">Equipe Clínica</h2>
+<p class="font-body text-on-surface-variant text-[0.875rem]">Gerencie dentistas, assistentes e equipe administrativa.</p>
+</div>
+<div class="flex items-center gap-3">
+<!-- Filter Pill -->
+<div class="flex bg-surface-container-low rounded-lg p-1">
+<button class="px-4 py-1.5 rounded-md bg-surface-container-lowest shadow-sm text-primary font-label text-[0.75rem] font-medium tracking-wide">Todos</button>
+<button class="px-4 py-1.5 rounded-md text-on-surface-variant hover:text-primary font-label text-[0.75rem] font-medium tracking-wide transition-colors">Dentistas</button>
+<button class="px-4 py-1.5 rounded-md text-on-surface-variant hover:text-primary font-label text-[0.75rem] font-medium tracking-wide transition-colors">Apoio</button>
+</div>
+<!-- CTA -->
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-5 py-2 rounded-lg font-label text-[0.875rem] font-medium flex items-center gap-2 hover:shadow-premium transition-shadow">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+                        Convidar Membro
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout for Members -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Member Card 1: Clinical Director -->
+<div class="bg-surface-container-lowest rounded-[16px] shadow-premium p-6 flex flex-col h-full relative overflow-hidden group">
+<!-- Gold accent for leadership -->
+<div class="absolute top-0 left-0 w-full h-1 bg-secondary opacity-80"></div>
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden ghost-border relative">
+<img alt="Dr. Roberto Silva" class="w-full h-full object-cover" data-alt="professional portrait of confident male dentist in modern clinic warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyckQI_CAP5yuTzVEPgw8sPaQif8Yx4dSdZz4fraqzSw9hC5LWT_0U2pkmK62eEQDWhVkgQNC-_9_r12Gw91MJVgGYvT4V-iDRfzVxjSSbVgv-qh1VN6YHuitPlCN2PBJCdnO0fVE60Y4cvc9KpM0EZ8b1DBLrJtRf2eTpSz1IwbSSnBZPGOe7g6nGmSj2kl1TTp87fwUGSuOlIMcbwr2VZpYVBIzPllyfhUYLc-P5nq0fR9aaYUwQJF6ccbqTDZpqrYUZ9v7AAWA"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-[#10B981] rounded-full border-2 border-surface-container-lowest"></div>
+</div>
+<div>
+<h3 class="font-headline font-bold text-[1rem] text-primary mb-1">Dr. Roberto Silva</h3>
+<p class="font-body text-[0.75rem] text-on-surface-variant mb-1">Diretor Clínico • Ortodontia</p>
+<div class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label text-[0.65rem] font-semibold uppercase tracking-wider">
+                                    CRO 12345
+                                </div>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-xl p-4 mb-4 flex flex-col justify-center">
+<div class="flex items-center justify-between mb-3">
+<span class="font-body text-[0.75rem] text-on-surface-variant">Próxima Consulta</span>
+<span class="font-body text-[0.75rem] font-medium text-primary">Hoje, 14:30</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">star</span>
+<span class="font-body text-[0.75rem] text-on-surface-variant">Agenda lotada (95%)</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-container-high">
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-primary hover:bg-surface-container-highest transition-colors" title="Ver Agenda">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-primary hover:bg-surface-container-highest transition-colors" title="Enviar Mensagem">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</button>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#10B981]/15 text-[#10B981] font-label text-[0.75rem] font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span> Ativo
+                        </span>
+</div>
+</div>
+<!-- Member Card 2: Specialist -->
+<div class="bg-surface-container-lowest rounded-[16px] shadow-premium p-6 flex flex-col h-full">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden ghost-border relative">
+<img alt="Dra. Camila Costa" class="w-full h-full object-cover" data-alt="professional portrait of friendly female dentist looking at camera bright clean clinic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiUO-EtTq_9_PoDvZ3DEVO6UFUL-2MP27MTzn9zDxO3n6zSp8ENeK_7NdOEKa0qQXuOaNphe8TInhvzRLq42-CXOAVnuanHv9ngbtO0yO-PxEyIMYwFU9oQy90bIy59qxeLZ2VH_gel8z5H6m3xCQ-UuLvEWhP3v0Km2sFa5kXgb1S9YXdSF_SbBGFtkh9HADLJdD94blQrsyME-ZQL0tpNTwg6CMPacT3f4QU6wEcmuGiOz1KcGFEcVZ6cQKJarXfXeVq-g314lk"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-[#10B981] rounded-full border-2 border-surface-container-lowest"></div>
+</div>
+<div>
+<h3 class="font-headline font-bold text-[1rem] text-primary mb-1">Dra. Camila Costa</h3>
+<p class="font-body text-[0.75rem] text-on-surface-variant mb-1">Cirurgiã Dentista • Implantodontia</p>
+<div class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label text-[0.65rem] font-semibold uppercase tracking-wider">
+                                    CRO 67890
+                                </div>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-xl p-4 mb-4 flex flex-col justify-center">
+<div class="flex items-center justify-between mb-3">
+<span class="font-body text-[0.75rem] text-on-surface-variant">Próxima Consulta</span>
+<span class="font-body text-[0.75rem] font-medium text-primary">Amanhã, 09:00</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-outline">schedule</span>
+<span class="font-body text-[0.75rem] text-on-surface-variant">Disponível a partir das 16h</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-container-high">
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-primary hover:bg-surface-container-highest transition-colors" title="Ver Agenda">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-primary hover:bg-surface-container-highest transition-colors" title="Enviar Mensagem">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</button>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#10B981]/15 text-[#10B981] font-label text-[0.75rem] font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span> Ativo
+                        </span>
+</div>
+</div>
+<!-- Member Card 3: Receptionist -->
+<div class="bg-surface-container-lowest rounded-[16px] shadow-premium p-6 flex flex-col h-full">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden ghost-border relative">
+<img alt="Ana Paula Dias" class="w-full h-full object-cover" data-alt="portrait of smiling receptionist at desk warm natural light inviting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHDFhO-TzozBHeHSm2jaBEtFHbn7jjB-5mzQ0dIDRMGDVmsowDa1Xk7xrJPHs9IBAOHpLVoFb8JLKyK7CLTx6ZIzvTuxEFvC3z7fqGKT23xsSepKGlREL8HDwbMcXZIDrjG0PlYIUjK3bhqmxMPvZpVKXlyVT94a2Ctn6YQEQfb6dxW1SqqowPI3Lx8q1SLl2F-Ov_qphyZ1RExXb0HU4vJEn7wVamgdH8dSMhpPAI2O9hHTdXx67NZYqdxhPKck3_BKABTTJN-kk"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-[#ffddaf] rounded-full border-2 border-surface-container-lowest"></div>
+</div>
+<div>
+<h3 class="font-headline font-bold text-[1rem] text-primary mb-1">Ana Paula Dias</h3>
+<p class="font-body text-[0.75rem] text-on-surface-variant mb-1">Recepcionista Chefe</p>
+<div class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label text-[0.65rem] font-semibold uppercase tracking-wider">
+                                    Administrativo
+                                </div>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-xl p-4 mb-4 flex flex-col justify-center">
+<div class="flex items-center justify-between mb-3">
+<span class="font-body text-[0.75rem] text-on-surface-variant">Turno Atual</span>
+<span class="font-body text-[0.75rem] font-medium text-primary">08:00 - 17:00</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#5d4212]">pause_circle</span>
+<span class="font-body text-[0.75rem] text-on-surface-variant">Em pausa (Almoço)</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-container-high">
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-primary hover:bg-surface-container-highest transition-colors" title="Atribuições">
+<span class="material-symbols-outlined text-[16px]">assignment</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-primary hover:bg-surface-container-highest transition-colors" title="Enviar Mensagem">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</button>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed-variant font-label text-[0.75rem] font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-on-secondary-fixed-variant"></span> Ausente
+                        </span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

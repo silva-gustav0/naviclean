@@ -27,7 +27,9 @@
       "Bash(python3 -c ':*)",
       "Bash(python3:*)",
       "Bash(npx vercel:*)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(mkdir -p stitch-export)",
+      "Bash(unzip -o stitch_markdown_execution_engine.zip -d stitch-export)"
     ]
   }
 }

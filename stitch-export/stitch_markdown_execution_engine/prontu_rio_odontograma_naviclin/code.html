@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NaviClin - Prontuário do Paciente</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for an elegant feel */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #dbe3ec; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c3c6d0; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#a7c8ff",
+                        "surface-container-high": "#e1e9f2",
+                        "on-primary-container": "#81a5dd",
+                        "surface-container-highest": "#dbe3ec",
+                        "primary-fixed": "#d5e3ff",
+                        "on-tertiary-container": "#75a5ef",
+                        "secondary-container": "#fdd497",
+                        "on-primary-fixed": "#001c3b",
+                        "on-primary-fixed-variant": "#204779",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#293138",
+                        "primary-fixed-dim": "#a6c8ff",
+                        "tertiary-container": "#003a72",
+                        "on-secondary-container": "#785a29",
+                        "background": "#f6faff",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#3b5f92",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#d5e3ff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#5d4212",
+                        "inverse-on-surface": "#eaf2fb",
+                        "outline-variant": "#c3c6d0",
+                        "on-secondary-fixed": "#281800",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#e7eff8",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffddaf",
+                        "on-tertiary-fixed": "#001b3c",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#a6c8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#43474f",
+                        "tertiary": "#00244b",
+                        "outline": "#737780",
+                        "primary": "#00244a",
+                        "secondary-fixed-dim": "#e8c085",
+                        "surface-variant": "#dbe3ec",
+                        "surface": "#f6faff",
+                        "secondary": "#775928",
+                        "on-tertiary-fixed-variant": "#004788",
+                        "primary-container": "#0d3a6b",
+                        "on-surface": "#151c23",
+                        "surface-dim": "#d3dbe4",
+                        "on-background": "#151c23",
+                        "surface-bright": "#f6faff",
+                        "surface-container-low": "#ecf4fd"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        "2xl": "1rem",
+                        full: "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Manrope", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        label: ["Inter", "sans-serif"]
+                    },
+                    boxShadow: {
+                        'premium': '0px 12px 32px -4px rgba(0, 36, 74, 0.05)',
+                        'premium-sm': '0px 4px 12px -2px rgba(0, 36, 74, 0.04)'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body h-screen flex overflow-hidden selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SideNavBar (Web) -->
+<nav class="hidden md:flex flex-col bg-surface-container-low h-screen w-64 fixed left-0 top-0 border-r-0 z-40 p-4 gap-2">
+<div class="flex items-center gap-3 px-2 py-4 mb-4">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-premium-sm text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+</div>
+<div>
+<h1 class="text-lg font-bold text-primary font-headline">NaviClin</h1>
+<p class="text-xs text-on-surface-variant font-label uppercase tracking-wider">Clinical Curator</p>
+</div>
+</div>
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-lg py-3 px-4 font-medium flex items-center justify-center gap-2 mb-6 hover:opacity-90 transition-opacity shadow-premium-sm">
+<span class="material-symbols-outlined">add</span>
+            Novo Agendamento
+        </button>
+<div class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined">calendar_month</span> Agenda
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined">group</span> Sala de Espera
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container-lowest text-primary shadow-sm font-medium text-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_ind</span> Pacientes
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined">payments</span> Financeiro
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined">analytics</span> Relatórios
+            </a>
+</div>
+<div class="mt-auto flex flex-col gap-1 pt-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined">contact_support</span> Suporte
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined">logout</span> Sair
+            </a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-64 h-full relative">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center px-6 py-3 w-full bg-surface/80 backdrop-blur-md text-primary docked full-width top-0 sticky z-30 shadow-[0px_4px_12px_-4px_rgba(0,36,74,0.02)]">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Search Bar (on_left as per JSON) -->
+<div class="hidden sm:flex items-center bg-surface-container-lowest rounded-full px-4 py-1.5 shadow-sm outline outline-1 outline-outline-variant/20 focus-within:outline-primary/50 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 text-on-surface placeholder:text-on-surface-variant p-0 h-7" placeholder="Buscar pacientes..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">settings</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">help</span></button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border-2 border-surface-container-lowest shadow-sm ml-2">
+<img alt="Médico Logado" class="w-full h-full object-cover" data-alt="professional headshot of a mature doctor in a well-lit modern clinic setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5TCwMti1_7tb7BFtegB8-9mMyJra9f7KHX-DBDOC1IaA6i44FSAASnG47OWqQwc4zzig1sytY3mxZLsDacL1FIVBFGndD2ye0buxH-1iG6An6iN2YlJuPVsG45Be2kBOZKCnIiV5QLHCihhq_1DOamLCh_6rxjZqAJb__-As3bCm7vW4rbxaKexIi-PrI73TzEge0icr5qsf43FcGTsfhcsN93yj6rByKtSpfCx4CocuYSoYosIQ5kg9LKJqwGBgvpb_LQ8xfTHA"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col gap-6 relative z-10">
+<!-- Breadcrumb / Back Action -->
+<div class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors cursor-pointer w-max">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span class="font-medium">Voltar para lista de pacientes</span>
+</div>
+<!-- Patient Header Card -->
+<section class="bg-surface-container-lowest rounded-2xl p-6 shadow-premium flex flex-col sm:flex-row gap-6 items-start sm:items-center relative overflow-hidden">
+<!-- Subtle decorative background shape -->
+<div class="absolute -right-16 -top-16 w-64 h-64 bg-primary-fixed/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative">
+<div class="w-24 h-24 rounded-2xl overflow-hidden shadow-sm outline outline-1 outline-outline-variant/20">
+<img alt="Foto da paciente" class="w-full h-full object-cover" data-alt="portrait of a young adult woman with a gentle smile in soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoAxneVtcmq-NVN8eKGxAaueNY5Wz1V5CFwcgk8UifZvBBYVGNe7P92foPxAWXI8WwGQQEYSv2_vqsdMuk120bu7UabpWIqFzzjDMfxpHGz0bk7loNBbYGejnr45iowmIVdP-9Dyuo4de4YecaT-VsEDVurmMDQWperTfWVVkphvSKPwFIGm0jwW5ZTw84KIj3vejr2hxF_gun0mjaZyBTcncq0tI2fiYLfunhvDi21nC50YhlEvNQCROO4rusICcoylNCIj0lmAA"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-surface-container-lowest rounded-full p-1 shadow-sm">
+<div class="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-on-secondary">
+<span class="material-symbols-outlined text-[14px]">star</span>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-2 z-10">
+<div class="flex flex-wrap items-center gap-3">
+<h2 class="font-headline font-bold text-2xl text-primary">Mariana Costa Silva</h2>
+<span class="bg-surface-container text-on-surface-variant text-xs font-medium px-2.5 py-1 rounded-md">ID: #94827</span>
+</div>
+<div class="flex flex-wrap items-center gap-4 text-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">cake</span> 32 anos (15/04/1991)</div>
+<div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">call</span> (11) 98765-4321</div>
+<div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">history</span> Última consulta: 12 Nov 2023</div>
+</div>
+<div class="flex flex-wrap gap-2 mt-2">
+<div class="flex items-center gap-1 bg-error-container/30 text-error px-2.5 py-1 rounded-md text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">warning</span> Alérgica a Penicilina
+                        </div>
+<div class="flex items-center gap-1 bg-primary-fixed/50 text-on-primary-fixed px-2.5 py-1 rounded-md text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">medical_information</span> Diabética (Tipo 1)
+                        </div>
+</div>
+</div>
+<div class="flex flex-row sm:flex-col gap-2 w-full sm:w-auto z-10 mt-4 sm:mt-0">
+<button class="flex-1 sm:flex-none bg-surface-container text-primary hover:bg-surface-container-highest rounded-lg px-4 py-2 text-sm font-medium transition-colors">
+                        Editar Perfil
+                    </button>
+<button class="flex-1 sm:flex-none bg-primary text-on-primary hover:bg-primary-container rounded-lg px-4 py-2 text-sm font-medium transition-colors shadow-sm">
+                        Nova Consulta
+                    </button>
+</div>
+</section>
+<!-- Navigation Tabs -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide border-b-2 border-surface-container-high/50">
+<button class="whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest/50 transition-all">Resumo</button>
+<button class="whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest/50 transition-all">Anamnese</button>
+<!-- Active Tab -->
+<div class="relative group">
+<button class="whitespace-nowrap px-5 py-2.5 text-sm font-bold text-primary bg-surface-container-lowest rounded-t-lg shadow-[0px_-4px_12px_rgba(0,36,74,0.03)] relative z-10">
+                        Odontograma
+                        <!-- Active Indicator Bar -->
+<div class="absolute bottom-[-2px] left-0 w-full h-[3px] bg-secondary rounded-t-sm"></div>
+</button>
+</div>
+<button class="whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest/50 transition-all">Evoluções</button>
+<button class="whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest/50 transition-all">Planos de Tratamento</button>
+<button class="whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest/50 transition-all">Receituário</button>
+<button class="whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest/50 transition-all">Arquivos</button>
+<button class="whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest/50 transition-all">Financeiro</button>
+</div>
+<!-- Active Tab Content: Odontograma -->
+<div class="flex flex-col lg:flex-row gap-6 pb-12">
+<!-- Chart Area (Visual) -->
+<div class="flex-[2] bg-surface-container-lowest rounded-2xl shadow-premium p-6 flex flex-col relative">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="font-headline font-bold text-lg text-primary">Odontograma Adulto (FDI)</h3>
+<p class="text-sm text-on-surface-variant">Visualização vestibular/oclusal/lingual</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-surface-container hover:bg-surface-container-highest text-on-surface transition-colors" title="Visão Infantil">
+<span class="material-symbols-outlined text-[20px]">child_care</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container hover:bg-surface-container-highest text-on-surface transition-colors" title="Histórico">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</button>
+</div>
+</div>
+<!-- Simulated Interactive SVG/Grid Area -->
+<!-- Due to HTML constraint, creating a highly stylized CSS grid to represent the dental arch conceptually -->
+<div class="flex-1 flex flex-col justify-center items-center gap-12 py-8 bg-surface-container-low/30 rounded-xl relative">
+<!-- Arch Guidelines -->
+<div class="absolute inset-0 flex flex-col justify-center items-center pointer-events-none opacity-20">
+<div class="w-[80%] h-[1px] bg-outline-variant mb-[70px]"></div>
+<div class="w-[1px] h-[60%] bg-outline-variant absolute"></div>
+<div class="w-[80%] h-[1px] bg-outline-variant mt-[70px]"></div>
+</div>
+<!-- Superior Arch -->
+<div class="flex gap-1 md:gap-2 relative z-10">
+<!-- Quadrant 1 (Right) 18-11 -->
+<div class="flex gap-1 md:gap-1.5">
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">18</span>
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-t-md rounded-b-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">17</span>
+<div class="w-6 h-8 md:w-8 md:h-10 bg-error/10 border-2 border-error rounded-t-md rounded-b-sm relative">
+<div class="absolute inset-2 bg-error rounded-full opacity-50"></div> <!-- Cárie Oclusal -->
+</div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">16</span>
+<div class="w-6 h-8 md:w-8 md:h-10 bg-primary-fixed border border-primary-container rounded-t-md rounded-b-sm relative">
+<div class="absolute inset-[3px] border border-primary-container rounded-sm"></div> <!-- Restauração -->
+</div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">15</span>
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-t-md rounded-b-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">14</span>
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-t-md rounded-b-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">13</span>
+<div class="w-5 h-8 md:w-7 md:h-10 bg-surface-container-highest rounded-t-lg rounded-b-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">12</span>
+<div class="w-4 h-8 md:w-6 md:h-10 bg-surface-container-highest rounded-t-lg rounded-b-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">11</span>
+<div class="w-5 h-8 md:w-7 md:h-10 bg-surface-container-highest rounded-t-lg rounded-b-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+</div>
+</div>
+<div class="w-4"></div> <!-- Midline Gap -->
+<!-- Quadrant 2 (Left) 21-28 -->
+<div class="flex gap-1 md:gap-1.5">
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">21</span>
+<div class="w-5 h-8 md:w-7 md:h-10 bg-surface-container-highest rounded-t-lg rounded-b-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">22</span>
+<div class="w-4 h-8 md:w-6 md:h-10 bg-surface-container-highest rounded-t-lg rounded-b-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">23</span>
+<div class="w-5 h-8 md:w-7 md:h-10 bg-surface-container-highest rounded-t-lg rounded-b-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">24</span>
+<div class="w-6 h-8 md:w-8 md:h-10 bg-secondary-fixed/50 border-2 border-secondary rounded-t-md rounded-b-sm relative">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-1.5 h-3 bg-outline rounded-t-sm"></div> <!-- Implante / Pino -->
+</div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">25</span>
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-t-md rounded-b-sm border border-outline-variant/30 group-hover:border-primary transition-colors relative">
+<span class="absolute -bottom-2 left-1/2 -translate-x-1/2 text-error text-[10px] font-bold">X</span> <!-- Extraído (marked below) -->
+</div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">26</span>
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-t-md rounded-b-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">27</span>
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-t-md rounded-b-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">28</span>
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-lowest border-2 border-dashed border-outline-variant rounded-t-md rounded-b-sm flex items-center justify-center">
+<span class="text-outline-variant text-[10px]">Aus</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Inferior Arch -->
+<div class="flex gap-1 md:gap-2 relative z-10">
+<!-- Quadrant 4 (Right) 48-41 -->
+<div class="flex gap-1 md:gap-1.5">
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-lowest border-2 border-dashed border-outline-variant rounded-b-md rounded-t-sm flex items-center justify-center">
+<span class="text-outline-variant text-[10px]">Aus</span>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">48</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-b-md rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">47</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-b-md rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">46</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-b-md rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">45</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-b-md rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">44</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-5 h-8 md:w-7 md:h-10 bg-surface-container-highest rounded-b-lg rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">43</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-4 h-8 md:w-6 md:h-10 bg-surface-container-highest rounded-b-lg rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">42</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-5 h-8 md:w-7 md:h-10 bg-surface-container-highest rounded-b-lg rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors relative overflow-hidden">
+<div class="absolute bottom-0 w-full h-1/2 bg-error/20"></div> <!-- Sangramento gengival -->
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">41</span>
+</div>
+</div>
+<div class="w-4"></div> <!-- Midline Gap -->
+<!-- Quadrant 3 (Left) 31-38 -->
+<div class="flex gap-1 md:gap-1.5">
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-5 h-8 md:w-7 md:h-10 bg-surface-container-highest rounded-b-lg rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors relative overflow-hidden">
+<div class="absolute bottom-0 w-full h-1/2 bg-error/20"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">31</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-4 h-8 md:w-6 md:h-10 bg-surface-container-highest rounded-b-lg rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">32</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-5 h-8 md:w-7 md:h-10 bg-surface-container-highest rounded-b-lg rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">33</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-b-md rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">34</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-b-md rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">35</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-b-md rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">36</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-6 h-8 md:w-8 md:h-10 bg-primary-fixed border border-primary-container rounded-b-md rounded-t-sm relative">
+<div class="absolute inset-[3px] border border-primary-container rounded-sm"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">37</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="w-6 h-8 md:w-8 md:h-10 bg-surface-container-highest rounded-b-md rounded-t-sm border border-outline-variant/30 group-hover:border-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant group-hover:text-primary transition-colors">38</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar / Actions -->
+<div class="flex-1 flex flex-col gap-6">
+<!-- Actions -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-premium p-5 flex flex-col gap-3">
+<h4 class="font-headline font-bold text-primary mb-1">Ações Rápidas</h4>
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-lg py-2.5 px-4 font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-sm text-sm">
+<span class="material-symbols-outlined text-[18px]">add_circle</span> Adicionar Procedimento
+                        </button>
+<button class="w-full bg-surface text-primary border border-outline-variant/30 hover:bg-surface-container-highest rounded-lg py-2.5 px-4 font-medium flex items-center justify-center gap-2 transition-colors text-sm">
+<span class="material-symbols-outlined text-[18px]">edit_note</span> Registrar Observação
+                        </button>
+</div>
+<!-- Legend -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-premium p-5 flex-1">
+<h4 class="font-headline font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">palette</span> Legenda Clínica
+                        </h4>
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<div class="w-4 h-4 rounded-sm bg-surface-container-highest border border-outline-variant/30"></div>
+<span class="text-sm text-on-surface font-medium">Hígido (Saudável)</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-4 h-4 rounded-sm bg-error/10 border-2 border-error"></div>
+<span class="text-sm text-on-surface font-medium">Lesão Cariosa</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-4 h-4 rounded-sm bg-primary-fixed border border-primary-container relative">
+<div class="absolute inset-[2px] border border-primary-container rounded-[1px]"></div>
+</div>
+<span class="text-sm text-on-surface font-medium">Restaurado</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-4 h-4 rounded-sm bg-secondary-fixed/50 border-2 border-secondary"></div>
+<span class="text-sm text-on-surface font-medium">Implante / Prótese</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-4 h-4 rounded-sm bg-surface-container-lowest border-2 border-dashed border-outline-variant flex items-center justify-center">
+<span class="text-[8px] text-outline-variant">Aus</span>
+</div>
+<span class="text-sm text-on-surface font-medium">Ausente</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-4 h-4 rounded-sm bg-surface-container-highest border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute bottom-0 w-full h-1/2 bg-error/30"></div>
+</div>
+<span class="text-sm text-on-surface font-medium">Sangramento / Inflamação</span>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container-high">
+<h5 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-3">Últimas Alterações</h5>
+<div class="flex flex-col gap-2 text-sm">
+<div class="flex justify-between items-start">
+<span class="text-on-surface">Dente 17: Resina Oclusal</span>
+<span class="text-xs text-on-surface-variant">12 Nov</span>
+</div>
+<div class="flex justify-between items-start">
+<span class="text-on-surface">Dente 24: Coroa Metalocerâmica</span>
+<span class="text-xs text-on-surface-variant">05 Out</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

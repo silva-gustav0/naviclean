@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Financeiro - Lançamentos | NaviClin</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config from Design System -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#151c23",
+                        "surface-container-high": "#e1e9f2",
+                        "on-tertiary-container": "#75a5ef",
+                        "tertiary-container": "#003a72",
+                        "tertiary": "#00244b",
+                        "surface-bright": "#f6faff",
+                        "surface": "#f6faff",
+                        "primary-container": "#0d3a6b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001c3b",
+                        "inverse-surface": "#293138",
+                        "background": "#f6faff",
+                        "on-tertiary-fixed-variant": "#004788",
+                        "on-primary-container": "#81a5dd",
+                        "inverse-on-surface": "#eaf2fb",
+                        "surface-container-low": "#ecf4fd",
+                        "primary": "#00244a",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#785a29",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#151c23",
+                        "surface-dim": "#d3dbe4",
+                        "surface-tint": "#3b5f92",
+                        "secondary-container": "#fdd497",
+                        "tertiary-fixed-dim": "#a7c8ff",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#43474f",
+                        "secondary-fixed-dim": "#e8c085",
+                        "secondary-fixed": "#ffddaf",
+                        "outline": "#737780",
+                        "tertiary-fixed": "#d5e3ff",
+                        "outline-variant": "#c3c6d0",
+                        "on-secondary-fixed": "#281800",
+                        "surface-container-highest": "#dbe3ec",
+                        "inverse-primary": "#a6c8ff",
+                        "surface-variant": "#dbe3ec",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#001b3c",
+                        "on-secondary-fixed-variant": "#5d4212",
+                        "surface-container": "#e7eff8",
+                        "on-primary-fixed-variant": "#204779",
+                        "primary-fixed": "#d5e3ff",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#775928",
+                        "primary-fixed-dim": "#a6c8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    },
+                    "boxShadow": {
+                        "premium": "0px 12px 32px -4px rgba(21, 28, 35, 0.05)"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen flex selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SideNavBar (Generated from JSON) -->
+<nav class="bg-[#ecf4fd] dark:bg-slate-950 fixed left-0 top-0 h-full w-64 z-50 flex flex-col p-6 space-y-2">
+<!-- Header -->
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-on-primary font-headline font-bold text-xl shadow-premium">
+                N
+            </div>
+<div>
+<h1 class="text-lg font-black text-[#00244a] tracking-wider font-headline leading-tight">NaviClin</h1>
+<p class="text-xs text-slate-500 font-label tracking-wide uppercase">Dental Management</p>
+</div>
+</div>
+<!-- CTA -->
+<button class="mb-6 w-full py-3 px-4 rounded-lg bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-medium text-[0.875rem] flex items-center justify-center gap-2 shadow-premium hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+            New Appointment
+        </button>
+<!-- Main Tabs -->
+<div class="flex-1 space-y-1">
+<!-- Agenda -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] rounded-lg transition-colors hover:translate-x-1 duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-[#00244a] transition-colors">calendar_today</span>
+<span>Agenda</span>
+</a>
+<!-- Sala de Espera -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] rounded-lg transition-colors hover:translate-x-1 duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-[#00244a] transition-colors">airline_seat_recline_normal</span>
+<span>Sala de Espera</span>
+</a>
+<!-- Pacientes -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] rounded-lg transition-colors hover:translate-x-1 duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-[#00244a] transition-colors">person</span>
+<span>Pacientes</span>
+</a>
+<!-- Financeiro (ACTIVE) -->
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-800 text-[#00244a] dark:text-blue-400 font-bold rounded-lg shadow-sm font-['Inter'] text-[0.875rem]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span>Financeiro</span>
+</a>
+<!-- Estoque -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] rounded-lg transition-colors hover:translate-x-1 duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-[#00244a] transition-colors">inventory_2</span>
+<span>Estoque</span>
+</a>
+<!-- Relatórios -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] rounded-lg transition-colors hover:translate-x-1 duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-[#00244a] transition-colors">analytics</span>
+<span>Relatórios</span>
+</a>
+</div>
+<!-- Footer Tabs -->
+<div class="pt-4 mt-auto space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] rounded-lg transition-colors hover:translate-x-1 duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-[#00244a] transition-colors">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 font-['Inter'] font-medium text-[0.875rem] rounded-lg transition-colors hover:translate-x-1 duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-[#00244a] transition-colors">logout</span>
+<span>Sign Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Canvas Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 ml-64 relative">
+<!-- TopNavBar (Generated from JSON) -->
+<header class="bg-[#f6faff]/80 dark:bg-slate-900/80 backdrop-blur-md fixed top-0 right-0 w-[calc(100%-16rem)] z-40 flex justify-between items-center h-16 px-8 shadow-sm shadow-blue-900/5">
+<!-- Search Bar on Left -->
+<div class="flex items-center w-96 relative">
+<span class="material-symbols-outlined absolute left-3 text-slate-400 pointer-events-none">search</span>
+<input class="w-full bg-[#ecf4fd] dark:bg-slate-800 border-none rounded-full py-2 pl-10 pr-4 text-sm font-['Manrope'] focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 outline-none text-[#00244a] dark:text-blue-400 placeholder:text-slate-400" placeholder="Search patients, appointments..." type="text"/>
+</div>
+<!-- Trailing Actions & Profile -->
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-slate-500 hover:text-[#00244a] hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-slate-500 hover:text-[#00244a] hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
+<img alt="Clinician profile" class="w-9 h-9 rounded-full cursor-pointer hover:scale-95 duration-150 border-2 border-white shadow-sm" data-alt="Professional headshot of a confident dentist in a modern clinic setting, bright and approachable" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7amH3r8UUGUyRBykkL4FNWgvMud-3PwQdGl34dI5mFsDZyQA0q1fOmrCq08aI5ljw25pgcwd61tEzokDlTnAcBVsUAdr_-15H_XAlNDDGrtSNx2_8aEOutJBaBh6DwdKCweKcHPfyn2pMkh7z29jfzLPFMk7vUEArcCLdkTAX7OU8NlZNr2ZUl_DXgBCkSWxMqthDofKphPCcZUsjxCHZ_YPC2Ue8HcFU7v-zbr9i5aZARou9Oax1aMRpqdcJ0AarsLbEgXdS36E"/>
+</div>
+</header>
+<!-- Page Content Canvas -->
+<main class="flex-1 pt-24 px-10 pb-12 w-full max-w-[1600px] mx-auto">
+<!-- Page Header Asymmetric Layout -->
+<div class="flex justify-between items-end mb-10 pl-2">
+<div>
+<p class="font-label text-label-md text-secondary tracking-[0.05em] uppercase mb-1">Gestão de Consultório</p>
+<h2 class="font-headline font-bold text-headline-md text-primary tracking-tight">Lançamentos Financeiros</h2>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-surface-container-highest text-primary font-label font-medium text-sm px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined text-[18px]">description</span>
+                        Exportar PDF
+                    </button>
+<button class="bg-surface-container-highest text-primary font-label font-medium text-sm px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined text-[18px]">table_view</span>
+                        Exportar Excel
+                    </button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-medium text-sm px-5 py-2 rounded-lg flex items-center gap-2 shadow-premium hover:opacity-95 transition-opacity ml-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Novo Lançamento
+                    </button>
+</div>
+</div>
+<!-- KPIs: Bento Grid Style -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+<!-- KPI: Receitas -->
+<div class="bg-surface-container-lowest rounded-[16px] p-6 shadow-premium relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-fixed-dim/20 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
+<p class="font-label text-label-md text-on-surface-variant uppercase tracking-wider mb-2">Total Entradas (Mês)</p>
+<div class="flex items-baseline gap-2">
+<span class="font-body text-title-sm text-primary">R$</span>
+<h3 class="font-headline font-extrabold text-[2.5rem] text-primary leading-none">42.500</h3>
+<span class="font-headline font-bold text-title-sm text-primary">,00</span>
+</div>
+<div class="mt-4 flex items-center gap-1 text-sm font-body text-[#10B981]">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>+12% vs mês anterior</span>
+</div>
+</div>
+<!-- KPI: Despesas -->
+<div class="bg-surface-container-lowest rounded-[16px] p-6 shadow-premium relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-error-container/30 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
+<p class="font-label text-label-md text-on-surface-variant uppercase tracking-wider mb-2">Total Saídas (Mês)</p>
+<div class="flex items-baseline gap-2">
+<span class="font-body text-title-sm text-on-surface">R$</span>
+<h3 class="font-headline font-bold text-[2.5rem] text-on-surface leading-none">18.320</h3>
+<span class="font-headline font-bold text-title-sm text-on-surface">,50</span>
+</div>
+<div class="mt-4 flex items-center gap-1 text-sm font-body text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+<span>Custos operacionais controlados</span>
+</div>
+</div>
+<!-- KPI: Saldo -->
+<div class="bg-primary rounded-[16px] p-6 shadow-premium relative overflow-hidden">
+<!-- Subtle surgical glow overlay -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary to-primary-container opacity-90"></div>
+<div class="absolute -bottom-10 -right-10 w-40 h-40 border border-on-primary/10 rounded-full"></div>
+<div class="relative z-10">
+<p class="font-label text-label-md text-primary-fixed-dim uppercase tracking-wider mb-2">Saldo Atual</p>
+<div class="flex items-baseline gap-2">
+<span class="font-body text-title-sm text-secondary-container">R$</span>
+<h3 class="font-headline font-extrabold text-[2.5rem] text-secondary-container leading-none">24.179</h3>
+<span class="font-headline font-bold text-title-sm text-secondary-container">,50</span>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<span class="text-sm font-body text-primary-fixed">Fluxo de caixa saudável</span>
+<span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Filter Section: Surface Container Low for depth -->
+<div class="bg-surface-container-low rounded-[16px] p-6 mb-8">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">filter_list</span>
+<h4 class="font-body font-semibold text-title-sm text-on-surface">Filtros Refinados</h4>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+<!-- Período -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-[11px] uppercase tracking-wider text-on-surface-variant ml-1">Período</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg py-2.5 pl-3 pr-9 text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow shadow-sm" placeholder="Outubro 2023" type="text"/>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline text-[18px] pointer-events-none">calendar_month</span>
+</div>
+</div>
+<!-- Tipo -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-[11px] uppercase tracking-wider text-on-surface-variant ml-1">Tipo</label>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg py-2.5 pl-3 pr-9 text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none shadow-sm cursor-pointer">
+<option value="all">Todos os tipos</option>
+<option value="in">Receita (+)</option>
+<option value="out">Despesa (-)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline text-[18px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Status -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-[11px] uppercase tracking-wider text-on-surface-variant ml-1">Status</label>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg py-2.5 pl-3 pr-9 text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none shadow-sm cursor-pointer">
+<option value="all">Todos</option>
+<option value="paid">Pago</option>
+<option value="pending">Pendente</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline text-[18px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Profissional -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-[11px] uppercase tracking-wider text-on-surface-variant ml-1">Profissional</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg py-2.5 pl-3 pr-9 text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none shadow-sm" placeholder="Buscar doutor..." type="text"/>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline text-[18px] pointer-events-none">search</span>
+</div>
+</div>
+<!-- Paciente/Fornecedor -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-[11px] uppercase tracking-wider text-on-surface-variant ml-1">Origem / Destino</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg py-2.5 pl-3 pr-9 text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none shadow-sm" placeholder="Buscar nome..." type="text"/>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline text-[18px] pointer-events-none">search</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Transactions List (Stylized Table Alternative) -->
+<div>
+<!-- Header Row (Visual alignment only, no strict grid borders) -->
+<div class="grid grid-cols-12 gap-4 px-6 py-3 text-label-md uppercase tracking-[0.05em] text-on-surface-variant font-label mb-2 ml-2">
+<div class="col-span-1">Data</div>
+<div class="col-span-3">Descrição / Origem</div>
+<div class="col-span-2">Categoria</div>
+<div class="col-span-2">Profissional</div>
+<div class="col-span-2">Valor</div>
+<div class="col-span-2 text-right">Status</div>
+</div>
+<!-- List Items (Cards) -->
+<div class="space-y-3">
+<!-- Entry: Receita Paga -->
+<div class="bg-surface-container-lowest rounded-xl p-5 flex items-center grid grid-cols-12 gap-4 hover:shadow-premium transition-shadow cursor-default group border border-transparent hover:border-outline-variant/10">
+<div class="col-span-1 flex flex-col">
+<span class="font-body text-title-sm text-on-surface">15</span>
+<span class="font-body text-[11px] text-on-surface-variant">Out</span>
+</div>
+<div class="col-span-3 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">medical_services</span>
+</div>
+<div>
+<p class="font-body font-medium text-body-md text-on-surface">Implante Dentário - Parcela 2</p>
+<p class="font-body text-[12px] text-on-surface-variant">Carlos Eduardo Silva</p>
+</div>
+</div>
+<div class="col-span-2 flex items-center">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant text-[12px] font-medium font-body">
+                                Procedimento
+                            </span>
+</div>
+<div class="col-span-2 flex items-center gap-2">
+<img alt="Dra Ana" class="w-6 h-6 rounded-full" data-alt="Small circular avatar placeholder with initials DA" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBevW_mYLBqQj9nOnW1GgZaRbjNAolxqCezakCoJhIPWntMWjczcSQ1h51iqCzpEnW4EuZTjXNJT0BWtbQPLdvNeIIe2AOm9hESLuzIv9lueqiC-bS9bLmAYkxLF5kLXUJheThzW6AAqwVBkd6sA-nx5JUBFrGYBgWkZaJGTINwp98shfUYS7ia6HPTlxlRno0pg1LHCZ1mJnUqF4ty4mxRAThT-p5yh_kZQZr3K60Y_kWZtbgKalF48rg-XgQLrbddirPII3kU0UY"/>
+<span class="font-body text-body-md text-on-surface-variant">Dra. Ana</span>
+</div>
+<div class="col-span-2 flex items-center">
+<span class="font-headline font-bold text-title-sm text-primary">+ R$ 1.500,00</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-3">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-[#10B981]/10 text-[#10B981] text-[12px] font-semibold font-body">
+                                Pago
+                            </span>
+<button class="text-outline hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Entry: Despesa Paga -->
+<div class="bg-surface-container-lowest rounded-xl p-5 flex items-center grid grid-cols-12 gap-4 hover:shadow-premium transition-shadow cursor-default group border border-transparent hover:border-outline-variant/10">
+<div class="col-span-1 flex flex-col">
+<span class="font-body text-title-sm text-on-surface">14</span>
+<span class="font-body text-[11px] text-on-surface-variant">Out</span>
+</div>
+<div class="col-span-3 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">water_drop</span>
+</div>
+<div>
+<p class="font-body font-medium text-body-md text-on-surface">Conta de Água - Sabesp</p>
+<p class="font-body text-[12px] text-on-surface-variant">Custo Fixo Operacional</p>
+</div>
+</div>
+<div class="col-span-2 flex items-center">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant text-[12px] font-medium font-body">
+                                Infraestrutura
+                            </span>
+</div>
+<div class="col-span-2 flex items-center text-on-surface-variant text-body-md">
+                            -
+                        </div>
+<div class="col-span-2 flex items-center">
+<span class="font-headline font-semibold text-title-sm text-on-surface-variant">- R$ 285,40</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-3">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-[#10B981]/10 text-[#10B981] text-[12px] font-semibold font-body">
+                                Pago
+                            </span>
+<button class="text-outline hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Entry: Receita Pendente -->
+<div class="bg-surface-container-lowest rounded-xl p-5 flex items-center grid grid-cols-12 gap-4 hover:shadow-premium transition-shadow cursor-default group border border-transparent hover:border-outline-variant/10">
+<div class="col-span-1 flex flex-col">
+<span class="font-body text-title-sm text-on-surface">18</span>
+<span class="font-body text-[11px] text-on-surface-variant">Out</span>
+</div>
+<div class="col-span-3 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[20px]">dentistry</span>
+</div>
+<div>
+<p class="font-body font-medium text-body-md text-on-surface">Clareamento a Laser</p>
+<p class="font-body text-[12px] text-on-surface-variant">Mariana Costa</p>
+</div>
+</div>
+<div class="col-span-2 flex items-center">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant text-[12px] font-medium font-body">
+                                Estética
+                            </span>
+</div>
+<div class="col-span-2 flex items-center gap-2">
+<img alt="Dr Clin" class="w-6 h-6 rounded-full" data-alt="Small circular avatar placeholder with initials DC" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBftQ-PNy33LCFu-RYrUIkxCmx5RhFLpkQkbMlbTFDbuoMqxP12fnk9jIzpfENRKwbwT6UEwCjNFg9Io0AIgR71W3mkUAsIfvSV9tTlGAjl0JZ5rJ4zh6iN1aOw3k8JkCaMEuS3T7j9dW9Ep9t8DnbJTlkBAPE9kJSP-rMsKBNz5A3KlTdDyOYT-y1bBh_A4c_IrPrx3yqtn9IMeqRsS31k-XX4nEe4Pxtjod3u8BM11U_DsFhoyjhh329yggv5_Sr8Jwpr9sFU_po"/>
+<span class="font-body text-body-md text-on-surface-variant">Dr. Marcos</span>
+</div>
+<div class="col-span-2 flex items-center">
+<span class="font-headline font-bold text-title-sm text-primary">+ R$ 800,00</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-3">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant text-[12px] font-semibold font-body">
+                                Pendente
+                            </span>
+<button class="text-outline hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Entry: Despesa Pendente (Atraso simulado/Atenção) -->
+<div class="bg-surface-container-lowest rounded-xl p-5 flex items-center grid grid-cols-12 gap-4 hover:shadow-premium transition-shadow cursor-default group border border-transparent hover:border-outline-variant/10 relative overflow-hidden">
+<!-- Red subtle accent line on left for pending expense -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error-container"></div>
+<div class="col-span-1 flex flex-col pl-2">
+<span class="font-body text-title-sm text-error">10</span>
+<span class="font-body text-[11px] text-error">Out</span>
+</div>
+<div class="col-span-3 flex items-center gap-3 pl-2">
+<div class="w-10 h-10 rounded-full bg-error-container/50 flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+</div>
+<div>
+<p class="font-body font-medium text-body-md text-on-surface">Compra Materiais Dental Cremer</p>
+<p class="font-body text-[12px] text-on-surface-variant">Fornecedor</p>
+</div>
+</div>
+<div class="col-span-2 flex items-center">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant text-[12px] font-medium font-body">
+                                Estoque
+                            </span>
+</div>
+<div class="col-span-2 flex items-center text-on-surface-variant text-body-md">
+                            -
+                        </div>
+<div class="col-span-2 flex items-center">
+<span class="font-headline font-semibold text-title-sm text-on-surface-variant">- R$ 3.240,00</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-3">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-error-container text-on-error-container text-[12px] font-semibold font-body">
+                                Pendente
+                            </span>
+<button class="text-outline hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More (Subtle) -->
+<div class="mt-8 flex justify-center">
+<button class="text-primary font-label font-medium text-sm px-6 py-2 rounded-full border border-outline-variant/30 hover:bg-surface-container-lowest transition-colors flex items-center gap-2">
+                        Carregar mais lançamentos
+                        <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

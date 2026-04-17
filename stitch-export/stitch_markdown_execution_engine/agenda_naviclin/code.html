@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agenda - NaviClin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#a7c8ff",
+                        "surface-container-high": "#e1e9f2",
+                        "on-primary-container": "#81a5dd",
+                        "surface-container-highest": "#dbe3ec",
+                        "primary-fixed": "#d5e3ff",
+                        "on-tertiary-container": "#75a5ef",
+                        "secondary-container": "#fdd497",
+                        "on-primary-fixed": "#001c3b",
+                        "on-primary-fixed-variant": "#204779",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#293138",
+                        "primary-fixed-dim": "#a6c8ff",
+                        "tertiary-container": "#003a72",
+                        "on-secondary-container": "#785a29",
+                        "background": "#f6faff",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#3b5f92",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#d5e3ff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#5d4212",
+                        "inverse-on-surface": "#eaf2fb",
+                        "outline-variant": "#c3c6d0",
+                        "on-secondary-fixed": "#281800",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#e7eff8",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffddaf",
+                        "on-tertiary-fixed": "#001b3c",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#a6c8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#43474f",
+                        "tertiary": "#00244b",
+                        "outline": "#737780",
+                        "primary": "#00244a",
+                        "secondary-fixed-dim": "#e8c085",
+                        "surface-variant": "#dbe3ec",
+                        "surface": "#f6faff",
+                        "secondary": "#775928",
+                        "on-tertiary-fixed-variant": "#004788",
+                        "primary-container": "#0d3a6b",
+                        "on-surface": "#151c23",
+                        "surface-dim": "#d3dbe4",
+                        "on-background": "#151c23",
+                        "surface-bright": "#f6faff",
+                        "surface-container-low": "#ecf4fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col p-4 gap-2 h-screen w-64 fixed left-0 top-0 border-r-0 bg-surface-container-low transition-all z-40">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+</div>
+<div>
+<h1 class="text-lg font-bold text-primary tracking-tight font-headline">NaviClin</h1>
+<p class="text-[0.75rem] font-medium text-on-surface-variant uppercase tracking-wider font-label">Clinical Curator</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-surface-container-lowest text-primary rounded-lg shadow-[0px_4px_12px_-2px_rgba(21,28,35,0.04)] transition-colors opacity-100 font-label text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="calendar_month" data-weight="fill" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+                Agenda
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-lowest/50 hover:translate-x-1 transition-all duration-200 rounded-lg font-label text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="group">group</span>
+                Sala de Espera
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-lowest/50 hover:translate-x-1 transition-all duration-200 rounded-lg font-label text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="assignment_ind">assignment_ind</span>
+                Pacientes
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-lowest/50 hover:translate-x-1 transition-all duration-200 rounded-lg font-label text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="payments">payments</span>
+                Financeiro
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-lowest/50 hover:translate-x-1 transition-all duration-200 rounded-lg font-label text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="analytics">analytics</span>
+                Relatórios
+            </a>
+</div>
+<button class="mt-auto mb-4 w-full py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-lg font-label text-[0.75rem] uppercase tracking-wider font-medium flex items-center justify-center gap-2 shadow-[0px_8px_16px_-4px_rgba(0,36,74,0.15)] hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="add">add</span>
+            Novo Agendamento
+        </button>
+<div class="flex flex-col gap-1 border-t border-outline-variant/20 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-lowest/50 hover:translate-x-1 transition-all duration-200 rounded-lg font-label text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="contact_support">contact_support</span>
+                Suporte
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-lowest/50 hover:translate-x-1 transition-all duration-200 rounded-lg font-label text-[0.75rem] uppercase tracking-wider font-medium" href="#">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="logout">logout</span>
+                Sair
+            </a>
+</div>
+</nav>
+<!-- TopNavBar (Mobile) -->
+<nav class="md:hidden flex justify-between items-center px-6 py-3 w-full bg-surface/80 backdrop-blur-md docked full-width top-0 sticky z-50 text-primary shadow-[0px_12px_32px_-4px_rgba(21,28,35,0.04)] border-b border-surface-container-low">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-sm" data-icon="medical_services">medical_services</span>
+</div>
+<span class="text-xl font-extrabold tracking-tight font-headline">NaviClin</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Minimalist abstract portrait representation in clinical blue tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXK85sVMGDIgO9IHrux8UdpwNnl5r1-1AuYRxOThkZaX3SnQeYquQ5Z49Zsx9cjoQ865XIfZkgYpMGKUBf1gRDjt5FLHCnA_vGpwBEj6Wsn78mEC-qOEr3M-u7ulcfmaKWSx0mygYutLtZ86Na6XCupW4DBfJh-zx0aNd0f6UdBydsPiRD05kEqGkjHNMJ-GSrEmOHkBMaBM5fyxoyou1HouFd1WuBfsmJ0RPheUPoX-7vfBFX72f0_uRL9rXe73sHTdxSRcekOyk"/>
+</button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col min-w-0 bg-surface">
+<!-- Header Section -->
+<header class="px-8 py-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-surface z-10 relative">
+<div>
+<p class="font-label text-on-surface-variant uppercase tracking-wider text-[0.75rem] mb-2 font-medium">Visão Geral</p>
+<h2 class="font-headline text-[2.5rem] font-extrabold text-primary leading-tight tracking-tight">Agenda Semanal</h2>
+<p class="font-body text-on-surface-variant mt-2">12 de Agosto - 18 de Agosto, 2024</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex bg-surface-container-low rounded-lg p-1">
+<button class="px-4 py-2 text-[0.875rem] font-medium text-on-surface-variant hover:text-primary transition-colors rounded-md">Dia</button>
+<button class="px-4 py-2 text-[0.875rem] font-medium bg-surface-container-lowest text-primary shadow-[0px_2px_8px_-2px_rgba(21,28,35,0.05)] rounded-md">Semana</button>
+<button class="px-4 py-2 text-[0.875rem] font-medium text-on-surface-variant hover:text-primary transition-colors rounded-md">Mês</button>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-on-surface-variant hover:text-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-on-surface-variant hover:text-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Calendar Area -->
+<div class="flex-1 flex overflow-hidden relative">
+<!-- Calendar Grid -->
+<div class="flex-1 overflow-auto bg-surface-container-lowest rounded-tl-2xl shadow-[0px_0px_40px_-10px_rgba(21,28,35,0.03)] flex flex-col relative z-10">
+<!-- Professionals Header Row -->
+<div class="flex border-b border-outline-variant/10 sticky top-0 bg-surface-container-lowest z-20">
+<div class="w-20 shrink-0 border-r border-outline-variant/10 bg-surface-container-lowest/90 backdrop-blur-sm"></div>
+<div class="flex-1 min-w-[200px] border-r border-outline-variant/10 p-4 text-center">
+<div class="w-12 h-12 mx-auto rounded-full bg-surface-container-high mb-2 overflow-hidden border-2 border-surface-container-lowest shadow-sm">
+<img alt="Dr. Silva" class="w-full h-full object-cover" data-alt="Professional headshot of a male doctor in clinical setting, warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAisMVIx2whYXHxH-WMfNIWfv_fYtiDSQ9UiJjViPJqynsU9FdlLNoPmOIlXdDV39AdkBUqhELCM0ZoqOCTQv5MjT9INO8nnJodVHMGoQe6ymbXlSxYG3eaGXEtv4O3i-fzRRMsJpN0S6lQoqIkh3h_S9P50vrxe2EvkAl5KTxnjd5xz8t_HqqB5ehhBDhBYk64M25zsmFjPrpaKt6WOgis8a5QLfEOcsrwYKA33GdHzyY4epFMTzqSQ2zfKUiV2L6A4v_JqwygoUE"/>
+</div>
+<h3 class="font-headline font-bold text-[1rem] text-primary">Dr. Silva</h3>
+<p class="font-body text-[0.75rem] text-on-surface-variant">Cardiologia</p>
+</div>
+<div class="flex-1 min-w-[200px] border-r border-outline-variant/10 p-4 text-center">
+<div class="w-12 h-12 mx-auto rounded-full bg-surface-container-high mb-2 overflow-hidden border-2 border-surface-container-lowest shadow-sm">
+<img alt="Dra. Costa" class="w-full h-full object-cover" data-alt="Professional headshot of a female doctor in clinical setting, warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy243eQNGa6oF5KbTyXT0rXCVv_O5J_5-vx-gIXncunNcVUBj296V2ygcbQuSXYJjEVHz04ZJkufNUBjYqP8KWsdyclgQs3H26Rob1Fnx61Wu1nsJLRDJWOTrXjV88P-k951AdoGMf4c2j7BmR_kv-TsNH30BUzixe2rNrQjp9rveeJz9spmZDyAq5f6uHmbC8Rmy79fxbr6JRCbrsyeLlBzb6vr_7NW_vdCT1FfINFalh6ImmiANe9ijMMR4N4dMfoLdNufUm6a8"/>
+</div>
+<h3 class="font-headline font-bold text-[1rem] text-primary">Dra. Costa</h3>
+<p class="font-body text-[0.75rem] text-on-surface-variant">Pediatria</p>
+</div>
+<div class="flex-1 min-w-[200px] p-4 text-center">
+<div class="w-12 h-12 mx-auto rounded-full bg-surface-container-high mb-2 overflow-hidden border-2 border-surface-container-lowest shadow-sm">
+<img alt="Dr. Santos" class="w-full h-full object-cover" data-alt="Professional headshot of a male doctor with glasses in clinical setting, warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqkFsc3-wBvDOf5AryMWrCjHEVAf7BhoHZxusat0I6l53To7hsRo-i2qDNzMYMnO_x9H7EXu0OHSM8CeQ24iiZ2CzQPsmsHrqrC1fYNIhT-u4WMpioCLOSgUSuqjGK6msrduGDO7obvPrhJy-YV-dDv6uA53VEwbZBEyaXAn_gDWgyWXLFRsreaBhi75rqcHbtwIhPIyW0gqbT-TMqMWZYCKsT0bdnb8tIvrXw1HhhwPwwX1rfvGR14gUVleF8NCzLn5yldUnlzrc"/>
+</div>
+<h3 class="font-headline font-bold text-[1rem] text-primary">Dr. Santos</h3>
+<p class="font-body text-[0.75rem] text-on-surface-variant">Ortopedia</p>
+</div>
+</div>
+<!-- Time Grid Body -->
+<div class="flex relative bg-surface-container-lowest">
+<!-- Time Column -->
+<div class="w-20 shrink-0 border-r border-outline-variant/10 bg-surface-container-lowest/90 backdrop-blur-sm relative z-10">
+<div class="h-24 border-b border-outline-variant/5 flex justify-end pr-2 pt-2">
+<span class="font-label text-[0.75rem] text-on-surface-variant">08:00</span>
+</div>
+<div class="h-24 border-b border-outline-variant/5 flex justify-end pr-2 pt-2">
+<span class="font-label text-[0.75rem] text-on-surface-variant">09:00</span>
+</div>
+<div class="h-24 border-b border-outline-variant/5 flex justify-end pr-2 pt-2">
+<span class="font-label text-[0.75rem] text-on-surface-variant">10:00</span>
+</div>
+<div class="h-24 border-b border-outline-variant/5 flex justify-end pr-2 pt-2">
+<span class="font-label text-[0.75rem] text-on-surface-variant">11:00</span>
+</div>
+<div class="h-24 border-b border-outline-variant/5 flex justify-end pr-2 pt-2">
+<span class="font-label text-[0.75rem] text-on-surface-variant">12:00</span>
+</div>
+</div>
+<!-- Grid Columns -->
+<div class="flex-1 flex">
+<!-- Col 1: Dr. Silva -->
+<div class="flex-1 min-w-[200px] border-r border-outline-variant/10 relative">
+<!-- Background grid lines -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="h-24 border-b border-outline-variant/5"></div>
+<div class="h-24 border-b border-outline-variant/5"></div>
+<div class="h-24 border-b border-outline-variant/5"></div>
+<div class="h-24 border-b border-outline-variant/5"></div>
+<div class="h-24 border-b border-outline-variant/5"></div>
+</div>
+<!-- Appointments -->
+<div class="absolute top-[10px] left-2 right-2 h-[80px] bg-[#10B981]/15 border-l-4 border-[#10B981] rounded-r-lg p-3 shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline font-bold text-[0.875rem] text-primary truncate group-hover:text-primary-container">João Nogueira</h4>
+<span class="material-symbols-outlined text-[1rem] text-[#10B981]" data-icon="check_circle">check_circle</span>
+</div>
+<p class="font-body text-[0.75rem] text-on-surface-variant truncate">Retorno - Exames</p>
+</div>
+<div class="absolute top-[120px] left-2 right-2 h-[110px] bg-secondary-fixed/50 border-l-4 border-secondary rounded-r-lg p-3 shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline font-bold text-[0.875rem] text-on-secondary-fixed-variant truncate group-hover:text-secondary-fixed-variant">Maria Santos</h4>
+<span class="material-symbols-outlined text-[1rem] text-secondary" data-icon="hourglass_top">hourglass_top</span>
+</div>
+<p class="font-body text-[0.75rem] text-on-secondary-fixed-variant/80 truncate mb-2">Primeira Consulta</p>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[0.65rem] font-medium bg-surface-container-lowest/50 text-on-secondary-fixed-variant uppercase tracking-wider">Sala de Espera</span>
+</div>
+</div>
+<!-- Col 2: Dra. Costa -->
+<div class="flex-1 min-w-[200px] border-r border-outline-variant/10 relative">
+<!-- Background grid lines -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="h-24 border-b border-outline-variant/5"></div>
+<div class="h-24 border-b border-outline-variant/5"></div>
+<div class="h-24 border-b border-outline-variant/5"></div>
+<div class="h-24 border-b border-outline-variant/5"></div>
+<div class="h-24 border-b border-outline-variant/5"></div>
+</div>
+<div class="absolute top-[48px] left-2 right-2 h-[48px] bg-primary-fixed/30 border-l-4 border-primary rounded-r-lg p-2 shadow-sm hover:shadow-md transition-shadow cursor-pointer group flex flex-col justify-center">
+<div class="flex justify-between items-center">
+<h4 class="font-headline font-bold text-[0.875rem] text-primary truncate group-hover:text-primary-container">Pedro Alves</h4>
+<span class="material-symbols-outlined text-[1rem] text-primary/70" data-icon="event">event</span>
+</div>
+<p class="font-body text-[0.75rem] text-on-surface-variant truncate">Rotina</p>
+</div>
+</div>
+<!-- Col 3: Dr. Santos -->
+<div class="flex-1 min-w-[200px] relative">
+<!-- Background grid lines -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="h-24 border-b border-outline-variant/5"></div>
+<div class="h-24 border-b border-outline-variant/5"></div>
+<div class="h-24 border-b border-outline-variant/5"></div>
+<div class="h-24 border-b border-outline-variant/5"></div>
+<div class="h-24 border-b border-outline-variant/5"></div>
+</div>
+<div class="absolute top-[200px] left-2 right-2 h-[90px] bg-error-container/30 border-l-4 border-error rounded-r-lg p-3 shadow-sm hover:shadow-md transition-shadow cursor-pointer group opacity-60">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline font-bold text-[0.875rem] text-on-error-container line-through truncate">Ana Paula</h4>
+<span class="material-symbols-outlined text-[1rem] text-error" data-icon="cancel">cancel</span>
+</div>
+<p class="font-body text-[0.75rem] text-on-error-container/80 truncate">Avaliação</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Current Time Indicator Line -->
+<div class="absolute left-20 right-0 top-[140px] h-[2px] bg-secondary z-30 pointer-events-none opacity-80">
+<div class="absolute -left-2 -top-1.5 w-3 h-3 rounded-full bg-secondary"></div>
+</div>
+</div>
+<!-- Right Sidebar: Filters -->
+<aside class="w-80 shrink-0 bg-surface-container-low border-l border-surface-variant p-6 flex flex-col gap-8 overflow-y-auto">
+<!-- Mini Calendar -->
+<div>
+<h4 class="font-headline font-bold text-[1rem] text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="calendar_today">calendar_today</span>
+                        Navegação
+                    </h4>
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0px_4px_12px_-2px_rgba(21,28,35,0.02)]">
+<div class="flex justify-between items-center mb-4">
+<span class="font-body font-semibold text-[0.875rem]">Agosto 2024</span>
+<div class="flex gap-1">
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span></button>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</div>
+<!-- Decorative mini calendar grid -->
+<div class="grid grid-cols-7 gap-1 text-center font-label text-[0.65rem] text-on-surface-variant mb-2">
+<div>D</div><div>S</div><div>T</div><div>Q</div><div>Q</div><div>S</div><div>S</div>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center font-body text-[0.75rem]">
+<div class="text-on-surface-variant/40 p-1">28</div><div class="text-on-surface-variant/40 p-1">29</div><div class="text-on-surface-variant/40 p-1">30</div><div class="text-on-surface-variant/40 p-1">31</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">1</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">2</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">3</div>
+<div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">4</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">5</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">6</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">7</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">8</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">9</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">10</div>
+<div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">11</div><div class="p-1 bg-primary text-on-primary rounded-full font-bold shadow-sm">12</div><div class="p-1 bg-surface-container-high text-primary rounded-full font-bold">13</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">14</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">15</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">16</div><div class="p-1 hover:bg-surface-container-high rounded cursor-pointer">17</div>
+</div>
+</div>
+</div>
+<!-- Filters -->
+<div>
+<h4 class="font-headline font-bold text-[1rem] text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="filter_list">filter_list</span>
+                        Filtros
+                    </h4>
+<div class="flex flex-col gap-5">
+<!-- Especialidade -->
+<div>
+<label class="font-label text-[0.75rem] uppercase tracking-wider text-on-surface-variant mb-2 block">Especialidade</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-2.5 text-[0.875rem] font-body text-on-surface focus:border-primary/50 focus:ring-2 focus:ring-primary-fixed outline-none shadow-sm transition-all appearance-none">
+<option>Todas as Especialidades</option>
+<option>Cardiologia</option>
+<option>Pediatria</option>
+<option>Ortopedia</option>
+</select>
+</div>
+<!-- Profissionais -->
+<div>
+<label class="font-label text-[0.75rem] uppercase tracking-wider text-on-surface-variant mb-2 block">Profissionais</label>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container-lowest/50 cursor-pointer transition-colors">
+<input checked="" class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary-fixed" type="checkbox"/>
+<span class="font-body text-[0.875rem]">Dr. Silva</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container-lowest/50 cursor-pointer transition-colors">
+<input checked="" class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary-fixed" type="checkbox"/>
+<span class="font-body text-[0.875rem]">Dra. Costa</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container-lowest/50 cursor-pointer transition-colors">
+<input checked="" class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary-fixed" type="checkbox"/>
+<span class="font-body text-[0.875rem]">Dr. Santos</span>
+</label>
+</div>
+</div>
+<!-- Status Legenda -->
+<div>
+<label class="font-label text-[0.75rem] uppercase tracking-wider text-on-surface-variant mb-2 block">Status</label>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[0.75rem] font-medium bg-[#10B981]/15 text-[#10B981]">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span> Confirmado
+                                </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[0.75rem] font-medium bg-secondary-fixed/50 text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Sala de Espera
+                                </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[0.75rem] font-medium bg-primary-fixed/30 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Agendado
+                                </span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Floating Action Button (Mobile only) -->
+<button class="md:hidden fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-br from-secondary to-on-secondary-container text-on-secondary flex items-center justify-center shadow-[0px_12px_32px_-4px_rgba(119,89,40,0.4)] hover:scale-105 transition-transform z-50">
+<span class="material-symbols-outlined text-[2rem]" data-icon="add">add</span>
+</button>
+</body></html>

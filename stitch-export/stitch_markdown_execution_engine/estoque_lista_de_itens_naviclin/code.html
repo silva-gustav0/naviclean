@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NaviClin - Controle de Estoque</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#151c23",
+                        "surface-container-high": "#e1e9f2",
+                        "on-tertiary-container": "#75a5ef",
+                        "tertiary-container": "#003a72",
+                        "tertiary": "#00244b",
+                        "surface-bright": "#f6faff",
+                        "surface": "#f6faff",
+                        "primary-container": "#0d3a6b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001c3b",
+                        "inverse-surface": "#293138",
+                        "background": "#f6faff",
+                        "on-tertiary-fixed-variant": "#004788",
+                        "on-primary-container": "#81a5dd",
+                        "inverse-on-surface": "#eaf2fb",
+                        "surface-container-low": "#ecf4fd",
+                        "primary": "#00244a",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#785a29",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#151c23",
+                        "surface-dim": "#d3dbe4",
+                        "surface-tint": "#3b5f92",
+                        "secondary-container": "#fdd497",
+                        "tertiary-fixed-dim": "#a7c8ff",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#43474f",
+                        "secondary-fixed-dim": "#e8c085",
+                        "secondary-fixed": "#ffddaf",
+                        "outline": "#737780",
+                        "tertiary-fixed": "#d5e3ff",
+                        "outline-variant": "#c3c6d0",
+                        "on-secondary-fixed": "#281800",
+                        "surface-container-highest": "#dbe3ec",
+                        "inverse-primary": "#a6c8ff",
+                        "surface-variant": "#dbe3ec",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#001b3c",
+                        "on-secondary-fixed-variant": "#5d4212",
+                        "surface-container": "#e7eff8",
+                        "on-primary-fixed-variant": "#204779",
+                        "primary-fixed": "#d5e3ff",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#775928",
+                        "primary-fixed-dim": "#a6c8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f6faff; color: #151c23; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .gradient-primary { background: linear-gradient(135deg, #00244a 0%, #0d3a6b 100%); }
+        .shadow-premium { box-shadow: 0px 12px 32px -4px rgba(0, 36, 74, 0.05); }
+    </style>
+</head>
+<body class="flex min-h-screen bg-surface">
+<!-- SideNavBar (from JSON) -->
+<aside class="hidden md:flex flex-col bg-[#ecf4fd] dark:bg-slate-950 text-[#00244a] dark:text-blue-400 font-['Inter'] font-medium text-[0.875rem] fixed left-0 top-0 h-full w-64 z-50 p-6 space-y-2">
+<div class="mb-8 px-4 flex flex-col">
+<span class="text-lg font-black text-[#00244a] tracking-wider font-headline">NaviClin</span>
+<span class="text-xs text-outline tracking-widest uppercase mt-1">Dental Management</span>
+</div>
+<button class="mb-6 w-full py-3 px-4 rounded-lg gradient-primary text-on-primary font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-premium">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+            New Appointment
+        </button>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+                Agenda
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="airline_seat_recline_normal">airline_seat_recline_normal</span>
+                Sala de Espera
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+                Pacientes
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                Financeiro
+            </a>
+<!-- Active Tab -->
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-800 text-[#00244a] dark:text-blue-400 font-bold rounded-lg shadow-sm hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2" data-weight="fill" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+                Estoque
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                Relatórios
+            </a>
+</nav>
+<div class="mt-auto space-y-1 pt-4 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-white/50 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Sign Out
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar (from JSON) -->
+<header class="bg-[#f6faff]/80 dark:bg-slate-900/80 backdrop-blur-md text-[#00244a] dark:text-blue-400 font-['Manrope'] font-bold text-sm tracking-tight fixed top-0 right-0 w-full z-40 shadow-sm shadow-blue-900/5 flex justify-between items-center h-16 px-8 md:ml-64 md:w-[calc(100%-16rem)]">
+<!-- Search Bar on Left -->
+<div class="flex-1 flex items-center">
+<div class="relative w-64 group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors text-xl" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg pl-10 pr-4 py-2 text-sm font-body font-normal text-on-surface focus:outline-none focus:border-primary-fixed focus:ring-2 focus:ring-primary-fixed/50 transition-all placeholder:text-outline/70" placeholder="Buscar pacientes, itens..." type="text"/>
+</div>
+</div>
+<!-- Trailing Icons & Profile -->
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-slate-500 hover:text-[#00244a] hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-slate-500 hover:text-[#00244a] hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-px bg-outline-variant/30 mx-2"></div>
+<button class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+<div class="text-right hidden lg:block">
+<div class="text-sm font-bold text-primary leading-tight">Dr. Silva</div>
+<div class="text-xs font-normal text-outline">Clinician</div>
+</div>
+<img alt="Clinician profile" class="w-9 h-9 rounded-full object-cover border border-outline-variant/20" data-alt="professional headshot of a male doctor in a bright clinical setting wearing scrubs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpH6P0f8FCqevuTzbFrP3HcDlYDXxYAAKb2jZyETm2_EGkqcpwiCQm0lp5ulTsK_Ej7mT316zq-b7ln4bySD0N5uw8QZnRQG3C2WTDLXqKkJM6U-Yt477CroQ-BcoUnIyMaO3sri4hDOW1JOOwF2hYyAe9JNUFE-B14-dGOodRbdG1jCeVFOhD9gc7gEpuMKuinZz70KWmL5gvSOkTlI3FWVfrWLPMQtJAJq9A9GBY9ZbWmi_PIEXGwjEtSmaTr7aX4uA6W9cRkQo"/>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 p-8 pt-24 max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+<div>
+<h1 class="font-headline font-extrabold text-[1.75rem] text-primary tracking-tight">Estoque</h1>
+<p class="font-body text-sm text-outline mt-1">Gerencie itens, validade e níveis de reposição.</p>
+</div>
+<button class="gradient-primary text-on-primary font-body font-medium text-sm px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-premium hover:opacity-95 transition-opacity">
+<span class="material-symbols-outlined text-base" data-icon="add">add</span>
+                    Novo Item
+                </button>
+</div>
+<!-- Controls (Search & Filters) -->
+<div class="bg-surface-container-low rounded-xl p-4 mb-6 flex flex-col sm:flex-row gap-4 items-center">
+<div class="relative flex-1 w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg pl-10 pr-4 py-2.5 text-sm font-body text-on-surface focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-shadow" placeholder="Buscar no estoque..." type="text"/>
+</div>
+<div class="flex gap-3 w-full sm:w-auto">
+<select class="bg-surface-container-lowest border border-outline-variant/20 rounded-lg px-4 py-2.5 text-sm font-body text-on-surface focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-shadow appearance-none pr-10">
+<option>Todas as Categorias</option>
+<option>Consumo</option>
+<option>EPI</option>
+<option>Medicamentos</option>
+</select>
+<select class="bg-surface-container-lowest border border-outline-variant/20 rounded-lg px-4 py-2.5 text-sm font-body text-on-surface focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-shadow appearance-none pr-10">
+<option>Status: Todos</option>
+<option>Atenção</option>
+<option>Crítico</option>
+<option>Normal</option>
+</select>
+</div>
+</div>
+<!-- Data Presentation (Bento-style List) -->
+<div class="space-y-3">
+<!-- Header Row -->
+<div class="hidden lg:flex items-center px-6 py-2 text-[0.75rem] font-label font-medium uppercase tracking-[0.05em] text-outline ml-2">
+<div class="flex-1">Item / SKU</div>
+<div class="w-48">Categoria</div>
+<div class="w-32 text-right">Estoque Atual</div>
+<div class="w-32 text-right">Estoque Mín.</div>
+<div class="w-40 text-right">Validade</div>
+<div class="w-16"></div>
+</div>
+<!-- Row 1: Normal State -->
+<div class="flex flex-col lg:flex-row lg:items-center bg-surface-container-lowest p-5 lg:px-8 lg:py-4 rounded-xl shadow-sm hover:shadow-md transition-shadow gap-4 lg:gap-0 border border-outline-variant/10">
+<div class="flex-1 flex flex-col">
+<span class="font-body font-semibold text-primary text-sm">Resina Composta A2</span>
+<span class="font-body text-xs text-outline mt-0.5">SKU: RC-1029</span>
+</div>
+<div class="lg:w-48 flex items-center">
+<span class="bg-surface-container-low text-primary px-2.5 py-1 rounded-md text-xs font-medium font-body">Consumo Clínico</span>
+</div>
+<div class="lg:w-32 flex lg:justify-end items-center">
+<span class="font-headline font-bold text-base text-on-surface">45 un</span>
+</div>
+<div class="lg:w-32 flex lg:justify-end items-center">
+<span class="font-body text-sm text-outline">10 un</span>
+</div>
+<div class="lg:w-40 flex lg:justify-end items-center">
+<span class="font-body text-sm text-on-surface">12/08/2025</span>
+</div>
+<div class="lg:w-16 flex justify-end">
+<button class="text-outline hover:text-primary transition-colors p-1"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</div>
+</div>
+<!-- Row 2: ALERT - Low Stock -->
+<div class="flex flex-col lg:flex-row lg:items-center bg-error-container/20 p-5 lg:px-8 lg:py-4 rounded-xl shadow-sm border border-error/20 relative overflow-hidden gap-4 lg:gap-0">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+<div class="flex-1 flex flex-col pl-2">
+<span class="font-body font-semibold text-on-error-container text-sm flex items-center gap-2">
+                            Luvas de Procedimento (M)
+                            <span class="material-symbols-outlined text-[1rem] text-error" data-icon="warning">warning</span>
+</span>
+<span class="font-body text-xs text-error/70 mt-0.5">SKU: EPI-440</span>
+</div>
+<div class="lg:w-48 flex items-center">
+<span class="bg-surface-container-lowest/50 text-on-error-container px-2.5 py-1 rounded-md text-xs font-medium font-body">EPI</span>
+</div>
+<div class="lg:w-32 flex lg:justify-end items-center">
+<span class="font-headline font-bold text-base text-error">2 cx</span>
+</div>
+<div class="lg:w-32 flex lg:justify-end items-center">
+<span class="font-body text-sm text-error/70">5 cx</span>
+</div>
+<div class="lg:w-40 flex lg:justify-end items-center">
+<span class="font-body text-sm text-on-surface">N/A</span>
+</div>
+<div class="lg:w-16 flex justify-end">
+<button class="text-error/70 hover:text-error transition-colors p-1"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</div>
+</div>
+<!-- Row 3: Secondary Highlight - Premium Item -->
+<div class="flex flex-col lg:flex-row lg:items-center bg-surface-container-lowest p-5 lg:px-8 lg:py-4 rounded-xl shadow-sm hover:shadow-md transition-shadow gap-4 lg:gap-0 border border-secondary/20">
+<div class="flex-1 flex flex-col">
+<span class="font-body font-semibold text-secondary text-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[1rem] text-secondary" data-icon="star">star</span>
+                            Implante Titânio Premium 4x10
+                        </span>
+<span class="font-body text-xs text-outline mt-0.5">SKU: IMP-099</span>
+</div>
+<div class="lg:w-48 flex items-center">
+<span class="bg-secondary/10 text-secondary px-2.5 py-1 rounded-md text-xs font-medium font-body">Cirúrgico</span>
+</div>
+<div class="lg:w-32 flex lg:justify-end items-center">
+<span class="font-headline font-bold text-base text-on-surface">12 un</span>
+</div>
+<div class="lg:w-32 flex lg:justify-end items-center">
+<span class="font-body text-sm text-outline">4 un</span>
+</div>
+<div class="lg:w-40 flex lg:justify-end items-center">
+<span class="font-body text-sm text-on-surface">05/2028</span>
+</div>
+<div class="lg:w-16 flex justify-end">
+<button class="text-outline hover:text-secondary transition-colors p-1"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</div>
+</div>
+<!-- Row 4: ALERT - Nearing Expiration -->
+<div class="flex flex-col lg:flex-row lg:items-center bg-secondary-fixed/30 p-5 lg:px-8 lg:py-4 rounded-xl shadow-sm border border-secondary-fixed relative overflow-hidden gap-4 lg:gap-0">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-on-secondary-fixed-variant"></div>
+<div class="flex-1 flex flex-col pl-2">
+<span class="font-body font-semibold text-on-secondary-fixed-variant text-sm flex items-center gap-2">
+                            Anestésico Local (Lidocaína)
+                            <span class="material-symbols-outlined text-[1rem] text-on-secondary-fixed-variant" data-icon="schedule">schedule</span>
+</span>
+<span class="font-body text-xs text-on-secondary-fixed-variant/70 mt-0.5">SKU: MED-210</span>
+</div>
+<div class="lg:w-48 flex items-center">
+<span class="bg-surface-container-lowest/50 text-on-secondary-fixed-variant px-2.5 py-1 rounded-md text-xs font-medium font-body">Medicamento</span>
+</div>
+<div class="lg:w-32 flex lg:justify-end items-center">
+<span class="font-headline font-bold text-base text-on-surface">28 cx</span>
+</div>
+<div class="lg:w-32 flex lg:justify-end items-center">
+<span class="font-body text-sm text-outline">10 cx</span>
+</div>
+<div class="lg:w-40 flex lg:justify-end items-center">
+<span class="font-body font-semibold text-sm text-on-secondary-fixed-variant bg-surface-container-lowest px-2 py-1 rounded">15 dias</span>
+</div>
+<div class="lg:w-16 flex justify-end">
+<button class="text-on-secondary-fixed-variant/70 hover:text-on-secondary-fixed-variant transition-colors p-1"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-8 flex justify-center">
+<button class="text-sm font-body font-medium text-primary bg-transparent border border-outline-variant/30 px-6 py-2 rounded-lg hover:bg-surface-container-low transition-colors">
+                    Carregar mais itens
+                </button>
+</div>
+</div>
+</main>
+</body></html>

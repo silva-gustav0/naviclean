@@ -21,7 +21,7 @@ export default async function AnamnesisPublicPage({ params }: { params: Promise<
             <span className="text-2xl">✓</span>
           </div>
           <h1 className="text-xl font-bold">Anamnese já preenchida</h1>
-          <p className="text-muted-foreground text-sm">Este link já foi utilizado. Caso precise atualizar, solicite um novo link à clínica.</p>
+          <p className="text-on-surface-variant text-sm">Este link já foi utilizado. Caso precise atualizar, solicite um novo link à clínica.</p>
         </div>
       </div>
     )
@@ -31,7 +31,7 @@ export default async function AnamnesisPublicPage({ params }: { params: Promise<
       <div className="min-h-screen flex items-center justify-center p-6">
         <div className="max-w-md text-center space-y-3">
           <h1 className="text-xl font-bold">Link expirado</h1>
-          <p className="text-muted-foreground text-sm">Este link de anamnese expirou. Solicite um novo link à clínica.</p>
+          <p className="text-on-surface-variant text-sm">Este link de anamnese expirou. Solicite um novo link à clínica.</p>
         </div>
       </div>
     )
@@ -47,21 +47,20 @@ export default async function AnamnesisPublicPage({ params }: { params: Promise<
   const clinic = tokenData.clinics as { name: string } | null
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4">
+    <div className="min-h-screen bg-surface-container-low py-8 px-4">
       <div className="max-w-2xl mx-auto space-y-6">
-        {/* Header */}
         <div className="text-center space-y-1">
-          <div className="w-12 h-12 bg-[#0D3A6B] rounded-xl flex items-center justify-center mx-auto mb-3">
+          <div className="w-12 h-12 surgical-gradient rounded-xl flex items-center justify-center mx-auto mb-3">
             <span className="text-white font-bold text-lg">N</span>
           </div>
-          <h1 className="text-xl font-bold text-[#0D3A6B]">{clinic?.name ?? "Clínica"}</h1>
-          <p className="text-sm text-muted-foreground">Anamnese de <strong>{patient?.full_name}</strong></p>
-          <p className="text-xs text-muted-foreground">
+          <h1 className="font-headline font-extrabold text-xl text-primary">{clinic?.name ?? "Clínica"}</h1>
+          <p className="text-sm text-on-surface-variant">Anamnese de <strong>{patient?.full_name}</strong></p>
+          <p className="text-xs text-on-surface-variant">
             Preencha com cuidado. Suas respostas são confidenciais e ajudam a garantir um atendimento seguro.
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl border p-6">
+        <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-6 shadow-premium-sm">
           <AnamnesisFormWithSubmit
             patientId={tokenData.patient_id}
             clinicId={tokenData.clinic_id}

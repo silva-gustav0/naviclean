@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { Users } from "lucide-react"
 import { NewPatientModal } from "@/components/dashboard/modals/new-patient-modal"
 import { PatientsList } from "@/components/dashboard/patients-list"
 
@@ -31,8 +30,8 @@ export default async function PacientesPage() {
     <div className="space-y-6 max-w-5xl">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Pacientes</h1>
-          <p className="text-muted-foreground text-sm">
+          <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Pacientes</h2>
+          <p className="text-on-surface-variant text-sm mt-1 font-sans">
             {safePatients.length} paciente{safePatients.length !== 1 ? "s" : ""} cadastrado{safePatients.length !== 1 ? "s" : ""}
           </p>
         </div>
@@ -42,12 +41,14 @@ export default async function PacientesPage() {
       {safePatients.length > 0 ? (
         <PatientsList patients={safePatients} />
       ) : (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border py-16 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-emerald-50 dark:bg-emerald-950 flex items-center justify-center mx-auto mb-4">
-            <Users className="h-8 w-8 text-emerald-600" />
+        <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 py-16 text-center shadow-premium-sm">
+          <div className="w-16 h-16 rounded-2xl bg-nc-secondary/10 flex items-center justify-center mx-auto mb-4">
+            <span className="material-symbols-outlined text-nc-secondary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+              groups
+            </span>
           </div>
-          <h3 className="font-semibold text-base mb-1">Nenhum paciente ainda</h3>
-          <p className="text-muted-foreground text-sm mb-6 max-w-xs mx-auto">
+          <h3 className="font-headline font-semibold text-primary text-base mb-1">Nenhum paciente ainda</h3>
+          <p className="text-on-surface-variant text-sm mb-6 max-w-xs mx-auto font-sans">
             Cadastre o primeiro paciente para começar a organizar os atendimentos.
           </p>
           <NewPatientModal />

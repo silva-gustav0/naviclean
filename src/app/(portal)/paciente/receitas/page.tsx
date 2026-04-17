@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { FileText, Download } from "lucide-react"
 
 export default async function PacienteReceitasPage() {
   const supabase = await createClient()
@@ -16,31 +15,29 @@ export default async function PacienteReceitasPage() {
     .eq("patient_id", patientId)
     .order("created_at", { ascending: false })
 
-  const today = new Date()
+  const typeLabel: Record<string, string> = { recipe: "Receita", certificate: "Atestado", referral: "Encaminhamento" }
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Minhas Receitas</h1>
+      <h1 className="font-headline font-extrabold text-2xl text-primary">Minhas Receitas</h1>
 
       {prescriptions && prescriptions.length > 0 ? (
         <div className="space-y-3">
           {prescriptions.map((p) => {
             const member = p.clinic_members as { full_name: string } | null
-            const typeLabel: Record<string, string> = { recipe: "Receita", certificate: "Atestado", referral: "Encaminhamento" }
-
             return (
-              <div key={p.id as string} className="bg-white dark:bg-slate-900 border rounded-2xl p-5">
+              <div key={p.id as string} className="bg-surface-container-lowest border border-outline-variant rounded-2xl p-5 shadow-premium-sm">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-violet-50">
-                      <FileText className="h-5 w-5 text-violet-600" />
+                      <span className="material-symbols-outlined text-violet-600" style={{ fontSize: 20 }}>description</span>
                     </div>
                     <div>
-                      <p className="font-semibold text-sm">{p.title as string}</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="font-semibold text-sm text-on-surface">{p.title as string}</p>
+                      <p className="text-xs text-on-surface-variant">
                         Dr(a). {member?.full_name ?? "—"} · {typeLabel[p.type as string] ?? p.type}
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-on-surface-variant">
                         {new Date(p.created_at as string).toLocaleDateString("pt-BR")}
                       </p>
                     </div>
@@ -50,9 +47,9 @@ export default async function PacienteReceitasPage() {
                       href={p.pdf_url as string}
                       target="_blank"
                       rel="noopener"
-                      className="flex items-center gap-1.5 text-xs font-medium border px-3 py-1.5 rounded-xl hover:border-[#0D3A6B] hover:text-[#0D3A6B] transition-colors shrink-0"
+                      className="flex items-center gap-1.5 text-xs font-medium border border-outline-variant text-on-surface-variant px-3 py-1.5 rounded-xl hover:border-primary hover:text-primary transition-colors shrink-0"
                     >
-                      <Download className="h-3.5 w-3.5" />
+                      <span className="material-symbols-outlined" style={{ fontSize: 14 }}>download</span>
                       PDF
                     </a>
                   )}
@@ -62,12 +59,10 @@ export default async function PacienteReceitasPage() {
           })}
         </div>
       ) : (
-        <div className="bg-white dark:bg-slate-900 border rounded-2xl py-16 text-center">
-          <div className="w-14 h-14 rounded-2xl bg-violet-50 flex items-center justify-center mx-auto mb-3">
-            <FileText className="h-7 w-7 text-violet-600" />
-          </div>
-          <p className="font-semibold">Nenhuma receita</p>
-          <p className="text-muted-foreground text-sm mt-1">Suas receitas médicas aparecerão aqui.</p>
+        <div className="bg-surface-container-lowest border border-outline-variant rounded-2xl py-16 text-center shadow-premium-sm">
+          <span className="material-symbols-outlined text-outline mb-3 block" style={{ fontSize: 40 }}>description</span>
+          <p className="font-semibold text-on-surface">Nenhuma receita</p>
+          <p className="text-on-surface-variant text-sm mt-1">Suas receitas médicas aparecerão aqui.</p>
         </div>
       )}
     </div>

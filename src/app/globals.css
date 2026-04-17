@@ -3,76 +3,154 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ── Material Symbols ─────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.546 0.245 262.881);
-  --primary-foreground: oklch(0.985 0.002 247.839);
-  --secondary: oklch(0.961 0.013 247.858);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.961 0.013 247.858);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.961 0.013 247.858);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.546 0.245 262.881);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.546 0.245 262.881);
-  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
-  --sidebar-accent: oklch(0.961 0.013 247.858);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.546 0.245 262.881);
+  /* ── shadcn/ui tokens — mapeados para NaviClin ──────────── */
+  --background: #f6faff;
+  --foreground: #151c23;
+  --card: #ffffff;
+  --card-foreground: #151c23;
+  --popover: #ffffff;
+  --popover-foreground: #151c23;
+  --primary: #00244a;
+  --primary-foreground: #ffffff;
+  --secondary: #ecf4fd;
+  --secondary-foreground: #00244a;
+  --muted: #e7eff8;
+  --muted-foreground: #43474f;
+  --accent: #ecf4fd;
+  --accent-foreground: #00244a;
+  --destructive: #ba1a1a;
+  --border: #c3c6d0;
+  --input: #c3c6d0;
+  --ring: #00244a;
+  --radius: 0.5rem;
+
+  /* ── Sidebar ─────────────────────────────────────────────── */
+  --sidebar: #ecf4fd;
+  --sidebar-foreground: #151c23;
+  --sidebar-primary: #00244a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e1e9f2;
+  --sidebar-accent-foreground: #00244a;
+  --sidebar-border: #c3c6d0;
+  --sidebar-ring: #00244a;
+
+  /* ── NaviClin Material Design 3 tokens ───────────────────── */
+
+  /* Surface */
+  --nc-surface-bright: #f6faff;
+  --nc-surface: #f6faff;
+  --nc-surface-dim: #d3dbe4;
+  --nc-surface-container-lowest: #ffffff;
+  --nc-surface-container-low: #ecf4fd;
+  --nc-surface-container: #e7eff8;
+  --nc-surface-container-high: #e1e9f2;
+  --nc-surface-container-highest: #dbe3ec;
+  --nc-surface-variant: #dbe3ec;
+  --nc-surface-tint: #3b5f92;
+  --nc-inverse-surface: #293138;
+  --nc-inverse-on-surface: #eaf2fb;
+
+  /* Primary */
+  --nc-primary: #00244a;
+  --nc-primary-container: #0d3a6b;
+  --nc-primary-fixed: #d5e3ff;
+  --nc-primary-fixed-dim: #a6c8ff;
+  --nc-inverse-primary: #a6c8ff;
+  --nc-on-primary: #ffffff;
+  --nc-on-primary-container: #81a5dd;
+  --nc-on-primary-fixed: #001c3b;
+  --nc-on-primary-fixed-variant: #204779;
+
+  /* Secondary (gold) */
+  --nc-secondary: #775928;
+  --nc-secondary-container: #fdd497;
+  --nc-secondary-fixed: #ffddaf;
+  --nc-secondary-fixed-dim: #e8c085;
+  --nc-on-secondary: #ffffff;
+  --nc-on-secondary-container: #785a29;
+  --nc-on-secondary-fixed: #281800;
+  --nc-on-secondary-fixed-variant: #5d4212;
+
+  /* Tertiary */
+  --nc-tertiary: #00244b;
+  --nc-tertiary-container: #003a72;
+  --nc-tertiary-fixed: #d5e3ff;
+  --nc-tertiary-fixed-dim: #a7c8ff;
+  --nc-on-tertiary: #ffffff;
+  --nc-on-tertiary-container: #75a5ef;
+  --nc-on-tertiary-fixed: #001b3c;
+  --nc-on-tertiary-fixed-variant: #004788;
+
+  /* Error */
+  --nc-error: #ba1a1a;
+  --nc-error-container: #ffdad6;
+  --nc-on-error: #ffffff;
+  --nc-on-error-container: #93000a;
+
+  /* Outline */
+  --nc-outline: #737780;
+  --nc-outline-variant: #c3c6d0;
+
+  /* Background / On-Surface */
+  --nc-background: #f6faff;
+  --nc-on-background: #151c23;
+  --nc-on-surface: #151c23;
+  --nc-on-surface-variant: #43474f;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.707 0.165 254.624);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.269 0.044 260.031);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0.044 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.269 0.044 260.031);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.707 0.165 254.624);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.707 0.165 254.624);
-  --sidebar-primary-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-accent: oklch(0.269 0.044 260.031);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.707 0.165 254.624);
+  --background: #0f1923;
+  --foreground: #eaf2fb;
+  --card: #1a2433;
+  --card-foreground: #eaf2fb;
+  --popover: #1a2433;
+  --popover-foreground: #eaf2fb;
+  --primary: #a6c8ff;
+  --primary-foreground: #001c3b;
+  --secondary: #1e2d3d;
+  --secondary-foreground: #a6c8ff;
+  --muted: #1e2d3d;
+  --muted-foreground: #8ba0b5;
+  --accent: #1e2d3d;
+  --accent-foreground: #a6c8ff;
+  --destructive: #ff897d;
+  --border: #2d3e52;
+  --input: #2d3e52;
+  --ring: #a6c8ff;
+  --sidebar: #111d29;
+  --sidebar-foreground: #eaf2fb;
+  --sidebar-primary: #a6c8ff;
+  --sidebar-primary-foreground: #001c3b;
+  --sidebar-accent: #1e2d3d;
+  --sidebar-accent-foreground: #eaf2fb;
+  --sidebar-border: #2d3e52;
+  --sidebar-ring: #a6c8ff;
 }
 
 @theme inline {
+  /* ── shadcn/ui ─────────────────────────────────────────── */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -91,15 +169,6 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -108,8 +177,71 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-sans: var(--font-geist-sans);
+
+  /* ── Radius ────────────────────────────────────────────── */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  /* ── Fonts ─────────────────────────────────────────────── */
+  --font-sans: var(--font-inter);
+  --font-headline: var(--font-manrope);
   --font-mono: var(--font-geist-mono);
+
+  /* ── NaviClin Material Design 3 colors ─────────────────── */
+  --color-surface-bright: var(--nc-surface-bright);
+  --color-surface: var(--nc-surface);
+  --color-surface-dim: var(--nc-surface-dim);
+  --color-surface-container-lowest: var(--nc-surface-container-lowest);
+  --color-surface-container-low: var(--nc-surface-container-low);
+  --color-surface-container: var(--nc-surface-container);
+  --color-surface-container-high: var(--nc-surface-container-high);
+  --color-surface-container-highest: var(--nc-surface-container-highest);
+  --color-surface-variant: var(--nc-surface-variant);
+  --color-surface-tint: var(--nc-surface-tint);
+  --color-inverse-surface: var(--nc-inverse-surface);
+  --color-inverse-on-surface: var(--nc-inverse-on-surface);
+
+  --color-nc-primary: var(--nc-primary);
+  --color-primary-container: var(--nc-primary-container);
+  --color-primary-fixed: var(--nc-primary-fixed);
+  --color-primary-fixed-dim: var(--nc-primary-fixed-dim);
+  --color-inverse-primary: var(--nc-inverse-primary);
+  --color-on-primary: var(--nc-on-primary);
+  --color-on-primary-container: var(--nc-on-primary-container);
+  --color-on-primary-fixed: var(--nc-on-primary-fixed);
+  --color-on-primary-fixed-variant: var(--nc-on-primary-fixed-variant);
+
+  --color-nc-secondary: var(--nc-secondary);
+  --color-secondary-container: var(--nc-secondary-container);
+  --color-secondary-fixed: var(--nc-secondary-fixed);
+  --color-secondary-fixed-dim: var(--nc-secondary-fixed-dim);
+  --color-on-secondary: var(--nc-on-secondary);
+  --color-on-secondary-container: var(--nc-on-secondary-container);
+  --color-on-secondary-fixed: var(--nc-on-secondary-fixed);
+  --color-on-secondary-fixed-variant: var(--nc-on-secondary-fixed-variant);
+
+  --color-tertiary: var(--nc-tertiary);
+  --color-tertiary-container: var(--nc-tertiary-container);
+  --color-tertiary-fixed: var(--nc-tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--nc-tertiary-fixed-dim);
+  --color-on-tertiary: var(--nc-on-tertiary);
+  --color-on-tertiary-container: var(--nc-on-tertiary-container);
+  --color-on-tertiary-fixed: var(--nc-on-tertiary-fixed);
+  --color-on-tertiary-fixed-variant: var(--nc-on-tertiary-fixed-variant);
+
+  --color-error: var(--nc-error);
+  --color-error-container: var(--nc-error-container);
+  --color-on-error: var(--nc-on-error);
+  --color-on-error-container: var(--nc-on-error-container);
+
+  --color-outline: var(--nc-outline);
+  --color-outline-variant: var(--nc-outline-variant);
+
+  --color-on-background: var(--nc-on-background);
+  --color-on-surface: var(--nc-on-surface);
+  --color-on-surface-variant: var(--nc-on-surface-variant);
 }
 
 * {
@@ -119,4 +251,21 @@
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* ── Utility classes ─────────────────────────────────────── */
+.surgical-gradient {
+  background: linear-gradient(135deg, #00244a 0%, #0d3a6b 100%);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #775928 0%, #b88a3e 100%);
+}
+
+.shadow-premium {
+  box-shadow: 0px 12px 32px -4px rgba(21, 28, 35, 0.06);
+}
+
+.shadow-premium-sm {
+  box-shadow: 0px 4px 12px -2px rgba(21, 28, 35, 0.04);
 }

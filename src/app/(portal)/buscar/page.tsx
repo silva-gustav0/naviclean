@@ -52,8 +52,8 @@ export default async function BuscarPage({
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold mb-1">Encontrar clínica</h1>
-        <p className="text-muted-foreground text-sm">Busque por nome, especialidade ou localização</p>
+        <h1 className="font-headline font-extrabold text-2xl text-primary mb-1">Encontrar clínica</h1>
+        <p className="text-on-surface-variant text-sm">Busque por nome, especialidade ou localização</p>
       </div>
 
       <SearchClient clinics={enriched} initialQuery={q ?? ""} />

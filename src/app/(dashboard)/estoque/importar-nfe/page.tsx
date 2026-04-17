@@ -21,13 +21,13 @@ export default async function ImportarNfePage() {
   return (
     <div className="space-y-6 max-w-4xl">
       <div>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
-          <Link href="/estoque" className="hover:text-foreground transition-colors">Estoque</Link>
+        <div className="flex items-center gap-2 text-sm text-on-surface-variant mb-1">
+          <Link href="/estoque" className="hover:text-on-surface transition-colors">Estoque</Link>
           <span>/</span>
           <span>Importar NF-e</span>
         </div>
-        <h1 className="text-2xl font-bold">Importar NF-e</h1>
-        <p className="text-muted-foreground text-sm">Faça o upload do XML da nota fiscal para importar itens automaticamente</p>
+        <h1 className="font-headline font-extrabold text-2xl text-primary">Importar NF-e</h1>
+        <p className="text-on-surface-variant text-sm">Faça o upload do XML da nota fiscal para importar itens automaticamente</p>
       </div>
 
       <NfeImportClient

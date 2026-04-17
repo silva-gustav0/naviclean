@@ -6,19 +6,9 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { toast } from "sonner"
-import { Loader2, Mail, Lock } from "lucide-react"
 
 import { createClient } from "@/lib/supabase/client"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
 
 const loginSchema = z.object({
   email: z.string().email("Email inválido"),
@@ -29,6 +19,7 @@ type LoginForm = z.infer<typeof loginSchema>
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const supabase = createClient()
 
   const form = useForm<LoginForm>({
@@ -59,63 +50,71 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight">Bem-vindo de volta</h1>
-        <p className="text-muted-foreground text-sm">
-          Entre com sua conta para acessar o painel
-        </p>
-      </div>
+    <>
+      <h1 className="text-4xl font-extrabold font-headline text-primary mb-2 tracking-tight">
+        Bem-vindo de volta
+      </h1>
+      <p className="text-on-surface-variant font-sans mb-10">
+        Acesse seu painel e prontuários dos pacientes.
+      </p>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          {/* Email */}
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
+              <FormItem className="space-y-2">
+                <label className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-sans">
+                  Email
+                </label>
                 <FormControl>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      type="email"
-                      placeholder="voce@clinica.com"
-                      autoComplete="email"
-                      className="pl-9"
-                      {...field}
-                    />
-                  </div>
+                  <input
+                    type="email"
+                    placeholder="dr.silva@naviclin.com"
+                    autoComplete="email"
+                    className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm text-on-surface placeholder:text-outline/50"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
+          {/* Password */}
           <FormField
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
-                <div className="flex items-center justify-between">
-                  <FormLabel>Senha</FormLabel>
-                  <Link
-                    href="/recuperar-senha"
-                    className="text-xs text-blue-600 hover:underline"
-                  >
+              <FormItem className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <label className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-sans">
+                    Senha
+                  </label>
+                  <Link href="/recuperar-senha" className="text-xs font-semibold text-primary hover:text-nc-secondary transition-colors">
                     Esqueceu a senha?
                   </Link>
                 </div>
                 <FormControl>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      type="password"
+                    <input
+                      type={showPassword ? "text" : "password"}
                       placeholder="••••••••"
                       autoComplete="current-password"
-                      className="pl-9"
+                      className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm text-on-surface"
                       {...field}
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-xl">
+                        {showPassword ? "visibility_off" : "visibility"}
+                      </span>
+                    </button>
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -123,19 +122,23 @@ export default function LoginPage() {
             )}
           />
 
-          <Button type="submit" className="w-full h-11 text-sm font-semibold" disabled={isLoading}>
-            {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-            Entrar
-          </Button>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full py-4 px-6 surgical-gradient text-white font-headline font-bold rounded-lg shadow-premium hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60"
+          >
+            {isLoading ? <span className="material-symbols-outlined animate-spin" style={{ fontSize: 16 }}>autorenew</span> : null}
+            Entrar no Painel
+          </button>
         </form>
       </Form>
 
-      <p className="text-center text-sm text-muted-foreground">
-        Não tem uma conta?{" "}
-        <Link href="/cadastro" className="text-blue-600 font-semibold hover:underline">
-          Criar conta grátis
+      <p className="mt-10 text-center text-sm text-on-surface-variant font-sans">
+        Não tem conta?{" "}
+        <Link href="/cadastro" className="text-primary font-bold hover:underline underline-offset-4 transition-all">
+          Começar teste grátis
         </Link>
       </p>
-    </div>
+    </>
   )
 }

@@ -1,24 +1,20 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect, notFound } from "next/navigation"
-import { ArrowLeft, ClipboardList, Check, Clock, DollarSign, Printer } from "lucide-react"
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
 
 interface Props {
   params: Promise<{ id: string }>
 }
 
 const STEP_COLORS: Record<string, string> = {
-  pending: "bg-slate-100 text-slate-600",
-  in_progress: "bg-blue-100 text-blue-700",
-  completed: "bg-emerald-100 text-emerald-700",
-  cancelled: "bg-red-100 text-red-700",
+  pending:     "bg-surface-container text-on-surface-variant border-outline-variant",
+  in_progress: "bg-blue-50 text-blue-700 border-blue-200",
+  completed:   "bg-emerald-50 text-emerald-700 border-emerald-200",
+  cancelled:   "bg-red-50 text-red-600 border-red-200",
 }
 const STEP_LABELS: Record<string, string> = {
-  pending: "Pendente",
-  in_progress: "Em andamento",
-  completed: "Concluído",
-  cancelled: "Cancelado",
+  pending: "Pendente", in_progress: "Em andamento",
+  completed: "Concluído", cancelled: "Cancelado",
 }
 
 export default async function PlanoDetalhe({ params }: Props) {
@@ -51,39 +47,39 @@ export default async function PlanoDetalhe({ params }: Props) {
   return (
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center gap-3">
-        <Link href="/tratamentos/planos" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
-          <ArrowLeft className="h-4 w-4" />
+        <Link href="/tratamentos/planos" className="p-2 hover:bg-surface-container rounded-xl transition-colors">
+          <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 18 }}>arrow_back</span>
         </Link>
-        <h1 className="text-2xl font-bold flex-1">{plan.title as string || "Plano de tratamento"}</h1>
-        <button className="flex items-center gap-1.5 border px-3 py-2 rounded-xl text-sm hover:bg-slate-50 transition-colors">
-          <Printer className="h-4 w-4" />
+        <h1 className="font-headline font-bold text-2xl text-primary flex-1">{plan.title as string || "Plano de tratamento"}</h1>
+        <button className="flex items-center gap-1.5 border border-outline-variant text-on-surface-variant px-3 py-2 rounded-xl text-sm hover:bg-surface-container transition-colors">
+          <span className="material-symbols-outlined" style={{ fontSize: 16 }}>print</span>
           Imprimir
         </button>
       </div>
 
       {/* Info card */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border p-5 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 shadow-premium-sm grid grid-cols-2 md:grid-cols-4 gap-4">
         <div>
-          <p className="text-xs text-muted-foreground">Paciente</p>
-          <p className="font-semibold mt-0.5">{patient?.full_name ?? "—"}</p>
+          <p className="text-xs text-on-surface-variant font-medium mb-0.5">Paciente</p>
+          <p className="font-semibold text-on-surface">{patient?.full_name ?? "—"}</p>
         </div>
         <div>
-          <p className="text-xs text-muted-foreground">Profissional</p>
-          <p className="font-semibold mt-0.5">{member?.full_name ?? "—"}</p>
+          <p className="text-xs text-on-surface-variant font-medium mb-0.5">Profissional</p>
+          <p className="font-semibold text-on-surface">{member?.full_name ?? "—"}</p>
         </div>
         <div>
-          <p className="text-xs text-muted-foreground">Valor total</p>
-          <p className="font-semibold mt-0.5">{plan.total_amount ? fmt(Number(plan.total_amount)) : "—"}</p>
+          <p className="text-xs text-on-surface-variant font-medium mb-0.5">Valor total</p>
+          <p className="font-bold text-primary">{plan.total_amount ? fmt(Number(plan.total_amount)) : "—"}</p>
         </div>
         <div>
-          <p className="text-xs text-muted-foreground">Progresso</p>
-          <p className="font-semibold mt-0.5">{completedProcedures}/{totalProcedures} procedimentos</p>
+          <p className="text-xs text-on-surface-variant font-medium mb-0.5">Progresso</p>
+          <p className="font-semibold text-on-surface">{completedProcedures}/{totalProcedures} procedimentos</p>
         </div>
       </div>
 
       {/* Progress bar */}
       {totalProcedures > 0 && (
-        <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+        <div className="h-2 bg-surface-container rounded-full overflow-hidden">
           <div
             className="h-full bg-emerald-500 rounded-full transition-all"
             style={{ width: `${(completedProcedures / totalProcedures) * 100}%` }}
@@ -92,44 +88,39 @@ export default async function PlanoDetalhe({ params }: Props) {
       )}
 
       {/* Procedures */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
-        <div className="px-5 py-4 border-b flex items-center justify-between">
-          <h2 className="font-semibold text-sm flex items-center gap-2">
-            <ClipboardList className="h-4 w-4 text-cyan-600" />
-            Procedimentos
-          </h2>
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden shadow-premium-sm">
+        <div className="px-5 py-4 border-b border-outline-variant bg-surface-container flex items-center gap-2">
+          <span className="material-symbols-outlined text-primary" style={{ fontSize: 18 }}>clinical_notes</span>
+          <h2 className="font-semibold text-sm text-on-surface">Procedimentos</h2>
         </div>
         {items.length > 0 ? (
-          <div className="divide-y">
+          <div className="divide-y divide-outline-variant/50">
             {items.map((item) => (
-              <div key={item.id} className="flex items-center gap-4 px-5 py-3.5 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+              <div key={item.id} className="flex items-center gap-4 px-5 py-3.5 hover:bg-surface-container transition-colors">
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                  item.status === "completed" ? "bg-emerald-100" : "bg-slate-100"
+                  item.status === "completed" ? "bg-emerald-50" : "bg-surface-container"
                 }`}>
-                  {item.status === "completed"
-                    ? <Check className="h-4 w-4 text-emerald-600" />
-                    : <Clock className="h-4 w-4 text-slate-400" />
-                  }
+                  <span className={`material-symbols-outlined ${item.status === "completed" ? "text-emerald-600" : "text-on-surface-variant"}`} style={{ fontSize: 16 }}>
+                    {item.status === "completed" ? "check_circle" : "schedule"}
+                  </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-sm">{item.services?.name ?? "Procedimento"}</p>
-                  {(item.quantity ?? 1) > 1 && <p className="text-xs text-muted-foreground">Qtd: {item.quantity}</p>}
+                  <p className="font-semibold text-sm text-on-surface">{item.services?.name ?? "Procedimento"}</p>
+                  {(item.quantity ?? 1) > 1 && <p className="text-xs text-on-surface-variant">Qtd: {item.quantity}</p>}
                 </div>
                 {item.total_price > 0 && (
-                  <p className="text-sm font-semibold flex items-center gap-1 shrink-0 text-[#0D3A6B]">
-                    <DollarSign className="h-3.5 w-3.5" />
-                    {fmt(Number(item.total_price))}
-                  </p>
+                  <p className="text-sm font-bold text-primary shrink-0">{fmt(Number(item.total_price))}</p>
                 )}
-                <Badge className={`text-[10px] shrink-0 ${STEP_COLORS[item.status] ?? "bg-slate-100 text-slate-600"}`}>
+                <span className={`text-[10px] shrink-0 px-2.5 py-0.5 rounded-full border font-medium ${STEP_COLORS[item.status] ?? STEP_COLORS.pending}`}>
                   {STEP_LABELS[item.status] ?? item.status}
-                </Badge>
+                </span>
               </div>
             ))}
           </div>
         ) : (
           <div className="py-10 text-center">
-            <p className="text-sm text-muted-foreground">Nenhum procedimento cadastrado</p>
+            <span className="material-symbols-outlined text-outline mb-2 block" style={{ fontSize: 32 }}>clinical_notes</span>
+            <p className="text-sm text-on-surface-variant">Nenhum procedimento cadastrado</p>
           </div>
         )}
       </div>

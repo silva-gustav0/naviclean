@@ -6,19 +6,9 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { toast } from "sonner"
-import { Loader2, User, Mail, Lock } from "lucide-react"
 
 import { createClient } from "@/lib/supabase/client"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
 
 const cadastroSchema = z.object({
   full_name: z.string().min(3, "Nome deve ter pelo menos 3 caracteres"),
@@ -75,27 +65,40 @@ export default function CadastroPage() {
     }
   }
 
+  const inputClass = "w-full pl-11 pr-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm text-on-surface placeholder:text-outline/50"
+
   return (
-    <div className="space-y-6">
-      <div className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight">Crie sua conta</h1>
-        <p className="text-muted-foreground text-sm">
-          14 dias grátis, sem cartão de crédito
-        </p>
-      </div>
+    <>
+      <h1 className="text-4xl font-extrabold font-headline text-primary mb-2 tracking-tight">
+        Comece grátis hoje
+      </h1>
+      <p className="text-on-surface-variant font-sans mb-10">
+        14 dias sem custo. Sem cartão de crédito.
+      </p>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+          {/* Nome */}
           <FormField
             control={form.control}
             name="full_name"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nome completo</FormLabel>
+              <FormItem className="space-y-2">
+                <label className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-sans">
+                  Nome completo
+                </label>
                 <FormControl>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input placeholder="Dr. João Silva" autoComplete="name" className="pl-9" {...field} />
+                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">
+                      person
+                    </span>
+                    <input
+                      type="text"
+                      placeholder="Dr. João Silva"
+                      autoComplete="name"
+                      className={inputClass}
+                      {...field}
+                    />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -103,20 +106,25 @@ export default function CadastroPage() {
             )}
           />
 
+          {/* Email */}
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
+              <FormItem className="space-y-2">
+                <label className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-sans">
+                  Email
+                </label>
                 <FormControl>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input
+                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">
+                      mail
+                    </span>
+                    <input
                       type="email"
                       placeholder="voce@clinica.com"
                       autoComplete="email"
-                      className="pl-9"
+                      className={inputClass}
                       {...field}
                     />
                   </div>
@@ -126,20 +134,25 @@ export default function CadastroPage() {
             )}
           />
 
+          {/* Senha */}
           <FormField
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Senha</FormLabel>
+              <FormItem className="space-y-2">
+                <label className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-sans">
+                  Senha
+                </label>
                 <FormControl>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input
+                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">
+                      lock
+                    </span>
+                    <input
                       type="password"
                       placeholder="Mínimo 8 caracteres"
                       autoComplete="new-password"
-                      className="pl-9"
+                      className={inputClass}
                       {...field}
                     />
                   </div>
@@ -149,20 +162,25 @@ export default function CadastroPage() {
             )}
           />
 
+          {/* Confirmar senha */}
           <FormField
             control={form.control}
             name="confirm_password"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirmar senha</FormLabel>
+              <FormItem className="space-y-2">
+                <label className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-sans">
+                  Confirmar senha
+                </label>
                 <FormControl>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input
+                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">
+                      lock_reset
+                    </span>
+                    <input
                       type="password"
                       placeholder="Repita a senha"
                       autoComplete="new-password"
-                      className="pl-9"
+                      className={inputClass}
                       {...field}
                     />
                   </div>
@@ -172,26 +190,30 @@ export default function CadastroPage() {
             )}
           />
 
-          <Button type="submit" className="w-full h-11 text-sm font-semibold" disabled={isLoading}>
-            {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full py-4 px-6 surgical-gradient text-white font-headline font-bold rounded-lg shadow-premium hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60"
+          >
+            {isLoading ? <span className="material-symbols-outlined animate-spin" style={{ fontSize: 16 }}>autorenew</span> : null}
             Começar gratuitamente
-          </Button>
+          </button>
         </form>
       </Form>
 
-      <p className="text-center text-xs text-muted-foreground">
+      <p className="mt-6 text-center text-xs text-on-surface-variant font-sans">
         Ao criar uma conta, você concorda com os{" "}
-        <Link href="/termos" className="underline hover:text-blue-600">Termos de Uso</Link>{" "}
+        <Link href="/termos" className="text-primary font-semibold hover:underline underline-offset-4">Termos de Uso</Link>{" "}
         e{" "}
-        <Link href="/privacidade" className="underline hover:text-blue-600">Política de Privacidade</Link>.
+        <Link href="/privacidade" className="text-primary font-semibold hover:underline underline-offset-4">Política de Privacidade</Link>.
       </p>
 
-      <p className="text-center text-sm text-muted-foreground">
+      <p className="mt-4 text-center text-sm text-on-surface-variant font-sans">
         Já tem uma conta?{" "}
-        <Link href="/login" className="text-blue-600 font-semibold hover:underline">
+        <Link href="/login" className="text-primary font-bold hover:underline underline-offset-4">
           Entrar
         </Link>
       </p>
-    </div>
+    </>
   )
 }

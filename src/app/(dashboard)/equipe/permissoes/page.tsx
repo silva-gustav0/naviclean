@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { Shield, Check, X } from "lucide-react"
 
 const ROLES = [
   { key: "clinic_owner", label: "Proprietário" },
@@ -61,44 +60,44 @@ export default async function PermissoesPage() {
 
   return (
     <div className="space-y-6 max-w-5xl">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-bold">Permissões por Função</h1>
-          <p className="text-muted-foreground text-sm">Matriz de acesso para cada papel na clínica</p>
+          <h1 className="font-headline font-extrabold text-3xl text-primary">Permissões por Função</h1>
+          <p className="text-on-surface-variant text-sm mt-0.5">Matriz de acesso para cada papel na clínica</p>
         </div>
-        <div className="flex items-center gap-2 text-xs text-muted-foreground bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 px-3 py-2 rounded-xl">
-          <Shield className="h-3.5 w-3.5 text-amber-600" />
+        <div className="flex items-center gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 px-3 py-2 rounded-xl">
+          <span className="material-symbols-outlined text-amber-600" style={{ fontSize: 14 }}>shield</span>
           Apenas proprietários podem alterar permissões
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden overflow-x-auto">
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden overflow-x-auto shadow-premium-sm">
         <table className="w-full text-sm min-w-max">
-          <thead className="bg-slate-50 dark:bg-slate-800/50 border-b">
+          <thead className="bg-surface-container border-b border-outline-variant">
             <tr>
-              <th className="text-left text-xs font-medium text-muted-foreground px-5 py-3 w-48">Permissão</th>
+              <th className="text-left text-xs font-medium text-on-surface-variant px-5 py-3 w-48">Permissão</th>
               {ROLES.map((r) => (
-                <th key={r.key} className="text-center text-xs font-medium text-muted-foreground px-4 py-3 min-w-[140px]">
+                <th key={r.key} className="text-center text-xs font-semibold text-on-surface px-4 py-3 min-w-[140px]">
                   {r.label}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y">
+          <tbody className="divide-y divide-outline-variant/50">
             {PERMISSIONS.map((perm) => (
-              <tr key={perm.key} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-                <td className="px-5 py-3 text-sm font-medium">{perm.label}</td>
+              <tr key={perm.key} className="hover:bg-surface-container transition-colors">
+                <td className="px-5 py-3 text-sm font-medium text-on-surface">{perm.label}</td>
                 {ROLES.map((role) => {
                   const allowed = DEFAULT_MATRIX[role.key]?.[perm.key] ?? false
                   return (
                     <td key={role.key} className="px-4 py-3 text-center">
                       <div className="flex justify-center">
                         {allowed
-                          ? <div className="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center">
-                              <Check className="h-3.5 w-3.5 text-emerald-600" />
+                          ? <div className="w-6 h-6 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+                              <span className="material-symbols-outlined text-emerald-600" style={{ fontSize: 14 }}>check</span>
                             </div>
-                          : <div className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
-                              <X className="h-3.5 w-3.5 text-slate-400" />
+                          : <div className="w-6 h-6 rounded-full bg-surface-container border border-outline-variant flex items-center justify-center">
+                              <span className="material-symbols-outlined text-outline" style={{ fontSize: 14 }}>close</span>
                             </div>
                         }
                       </div>
@@ -111,7 +110,7 @@ export default async function PermissoesPage() {
         </table>
       </div>
 
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs text-on-surface-variant">
         * Estas são as permissões padrão por função. Em breve, será possível customizar individualmente por membro.
       </p>
     </div>

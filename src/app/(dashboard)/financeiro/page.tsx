@@ -1,9 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import {
-  DollarSign, TrendingUp, TrendingDown, Wallet,
-  ArrowUpRight, ArrowDownRight, Clock, AlertCircle, ChevronRight,
-} from "lucide-react"
 import { NewTransactionModal } from "@/components/dashboard/modals/new-transaction-modal"
 import { FinanceiroChart } from "@/components/dashboard/financeiro/FinanceiroChart"
 import Link from "next/link"
@@ -13,6 +9,13 @@ function getMonthLabel(offset: number) {
   d.setMonth(d.getMonth() - offset)
   return d.toLocaleString("pt-BR", { month: "short" }).replace(".", "")
 }
+
+const subPages = [
+  { href: "/financeiro/receitas", label: "Receitas", icon: "trending_up", color: "text-emerald-600", bg: "bg-emerald-50" },
+  { href: "/financeiro/despesas", label: "Despesas", icon: "trending_down", color: "text-red-500", bg: "bg-red-50" },
+  { href: "/financeiro/comissoes", label: "Comissões", icon: "payments", color: "text-nc-secondary", bg: "bg-nc-secondary/10" },
+  { href: "/financeiro/relatorios", label: "Relatórios", icon: "bar_chart", color: "text-primary", bg: "bg-primary/10" },
+]
 
 export default async function FinanceiroPage() {
   const supabase = await createClient()
@@ -48,9 +51,7 @@ export default async function FinanceiroPage() {
   const monthExpense = (monthTx ?? []).filter((t) => t.type === "expense").reduce((a, t) => a + Number(t.amount), 0)
   const balance = monthIncome - monthExpense
   const pendingReceivable = (allTx ?? []).filter((t) => t.type === "income" && t.payment_status === "pending").reduce((a, t) => a + Number(t.amount), 0)
-  const overdueAmount = (allTx ?? []).filter((t) => t.payment_status === "overdue").reduce((a, t) => a + Number(t.amount), 0)
 
-  // Build 6-month chart data
   const chartData = Array.from({ length: 6 }, (_, i) => {
     const offset = 5 - i
     const d = new Date(now.getFullYear(), now.getMonth() - offset, 1)
@@ -71,64 +72,36 @@ export default async function FinanceiroPage() {
 
   const recentTx = (allTx ?? []).slice(0, 15)
 
-  const subPages = [
-    { href: "/financeiro/receitas", label: "Receitas", icon: TrendingUp, color: "text-emerald-600", bg: "bg-emerald-50 dark:bg-emerald-950" },
-    { href: "/financeiro/despesas", label: "Despesas", icon: TrendingDown, color: "text-red-500", bg: "bg-red-50 dark:bg-red-950" },
-    { href: "/financeiro/comissoes", label: "Comissões", icon: DollarSign, color: "text-violet-600", bg: "bg-violet-50 dark:bg-violet-950" },
-    { href: "/financeiro/relatorios", label: "Relatórios", icon: ChevronRight, color: "text-slate-600", bg: "bg-slate-50 dark:bg-slate-800" },
+  const kpis = [
+    { label: "Receitas do Mês", value: fmt(monthIncome), icon: "trending_up", colorClass: "text-emerald-600", bgClass: "bg-emerald-50" },
+    { label: "Despesas do Mês", value: fmt(monthExpense), icon: "trending_down", colorClass: "text-red-500", bgClass: "bg-red-50" },
+    { label: "Saldo do Mês", value: fmt(balance), icon: "account_balance_wallet", colorClass: "text-primary", bgClass: "bg-primary/10" },
+    { label: "A Receber", value: fmt(pendingReceivable), icon: "pending_actions", colorClass: "text-nc-secondary", bgClass: "bg-nc-secondary/10" },
   ]
 
   return (
     <div className="space-y-6 max-w-5xl">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Financeiro</h1>
-          <p className="text-muted-foreground text-sm">Controle de receitas e despesas</p>
+          <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Financeiro</h2>
+          <p className="text-on-surface-variant text-sm mt-1 font-sans">Controle de receitas e despesas</p>
         </div>
         <NewTransactionModal />
       </div>
 
       {/* KPI cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-emerald-50 dark:bg-emerald-950 rounded-2xl p-4 space-y-2">
-          <div className="flex items-center justify-between">
-            <div className="w-9 h-9 bg-emerald-100 dark:bg-emerald-900 rounded-xl flex items-center justify-center">
-              <TrendingUp className="h-4 w-4 text-emerald-600" />
+        {kpis.map((kpi) => (
+          <div key={kpi.label} className="bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant/10 shadow-premium-sm">
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${kpi.bgClass}`}>
+              <span className={`material-symbols-outlined text-xl ${kpi.colorClass}`} style={{ fontVariationSettings: "'FILL' 1" }}>
+                {kpi.icon}
+              </span>
             </div>
-            <ArrowUpRight className="h-4 w-4 text-emerald-600" />
+            <p className="font-headline font-extrabold text-xl text-primary">{kpi.value}</p>
+            <p className="text-xs text-on-surface-variant mt-1 font-sans">{kpi.label}</p>
           </div>
-          <p className="text-xl font-bold">{fmt(monthIncome)}</p>
-          <p className="text-xs text-muted-foreground">Receitas do mês</p>
-        </div>
-        <div className="bg-red-50 dark:bg-red-950 rounded-2xl p-4 space-y-2">
-          <div className="flex items-center justify-between">
-            <div className="w-9 h-9 bg-red-100 dark:bg-red-900 rounded-xl flex items-center justify-center">
-              <TrendingDown className="h-4 w-4 text-red-500" />
-            </div>
-            <ArrowDownRight className="h-4 w-4 text-red-500" />
-          </div>
-          <p className="text-xl font-bold">{fmt(monthExpense)}</p>
-          <p className="text-xs text-muted-foreground">Despesas do mês</p>
-        </div>
-        <div className="bg-blue-50 dark:bg-blue-950 rounded-2xl p-4 space-y-2">
-          <div className="flex items-center justify-between">
-            <div className="w-9 h-9 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center">
-              <Wallet className="h-4 w-4 text-blue-600" />
-            </div>
-          </div>
-          <p className="text-xl font-bold">{fmt(balance)}</p>
-          <p className="text-xs text-muted-foreground">Saldo do mês</p>
-        </div>
-        <div className="bg-amber-50 dark:bg-amber-950 rounded-2xl p-4 space-y-2">
-          <div className="flex items-center justify-between">
-            <div className="w-9 h-9 bg-amber-100 dark:bg-amber-900 rounded-xl flex items-center justify-center">
-              <Clock className="h-4 w-4 text-amber-600" />
-            </div>
-            {overdueAmount > 0 && <AlertCircle className="h-4 w-4 text-red-500" />}
-          </div>
-          <p className="text-xl font-bold">{fmt(pendingReceivable)}</p>
-          <p className="text-xs text-muted-foreground">A receber</p>
-        </div>
+        ))}
       </div>
 
       {/* Sub-page links */}
@@ -137,60 +110,62 @@ export default async function FinanceiroPage() {
           <Link
             key={p.href}
             href={p.href}
-            className="bg-white dark:bg-slate-900 border rounded-xl p-4 flex items-center gap-3 hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-sm transition-all group"
+            className="bg-surface-container-lowest border border-outline-variant/10 rounded-xl p-4 flex items-center gap-3 hover:border-nc-secondary/30 hover:shadow-premium-sm transition-all group"
           >
             <div className={`w-9 h-9 rounded-xl ${p.bg} flex items-center justify-center shrink-0`}>
-              <p.icon className={`h-4 w-4 ${p.color}`} />
+              <span className={`material-symbols-outlined text-lg ${p.color}`} style={{ fontVariationSettings: "'FILL' 1" }}>
+                {p.icon}
+              </span>
             </div>
-            <span className="text-sm font-medium">{p.label}</span>
-            <ChevronRight className="h-4 w-4 text-muted-foreground ml-auto group-hover:translate-x-0.5 transition-transform" />
+            <span className="text-sm font-semibold text-primary font-headline">{p.label}</span>
+            <span className="material-symbols-outlined text-outline text-lg ml-auto group-hover:translate-x-0.5 transition-transform">
+              arrow_forward
+            </span>
           </Link>
         ))}
       </div>
 
       {/* Chart */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border p-5">
-        <h2 className="font-semibold text-sm mb-4">Receitas vs Despesas — últimos 6 meses</h2>
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 p-5 shadow-premium-sm">
+        <h3 className="font-headline font-semibold text-primary text-sm mb-4">Receitas vs Despesas — últimos 6 meses</h3>
         <FinanceiroChart data={chartData} />
       </div>
 
       {/* Recent transactions */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
-        <div className="px-5 py-4 border-b flex items-center justify-between">
-          <h2 className="font-semibold text-sm">Últimas movimentações</h2>
-          <div className="flex gap-2">
-            <Link href="/financeiro/receitas" className="text-xs text-blue-600 hover:underline">Ver receitas</Link>
-            <span className="text-muted-foreground text-xs">·</span>
-            <Link href="/financeiro/despesas" className="text-xs text-blue-600 hover:underline">Ver despesas</Link>
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 overflow-hidden shadow-premium-sm">
+        <div className="px-5 py-4 border-b border-outline-variant/10 flex items-center justify-between">
+          <h3 className="font-headline font-semibold text-primary text-sm">Últimas movimentações</h3>
+          <div className="flex gap-3">
+            <Link href="/financeiro/receitas" className="text-xs text-nc-secondary font-semibold hover:underline underline-offset-2 font-sans">Ver receitas</Link>
+            <Link href="/financeiro/despesas" className="text-xs text-nc-secondary font-semibold hover:underline underline-offset-2 font-sans">Ver despesas</Link>
           </div>
         </div>
 
         {recentTx.length > 0 ? (
-          <div className="divide-y">
+          <div className="divide-y divide-outline-variant/10">
             {recentTx.map((t) => (
-              <div key={t.id as string} className="flex items-center gap-4 px-5 py-3.5 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+              <div key={t.id as string} className="flex items-center gap-4 px-5 py-3.5 hover:bg-surface-container-low transition-colors">
                 <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
-                  t.type === "income" ? "bg-emerald-100 dark:bg-emerald-900" : "bg-red-100 dark:bg-red-900"
+                  t.type === "income" ? "bg-emerald-50" : "bg-red-50"
                 }`}>
-                  {t.type === "income"
-                    ? <ArrowUpRight className="h-3.5 w-3.5 text-emerald-600" />
-                    : <ArrowDownRight className="h-3.5 w-3.5 text-red-500" />
-                  }
+                  <span className={`material-symbols-outlined text-base ${t.type === "income" ? "text-emerald-600" : "text-red-500"}`} style={{ fontVariationSettings: "'FILL' 1" }}>
+                    {t.type === "income" ? "arrow_upward" : "arrow_downward"}
+                  </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-sm truncate">{t.description as string}</p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="font-medium text-sm text-primary truncate font-headline">{t.description as string}</p>
+                  <p className="text-xs text-on-surface-variant font-sans">
                     {t.category as string ? `${t.category} · ` : ""}
                     {new Date(t.created_at as string).toLocaleDateString("pt-BR")}
                   </p>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className={`font-semibold text-sm ${t.type === "income" ? "text-emerald-600" : "text-red-500"}`}>
+                  <p className={`font-semibold text-sm font-headline ${t.type === "income" ? "text-emerald-600" : "text-red-500"}`}>
                     {t.type === "income" ? "+" : "-"}{fmt(Number(t.amount))}
                   </p>
                   {t.payment_status !== "paid" && (
-                    <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${
-                      t.payment_status === "overdue" ? "bg-red-100 text-red-700" : "bg-amber-100 text-amber-700"
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold font-sans ${
+                      t.payment_status === "overdue" ? "bg-red-50 text-red-700" : "bg-nc-secondary/10 text-nc-secondary"
                     }`}>
                       {t.payment_status === "overdue" ? "Vencido" : "Pendente"}
                     </span>
@@ -201,11 +176,13 @@ export default async function FinanceiroPage() {
           </div>
         ) : (
           <div className="py-16 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-amber-50 dark:bg-amber-950 flex items-center justify-center mx-auto mb-4">
-              <DollarSign className="h-8 w-8 text-amber-500" />
+            <div className="w-16 h-16 rounded-2xl bg-nc-secondary/10 flex items-center justify-center mx-auto mb-4">
+              <span className="material-symbols-outlined text-nc-secondary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                payments
+              </span>
             </div>
-            <h3 className="font-semibold text-base mb-1">Nenhuma movimentação</h3>
-            <p className="text-muted-foreground text-sm mb-6 max-w-xs mx-auto">
+            <h3 className="font-headline font-semibold text-primary text-base mb-1">Nenhuma movimentação</h3>
+            <p className="text-on-surface-variant text-sm mb-6 max-w-xs mx-auto font-sans">
               Registre receitas e despesas para ter controle financeiro completo.
             </p>
             <NewTransactionModal />

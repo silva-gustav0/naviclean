@@ -5,39 +5,36 @@ const links = {
     { label: "Funcionalidades", href: "#funcionalidades" },
     { label: "Planos", href: "#planos" },
     { label: "Blog", href: "/blog" },
-    { label: "Roadmap", href: "/roadmap" },
+    { label: "Recursos", href: "/recursos" },
   ],
   Empresa: [
     { label: "Sobre nós", href: "/sobre" },
     { label: "Contato", href: "/contato" },
+    { label: "FAQ", href: "/faq" },
     { label: "Parceiros", href: "/parceiros" },
-    { label: "Imprensa", href: "/imprensa" },
   ],
   Legal: [
     { label: "Privacidade", href: "/privacidade" },
     { label: "Termos de Uso", href: "/termos" },
+    { label: "Segurança", href: "/seguranca" },
     { label: "LGPD", href: "/lgpd" },
-    { label: "Cookies", href: "/cookies" },
   ],
 }
 
 export function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-400">
+    <footer className="bg-primary text-on-primary-container">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-black text-sm"
-                style={{ background: "linear-gradient(135deg, #004ac6 0%, #2563eb 100%)" }}
-              >
-                N
+            <Link href="/" className="flex items-center gap-2.5 mb-4">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/10 border border-white/20">
+                <span className="text-white font-black text-sm font-headline">N</span>
               </div>
-              <span className="text-white font-black text-lg tracking-tight">NaviClin</span>
+              <span className="text-white font-extrabold text-lg tracking-tight font-headline">NaviClin</span>
             </Link>
-            <p className="text-sm leading-relaxed text-slate-500">
+            <p className="text-sm leading-relaxed text-white/50 font-sans">
               A plataforma de gestão odontológica mais completa do Brasil.
             </p>
             <div className="flex gap-3 mt-6">
@@ -46,7 +43,7 @@ export function Footer() {
                 href="https://wa.me/5511999999999"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-green-600 transition-colors"
+                className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-green-600 transition-colors"
                 aria-label="WhatsApp"
               >
                 <svg className="w-4 h-4 fill-current text-white" viewBox="0 0 24 24">
@@ -58,7 +55,7 @@ export function Footer() {
                 href="https://instagram.com/naviclin"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-pink-600 transition-colors"
+                className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-pink-600 transition-colors"
                 aria-label="Instagram"
               >
                 <svg className="w-4 h-4 fill-current text-white" viewBox="0 0 24 24">
@@ -70,7 +67,7 @@ export function Footer() {
                 href="https://linkedin.com/company/naviclin"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-blue-600 transition-colors"
+                className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-500 transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg className="w-4 h-4 fill-current text-white" viewBox="0 0 24 24">
@@ -83,13 +80,13 @@ export function Footer() {
           {/* Links */}
           {Object.entries(links).map(([section, items]) => (
             <div key={section}>
-              <h4 className="text-white font-bold text-sm mb-4">{section}</h4>
+              <h4 className="text-white font-bold text-sm mb-4 font-headline">{section}</h4>
               <ul className="space-y-3">
                 {items.map((item) => (
                   <li key={item.label}>
                     <Link
                       href={item.href}
-                      className="text-sm text-slate-500 hover:text-white transition-colors"
+                      className="text-sm text-white/50 hover:text-white transition-colors font-sans"
                     >
                       {item.label}
                     </Link>
@@ -100,12 +97,12 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-slate-600">
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-white/30 font-sans">
             © 2026 NaviClin. Todos os direitos reservados.
           </p>
-          <p className="text-xs text-slate-700">
-            Feito com ❤️ para a odontologia brasileira
+          <p className="text-xs text-white/20 font-sans">
+            Feito para a odontologia brasileira
           </p>
         </div>
       </div>

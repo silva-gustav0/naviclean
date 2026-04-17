@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { ArrowLeft, Shield, Key } from "lucide-react"
 import Link from "next/link"
 import { SecurityForm } from "@/components/dashboard/forms/security-form"
 
@@ -12,35 +11,35 @@ export default async function SegurancaPage() {
   return (
     <div className="space-y-6 max-w-2xl">
       <div className="flex items-center gap-3">
-        <Link href="/configuracoes" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors">
-          <ArrowLeft className="h-4 w-4" />
+        <Link href="/configuracoes" className="p-2 hover:bg-surface-container rounded-xl transition-colors">
+          <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 18 }}>arrow_back</span>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold">Segurança</h1>
-          <p className="text-muted-foreground text-sm">Proteja sua conta</p>
+          <h1 className="font-headline font-extrabold text-2xl text-primary">Segurança</h1>
+          <p className="text-on-surface-variant text-sm">Proteja sua conta</p>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
-        <div className="px-6 py-4 border-b flex items-center gap-2">
-          <Shield className="h-4 w-4 text-slate-600" />
-          <span className="font-semibold text-sm">Alterar senha</span>
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden shadow-premium-sm">
+        <div className="px-6 py-4 border-b border-outline-variant bg-surface-container flex items-center gap-2">
+          <span className="material-symbols-outlined text-primary" style={{ fontSize: 16 }}>shield</span>
+          <span className="font-semibold text-sm text-on-surface">Alterar senha</span>
         </div>
         <SecurityForm />
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
-        <div className="px-6 py-4 border-b flex items-center gap-2">
-          <Key className="h-4 w-4 text-amber-600" />
-          <span className="font-semibold text-sm">Sessões ativas</span>
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden shadow-premium-sm">
+        <div className="px-6 py-4 border-b border-outline-variant bg-surface-container flex items-center gap-2">
+          <span className="material-symbols-outlined text-nc-secondary" style={{ fontSize: 16 }}>key</span>
+          <span className="font-semibold text-sm text-on-surface">Sessões ativas</span>
         </div>
         <div className="p-6">
           <div className="flex items-center justify-between py-3">
             <div>
-              <p className="text-sm font-medium">Sessão atual</p>
-              <p className="text-xs text-muted-foreground">Navegador Web · {user.email}</p>
+              <p className="text-sm font-semibold text-on-surface">Sessão atual</p>
+              <p className="text-xs text-on-surface-variant">Navegador Web · {user.email}</p>
             </div>
-            <span className="text-xs bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300 px-2 py-0.5 rounded-full font-medium">
+            <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full font-medium">
               Ativa
             </span>
           </div>

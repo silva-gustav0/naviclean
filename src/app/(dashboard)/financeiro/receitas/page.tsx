@@ -1,9 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { ArrowUpRight, TrendingUp } from "lucide-react"
 import { NewTransactionModal } from "@/components/dashboard/modals/new-transaction-modal"
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
 
 const PAYMENT_METHOD_LABELS: Record<string, string> = {
   cash: "Dinheiro",
@@ -15,19 +13,16 @@ const PAYMENT_METHOD_LABELS: Record<string, string> = {
 }
 
 const STATUS_STYLES: Record<string, string> = {
-  paid: "bg-emerald-100 text-emerald-700",
-  pending: "bg-amber-100 text-amber-700",
-  overdue: "bg-red-100 text-red-700",
-  cancelled: "bg-slate-100 text-slate-500",
-  refunded: "bg-blue-100 text-blue-700",
+  paid:      "bg-emerald-50 text-emerald-700 border-emerald-200",
+  pending:   "bg-amber-50 text-amber-700 border-amber-200",
+  overdue:   "bg-red-50 text-red-600 border-red-200",
+  cancelled: "bg-surface-container text-on-surface-variant border-outline-variant",
+  refunded:  "bg-blue-50 text-blue-700 border-blue-200",
 }
 
 const STATUS_LABELS: Record<string, string> = {
-  paid: "Pago",
-  pending: "Pendente",
-  overdue: "Vencido",
-  cancelled: "Cancelado",
-  refunded: "Estornado",
+  paid: "Pago", pending: "Pendente", overdue: "Vencido",
+  cancelled: "Cancelado", refunded: "Estornado",
 }
 
 export default async function ReceitasPage() {
@@ -52,83 +47,79 @@ export default async function ReceitasPage() {
 
   return (
     <div className="space-y-6 max-w-5xl">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
-            <Link href="/financeiro" className="hover:text-foreground transition-colors">Financeiro</Link>
-            <span>/</span>
-            <span>Receitas</span>
+          <div className="flex items-center gap-1.5 text-xs text-on-surface-variant mb-1">
+            <Link href="/financeiro" className="hover:text-primary transition-colors">Financeiro</Link>
+            <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
+            <span className="text-on-surface">Receitas</span>
           </div>
-          <h1 className="text-2xl font-bold">Receitas</h1>
-          <p className="text-muted-foreground text-sm">{transactions?.length ?? 0} registros · {fmt(totalPaid)} recebido</p>
+          <h1 className="font-headline font-extrabold text-3xl text-primary">Receitas</h1>
+          <p className="text-on-surface-variant text-sm mt-0.5">{transactions?.length ?? 0} registros · {fmt(totalPaid)} recebido</p>
         </div>
         <NewTransactionModal />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-emerald-50 dark:bg-emerald-950 rounded-2xl p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 bg-emerald-100 dark:bg-emerald-900 rounded-xl flex items-center justify-center">
-              <TrendingUp className="h-4 w-4 text-emerald-600" />
-            </div>
-            <span className="text-sm text-muted-foreground">Total</span>
+        <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 shadow-premium-sm relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110" />
+          <div className="flex items-center gap-2 mb-3">
+            <span className="material-symbols-outlined text-emerald-600" style={{ fontSize: 18 }}>trending_up</span>
+            <span className="text-xs text-on-surface-variant font-medium">Total</span>
           </div>
-          <p className="text-2xl font-bold">{fmt(total)}</p>
+          <p className="font-headline font-extrabold text-2xl text-primary">{fmt(total)}</p>
         </div>
-        <div className="bg-blue-50 dark:bg-blue-950 rounded-2xl p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center">
-              <ArrowUpRight className="h-4 w-4 text-blue-600" />
-            </div>
-            <span className="text-sm text-muted-foreground">Recebido</span>
+        <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 shadow-premium-sm relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110" />
+          <div className="flex items-center gap-2 mb-3">
+            <span className="material-symbols-outlined text-blue-600" style={{ fontSize: 18 }}>payments</span>
+            <span className="text-xs text-on-surface-variant font-medium">Recebido</span>
           </div>
-          <p className="text-2xl font-bold">{fmt(totalPaid)}</p>
+          <p className="font-headline font-extrabold text-2xl text-primary">{fmt(totalPaid)}</p>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden shadow-premium-sm">
         {(transactions ?? []).length === 0 ? (
           <div className="py-16 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-4">
-              <TrendingUp className="h-8 w-8 text-emerald-600" />
-            </div>
-            <h3 className="font-semibold mb-1">Nenhuma receita registrada</h3>
-            <p className="text-muted-foreground text-sm mb-4">Registre receitas para acompanhar seu faturamento.</p>
+            <span className="material-symbols-outlined text-outline mb-3 block" style={{ fontSize: 40 }}>trending_up</span>
+            <h3 className="font-semibold text-on-surface mb-1">Nenhuma receita registrada</h3>
+            <p className="text-on-surface-variant text-sm mb-4">Registre receitas para acompanhar seu faturamento.</p>
             <NewTransactionModal />
           </div>
         ) : (
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 dark:bg-slate-800/50 border-b">
+            <thead className="bg-surface-container border-b border-outline-variant">
               <tr>
-                <th className="text-left font-medium text-xs text-muted-foreground px-5 py-3">Descrição</th>
-                <th className="text-left font-medium text-xs text-muted-foreground px-4 py-3">Paciente</th>
-                <th className="text-left font-medium text-xs text-muted-foreground px-4 py-3">Método</th>
-                <th className="text-left font-medium text-xs text-muted-foreground px-4 py-3">Data</th>
-                <th className="text-right font-medium text-xs text-muted-foreground px-5 py-3">Valor</th>
-                <th className="text-center font-medium text-xs text-muted-foreground px-4 py-3">Status</th>
+                <th className="text-left font-medium text-xs text-on-surface-variant px-5 py-3">Descrição</th>
+                <th className="text-left font-medium text-xs text-on-surface-variant px-4 py-3">Paciente</th>
+                <th className="text-left font-medium text-xs text-on-surface-variant px-4 py-3">Método</th>
+                <th className="text-left font-medium text-xs text-on-surface-variant px-4 py-3">Data</th>
+                <th className="text-right font-medium text-xs text-on-surface-variant px-5 py-3">Valor</th>
+                <th className="text-center font-medium text-xs text-on-surface-variant px-4 py-3">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y">
+            <tbody className="divide-y divide-outline-variant/50">
               {(transactions ?? []).map((t) => {
                 const patient = t.patients as { full_name: string } | null
                 return (
-                  <tr key={t.id as string} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                  <tr key={t.id as string} className="hover:bg-surface-container transition-colors">
                     <td className="px-5 py-3">
-                      <p className="font-medium">{t.description as string}</p>
-                      {t.category && <p className="text-xs text-muted-foreground">{t.category as string}</p>}
+                      <p className="font-semibold text-on-surface">{t.description as string}</p>
+                      {t.category && <p className="text-xs text-on-surface-variant">{t.category as string}</p>}
                     </td>
-                    <td className="px-4 py-3 text-xs text-muted-foreground">{patient?.full_name ?? "—"}</td>
-                    <td className="px-4 py-3 text-xs text-muted-foreground">
+                    <td className="px-4 py-3 text-xs text-on-surface-variant">{patient?.full_name ?? "—"}</td>
+                    <td className="px-4 py-3 text-xs text-on-surface-variant">
                       {t.payment_method ? PAYMENT_METHOD_LABELS[t.payment_method as string] ?? t.payment_method : "—"}
                     </td>
-                    <td className="px-4 py-3 text-xs text-muted-foreground">
+                    <td className="px-4 py-3 text-xs text-on-surface-variant">
                       {new Date(t.created_at as string).toLocaleDateString("pt-BR")}
                     </td>
-                    <td className="px-5 py-3 text-right font-semibold text-emerald-600">{fmt(Number(t.amount))}</td>
+                    <td className="px-5 py-3 text-right font-bold text-emerald-600">{fmt(Number(t.amount))}</td>
                     <td className="px-4 py-3 text-center">
-                      <Badge className={`text-[10px] ${STATUS_STYLES[t.payment_status as string] ?? ""}`}>
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${STATUS_STYLES[t.payment_status as string] ?? ""}`}>
                         {STATUS_LABELS[t.payment_status as string] ?? t.payment_status}
-                      </Badge>
+                      </span>
                     </td>
                   </tr>
                 )

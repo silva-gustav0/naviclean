@@ -5,11 +5,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { toast } from "sonner"
-import { Loader2, Lock, CheckCircle } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
 
 const schema = z.object({
   password: z.string().min(8, "Mínimo 8 caracteres"),
@@ -20,6 +17,8 @@ const schema = z.object({
 })
 
 type FormData = z.infer<typeof schema>
+
+const inputCls = "w-full pl-11 pr-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm text-on-surface placeholder:text-outline/50"
 
 export default function RedefinirSenhaPage() {
   const [loading, setLoading] = useState(false)
@@ -46,16 +45,14 @@ export default function RedefinirSenhaPage() {
   if (done) {
     return (
       <div className="space-y-6 text-center">
-        <div className="flex justify-center">
-          <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center">
-            <CheckCircle className="h-8 w-8 text-emerald-600" />
-          </div>
+        <div className="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center mx-auto">
+          <span className="material-symbols-outlined text-emerald-600" style={{ fontSize: 32, fontVariationSettings: "'FILL' 1" }}>check_circle</span>
         </div>
         <div>
-          <h1 className="text-2xl font-bold">Senha redefinida!</h1>
-          <p className="text-muted-foreground text-sm mt-1">Sua senha foi alterada com sucesso.</p>
+          <h1 className="font-headline font-extrabold text-2xl text-primary">Senha redefinida!</h1>
+          <p className="text-on-surface-variant text-sm mt-1">Sua senha foi alterada com sucesso.</p>
         </div>
-        <a href="/login" className="block w-full py-2.5 bg-[#0D3A6B] hover:bg-[#1A5599] text-white rounded-xl font-semibold text-sm transition-colors text-center">
+        <a href="/login" className="block w-full py-3 surgical-gradient text-white rounded-xl font-semibold text-sm text-center shadow-premium hover:opacity-90 transition-opacity">
           Ir para o login
         </a>
       </div>
@@ -63,24 +60,28 @@ export default function RedefinirSenhaPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight">Criar nova senha</h1>
-        <p className="text-muted-foreground text-sm">Escolha uma senha segura com pelo menos 8 caracteres.</p>
-      </div>
+    <>
+      <h1 className="text-4xl font-extrabold font-headline text-primary mb-2 tracking-tight">
+        Criar nova senha
+      </h1>
+      <p className="text-on-surface-variant font-sans mb-10">
+        Escolha uma senha segura com pelo menos 8 caracteres.
+      </p>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
           <FormField
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nova senha</FormLabel>
+              <FormItem className="space-y-2">
+                <label className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-sans">
+                  Nova senha
+                </label>
                 <FormControl>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input type="password" placeholder="••••••••" className="pl-9" {...field} />
+                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">lock</span>
+                    <input type="password" placeholder="••••••••" autoComplete="new-password" className={inputCls} {...field} />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -91,24 +92,30 @@ export default function RedefinirSenhaPage() {
             control={form.control}
             name="confirm"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirmar senha</FormLabel>
+              <FormItem className="space-y-2">
+                <label className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-sans">
+                  Confirmar senha
+                </label>
                 <FormControl>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input type="password" placeholder="••••••••" className="pl-9" {...field} />
+                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">lock_reset</span>
+                    <input type="password" placeholder="••••••••" autoComplete="new-password" className={inputCls} {...field} />
                   </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full h-11 font-semibold" disabled={loading}>
-            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-4 px-6 surgical-gradient text-white font-headline font-bold rounded-lg shadow-premium hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60"
+          >
+            {loading ? <span className="material-symbols-outlined animate-spin" style={{ fontSize: 16 }}>autorenew</span> : null}
             Salvar nova senha
-          </Button>
+          </button>
         </form>
       </Form>
-    </div>
+    </>
   )
 }

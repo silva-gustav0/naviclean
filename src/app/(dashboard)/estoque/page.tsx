@@ -1,7 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { Package, AlertTriangle, Plus } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { StockItemModal } from "@/components/dashboard/modals/stock-item-modal"
 import { StockEntryModal } from "@/components/dashboard/modals/stock-entry-modal"
@@ -47,13 +45,13 @@ export default async function EstoquePage() {
     <div className="space-y-6 max-w-5xl">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Estoque</h1>
-          <p className="text-muted-foreground text-sm">{enriched.length} itens cadastrados</p>
+          <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Estoque</h2>
+          <p className="text-on-surface-variant text-sm mt-1 font-sans">{enriched.length} itens cadastrados</p>
         </div>
         <div className="flex gap-2">
           <Link
             href="/estoque/importar-nfe"
-            className="text-xs px-3 py-2 border rounded-lg hover:bg-slate-50 transition-colors font-medium"
+            className="text-xs px-3 py-2 border border-outline-variant/20 rounded-lg hover:bg-surface-container-low transition-colors font-semibold text-primary font-sans"
           >
             Importar NF-e
           </Link>
@@ -66,71 +64,76 @@ export default async function EstoquePage() {
       {(lowItems.length > 0 || expiringSoon.length > 0) && (
         <div className="space-y-2">
           {lowItems.length > 0 && (
-            <div className="flex items-center gap-3 p-3 bg-red-50 border border-red-200 rounded-xl text-sm">
-              <AlertTriangle className="h-4 w-4 text-red-500 shrink-0" />
-              <span className="text-red-700 font-medium">{lowItems.length} item(s) abaixo do estoque mínimo:</span>
-              <span className="text-red-600 text-xs">{lowItems.map((i) => i.name).join(', ')}</span>
+            <div className="flex items-center gap-3 p-3 bg-red-50 border border-red-200/50 rounded-xl text-sm">
+              <span className="material-symbols-outlined text-red-500 text-xl shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
+                warning
+              </span>
+              <span className="text-red-700 font-semibold font-sans">{lowItems.length} item(s) abaixo do estoque mínimo:</span>
+              <span className="text-red-600 text-xs font-sans">{lowItems.map((i) => i.name).join(", ")}</span>
             </div>
           )}
           {expiringSoon.length > 0 && (
-            <div className="flex items-center gap-3 p-3 bg-amber-50 border border-amber-200 rounded-xl text-sm">
-              <AlertTriangle className="h-4 w-4 text-amber-500 shrink-0" />
-              <span className="text-amber-700 font-medium">{expiringSoon.length} item(s) vencendo em até 30 dias</span>
+            <div className="flex items-center gap-3 p-3 bg-nc-secondary/10 border border-nc-secondary/20 rounded-xl text-sm">
+              <span className="material-symbols-outlined text-nc-secondary text-xl shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
+                event_busy
+              </span>
+              <span className="text-nc-secondary font-semibold font-sans">{expiringSoon.length} item(s) vencendo em até 30 dias</span>
             </div>
           )}
         </div>
       )}
 
       {/* Tabela */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 overflow-hidden shadow-premium-sm">
         {enriched.length === 0 ? (
           <div className="py-16 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-[#E8F0F9] flex items-center justify-center mx-auto mb-4">
-              <Package className="h-8 w-8 text-[#0D3A6B]" />
+            <div className="w-16 h-16 rounded-2xl bg-nc-secondary/10 flex items-center justify-center mx-auto mb-4">
+              <span className="material-symbols-outlined text-nc-secondary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                inventory_2
+              </span>
             </div>
-            <h3 className="font-semibold text-base mb-1">Estoque vazio</h3>
-            <p className="text-muted-foreground text-sm mb-4">Cadastre itens ou importe uma NF-e para começar.</p>
+            <h3 className="font-headline font-semibold text-primary text-base mb-1">Estoque vazio</h3>
+            <p className="text-on-surface-variant text-sm mb-4 font-sans">Cadastre itens ou importe uma NF-e para começar.</p>
             <StockItemModal />
           </div>
         ) : (
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 dark:bg-slate-800/50 border-b">
+            <thead className="bg-surface-container-low border-b border-outline-variant/10">
               <tr>
-                <th className="text-left font-medium text-xs text-muted-foreground px-5 py-3">Item</th>
-                <th className="text-left font-medium text-xs text-muted-foreground px-4 py-3">Categoria</th>
-                <th className="text-right font-medium text-xs text-muted-foreground px-4 py-3">Estoque</th>
-                <th className="text-right font-medium text-xs text-muted-foreground px-4 py-3">Mínimo</th>
-                <th className="text-left font-medium text-xs text-muted-foreground px-4 py-3">Vencimento</th>
-                <th className="text-center font-medium text-xs text-muted-foreground px-4 py-3">Status</th>
+                <th className="text-left font-semibold text-xs text-on-surface-variant uppercase tracking-wider px-5 py-3 font-sans">Item</th>
+                <th className="text-left font-semibold text-xs text-on-surface-variant uppercase tracking-wider px-4 py-3 font-sans">Categoria</th>
+                <th className="text-right font-semibold text-xs text-on-surface-variant uppercase tracking-wider px-4 py-3 font-sans">Estoque</th>
+                <th className="text-right font-semibold text-xs text-on-surface-variant uppercase tracking-wider px-4 py-3 font-sans">Mínimo</th>
+                <th className="text-left font-semibold text-xs text-on-surface-variant uppercase tracking-wider px-4 py-3 font-sans">Vencimento</th>
+                <th className="text-center font-semibold text-xs text-on-surface-variant uppercase tracking-wider px-4 py-3 font-sans">Status</th>
                 <th className="px-4 py-3"></th>
               </tr>
             </thead>
-            <tbody className="divide-y">
+            <tbody className="divide-y divide-outline-variant/10">
               {enriched.map((item) => (
-                <tr key={item.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                <tr key={item.id} className="hover:bg-surface-container-low transition-colors">
                   <td className="px-5 py-3">
-                    <p className="font-medium">{item.name}</p>
-                    {item.brand && <p className="text-xs text-muted-foreground">{item.brand}</p>}
+                    <p className="font-semibold text-primary font-headline">{item.name}</p>
+                    {item.brand && <p className="text-xs text-on-surface-variant font-sans">{item.brand}</p>}
                   </td>
-                  <td className="px-4 py-3 text-xs text-muted-foreground">{item.category ?? '—'}</td>
-                  <td className="px-4 py-3 text-right font-medium">{item.totalQty} {item.unit}</td>
-                  <td className="px-4 py-3 text-right text-muted-foreground">{Number(item.minimum_stock)} {item.unit}</td>
-                  <td className="px-4 py-3 text-xs">
+                  <td className="px-4 py-3 text-xs text-on-surface-variant font-sans">{item.category ?? "—"}</td>
+                  <td className="px-4 py-3 text-right font-semibold text-primary font-headline">{item.totalQty} {item.unit}</td>
+                  <td className="px-4 py-3 text-right text-on-surface-variant font-sans">{Number(item.minimum_stock)} {item.unit}</td>
+                  <td className="px-4 py-3 text-xs font-sans">
                     {item.nearestExpiry
-                      ? item.nearestExpiry.toLocaleDateString('pt-BR')
-                      : <span className="text-muted-foreground">—</span>
+                      ? item.nearestExpiry.toLocaleDateString("pt-BR")
+                      : <span className="text-outline">—</span>
                     }
                   </td>
                   <td className="px-4 py-3 text-center">
-                    {item.isLow ? (
-                      <Badge className="bg-red-100 text-red-700 border-red-200 text-[10px]">Baixo</Badge>
-                    ) : item.isExpiringSoon ? (
-                      <Badge className="bg-red-100 text-red-700 border-red-200 text-[10px]">Vence em breve</Badge>
-                    ) : item.isExpiringWarning ? (
-                      <Badge className="bg-amber-100 text-amber-700 border-amber-200 text-[10px]">Atenção</Badge>
-                    ) : (
-                      <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200 text-[10px]">OK</Badge>
-                    )}
+                    <span className={`text-[10px] px-2 py-1 rounded-full font-semibold font-sans ${
+                      item.isLow ? "bg-red-50 text-red-700"
+                        : item.isExpiringSoon ? "bg-red-50 text-red-700"
+                        : item.isExpiringWarning ? "bg-nc-secondary/10 text-nc-secondary"
+                        : "bg-emerald-50 text-emerald-700"
+                    }`}>
+                      {item.isLow ? "Baixo" : item.isExpiringSoon ? "Vence em breve" : item.isExpiringWarning ? "Atenção" : "OK"}
+                    </span>
                   </td>
                   <td className="px-4 py-3 text-right">
                     <StockItemModal item={item} />

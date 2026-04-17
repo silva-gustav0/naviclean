@@ -2,22 +2,20 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { ArrowLeft, Loader2, Package } from "lucide-react"
 import { toast } from "sonner"
 import { createClient } from "@/lib/supabase/client"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import Link from "next/link"
 
 type StockItem = { id: string; name: string; unit: string }
 
 const TYPES = [
-  { value: "entry", label: "Entrada de compra" },
-  { value: "exit", label: "Saída manual" },
-  { value: "adjustment", label: "Ajuste de inventário" },
-  { value: "expired", label: "Perda por vencimento" },
+  { value: "entry",      label: "Entrada de compra",     icon: "add_circle" },
+  { value: "exit",       label: "Saída manual",           icon: "remove_circle" },
+  { value: "adjustment", label: "Ajuste de inventário",   icon: "tune" },
+  { value: "expired",    label: "Perda por vencimento",   icon: "block" },
 ]
+
+const inputCls = "w-full border border-outline-variant rounded-xl px-4 py-2.5 text-sm bg-surface-container-lowest focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors"
 
 export default function NovaMovimentacaoPage() {
   const router = useRouter()
@@ -81,30 +79,31 @@ export default function NovaMovimentacaoPage() {
   return (
     <div className="max-w-xl space-y-6">
       <div className="flex items-center gap-3">
-        <Link href="/estoque/movimentacoes" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
-          <ArrowLeft className="h-4 w-4" />
+        <Link href="/estoque/movimentacoes" className="p-2 hover:bg-surface-container rounded-xl transition-colors">
+          <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 18 }}>arrow_back</span>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold">Nova movimentação</h1>
-          <p className="text-muted-foreground text-sm">Registre entrada, saída ou ajuste de estoque</p>
+          <h1 className="font-headline font-extrabold text-2xl text-primary">Nova movimentação</h1>
+          <p className="text-on-surface-variant text-sm">Registre entrada, saída ou ajuste de estoque</p>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-900 rounded-2xl border p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-6 space-y-5 shadow-premium-sm">
         <div>
-          <Label htmlFor="type">Tipo de movimentação</Label>
-          <div className="grid grid-cols-2 gap-2 mt-2">
+          <label className="block text-sm font-medium text-on-surface mb-2">Tipo de movimentação</label>
+          <div className="grid grid-cols-2 gap-2">
             {TYPES.map((t) => (
               <button
                 key={t.value}
                 type="button"
                 onClick={() => setForm((f) => ({ ...f, type: t.value }))}
-                className={`p-3 rounded-xl border text-sm font-medium transition-all text-left ${
+                className={`p-3 rounded-xl border-2 text-sm font-medium transition-all text-left flex items-center gap-2 ${
                   form.type === t.value
-                    ? "border-[#0D3A6B] bg-[#E8F0F9] text-[#0D3A6B]"
-                    : "border-slate-200 hover:border-slate-300"
+                    ? "border-primary bg-primary/5 text-primary"
+                    : "border-outline-variant hover:border-primary/30 text-on-surface-variant"
                 }`}
               >
+                <span className="material-symbols-outlined shrink-0" style={{ fontSize: 16 }}>{t.icon}</span>
                 {t.label}
               </button>
             ))}
@@ -112,13 +111,12 @@ export default function NovaMovimentacaoPage() {
         </div>
 
         <div>
-          <Label htmlFor="item">Item do estoque</Label>
+          <label className="block text-sm font-medium text-on-surface mb-1.5">Item do estoque</label>
           <select
-            id="item"
             required
             value={form.stock_item_id}
             onChange={(e) => setForm((f) => ({ ...f, stock_item_id: e.target.value }))}
-            className="mt-1.5 w-full border rounded-xl px-4 py-2.5 text-sm bg-white dark:bg-slate-800 focus:outline-none focus:border-[#0D3A6B]"
+            className={inputCls}
           >
             <option value="">Selecione um item...</option>
             {items.map((i) => <option key={i.id} value={i.id}>{i.name} ({i.unit})</option>)}
@@ -127,28 +125,26 @@ export default function NovaMovimentacaoPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="quantity">Quantidade</Label>
-            <Input
-              id="quantity"
+            <label className="block text-sm font-medium text-on-surface mb-1.5">Quantidade</label>
+            <input
               type="number"
               min={1}
               required
               value={form.quantity}
               onChange={(e) => setForm((f) => ({ ...f, quantity: e.target.value }))}
-              className="mt-1.5"
+              className={inputCls}
               placeholder="0"
             />
           </div>
           {isEntry && (
             <div>
-              <Label htmlFor="cost">Custo por unidade (R$)</Label>
-              <Input
-                id="cost"
+              <label className="block text-sm font-medium text-on-surface mb-1.5">Custo por unidade (R$)</label>
+              <input
                 type="number"
                 step="0.01"
                 value={form.cost_per_unit}
                 onChange={(e) => setForm((f) => ({ ...f, cost_per_unit: e.target.value }))}
-                className="mt-1.5"
+                className={inputCls}
                 placeholder="0,00"
               />
             </div>
@@ -157,32 +153,34 @@ export default function NovaMovimentacaoPage() {
 
         {isEntry && (
           <div>
-            <Label htmlFor="expiry">Data de vencimento</Label>
-            <Input
-              id="expiry"
+            <label className="block text-sm font-medium text-on-surface mb-1.5">Data de vencimento</label>
+            <input
               type="date"
               value={form.expiry_date}
               onChange={(e) => setForm((f) => ({ ...f, expiry_date: e.target.value }))}
-              className="mt-1.5"
+              className={inputCls}
             />
           </div>
         )}
 
         <div>
-          <Label htmlFor="reason">Motivo / Observação</Label>
-          <Input
-            id="reason"
+          <label className="block text-sm font-medium text-on-surface mb-1.5">Motivo / Observação</label>
+          <input
             value={form.reason}
             onChange={(e) => setForm((f) => ({ ...f, reason: e.target.value }))}
-            className="mt-1.5"
+            className={inputCls}
             placeholder="Ex: Compra da distribuidora, Uso em procedimento..."
           />
         </div>
 
-        <Button type="submit" className="w-full h-11 font-semibold" disabled={loading}>
-          {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Package className="mr-2 h-4 w-4" />}
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full flex items-center justify-center gap-2 surgical-gradient text-white py-3 rounded-xl font-semibold text-sm shadow-premium-sm hover:opacity-90 disabled:opacity-50 transition-opacity"
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: 16 }}>{loading ? "autorenew" : "inventory_2"}</span>
           {loading ? "Salvando..." : "Registrar movimentação"}
-        </Button>
+        </button>
       </form>
     </div>
   )

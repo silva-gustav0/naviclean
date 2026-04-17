@@ -1,48 +1,45 @@
-import {
-  Calendar,
-  ClipboardList,
-  DollarSign,
-  Users,
-  TrendingUp,
-  Network,
-} from "lucide-react"
-
 const features = [
   {
-    icon: Calendar,
+    icon: "calendar_month",
     title: "Agendamento Online",
     description:
       "Reduza faltas com confirmações automáticas via WhatsApp e permita que seus pacientes agendem 24/7.",
+    accent: false,
   },
   {
-    icon: ClipboardList,
+    icon: "assignment_ind",
     title: "Prontuário Digital",
     description:
       "Fichas clínicas completas, odontograma digital e histórico de tratamentos com assinatura eletrônica.",
+    accent: false,
   },
   {
-    icon: DollarSign,
+    icon: "payments",
     title: "Controle Financeiro",
     description:
       "Fluxo de caixa, controle de inadimplência e repasses para dentistas em tempo real.",
+    accent: true,
   },
   {
-    icon: Users,
+    icon: "groups",
     title: "Gestão de Equipe",
     description:
       "Controle de acessos, metas de produtividade e agenda individual para cada profissional.",
+    accent: false,
   },
   {
-    icon: TrendingUp,
+    icon: "campaign",
     title: "Marketing Digital",
     description:
       "Ferramentas de CRM para fidelização e recuperação de pacientes ausentes via campanhas inteligentes.",
+    accent: false,
   },
   {
-    icon: Network,
+    icon: "business",
     title: "Multi-clínica",
     description:
       "Gerencie múltiplas unidades de forma centralizada com relatórios consolidados em tempo real.",
+    accent: false,
   },
 ]
 
@@ -50,13 +47,13 @@ export function FeaturesSection() {
   return (
     <section id="funcionalidades" className="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
       <div className="text-center mb-16">
-        <span className="text-blue-600 font-bold tracking-widest text-xs uppercase">
+        <span className="text-nc-secondary font-bold tracking-widest text-xs uppercase font-sans">
           Funcionalidades
         </span>
-        <h2 className="text-4xl font-black tracking-tight text-slate-900 mt-3">
+        <h2 className="text-4xl font-extrabold tracking-tight text-primary mt-3 font-headline">
           Tudo o que sua clínica precisa em um só lugar
         </h2>
-        <p className="text-slate-500 mt-4 max-w-xl mx-auto">
+        <p className="text-on-surface-variant mt-4 max-w-xl mx-auto font-sans">
           Cada módulo foi desenvolvido com dentistas para resolver os problemas reais
           da gestão clínica.
         </p>
@@ -66,18 +63,19 @@ export function FeaturesSection() {
         {features.map((feature) => (
           <div
             key={feature.title}
-            className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
+            className="group bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/10 shadow-premium-sm hover:bg-primary hover:border-primary hover:-translate-y-1 transition-all duration-300 cursor-default"
           >
-            <div
-              className="w-12 h-12 rounded-xl flex items-center justify-center text-white mb-6"
-              style={{ background: "linear-gradient(135deg, #004ac6 0%, #2563eb 100%)" }}
-            >
-              <feature.icon size={22} />
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 surgical-gradient group-hover:bg-white/10 group-hover:[background:none] transition-all">
+              <span className="material-symbols-outlined text-white text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                {feature.icon}
+              </span>
             </div>
-            <h3 className="text-lg font-bold mb-3 text-slate-900 tracking-tight">
+            <h3 className="text-lg font-bold mb-3 text-primary group-hover:text-white tracking-tight font-headline transition-colors">
               {feature.title}
             </h3>
-            <p className="text-slate-500 text-sm leading-relaxed">{feature.description}</p>
+            <p className="text-on-surface-variant group-hover:text-white/70 text-sm leading-relaxed font-sans transition-colors">
+              {feature.description}
+            </p>
           </div>
         ))}
       </div>

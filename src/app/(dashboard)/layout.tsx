@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { SidebarNav } from "@/components/dashboard/sidebar-nav"
-import { Bell, Search } from "lucide-react"
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -24,39 +23,41 @@ export default async function DashboardLayout({ children }: { children: React.Re
     .toUpperCase() || "?"
 
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-50 dark:bg-slate-900">
+    <div className="flex h-screen overflow-hidden bg-surface">
       <SidebarNav
         clinicName={clinic?.name ?? "Minha Clínica"}
         userEmail={user.email ?? ""}
         userInitials={initials}
       />
 
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden md:ml-64">
         {/* Topbar */}
-        <header className="h-16 border-b bg-white dark:bg-slate-950 flex items-center px-6 shrink-0 gap-4">
+        <header className="sticky top-0 z-30 bg-surface/80 backdrop-blur-xl flex items-center px-8 py-4 gap-4 shadow-[0px_4px_12px_-4px_rgba(21,28,35,0.04)]">
           <div className="flex-1 max-w-sm">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">
+                search
+              </span>
               <input
                 type="text"
                 placeholder="Buscar paciente, agendamento..."
-                className="w-full pl-9 pr-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-4 py-2 text-sm bg-surface-container-lowest border-0 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
               />
             </div>
           </div>
 
           <div className="ml-auto flex items-center gap-2">
-            <button className="relative w-9 h-9 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center transition-colors">
-              <Bell className="h-4 w-4 text-muted-foreground" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-blue-600" />
+            <button className="relative w-10 h-10 rounded-full hover:bg-surface-container-low flex items-center justify-center transition-colors">
+              <span className="material-symbols-outlined text-on-surface text-xl">notifications</span>
+              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-nc-secondary" />
             </button>
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-white text-xs font-bold">
+            <div className="w-10 h-10 rounded-full surgical-gradient flex items-center justify-center text-white text-xs font-bold">
               {initials}
             </div>
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-6 md:p-8">
           {children}
         </main>
       </div>

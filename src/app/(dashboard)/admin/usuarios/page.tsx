@@ -1,7 +1,12 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { Users, KeyRound } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+
+const ROLE_COLORS: Record<string, string> = {
+  super_admin: "bg-red-50 text-red-600 border-red-200",
+  clinic_owner: "bg-primary/10 text-primary border-primary/20",
+  dentist: "bg-blue-50 text-blue-700 border-blue-200",
+  receptionist: "bg-emerald-50 text-emerald-700 border-emerald-200",
+}
 
 export default async function AdminUsuariosPage() {
   const supabase = await createClient()
@@ -17,57 +22,50 @@ export default async function AdminUsuariosPage() {
     .order("created_at", { ascending: false })
     .limit(200)
 
-  const ROLE_COLORS: Record<string, string> = {
-    super_admin: "bg-red-100 text-red-700",
-    clinic_owner: "bg-violet-100 text-violet-700",
-    dentist: "bg-blue-100 text-blue-700",
-    receptionist: "bg-emerald-100 text-emerald-700",
-  }
-
   return (
     <div className="space-y-6 max-w-5xl">
       <div>
-        <h1 className="text-2xl font-bold">Usuários</h1>
-        <p className="text-muted-foreground text-sm">{users?.length ?? 0} usuários</p>
+        <h1 className="font-headline font-extrabold text-2xl text-primary">Usuários</h1>
+        <p className="text-on-surface-variant text-sm mt-0.5">{users?.length ?? 0} usuários</p>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden shadow-premium-sm">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 dark:bg-slate-800/50 border-b">
+          <thead className="bg-surface-container border-b border-outline-variant">
             <tr>
-              <th className="text-left text-xs font-medium text-muted-foreground px-5 py-3">Usuário</th>
-              <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">Função</th>
-              <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">Cadastro</th>
+              <th className="text-left text-xs font-medium text-on-surface-variant px-5 py-3">Usuário</th>
+              <th className="text-left text-xs font-medium text-on-surface-variant px-4 py-3">Função</th>
+              <th className="text-left text-xs font-medium text-on-surface-variant px-4 py-3">Cadastro</th>
               <th className="px-4 py-3" />
             </tr>
           </thead>
-          <tbody className="divide-y">
+          <tbody className="divide-y divide-outline-variant/50">
             {(users ?? []).map((u) => {
               const initials = ((u.full_name as string) ?? "?").split(" ").slice(0, 2).map((n: string) => n[0]).join("").toUpperCase()
               return (
-                <tr key={u.id as string} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                <tr key={u.id as string} className="hover:bg-surface-container transition-colors">
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0D3A6B] to-[#1A5599] flex items-center justify-center text-white text-xs font-bold shrink-0">
+                      <div className="w-8 h-8 rounded-full surgical-gradient flex items-center justify-center text-white text-xs font-bold shrink-0">
                         {initials}
                       </div>
                       <div>
-                        <p className="font-medium text-sm">{u.full_name as string || "—"}</p>
-                        <p className="text-xs text-muted-foreground">{u.email as string}</p>
+                        <p className="font-semibold text-sm text-on-surface">{u.full_name as string || "—"}</p>
+                        <p className="text-xs text-on-surface-variant">{u.email as string}</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    <Badge className={`text-[10px] ${ROLE_COLORS[u.role as string] ?? "bg-slate-100 text-slate-600"}`}>
-                      {u.role as string}
-                    </Badge>
+                    <span className={`text-[10px] px-2.5 py-0.5 rounded-full border font-medium ${ROLE_COLORS[u.role as string] ?? "bg-surface-container text-on-surface-variant border-outline-variant"}`}>
+                      {u.role as string ?? "—"}
+                    </span>
                   </td>
-                  <td className="px-4 py-3 text-xs text-muted-foreground">
+                  <td className="px-4 py-3 text-xs text-on-surface-variant">
                     {new Date(u.created_at as string).toLocaleDateString("pt-BR")}
                   </td>
-                  <td className="px-4 py-3 text-right">
-                    <button className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" title="Reset senha">
-                      <KeyRound className="h-3.5 w-3.5 text-muted-foreground" />
+                  <td className="px-4 py-3">
+                    <button className="p-1.5 hover:bg-surface-container rounded-lg transition-colors">
+                      <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 14 }}>key</span>
                     </button>
                   </td>
                 </tr>
@@ -77,8 +75,8 @@ export default async function AdminUsuariosPage() {
         </table>
         {(!users || users.length === 0) && (
           <div className="py-14 text-center">
-            <Users className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-            <p className="text-sm text-muted-foreground">Nenhum usuário</p>
+            <span className="material-symbols-outlined text-outline mb-2 block" style={{ fontSize: 32 }}>group</span>
+            <p className="text-sm text-on-surface-variant">Nenhum usuário encontrado</p>
           </div>
         )}
       </div>

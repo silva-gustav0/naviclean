@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { ArrowLeft, Clock } from "lucide-react"
 import Link from "next/link"
 import { WorkingHoursForm } from "@/components/dashboard/forms/working-hours-form"
 
@@ -39,19 +38,19 @@ export default async function HorariosPage() {
   return (
     <div className="space-y-6 max-w-2xl">
       <div className="flex items-center gap-3">
-        <Link href="/configuracoes" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors">
-          <ArrowLeft className="h-4 w-4" />
+        <Link href="/configuracoes" className="p-2 hover:bg-surface-container rounded-xl transition-colors">
+          <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 18 }}>arrow_back</span>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold">Horários de Atendimento</h1>
-          <p className="text-muted-foreground text-sm">Defina quando sua clínica está aberta</p>
+          <h1 className="font-headline font-extrabold text-2xl text-primary">Horários de Atendimento</h1>
+          <p className="text-on-surface-variant text-sm">Defina quando sua clínica está aberta</p>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
-        <div className="px-6 py-4 border-b flex items-center gap-2">
-          <Clock className="h-4 w-4 text-emerald-600" />
-          <span className="font-semibold text-sm">Horários semanais</span>
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden shadow-premium-sm">
+        <div className="px-6 py-4 border-b border-outline-variant bg-surface-container flex items-center gap-2">
+          <span className="material-symbols-outlined text-emerald-600" style={{ fontSize: 16 }}>schedule</span>
+          <span className="font-semibold text-sm text-on-surface">Horários semanais</span>
         </div>
         <WorkingHoursForm initialHours={hoursMap} />
       </div>

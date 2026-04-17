@@ -1,17 +1,25 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { DollarSign, CreditCard, CheckCircle, Clock, AlertCircle } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
 
 const STATUS_COLORS: Record<string, string> = {
-  paid: "bg-emerald-100 text-emerald-700",
-  pending: "bg-amber-100 text-amber-700",
-  overdue: "bg-red-100 text-red-700",
+  paid:    "bg-emerald-50 text-emerald-700 border-emerald-200",
+  pending: "bg-amber-50 text-amber-700 border-amber-200",
+  overdue: "bg-red-50 text-red-700 border-red-200",
 }
 const STATUS_LABELS: Record<string, string> = {
-  paid: "Pago",
+  paid:    "Pago",
   pending: "Pendente",
   overdue: "Vencido",
+}
+const STATUS_ICON: Record<string, string> = {
+  paid:    "check_circle",
+  pending: "schedule",
+  overdue: "warning",
+}
+const KPI_ICON_CLS: Record<string, string> = {
+  paid:    "bg-emerald-50 text-emerald-600",
+  pending: "bg-amber-50 text-amber-600",
+  overdue: "bg-red-50 text-red-600",
 }
 
 export default async function PacienteFinanceiroPage() {
@@ -32,68 +40,67 @@ export default async function PacienteFinanceiroPage() {
 
   const fmt = (v: number) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
 
-  const totalPaid = (transactions ?? []).filter((t) => t.payment_status === "paid").reduce((s, t) => s + Number(t.amount), 0)
+  const totalPaid    = (transactions ?? []).filter((t) => t.payment_status === "paid").reduce((s, t) => s + Number(t.amount), 0)
   const totalPending = (transactions ?? []).filter((t) => t.payment_status === "pending").reduce((s, t) => s + Number(t.amount), 0)
   const totalOverdue = (transactions ?? []).filter((t) => t.payment_status === "overdue").reduce((s, t) => s + Number(t.amount), 0)
 
+  const kpis = [
+    { key: "paid",    label: "Pago",     value: totalPaid },
+    { key: "pending", label: "A pagar",  value: totalPending },
+    { key: "overdue", label: "Vencido",  value: totalOverdue },
+  ]
+
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Financeiro</h1>
+      <h1 className="font-headline font-extrabold text-2xl text-primary">Financeiro</h1>
 
       <div className="grid grid-cols-3 gap-3">
-        {[
-          { label: "Pago", value: totalPaid, icon: CheckCircle, color: "bg-emerald-50 text-emerald-600" },
-          { label: "A pagar", value: totalPending, icon: Clock, color: "bg-amber-50 text-amber-600" },
-          { label: "Vencido", value: totalOverdue, icon: AlertCircle, color: "bg-red-50 text-red-600" },
-        ].map((k) => (
-          <div key={k.label} className="bg-white dark:bg-slate-900 border rounded-2xl p-4">
-            <div className={`w-8 h-8 rounded-xl ${k.color} flex items-center justify-center mb-2`}>
-              <k.icon className="h-4 w-4" />
+        {kpis.map((k) => (
+          <div key={k.key} className="bg-surface-container-lowest border border-outline-variant rounded-2xl p-4 shadow-premium-sm">
+            <div className={`w-8 h-8 rounded-xl ${KPI_ICON_CLS[k.key]} flex items-center justify-center mb-2`}>
+              <span className="material-symbols-outlined" style={{ fontSize: 16 }}>{STATUS_ICON[k.key]}</span>
             </div>
-            <p className="font-bold">{fmt(k.value)}</p>
-            <p className="text-xs text-muted-foreground">{k.label}</p>
+            <p className="font-bold text-on-surface text-sm">{fmt(k.value)}</p>
+            <p className="text-xs text-on-surface-variant">{k.label}</p>
           </div>
         ))}
       </div>
 
-      {/* Overdue alert */}
       {totalOverdue > 0 && (
         <div className="flex items-center gap-3 p-3 bg-red-50 border border-red-200 rounded-xl text-sm">
-          <AlertCircle className="h-4 w-4 text-red-500 shrink-0" />
+          <span className="material-symbols-outlined text-red-500 shrink-0" style={{ fontSize: 18 }}>warning</span>
           <p className="text-red-700 font-medium">Você tem {fmt(totalOverdue)} vencidos. Entre em contato com a clínica.</p>
         </div>
       )}
 
-      {/* Transactions */}
       {transactions && transactions.length > 0 ? (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
-          <div className="divide-y">
+        <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden shadow-premium-sm">
+          <div className="divide-y divide-outline-variant/50">
             {transactions.map((t) => {
               const clinic = t.clinics as { name: string } | null
+              const statusKey = t.payment_status as string
               return (
-                <div key={t.id as string} className="flex items-center gap-4 px-5 py-3.5 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
-                    t.payment_status === "paid" ? "bg-emerald-100" : t.payment_status === "overdue" ? "bg-red-100" : "bg-amber-100"
-                  }`}>
-                    <DollarSign className={`h-4 w-4 ${t.payment_status === "paid" ? "text-emerald-600" : t.payment_status === "overdue" ? "text-red-600" : "text-amber-600"}`} />
+                <div key={t.id as string} className="flex items-center gap-4 px-5 py-3.5 hover:bg-surface-container transition-colors">
+                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${KPI_ICON_CLS[statusKey] ?? "bg-surface-container"}`}>
+                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>{STATUS_ICON[statusKey] ?? "payments"}</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">{t.description as string}</p>
-                    <p className="text-xs text-muted-foreground">{clinic?.name ?? "—"}</p>
+                    <p className="text-sm font-medium text-on-surface truncate">{t.description as string}</p>
+                    <p className="text-xs text-on-surface-variant">{clinic?.name ?? "—"}</p>
                     {t.payment_method && (
-                      <p className="text-xs text-muted-foreground flex items-center gap-1">
-                        <CreditCard className="h-3 w-3" />
+                      <p className="text-xs text-on-surface-variant flex items-center gap-1">
+                        <span className="material-symbols-outlined" style={{ fontSize: 12 }}>credit_card</span>
                         {t.payment_method as string}
                       </p>
                     )}
                   </div>
                   <div className="text-right shrink-0">
-                    <p className="font-semibold text-sm">{fmt(Number(t.amount))}</p>
-                    <Badge className={`text-[10px] ${STATUS_COLORS[t.payment_status as string] ?? "bg-slate-100 text-slate-500"}`}>
-                      {STATUS_LABELS[t.payment_status as string] ?? t.payment_status}
-                    </Badge>
-                    {t.due_date && t.payment_status !== "paid" && (
-                      <p className="text-[10px] text-muted-foreground mt-0.5">
+                    <p className="font-semibold text-sm text-on-surface">{fmt(Number(t.amount))}</p>
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${STATUS_COLORS[statusKey] ?? "bg-surface-container text-on-surface-variant border-outline-variant"}`}>
+                      {STATUS_LABELS[statusKey] ?? statusKey}
+                    </span>
+                    {t.due_date && statusKey !== "paid" && (
+                      <p className="text-[10px] text-on-surface-variant mt-0.5">
                         Vence: {new Date(t.due_date as string).toLocaleDateString("pt-BR")}
                       </p>
                     )}
@@ -104,9 +111,9 @@ export default async function PacienteFinanceiroPage() {
           </div>
         </div>
       ) : (
-        <div className="bg-white dark:bg-slate-900 border rounded-2xl py-14 text-center">
-          <DollarSign className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-          <p className="text-sm font-medium">Nenhuma cobrança encontrada</p>
+        <div className="bg-surface-container-lowest border border-outline-variant rounded-2xl py-14 text-center shadow-premium-sm">
+          <span className="material-symbols-outlined text-outline mb-2 block" style={{ fontSize: 32 }}>payments</span>
+          <p className="text-sm font-medium text-on-surface">Nenhuma cobrança encontrada</p>
         </div>
       )}
     </div>

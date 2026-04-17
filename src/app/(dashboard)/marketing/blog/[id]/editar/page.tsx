@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from "react"
 import { useRouter, useParams } from "next/navigation"
-import { ArrowLeft, Loader2, Save, Eye, Tag } from "lucide-react"
 import { toast } from "sonner"
 import { createClient } from "@/lib/supabase/client"
 import Link from "next/link"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+
+const inputCls = "w-full border border-outline-variant rounded-xl px-4 py-2.5 text-sm bg-surface-container-lowest focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors"
 
 export default function EditarPostPage() {
   const params = useParams()
@@ -92,11 +91,10 @@ export default function EditarPostPage() {
     router.push("/marketing/blog")
   }
 
-
   if (loading) {
     return (
       <div className="flex items-center justify-center h-48">
-        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+        <span className="material-symbols-outlined text-on-surface-variant animate-spin" style={{ fontSize: 24 }}>autorenew</span>
       </div>
     )
   }
@@ -105,29 +103,29 @@ export default function EditarPostPage() {
     <div className="max-w-4xl space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Link href="/marketing/blog" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
-            <ArrowLeft className="h-4 w-4" />
+          <Link href="/marketing/blog" className="p-2 hover:bg-surface-container rounded-xl transition-colors">
+            <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 18 }}>arrow_back</span>
           </Link>
           <div>
-            <h1 className="text-xl font-bold">{isNew ? "Novo post" : "Editar post"}</h1>
-            <p className="text-xs text-muted-foreground">Blog da clínica</p>
+            <h1 className="font-headline font-extrabold text-2xl text-primary">{isNew ? "Novo post" : "Editar post"}</h1>
+            <p className="text-on-surface-variant text-sm">Blog da clínica</p>
           </div>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => save()}
             disabled={saving}
-            className="flex items-center gap-1.5 border px-4 py-2 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors"
+            className="flex items-center gap-1.5 border border-outline-variant text-on-surface-variant px-4 py-2 rounded-xl text-sm font-medium hover:bg-surface-container transition-colors disabled:opacity-50"
           >
-            {saving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />}
+            <span className="material-symbols-outlined" style={{ fontSize: 16 }}>{saving ? "autorenew" : "save"}</span>
             Salvar rascunho
           </button>
           <button
             onClick={() => save(true)}
             disabled={saving}
-            className="flex items-center gap-1.5 bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors"
+            className="flex items-center gap-1.5 surgical-gradient text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-premium-sm hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            <Eye className="h-3.5 w-3.5" />
+            <span className="material-symbols-outlined" style={{ fontSize: 16 }}>publish</span>
             Publicar
           </button>
         </div>
@@ -136,20 +134,20 @@ export default function EditarPostPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border p-5 space-y-4">
+          <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 space-y-4 shadow-premium-sm">
             <div>
-              <Label>Título <span className="text-red-500">*</span></Label>
-              <Input
-                className="mt-1.5 text-lg font-semibold"
+              <label className="block text-sm font-medium text-on-surface mb-1.5">Título <span className="text-red-500">*</span></label>
+              <input
+                className={`${inputCls} text-base font-semibold`}
                 placeholder="Ex: Como reduzir as faltas na sua clínica"
                 value={form.title}
                 onChange={(e) => setForm((f) => ({ ...f, title: e.target.value, slug: f.slug || generateSlug(e.target.value) }))}
               />
             </div>
             <div>
-              <Label>Resumo (excerpt)</Label>
+              <label className="block text-sm font-medium text-on-surface mb-1.5">Resumo (excerpt)</label>
               <textarea
-                className="mt-1.5 w-full border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-violet-400 resize-none"
+                className={`${inputCls} resize-none`}
                 rows={2}
                 placeholder="Um parágrafo resumindo o post..."
                 value={form.excerpt}
@@ -157,9 +155,9 @@ export default function EditarPostPage() {
               />
             </div>
             <div>
-              <Label>Conteúdo</Label>
+              <label className="block text-sm font-medium text-on-surface mb-1.5">Conteúdo</label>
               <textarea
-                className="mt-1.5 w-full border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-violet-400 resize-none font-mono"
+                className={`${inputCls} resize-none font-mono`}
                 rows={16}
                 placeholder="Escreva o conteúdo do post aqui (HTML ou Markdown)..."
                 value={form.content}
@@ -168,17 +166,19 @@ export default function EditarPostPage() {
             </div>
           </div>
 
-          {/* SEO */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border p-5 space-y-4">
-            <h3 className="font-semibold text-sm">SEO</h3>
+          <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 space-y-4 shadow-premium-sm">
+            <h3 className="font-headline font-bold text-sm text-on-surface flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 16 }}>search</span>
+              SEO
+            </h3>
             <div>
-              <Label>Meta título</Label>
-              <Input className="mt-1.5" placeholder={form.title || "Título para motores de busca"} value={form.meta_title} onChange={(e) => setForm((f) => ({ ...f, meta_title: e.target.value }))} />
+              <label className="block text-sm font-medium text-on-surface mb-1.5">Meta título</label>
+              <input className={inputCls} placeholder={form.title || "Título para motores de busca"} value={form.meta_title} onChange={(e) => setForm((f) => ({ ...f, meta_title: e.target.value }))} />
             </div>
             <div>
-              <Label>Meta descrição</Label>
+              <label className="block text-sm font-medium text-on-surface mb-1.5">Meta descrição</label>
               <textarea
-                className="mt-1.5 w-full border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-violet-400 resize-none"
+                className={`${inputCls} resize-none`}
                 rows={2}
                 placeholder={form.excerpt || "Descrição para motores de busca (até 160 caracteres)"}
                 value={form.meta_description}
@@ -190,15 +190,18 @@ export default function EditarPostPage() {
 
         {/* Sidebar */}
         <div className="space-y-4">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border p-5 space-y-4">
-            <h3 className="font-semibold text-sm">Configurações</h3>
+          <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 space-y-4 shadow-premium-sm">
+            <h3 className="font-headline font-bold text-sm text-on-surface">Configurações</h3>
             <div>
-              <Label className="flex items-center gap-1.5"><Tag className="h-3.5 w-3.5" /> Tags (separadas por vírgula)</Label>
-              <Input className="mt-1.5" placeholder="Gestão, Marketing..." value={form.tags} onChange={(e) => setForm((f) => ({ ...f, tags: e.target.value }))} />
+              <label className="block text-sm font-medium text-on-surface mb-1.5 flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 14 }}>label</span>
+                Tags (separadas por vírgula)
+              </label>
+              <input className={inputCls} placeholder="Gestão, Marketing..." value={form.tags} onChange={(e) => setForm((f) => ({ ...f, tags: e.target.value }))} />
             </div>
             <div>
-              <Label>Slug (URL)</Label>
-              <Input className="mt-1.5 font-mono text-xs" placeholder="meu-primeiro-post" value={form.slug} onChange={(e) => setForm((f) => ({ ...f, slug: e.target.value }))} />
+              <label className="block text-sm font-medium text-on-surface mb-1.5">Slug (URL)</label>
+              <input className={`${inputCls} font-mono text-xs`} placeholder="meu-primeiro-post" value={form.slug} onChange={(e) => setForm((f) => ({ ...f, slug: e.target.value }))} />
             </div>
           </div>
         </div>

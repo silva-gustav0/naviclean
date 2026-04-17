@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { DollarSign, Check, X, Edit } from "lucide-react"
 
 const DEFAULT_PLANS = [
   { name: "Solo", price: 97, max_professionals: 1, max_patients: 50, features: ["Agenda", "Prontuário básico", "Portal paciente básico"] },
@@ -19,41 +18,35 @@ export default async function AdminPlanosPage() {
   return (
     <div className="space-y-6 max-w-5xl">
       <div>
-        <h1 className="text-2xl font-bold">Planos</h1>
-        <p className="text-muted-foreground text-sm">Gestão dos planos de assinatura</p>
+        <h1 className="font-headline font-extrabold text-2xl text-primary">Planos</h1>
+        <p className="text-on-surface-variant text-sm mt-0.5">Gestão dos planos de assinatura</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {DEFAULT_PLANS.map((plan) => (
-          <div key={plan.name} className="bg-white dark:bg-slate-900 border rounded-2xl p-5">
+          <div key={plan.name} className="bg-surface-container-lowest border border-outline-variant rounded-2xl p-5 shadow-premium-sm">
             <div className="flex items-center justify-between mb-3">
-              <div className="w-9 h-9 rounded-xl bg-[#E8F0F9] flex items-center justify-center">
-                <DollarSign className="h-5 w-5 text-[#0D3A6B]" />
+              <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
+                <span className="material-symbols-outlined text-primary" style={{ fontSize: 20 }}>payments</span>
               </div>
-              <button className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
-                <Edit className="h-3.5 w-3.5 text-muted-foreground" />
+              <button className="p-1.5 hover:bg-surface-container rounded-lg transition-colors">
+                <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 14 }}>edit</span>
               </button>
             </div>
-            <h3 className="font-bold text-lg">{plan.name}</h3>
-            <p className="text-3xl font-black text-[#0D3A6B] mt-1">R${plan.price}<span className="text-sm font-normal text-muted-foreground">/mês</span></p>
+            <h3 className="font-headline font-bold text-lg text-on-surface">{plan.name}</h3>
+            <p className="text-3xl font-extrabold text-primary mt-1">
+              R${plan.price}<span className="text-sm font-normal text-on-surface-variant">/mês</span>
+            </p>
 
             <div className="mt-4 space-y-2 text-sm">
-              <div className="flex items-center gap-2 text-muted-foreground">
-                {plan.max_professionals
-                  ? <><Check className="h-4 w-4 text-emerald-500 shrink-0" /> Até {plan.max_professionals} profissional(is)</>
-                  : <><Check className="h-4 w-4 text-emerald-500 shrink-0" /> Profissionais ilimitados</>
-                }
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                {plan.max_patients
-                  ? <><Check className="h-4 w-4 text-emerald-500 shrink-0" /> Até {plan.max_patients} pacientes</>
-                  : <><Check className="h-4 w-4 text-emerald-500 shrink-0" /> Pacientes ilimitados</>
-                }
-              </div>
+              <p className="text-xs text-on-surface-variant font-medium">
+                {plan.max_professionals ? `Até ${plan.max_professionals} profissional${plan.max_professionals > 1 ? "is" : ""}` : "Profissionais ilimitados"} ·{" "}
+                {plan.max_patients ? `${plan.max_patients} pacientes` : "Pacientes ilimitados"}
+              </p>
               {plan.features.map((f) => (
-                <div key={f} className="flex items-center gap-2 text-muted-foreground">
-                  <Check className="h-4 w-4 text-emerald-500 shrink-0" />
-                  {f}
+                <div key={f} className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-emerald-600 shrink-0" style={{ fontSize: 14 }}>check_circle</span>
+                  <span className="text-on-surface-variant text-xs">{f}</span>
                 </div>
               ))}
             </div>

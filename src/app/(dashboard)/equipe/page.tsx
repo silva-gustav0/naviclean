@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { UserCog, Mail, Shield, BadgeCheck } from "lucide-react"
 import { InviteMemberModal } from "@/components/dashboard/modals/invite-member-modal"
 
 export const ROLE_LABELS: Record<string, string> = {
@@ -12,11 +11,11 @@ export const ROLE_LABELS: Record<string, string> = {
 }
 
 export const ROLE_COLORS: Record<string, string> = {
-  clinic_owner: "bg-violet-100 text-violet-700",
-  dentist: "bg-blue-100 text-blue-700",
-  doctor: "bg-sky-100 text-sky-700",
-  receptionist: "bg-emerald-100 text-emerald-700",
-  independent_professional: "bg-amber-100 text-amber-700",
+  clinic_owner: "bg-primary/10 text-primary",
+  dentist: "bg-nc-secondary/10 text-nc-secondary",
+  doctor: "bg-primary/10 text-primary",
+  receptionist: "bg-emerald-50 text-emerald-700",
+  independent_professional: "bg-nc-secondary/10 text-nc-secondary",
 }
 
 export default async function EquipePage() {
@@ -39,8 +38,8 @@ export default async function EquipePage() {
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Equipe</h1>
-          <p className="text-muted-foreground text-sm">
+          <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Equipe</h2>
+          <p className="text-on-surface-variant text-sm mt-1 font-sans">
             {activeCount} membro{activeCount !== 1 ? "s" : ""} ativo{activeCount !== 1 ? "s" : ""}
           </p>
         </div>
@@ -48,8 +47,8 @@ export default async function EquipePage() {
       </div>
 
       {members && members.length > 0 ? (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
-          <div className="divide-y">
+        <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 overflow-hidden shadow-premium-sm">
+          <div className="divide-y divide-outline-variant/10">
             {members.map((m) => {
               const profile = m.profiles as { full_name?: string; email?: string } | null
               const name = (m.full_name ?? profile?.full_name) ?? "Sem nome"
@@ -58,48 +57,57 @@ export default async function EquipePage() {
               const role = m.role as string
 
               return (
-                <div key={m.id as string} className={`flex items-center gap-4 px-5 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors ${!m.is_active ? 'opacity-50' : ''}`}>
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0D3A6B] to-[#1A5599] flex items-center justify-center text-white text-sm font-semibold shrink-0">
+                <div key={m.id as string} className={`flex items-center gap-4 px-5 py-4 hover:bg-surface-container-low transition-colors ${!m.is_active ? "opacity-50" : ""}`}>
+                  <div className="w-10 h-10 rounded-full surgical-gradient flex items-center justify-center text-white text-sm font-bold shrink-0 font-headline">
                     {initials}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <p className="font-medium text-sm">{name}</p>
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${ROLE_COLORS[role] ?? ROLE_COLORS.dentist}`}>
+                      <p className="font-semibold text-sm text-primary font-headline">{name}</p>
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-semibold font-sans ${ROLE_COLORS[role] ?? ROLE_COLORS.dentist}`}>
                         {ROLE_LABELS[role] ?? role}
                       </span>
-                      {m.affiliation === 'independent' && (
-                        <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-slate-100 text-slate-600">
+                      {m.affiliation === "independent" && (
+                        <span className="text-xs px-2 py-0.5 rounded-full font-semibold bg-surface-container-low text-on-surface-variant font-sans">
                           Independente
                         </span>
                       )}
-                      {!m.is_active && <span className="text-xs text-red-500">Inativo</span>}
+                      {!m.is_active && <span className="text-xs text-red-500 font-sans">Inativo</span>}
                     </div>
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground mt-0.5">
+                    <div className="flex items-center gap-3 text-xs text-on-surface-variant mt-0.5 font-sans">
                       <span>{email}</span>
-                      {m.specialty && <span>• {m.specialty}</span>}
-                      {m.cro && <span className="flex items-center gap-1"><BadgeCheck className="h-3 w-3" />{m.cro}</span>}
+                      {m.specialty && <span>· {m.specialty}</span>}
+                      {m.cro && (
+                        <span className="flex items-center gap-1">
+                          <span className="material-symbols-outlined text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                          {m.cro}
+                        </span>
+                      )}
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 shrink-0">
-                    {email !== "—" && (
-                      <a href={`mailto:${email}`} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" title="Enviar email">
-                        <Mail className="h-4 w-4 text-muted-foreground" />
-                      </a>
-                    )}
-                  </div>
+                  {email !== "—" && (
+                    <a
+                      href={`mailto:${email}`}
+                      className="p-2 hover:bg-surface-container-low rounded-lg transition-colors"
+                      title="Enviar email"
+                    >
+                      <span className="material-symbols-outlined text-outline text-xl">mail</span>
+                    </a>
+                  )}
                 </div>
               )
             })}
           </div>
         </div>
       ) : (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border py-16 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-[#E8F0F9] flex items-center justify-center mx-auto mb-4">
-            <UserCog className="h-8 w-8 text-[#0D3A6B]" />
+        <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 py-16 text-center shadow-premium-sm">
+          <div className="w-16 h-16 rounded-2xl bg-nc-secondary/10 flex items-center justify-center mx-auto mb-4">
+            <span className="material-symbols-outlined text-nc-secondary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+              manage_accounts
+            </span>
           </div>
-          <h3 className="font-semibold text-base mb-1">Nenhum membro ainda</h3>
-          <p className="text-muted-foreground text-sm mb-6 max-w-xs mx-auto">
+          <h3 className="font-headline font-semibold text-primary text-base mb-1">Nenhum membro ainda</h3>
+          <p className="text-on-surface-variant text-sm mb-6 max-w-xs mx-auto font-sans">
             Convide dentistas, médicos e recepcionistas para colaborar.
           </p>
           <InviteMemberModal />
@@ -110,7 +118,7 @@ export default async function EquipePage() {
       <div className="flex flex-wrap gap-2">
         {Object.entries(ROLE_LABELS).map(([key, label]) => (
           <div key={key} className="flex items-center gap-1.5 text-xs">
-            <span className={`px-2 py-0.5 rounded-full font-medium ${ROLE_COLORS[key]}`}>{label}</span>
+            <span className={`px-2 py-0.5 rounded-full font-semibold font-sans ${ROLE_COLORS[key]}`}>{label}</span>
           </div>
         ))}
       </div>

@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Mail, Loader2, RefreshCw } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { toast } from "sonner"
 
@@ -28,21 +27,19 @@ export default function VerificarEmailPage() {
 
   return (
     <div className="space-y-6 text-center">
-      <div className="flex justify-center">
-        <div className="w-20 h-20 rounded-2xl bg-blue-50 flex items-center justify-center">
-          <Mail className="h-10 w-10 text-[#0D3A6B]" />
-        </div>
+      <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
+        <span className="material-symbols-outlined text-primary" style={{ fontSize: 40, fontVariationSettings: "'FILL' 1" }}>mark_email_unread</span>
       </div>
       <div className="space-y-2">
-        <h1 className="text-2xl font-bold tracking-tight">Verifique seu email</h1>
-        <p className="text-muted-foreground text-sm leading-relaxed">
+        <h1 className="font-headline font-extrabold text-2xl text-primary tracking-tight">Verifique seu email</h1>
+        <p className="text-on-surface-variant text-sm leading-relaxed">
           Enviamos um link de confirmação para o seu email.<br />
           Clique no link para ativar sua conta.
         </p>
       </div>
-      <div className="bg-blue-50 rounded-xl p-4 text-left space-y-2">
-        <p className="text-sm font-medium text-blue-800">Não recebeu o email?</p>
-        <ul className="text-xs text-blue-700 space-y-1 list-disc list-inside">
+      <div className="bg-primary/5 border border-primary/10 rounded-xl p-4 text-left space-y-2">
+        <p className="text-sm font-semibold text-primary">Não recebeu o email?</p>
+        <ul className="text-xs text-on-surface-variant space-y-1 list-disc list-inside">
           <li>Verifique a pasta de spam ou lixo eletrônico</li>
           <li>Aguarde alguns minutos</li>
           <li>O remetente é no-reply@naviclin.com</li>
@@ -51,14 +48,14 @@ export default function VerificarEmailPage() {
       <button
         onClick={resend}
         disabled={loading}
-        className="w-full flex items-center justify-center gap-2 border border-slate-200 hover:border-[#0D3A6B] text-slate-600 hover:text-[#0D3A6B] font-medium py-2.5 rounded-xl text-sm transition-colors"
+        className="w-full flex items-center justify-center gap-2 border border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary font-medium py-2.5 rounded-xl text-sm transition-colors disabled:opacity-50"
       >
-        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4" />}
+        <span className="material-symbols-outlined" style={{ fontSize: 16 }}>{loading ? "autorenew" : "refresh"}</span>
         Reenviar email de confirmação
       </button>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs text-on-surface-variant">
         Email errado?{" "}
-        <a href="/cadastro" className="text-blue-600 hover:underline">Fazer novo cadastro</a>
+        <a href="/cadastro" className="text-primary font-semibold hover:underline underline-offset-4">Fazer novo cadastro</a>
       </p>
     </div>
   )

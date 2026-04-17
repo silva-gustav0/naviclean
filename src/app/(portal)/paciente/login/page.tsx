@@ -2,10 +2,11 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Loader2, Mail, Lock } from "lucide-react"
 import { toast } from "sonner"
 import { createClient } from "@/lib/supabase/client"
 import Link from "next/link"
+
+const inputCls = "w-full pl-10 pr-4 py-2.5 border border-outline-variant rounded-xl text-sm bg-surface-container-lowest focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors"
 
 export default function PacienteLoginPage() {
   const [loading, setLoading] = useState(false)
@@ -27,42 +28,42 @@ export default function PacienteLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F7F9FC] flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl border shadow-sm p-8 w-full max-w-sm">
+    <div className="min-h-screen bg-surface-container-low flex items-center justify-center px-4">
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-premium p-8 w-full max-w-sm">
         <Link href="/" className="flex items-center gap-2 mb-8">
-          <div className="w-8 h-8 rounded-lg bg-[#0D3A6B] flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg surgical-gradient flex items-center justify-center">
             <span className="text-white font-bold text-sm">N</span>
           </div>
-          <span className="font-bold text-[#0D3A6B]">NaviClin</span>
+          <span className="font-bold text-primary">NaviClin</span>
         </Link>
-        <h1 className="text-xl font-bold mb-1">Portal do Paciente</h1>
-        <p className="text-sm text-slate-500 mb-6">Entre para ver seus agendamentos e documentos</p>
+        <h1 className="font-headline font-extrabold text-xl text-primary mb-1">Portal do Paciente</h1>
+        <p className="text-sm text-on-surface-variant mb-6">Entre para ver seus agendamentos e documentos</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1.5">Email ou CPF</label>
+            <label className="block text-sm font-medium text-on-surface mb-1.5">Email ou CPF</label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style={{ fontSize: 16 }}>mail</span>
               <input
                 required
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:border-[#0D3A6B] focus:ring-1 focus:ring-[#0D3A6B]/20"
+                className={inputCls}
                 placeholder="seu@email.com"
               />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5">Senha</label>
+            <label className="block text-sm font-medium text-on-surface mb-1.5">Senha</label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style={{ fontSize: 16 }}>lock</span>
               <input
                 required
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:border-[#0D3A6B] focus:ring-1 focus:ring-[#0D3A6B]/20"
+                className={inputCls}
                 placeholder="••••••••"
               />
             </div>
@@ -70,21 +71,21 @@ export default function PacienteLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 bg-[#0D3A6B] hover:bg-[#1A5599] text-white font-semibold py-2.5 rounded-xl transition-colors text-sm"
+            className="w-full flex items-center justify-center gap-2 surgical-gradient text-white font-semibold py-2.5 rounded-xl shadow-premium-sm hover:opacity-90 disabled:opacity-50 transition-opacity text-sm"
           >
-            {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+            <span className="material-symbols-outlined" style={{ fontSize: 16 }}>{loading ? "autorenew" : "login"}</span>
             {loading ? "Entrando..." : "Entrar"}
           </button>
         </form>
 
         <div className="mt-4 text-center">
-          <Link href="/recuperar-senha" className="text-xs text-blue-600 hover:underline">Esqueceu sua senha?</Link>
+          <Link href="/recuperar-senha" className="text-xs text-primary hover:underline underline-offset-4">Esqueceu sua senha?</Link>
         </div>
 
-        <div className="mt-6 pt-6 border-t text-center">
-          <p className="text-xs text-slate-500">
+        <div className="mt-6 pt-6 border-t border-outline-variant text-center">
+          <p className="text-xs text-on-surface-variant">
             É profissional de saúde?{" "}
-            <Link href="/login" className="text-[#0D3A6B] font-medium hover:underline">Entrar na clínica</Link>
+            <Link href="/login" className="text-primary font-semibold hover:underline">Entrar na clínica</Link>
           </p>
         </div>
       </div>

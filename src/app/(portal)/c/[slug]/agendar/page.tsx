@@ -52,13 +52,13 @@ export default async function AgendarPage({ params }: Props) {
   return (
     <div className="space-y-6">
       <div>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
-          <Link href={`/c/${slug}`} className="hover:text-foreground transition-colors">{clinic.name as string}</Link>
+        <div className="flex items-center gap-2 text-sm text-on-surface-variant mb-1">
+          <Link href={`/c/${slug}`} className="hover:text-on-surface transition-colors">{clinic.name as string}</Link>
           <span>/</span>
           <span>Agendar</span>
         </div>
-        <h1 className="text-2xl font-bold">Agendar consulta</h1>
-        <p className="text-muted-foreground text-sm">em {clinic.name as string}</p>
+        <h1 className="font-headline font-extrabold text-2xl text-primary">Agendar consulta</h1>
+        <p className="text-on-surface-variant text-sm">em {clinic.name as string}</p>
       </div>
 
       <BookingClient

@@ -26,8 +26,8 @@ export default async function AvaliarPage({ params }: Props) {
   return (
     <div className="max-w-md mx-auto space-y-6">
       <div className="text-center">
-        <h1 className="text-2xl font-bold mb-1">Como foi sua consulta?</h1>
-        <p className="text-muted-foreground text-sm">
+        <h1 className="font-headline font-extrabold text-2xl text-primary mb-1">Como foi sua consulta?</h1>
+        <p className="text-on-surface-variant text-sm">
           {service?.name ?? "Consulta"} com {memberName}
           {clinic ? ` em ${clinic.name}` : ""}
         </p>

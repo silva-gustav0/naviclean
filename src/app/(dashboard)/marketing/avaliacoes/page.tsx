@@ -1,12 +1,17 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { Star, MessageSquare } from "lucide-react"
 
 function StarRating({ rating }: { rating: number }) {
   return (
     <div className="flex gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className={`h-3.5 w-3.5 ${i < rating ? "text-amber-400 fill-amber-400" : "text-slate-200 fill-slate-200"}`} />
+        <span
+          key={i}
+          className={`material-symbols-outlined ${i < rating ? "text-nc-secondary" : "text-outline"}`}
+          style={{ fontSize: 14, fontVariationSettings: i < rating ? "'FILL' 1" : "'FILL' 0" }}
+        >
+          star
+        </span>
       ))}
     </div>
   )
@@ -40,64 +45,63 @@ export default async function AvaliacoesPage() {
   return (
     <div className="space-y-6 max-w-5xl">
       <div>
-        <h1 className="text-2xl font-bold">Avaliações dos Pacientes</h1>
-        <p className="text-muted-foreground text-sm">{reviews?.length ?? 0} avaliações recebidas</p>
+        <h1 className="font-headline font-extrabold text-3xl text-primary">Avaliações dos Pacientes</h1>
+        <p className="text-on-surface-variant text-sm mt-0.5">{reviews?.length ?? 0} avaliações recebidas</p>
       </div>
 
-      {/* Summary */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border p-6">
+      {/* Summary card */}
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-6 shadow-premium-sm">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="text-center">
-            <p className="text-5xl font-black text-[#0D3A6B]">{avg.toFixed(1)}</p>
-            <StarRating rating={Math.round(avg)} />
-            <p className="text-xs text-muted-foreground mt-1">{reviews?.length ?? 0} avaliações</p>
+            <p className="font-headline font-extrabold text-5xl text-primary">{avg.toFixed(1)}</p>
+            <div className="flex justify-center mt-2">
+              <StarRating rating={Math.round(avg)} />
+            </div>
+            <p className="text-xs text-on-surface-variant mt-1">{reviews?.length ?? 0} avaliações</p>
           </div>
           <div className="md:col-span-2 space-y-2">
             {dist.map((d) => (
               <div key={d.star} className="flex items-center gap-2">
-                <span className="text-xs w-4 text-right">{d.star}</span>
-                <Star className="h-3 w-3 text-amber-400 fill-amber-400 shrink-0" />
-                <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
-                  <div className="h-full bg-amber-400 rounded-full transition-all" style={{ width: `${d.pct}%` }} />
+                <span className="text-xs w-4 text-right text-on-surface-variant">{d.star}</span>
+                <span className="material-symbols-outlined text-nc-secondary shrink-0" style={{ fontSize: 12, fontVariationSettings: "'FILL' 1" }}>star</span>
+                <div className="flex-1 h-2 bg-surface-container rounded-full overflow-hidden">
+                  <div className="h-full bg-nc-secondary rounded-full transition-all" style={{ width: `${d.pct}%` }} />
                 </div>
-                <span className="text-xs text-muted-foreground w-6 text-right">{d.count}</span>
+                <span className="text-xs text-on-surface-variant w-6 text-right">{d.count}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Reviews list */}
       {reviews && reviews.length > 0 ? (
         <div className="space-y-3">
           {reviews.map((r) => {
             const patient = r.patients as { full_name: string } | null
             return (
-              <div key={r.id as string} className="bg-white dark:bg-slate-900 rounded-2xl border p-5">
+              <div key={r.id as string} className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 shadow-premium-sm">
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#E8F0F9] flex items-center justify-center font-bold text-sm text-[#0D3A6B] shrink-0">
+                    <div className="w-9 h-9 rounded-full surgical-gradient flex items-center justify-center font-bold text-sm text-white shrink-0">
                       {(patient?.full_name ?? "?")[0].toUpperCase()}
                     </div>
                     <div>
-                      <p className="font-medium text-sm">{patient?.full_name ?? "Paciente anônimo"}</p>
-                      <p className="text-xs text-muted-foreground">{new Date(r.created_at as string).toLocaleDateString("pt-BR")}</p>
+                      <p className="font-semibold text-sm text-on-surface">{patient?.full_name ?? "Paciente anônimo"}</p>
+                      <p className="text-xs text-on-surface-variant">{new Date(r.created_at as string).toLocaleDateString("pt-BR")}</p>
                     </div>
                   </div>
                   <StarRating rating={Number(r.rating)} />
                 </div>
-                {r.comment && <p className="text-sm text-slate-600 dark:text-slate-300">{r.comment as string}</p>}
+                {r.comment && <p className="text-sm text-on-surface-variant">{r.comment as string}</p>}
               </div>
             )
           })}
         </div>
       ) : (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border py-16 text-center">
-          <div className="w-14 h-14 rounded-2xl bg-amber-50 dark:bg-amber-950 flex items-center justify-center mx-auto mb-3">
-            <MessageSquare className="h-7 w-7 text-amber-500" />
-          </div>
-          <p className="font-semibold">Nenhuma avaliação ainda</p>
-          <p className="text-muted-foreground text-sm mt-1">Avaliações dos pacientes após consultas aparecerão aqui.</p>
+        <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant py-16 text-center shadow-premium-sm">
+          <span className="material-symbols-outlined text-outline mb-3 block" style={{ fontSize: 40 }}>rate_review</span>
+          <p className="font-semibold text-on-surface">Nenhuma avaliação ainda</p>
+          <p className="text-on-surface-variant text-sm mt-1">Avaliações dos pacientes após consultas aparecerão aqui.</p>
         </div>
       )}
     </div>

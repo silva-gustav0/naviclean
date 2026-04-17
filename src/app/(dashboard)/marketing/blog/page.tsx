@@ -1,8 +1,6 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { FileText, Plus, Edit, Eye } from "lucide-react"
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
 
 export default async function MarketingBlogPage() {
   const supabase = await createClient()
@@ -20,46 +18,47 @@ export default async function MarketingBlogPage() {
 
   return (
     <div className="space-y-6 max-w-5xl">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-bold">Blog da Clínica</h1>
-          <p className="text-muted-foreground text-sm">{posts?.length ?? 0} post{(posts?.length ?? 0) !== 1 ? "s" : ""}</p>
+          <h1 className="font-headline font-extrabold text-3xl text-primary">Blog da Clínica</h1>
+          <p className="text-on-surface-variant text-sm mt-0.5">{posts?.length ?? 0} post{(posts?.length ?? 0) !== 1 ? "s" : ""}</p>
         </div>
         <Link
           href="/marketing/blog/novo/editar"
-          className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors"
+          className="surgical-gradient text-white text-sm font-semibold flex items-center gap-1.5 px-4 py-2 rounded-xl shadow-premium-sm hover:opacity-90 transition-opacity"
         >
-          <Plus className="h-4 w-4" />
+          <span className="material-symbols-outlined" style={{ fontSize: 18 }}>add</span>
           Novo post
         </Link>
       </div>
 
       {posts && posts.length > 0 ? (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
+        <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden shadow-premium-sm">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 dark:bg-slate-800/50 border-b">
+            <thead className="bg-surface-container border-b border-outline-variant">
               <tr>
-                <th className="text-left text-xs font-medium text-muted-foreground px-5 py-3">Título</th>
-                <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">Tags</th>
-                <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">Status</th>
-                <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">Data</th>
+                <th className="text-left text-xs font-medium text-on-surface-variant px-5 py-3">Título</th>
+                <th className="text-left text-xs font-medium text-on-surface-variant px-4 py-3">Tags</th>
+                <th className="text-left text-xs font-medium text-on-surface-variant px-4 py-3">Status</th>
+                <th className="text-left text-xs font-medium text-on-surface-variant px-4 py-3">Data</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y">
+            <tbody className="divide-y divide-outline-variant/50">
               {posts.map((post) => (
-                <tr key={post.id as string} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-                  <td className="px-5 py-3 font-medium max-w-xs truncate">{post.title as string}</td>
-                  <td className="px-4 py-3 text-xs text-muted-foreground">{(post.tags as string[] | null)?.[0] || "—"}</td>
+                <tr key={post.id as string} className="hover:bg-surface-container transition-colors">
+                  <td className="px-5 py-3 font-semibold text-on-surface max-w-xs truncate">{post.title as string}</td>
+                  <td className="px-4 py-3 text-xs text-on-surface-variant">{(post.tags as string[] | null)?.[0] || "—"}</td>
                   <td className="px-4 py-3">
-                    <Badge className={`text-[10px] ${
-                      post.status === "published" ? "bg-emerald-100 text-emerald-700"
-                      : "bg-slate-100 text-slate-500"
+                    <span className={`text-[10px] px-2.5 py-0.5 rounded-full border font-medium ${
+                      post.status === "published"
+                        ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                        : "bg-surface-container text-on-surface-variant border-outline-variant"
                     }`}>
                       {post.status === "published" ? "Publicado" : "Rascunho"}
-                    </Badge>
+                    </span>
                   </td>
-                  <td className="px-4 py-3 text-xs text-muted-foreground">
+                  <td className="px-4 py-3 text-xs text-on-surface-variant">
                     {new Date((post.published_at ?? post.created_at) as string).toLocaleDateString("pt-BR")}
                   </td>
                   <td className="px-4 py-3">
@@ -69,16 +68,16 @@ export default async function MarketingBlogPage() {
                           href={`/c/${clinic.slug as string}/blog/${post.slug as string}`}
                           target="_blank"
                           rel="noopener"
-                          className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                          className="p-1.5 hover:bg-surface-container rounded-lg transition-colors"
                         >
-                          <Eye className="h-3.5 w-3.5 text-muted-foreground" />
+                          <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 14 }}>open_in_new</span>
                         </a>
                       )}
                       <Link
                         href={`/marketing/blog/${post.id as string}/editar`}
-                        className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        className="p-1.5 hover:bg-surface-container rounded-lg transition-colors"
                       >
-                        <Edit className="h-3.5 w-3.5 text-muted-foreground" />
+                        <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 14 }}>edit</span>
                       </Link>
                     </div>
                   </td>
@@ -88,19 +87,17 @@ export default async function MarketingBlogPage() {
           </table>
         </div>
       ) : (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border py-16 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-violet-50 dark:bg-violet-950 flex items-center justify-center mx-auto mb-4">
-            <FileText className="h-8 w-8 text-violet-600" />
-          </div>
-          <h3 className="font-semibold text-base mb-1">Nenhum post ainda</h3>
-          <p className="text-muted-foreground text-sm mb-6 max-w-xs mx-auto">
+        <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant py-16 text-center shadow-premium-sm">
+          <span className="material-symbols-outlined text-outline mb-3 block" style={{ fontSize: 40 }}>article</span>
+          <h3 className="font-semibold text-on-surface text-base mb-1">Nenhum post ainda</h3>
+          <p className="text-on-surface-variant text-sm mb-6 max-w-xs mx-auto">
             Crie conteúdo para atrair novos pacientes e fortalecer a presença online da sua clínica.
           </p>
           <Link
             href="/marketing/blog/novo/editar"
-            className="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors"
+            className="inline-flex items-center gap-1.5 surgical-gradient text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-premium-sm hover:opacity-90 transition-opacity"
           >
-            <Plus className="h-4 w-4" />
+            <span className="material-symbols-outlined" style={{ fontSize: 16 }}>add</span>
             Criar primeiro post
           </Link>
         </div>

@@ -1,7 +1,6 @@
 import { Navbar } from "@/components/landing/Navbar"
 import { Footer } from "@/components/landing/Footer"
 import type { Metadata } from "next"
-import { Check, X, ChevronRight, Zap, Building2, Crown } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Planos e Preços — NaviClin",
@@ -11,13 +10,16 @@ export const metadata: Metadata = {
 const plans = [
   {
     id: "solo",
-    icon: Zap,
+    icon: "bolt",
+    iconCls: "bg-surface-container text-on-surface-variant",
     name: "Solo",
     price: 97,
     description: "Para profissionais autônomos que querem organizar a agenda e o prontuário.",
-    color: "border-slate-200",
+    borderCls: "border-outline-variant",
     highlight: false,
     badge: null,
+    badgeCls: "",
+    ctaCls: "border border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary",
     features: [
       { label: "1 profissional", included: true },
       { label: "Até 50 pacientes ativos", included: true },
@@ -39,13 +41,16 @@ const plans = [
   },
   {
     id: "starter",
-    icon: Building2,
+    icon: "business",
+    iconCls: "surgical-gradient text-white",
     name: "Clínica Starter",
     price: 297,
     description: "Para clínicas com equipe pequena que precisam de gestão completa.",
-    color: "border-[#0D3A6B]",
+    borderCls: "border-primary",
     highlight: true,
     badge: "Mais popular",
+    badgeCls: "surgical-gradient text-white",
+    ctaCls: "surgical-gradient text-white shadow-premium-sm hover:opacity-90",
     features: [
       { label: "Até 5 profissionais", included: true },
       { label: "Até 500 pacientes ativos", included: true },
@@ -67,13 +72,16 @@ const plans = [
   },
   {
     id: "pro",
-    icon: Crown,
+    icon: "workspace_premium",
+    iconCls: "bg-nc-secondary/20 text-nc-secondary",
     name: "Clínica Pro",
     price: 597,
     description: "Para clínicas que precisam de tudo, incluindo NF-e, API e multi-unidade.",
-    color: "border-[#DBB47A]",
+    borderCls: "border-nc-secondary",
     highlight: false,
     badge: "Completo",
+    badgeCls: "bg-nc-secondary text-primary",
+    ctaCls: "bg-nc-secondary text-primary hover:opacity-90",
     features: [
       { label: "Profissionais ilimitados", included: true },
       { label: "Pacientes ilimitados", included: true },
@@ -109,63 +117,50 @@ export default function PlanosPage() {
     <div className="min-h-screen bg-white">
       <Navbar />
       <main className="pt-20">
-        {/* Hero */}
-        <section className="bg-gradient-to-b from-[#E8F0F9] to-white py-16 px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#0F172A] mb-4">Planos transparentes</h1>
-          <p className="text-lg text-slate-600 max-w-xl mx-auto mb-6">
+        <section className="bg-primary/5 border-b border-primary/10 py-16 px-6 text-center">
+          <h1 className="font-headline font-extrabold text-4xl md:text-5xl text-primary mb-4">Planos transparentes</h1>
+          <p className="text-lg text-on-surface-variant max-w-xl mx-auto mb-6">
             Comece grátis por 14 dias. Sem cartão de crédito. Cancele quando quiser.
           </p>
-          <div className="inline-flex items-center gap-2 bg-[#E8F0F9] border border-blue-100 rounded-full px-4 py-2 text-sm">
-            <span className="text-slate-600">Anual</span>
-            <span className="bg-emerald-100 text-emerald-700 text-xs font-semibold px-2 py-0.5 rounded-full">20% off</span>
+          <div className="inline-flex items-center gap-2 bg-white border border-outline-variant rounded-full px-4 py-2 text-sm shadow-premium-sm">
+            <span className="text-on-surface-variant">Plano anual disponível</span>
+            <span className="bg-emerald-50 text-emerald-700 text-xs font-semibold px-2 py-0.5 rounded-full border border-emerald-200">20% off</span>
           </div>
         </section>
 
-        {/* Pricing cards */}
         <section className="py-12 px-6">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
             {plans.map((plan) => (
               <div
                 key={plan.id}
-                className={`border-2 ${plan.color} rounded-2xl p-8 relative ${plan.highlight ? "shadow-xl scale-[1.02]" : ""}`}
+                className={`border-2 ${plan.borderCls} rounded-2xl p-8 relative bg-surface-container-lowest shadow-premium-sm ${plan.highlight ? "scale-[1.02]" : ""}`}
               >
                 {plan.badge && (
-                  <span className={`absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold px-3 py-1 rounded-full ${
-                    plan.highlight ? "bg-[#0D3A6B] text-white" : "bg-[#DBB47A] text-[#0D3A6B]"
-                  }`}>
+                  <span className={`absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold px-3 py-1 rounded-full ${plan.badgeCls}`}>
                     {plan.badge}
                   </span>
                 )}
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${
-                  plan.highlight ? "bg-[#0D3A6B]" : plan.id === "pro" ? "bg-[#DBB47A]" : "bg-slate-100"
-                }`}>
-                  <plan.icon className={`h-5 w-5 ${plan.highlight ? "text-white" : plan.id === "pro" ? "text-[#0D3A6B]" : "text-slate-600"}`} />
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${plan.iconCls}`}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 20 }}>{plan.icon}</span>
                 </div>
-                <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
-                <p className="text-sm text-slate-500 mb-4">{plan.description}</p>
+                <h3 className="font-headline font-extrabold text-xl text-primary mb-1">{plan.name}</h3>
+                <p className="text-sm text-on-surface-variant mb-4">{plan.description}</p>
                 <div className="mb-6">
-                  <span className="text-4xl font-black text-[#0F172A]">R${plan.price}</span>
-                  <span className="text-slate-500 text-sm">/mês</span>
+                  <span className="text-4xl font-black text-primary">R${plan.price}</span>
+                  <span className="text-on-surface-variant text-sm">/mês</span>
                 </div>
                 <a
                   href="/cadastro"
-                  className={`block text-center py-3 rounded-xl font-semibold text-sm transition-colors mb-6 ${
-                    plan.highlight
-                      ? "bg-[#0D3A6B] hover:bg-[#1A5599] text-white"
-                      : plan.id === "pro"
-                      ? "bg-[#DBB47A] hover:bg-[#C89958] text-[#0D3A6B]"
-                      : "border border-slate-200 hover:border-[#0D3A6B] text-slate-700 hover:text-[#0D3A6B]"
-                  }`}
+                  className={`block text-center py-3 rounded-xl font-semibold text-sm transition-all mb-6 ${plan.ctaCls}`}
                 >
                   Começar teste grátis
                 </a>
                 <ul className="space-y-2.5">
                   {plan.features.map((f) => (
-                    <li key={f.label} className={`flex items-center gap-2 text-sm ${f.included ? "text-slate-700" : "text-slate-400"}`}>
-                      {f.included
-                        ? <Check className="h-4 w-4 text-emerald-500 shrink-0" />
-                        : <X className="h-4 w-4 text-slate-300 shrink-0" />
-                      }
+                    <li key={f.label} className={`flex items-center gap-2 text-sm ${f.included ? "text-on-surface" : "text-outline"}`}>
+                      <span className={`material-symbols-outlined shrink-0 ${f.included ? "text-emerald-600" : "text-outline"}`} style={{ fontSize: 16, fontVariationSettings: f.included ? "'FILL' 1" : "'FILL' 0" }}>
+                        {f.included ? "check_circle" : "cancel"}
+                      </span>
                       {f.label}
                     </li>
                   ))}
@@ -175,32 +170,30 @@ export default function PlanosPage() {
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="py-16 px-6 bg-[#F7F9FC]">
+        <section className="py-16 px-6 bg-surface-container-low">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-10">Perguntas frequentes</h2>
+            <h2 className="font-headline font-extrabold text-2xl text-primary text-center mb-10">Perguntas frequentes</h2>
             <div className="space-y-4">
               {faq.map((item) => (
-                <div key={item.q} className="bg-white border rounded-xl p-5">
-                  <h3 className="font-semibold mb-1.5">{item.q}</h3>
-                  <p className="text-sm text-slate-600">{item.a}</p>
+                <div key={item.q} className="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 shadow-premium-sm">
+                  <h3 className="font-semibold text-on-surface mb-1.5">{item.q}</h3>
+                  <p className="text-sm text-on-surface-variant">{item.a}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="bg-[#0D3A6B] py-16 px-6">
+        <section className="surgical-gradient py-16 px-6">
           <div className="max-w-3xl mx-auto text-center text-white">
-            <h2 className="text-3xl font-bold mb-3">Pronto para começar?</h2>
-            <p className="text-blue-200 mb-8">14 dias grátis. Sem cartão. Cancele quando quiser.</p>
+            <h2 className="font-headline font-extrabold text-3xl mb-3">Pronto para começar?</h2>
+            <p className="text-white/70 mb-8">14 dias grátis. Sem cartão. Cancele quando quiser.</p>
             <a
               href="/cadastro"
-              className="inline-flex items-center gap-2 bg-[#DBB47A] hover:bg-[#C89958] text-[#0D3A6B] font-bold px-8 py-4 rounded-xl transition-colors"
+              className="inline-flex items-center gap-2 bg-nc-secondary hover:opacity-90 text-primary font-bold px-8 py-4 rounded-xl transition-opacity shadow-premium"
             >
               Começar agora
-              <ChevronRight className="h-4 w-4" />
+              <span className="material-symbols-outlined" style={{ fontSize: 18 }}>chevron_right</span>
             </a>
           </div>
         </section>

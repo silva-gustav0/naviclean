@@ -1,8 +1,6 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { Tag, Star } from "lucide-react"
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
 import { PriceTableModal } from "@/components/dashboard/modals/price-table-modal"
 import { PriceTableEditor } from "@/components/dashboard/configuracoes/PriceTableEditor"
 
@@ -36,26 +34,24 @@ export default async function TabelasPrecoPage() {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
-            <Link href="/configuracoes" className="hover:text-foreground transition-colors">Configurações</Link>
-            <span>/</span>
-            <span>Tabelas de Preço</span>
+          <div className="flex items-center gap-1.5 text-xs text-on-surface-variant mb-1">
+            <Link href="/configuracoes" className="hover:text-primary transition-colors">Configurações</Link>
+            <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
+            <span className="text-on-surface">Tabelas de Preço</span>
           </div>
-          <h1 className="text-2xl font-bold">Tabelas de Preço</h1>
-          <p className="text-muted-foreground text-sm">{tables?.length ?? 0} tabelas cadastradas</p>
+          <h1 className="font-headline font-extrabold text-2xl text-primary">Tabelas de Preço</h1>
+          <p className="text-on-surface-variant text-sm mt-0.5">{tables?.length ?? 0} tabelas cadastradas</p>
         </div>
         <PriceTableModal insurancePlans={insurancePlans ?? []} />
       </div>
 
       {(tables ?? []).length === 0 ? (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border py-16 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-cyan-50 flex items-center justify-center mx-auto mb-4">
-            <Tag className="h-8 w-8 text-cyan-600" />
-          </div>
-          <h3 className="font-semibold text-base mb-1">Nenhuma tabela de preço</h3>
-          <p className="text-muted-foreground text-sm mb-4 max-w-xs mx-auto">
+        <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant py-16 text-center shadow-premium-sm">
+          <span className="material-symbols-outlined text-outline mb-3 block" style={{ fontSize: 40 }}>sell</span>
+          <h3 className="font-semibold text-on-surface text-base mb-1">Nenhuma tabela de preço</h3>
+          <p className="text-on-surface-variant text-sm mb-4 max-w-xs mx-auto">
             Crie tabelas para particular e convênios com preços específicos por serviço.
           </p>
           <PriceTableModal insurancePlans={insurancePlans ?? []} />
@@ -66,22 +62,23 @@ export default async function TabelasPrecoPage() {
             const insurancePlan = table.insurance_plans as { name: string } | null
             const servicePrices = (table.service_prices ?? []) as { id: string; price: number; service_id: string }[]
             return (
-              <div key={table.id} className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
-                <div className="flex items-center justify-between px-5 py-4 border-b bg-slate-50 dark:bg-slate-800/50">
+              <div key={table.id} className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden shadow-premium-sm">
+                <div className="flex items-center justify-between px-5 py-4 border-b border-outline-variant bg-surface-container">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-cyan-100 dark:bg-cyan-900 flex items-center justify-center">
-                      <Tag className="h-4 w-4 text-cyan-600" />
+                    <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <span className="material-symbols-outlined text-primary" style={{ fontSize: 18 }}>sell</span>
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold text-sm">{table.name}</span>
+                        <span className="font-semibold text-sm text-on-surface">{table.name}</span>
                         {table.is_default && (
-                          <span className="inline-flex items-center gap-1 text-[10px] bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full font-medium">
-                            <Star className="h-2.5 w-2.5" /> Padrão
+                          <span className="inline-flex items-center gap-1 text-[10px] bg-nc-secondary/15 text-nc-secondary border border-nc-secondary/20 px-1.5 py-0.5 rounded-full font-medium">
+                            <span className="material-symbols-outlined" style={{ fontSize: 10, fontVariationSettings: "'FILL' 1" }}>star</span>
+                            Padrão
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-on-surface-variant">
                         {table.type === "private" ? "Particular" : "Convênio"}
                         {insurancePlan ? ` · ${insurancePlan.name}` : ""}
                         {" · "}{servicePrices.length} serviços configurados
@@ -89,9 +86,9 @@ export default async function TabelasPrecoPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Badge className={table.is_active ? "bg-emerald-100 text-emerald-700 text-[10px]" : "bg-slate-100 text-slate-500 text-[10px]"}>
+                    <span className={`text-[10px] px-2.5 py-0.5 rounded-full border font-medium ${table.is_active ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "bg-surface-container text-on-surface-variant border-outline-variant"}`}>
                       {table.is_active ? "Ativa" : "Inativa"}
-                    </Badge>
+                    </span>
                     <PriceTableModal table={table} insurancePlans={insurancePlans ?? []} />
                   </div>
                 </div>

@@ -1,7 +1,11 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { Building2, Shield } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+
+const PLAN_COLORS: Record<string, string> = {
+  solo:    "bg-surface-container text-on-surface-variant border-outline-variant",
+  starter: "bg-blue-50 text-blue-700 border-blue-200",
+  pro:     "bg-primary/10 text-primary border-primary/20",
+}
 
 export default async function AdminClinicasPage() {
   const supabase = await createClient()
@@ -17,69 +21,61 @@ export default async function AdminClinicasPage() {
     .order("created_at", { ascending: false })
     .limit(200)
 
-  const PLAN_COLORS: Record<string, string> = {
-    solo: "bg-slate-100 text-slate-600",
-    starter: "bg-blue-100 text-blue-700",
-    pro: "bg-violet-100 text-violet-700",
-  }
-
   return (
     <div className="space-y-6 max-w-6xl">
-      <div className="flex items-center gap-3">
-        <div>
-          <h1 className="text-2xl font-bold">Clínicas</h1>
-          <p className="text-muted-foreground text-sm">{clinics?.length ?? 0} clínicas cadastradas</p>
-        </div>
+      <div>
+        <h1 className="font-headline font-extrabold text-2xl text-primary">Clínicas</h1>
+        <p className="text-on-surface-variant text-sm mt-0.5">{clinics?.length ?? 0} clínicas cadastradas</p>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden overflow-x-auto">
+      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden overflow-x-auto shadow-premium-sm">
         <table className="w-full text-sm min-w-max">
-          <thead className="bg-slate-50 dark:bg-slate-800/50 border-b">
+          <thead className="bg-surface-container border-b border-outline-variant">
             <tr>
-              <th className="text-left text-xs font-medium text-muted-foreground px-5 py-3">Clínica</th>
-              <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">Proprietário</th>
-              <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">Plano</th>
-              <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">Status</th>
-              <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">Cadastro</th>
+              <th className="text-left text-xs font-medium text-on-surface-variant px-5 py-3">Clínica</th>
+              <th className="text-left text-xs font-medium text-on-surface-variant px-4 py-3">Proprietário</th>
+              <th className="text-left text-xs font-medium text-on-surface-variant px-4 py-3">Plano</th>
+              <th className="text-left text-xs font-medium text-on-surface-variant px-4 py-3">Status</th>
+              <th className="text-left text-xs font-medium text-on-surface-variant px-4 py-3">Cadastro</th>
               <th className="px-4 py-3" />
             </tr>
           </thead>
-          <tbody className="divide-y">
+          <tbody className="divide-y divide-outline-variant/50">
             {(clinics ?? []).map((c) => {
               const owner = c.profiles as { full_name?: string; email?: string } | null
               return (
-                <tr key={c.id as string} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                <tr key={c.id as string} className="hover:bg-surface-container transition-colors">
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-[#E8F0F9] flex items-center justify-center font-bold text-[#0D3A6B] text-xs shrink-0">
+                      <div className="w-8 h-8 rounded-lg surgical-gradient flex items-center justify-center font-bold text-white text-xs shrink-0">
                         {(c.name as string)?.[0].toUpperCase()}
                       </div>
                       <div>
-                        <p className="font-medium">{c.name as string}</p>
-                        <p className="text-xs text-muted-foreground">/c/{c.slug as string}</p>
+                        <p className="font-semibold text-on-surface">{c.name as string}</p>
+                        <p className="text-xs text-on-surface-variant">/c/{c.slug as string}</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    <p className="text-sm">{owner?.full_name ?? "—"}</p>
-                    <p className="text-xs text-muted-foreground">{owner?.email ?? "—"}</p>
+                    <p className="text-sm font-medium text-on-surface">{owner?.full_name ?? "—"}</p>
+                    <p className="text-xs text-on-surface-variant">{owner?.email ?? "—"}</p>
                   </td>
                   <td className="px-4 py-3">
-                    <Badge className={`text-[10px] ${PLAN_COLORS[c.subscription_plan as string] ?? "bg-slate-100 text-slate-600"}`}>
+                    <span className={`text-[10px] px-2.5 py-0.5 rounded-full border font-medium ${PLAN_COLORS[c.subscription_plan as string] ?? PLAN_COLORS.solo}`}>
                       {c.subscription_plan as string ?? "—"}
-                    </Badge>
+                    </span>
                   </td>
                   <td className="px-4 py-3">
-                    <Badge className={`text-[10px] ${c.is_active ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"}`}>
+                    <span className={`text-[10px] px-2.5 py-0.5 rounded-full border font-medium ${c.is_active ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "bg-red-50 text-red-600 border-red-200"}`}>
                       {c.is_active ? "Ativa" : "Inativa"}
-                    </Badge>
+                    </span>
                   </td>
-                  <td className="px-4 py-3 text-xs text-muted-foreground">
+                  <td className="px-4 py-3 text-xs text-on-surface-variant">
                     {new Date(c.created_at as string).toLocaleDateString("pt-BR")}
                   </td>
                   <td className="px-4 py-3">
-                    <button className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
-                      <Shield className="h-3.5 w-3.5 text-muted-foreground" />
+                    <button className="p-1.5 hover:bg-surface-container rounded-lg transition-colors">
+                      <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 14 }}>shield</span>
                     </button>
                   </td>
                 </tr>
@@ -89,8 +85,8 @@ export default async function AdminClinicasPage() {
         </table>
         {(!clinics || clinics.length === 0) && (
           <div className="py-14 text-center">
-            <Building2 className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-            <p className="text-sm text-muted-foreground">Nenhuma clínica cadastrada</p>
+            <span className="material-symbols-outlined text-outline mb-2 block" style={{ fontSize: 32 }}>business</span>
+            <p className="text-sm text-on-surface-variant">Nenhuma clínica cadastrada</p>
           </div>
         )}
       </div>

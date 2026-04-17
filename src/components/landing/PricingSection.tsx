@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Check, X } from "lucide-react"
 
 const plans = [
   {
@@ -55,14 +54,14 @@ const plans = [
 
 export function PricingSection() {
   return (
-    <section id="planos" className="py-24 lg:py-32 bg-slate-50">
+    <section id="planos" className="py-24 lg:py-32 bg-surface-container-low">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="text-blue-600 font-bold tracking-widest text-xs uppercase">Planos</span>
-          <h2 className="text-4xl font-black tracking-tight text-slate-900 mt-3">
+          <span className="text-nc-secondary font-bold tracking-widest text-xs uppercase font-sans">Planos</span>
+          <h2 className="text-4xl font-extrabold tracking-tight text-primary mt-3 font-headline">
             Planos que acompanham seu crescimento
           </h2>
-          <p className="text-slate-500 mt-4">
+          <p className="text-on-surface-variant mt-4 font-sans">
             Sem taxas de implantação, sem multas, cancele quando quiser.
           </p>
         </div>
@@ -71,40 +70,49 @@ export function PricingSection() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative flex flex-col rounded-2xl p-10 ${
+              className={`relative flex flex-col rounded-2xl p-10 transition-all ${
                 plan.highlighted
-                  ? "bg-white border-2 border-blue-600 shadow-2xl shadow-blue-500/10 scale-105 z-10"
-                  : "bg-white border border-slate-100 shadow-sm"
+                  ? "surgical-gradient text-white shadow-premium scale-105 z-10"
+                  : "bg-surface-container-lowest border border-outline-variant/10 shadow-premium-sm"
               }`}
             >
               {plan.badge && (
-                <div
-                  className="absolute -top-4 left-1/2 -translate-x-1/2 text-white text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-widest"
-                  style={{ background: "linear-gradient(135deg, #004ac6 0%, #2563eb 100%)" }}
-                >
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-nc-secondary text-white text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-widest font-sans">
                   {plan.badge}
                 </div>
               )}
 
               <div className="mb-6">
-                <h3 className="text-xl font-bold text-slate-900 mb-1">{plan.name}</h3>
-                <p className="text-slate-500 text-sm mb-4">{plan.description}</p>
+                <h3 className={`text-xl font-bold mb-1 font-headline ${plan.highlighted ? "text-white" : "text-primary"}`}>
+                  {plan.name}
+                </h3>
+                <p className={`text-sm mb-4 font-sans ${plan.highlighted ? "text-white/70" : "text-on-surface-variant"}`}>
+                  {plan.description}
+                </p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-sm font-bold text-slate-700">R$</span>
-                  <span className="text-5xl font-black text-slate-900">{plan.price}</span>
-                  <span className="text-slate-400 text-sm">/mês</span>
+                  <span className={`text-sm font-bold ${plan.highlighted ? "text-white/70" : "text-outline"}`}>R$</span>
+                  <span className={`text-5xl font-extrabold font-headline ${plan.highlighted ? "text-white" : "text-primary"}`}>
+                    {plan.price}
+                  </span>
+                  <span className={`text-sm font-sans ${plan.highlighted ? "text-white/50" : "text-outline"}`}>/mês</span>
                 </div>
               </div>
 
               <ul className="space-y-3 mb-8 flex-grow">
                 {plan.features.map((f) => (
                   <li key={f.text} className="flex items-start gap-3 text-sm">
-                    {f.included ? (
-                      <Check size={16} className="text-blue-600 mt-0.5 shrink-0" />
-                    ) : (
-                      <X size={16} className="text-slate-300 mt-0.5 shrink-0" />
-                    )}
-                    <span className={f.included ? "text-slate-700" : "text-slate-400"}>
+                    <span className={`material-symbols-outlined text-lg mt-0.5 shrink-0 ${
+                      f.included
+                        ? plan.highlighted ? "text-white" : "text-nc-secondary"
+                        : plan.highlighted ? "text-white/20" : "text-outline-variant/40"
+                    }`} style={{ fontVariationSettings: f.included ? "'FILL' 1" : "'FILL' 0" }}>
+                      {f.included ? "check_circle" : "cancel"}
+                    </span>
+                    <span className={`font-sans ${
+                      f.included
+                        ? plan.highlighted ? "text-white" : "text-on-surface"
+                        : plan.highlighted ? "text-white/30" : "text-outline/50"
+                    }`}>
                       {f.text}
                     </span>
                   </li>
@@ -113,16 +121,11 @@ export function PricingSection() {
 
               <Link href={plan.href}>
                 <button
-                  className={`w-full py-3.5 rounded-xl font-bold text-sm transition-all active:scale-[0.98] ${
+                  className={`w-full py-3.5 rounded-xl font-bold text-sm transition-all active:scale-[0.98] font-headline ${
                     plan.highlighted
-                      ? "text-white shadow-lg shadow-blue-500/30"
-                      : "border-2 border-blue-600 text-blue-600 hover:bg-blue-50"
+                      ? "bg-white text-primary hover:bg-surface-container-low"
+                      : "border-2 border-primary/20 text-primary hover:bg-surface-container-low"
                   }`}
-                  style={
-                    plan.highlighted
-                      ? { background: "linear-gradient(135deg, #004ac6 0%, #2563eb 100%)" }
-                      : {}
-                  }
                 >
                   {plan.cta}
                 </button>
@@ -131,7 +134,7 @@ export function PricingSection() {
           ))}
         </div>
 
-        <p className="text-center text-slate-400 text-sm mt-10">
+        <p className="text-center text-on-surface-variant text-sm mt-10 font-sans">
           Todos os planos incluem 14 dias grátis. Sem necessidade de cartão de crédito.
         </p>
       </div>

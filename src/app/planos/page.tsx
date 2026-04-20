@@ -114,7 +114,7 @@ const faq = [
 
 export default function PlanosPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-surface">
       <Navbar />
       <main className="pt-20">
         <section className="bg-primary/5 border-b border-primary/10 py-16 px-6 text-center">

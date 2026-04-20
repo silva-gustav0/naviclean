@@ -23,7 +23,7 @@ export default async function BlogPage() {
     .limit(20)
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-surface">
       <Navbar />
       <main className="pt-20">
         <section className="bg-primary/5 border-b border-primary/10 py-16 px-6">
@@ -33,7 +33,7 @@ export default async function BlogPage() {
           </div>
         </section>
 
-        <section className="border-b border-outline-variant px-6 sticky top-[64px] bg-white z-10">
+        <section className="border-b border-outline-variant px-6 sticky top-[64px] bg-surface z-10">
           <div className="max-w-6xl mx-auto flex gap-1 overflow-x-auto py-3 scrollbar-hide">
             {categories.map((cat) => (
               <button

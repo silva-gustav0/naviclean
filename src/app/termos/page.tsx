@@ -62,20 +62,19 @@ const sections = [
 
 export default function TermosPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-surface">
       <Navbar />
       <main className="pt-20">
         <div className="max-w-6xl mx-auto px-6 py-12 flex gap-10">
-          {/* Sidebar TOC */}
           <aside className="hidden lg:block w-56 shrink-0">
             <div className="sticky top-24">
-              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Nesta página</p>
+              <p className="text-xs font-semibold text-outline uppercase tracking-wider mb-3">Nesta página</p>
               <nav className="space-y-1">
                 {sections.map((s) => (
                   <a
                     key={s.id}
                     href={`#${s.id}`}
-                    className="block text-sm text-slate-600 hover:text-[#0D3A6B] py-1 hover:underline transition-colors"
+                    className="block text-sm text-on-surface-variant hover:text-primary py-1 hover:underline transition-colors"
                   >
                     {s.title}
                   </a>
@@ -84,22 +83,21 @@ export default function TermosPage() {
             </div>
           </aside>
 
-          {/* Content */}
           <div className="flex-1 max-w-3xl">
             <div className="mb-8">
-              <h1 className="text-3xl font-bold text-[#0F172A] mb-2">Termos de Uso</h1>
-              <p className="text-sm text-slate-500">Última atualização: 1 de janeiro de 2025</p>
+              <h1 className="font-headline text-3xl font-bold text-primary mb-2">Termos de Uso</h1>
+              <p className="text-sm text-on-surface-variant">Última atualização: 1 de janeiro de 2025</p>
             </div>
             <div className="space-y-8">
               {sections.map((s) => (
                 <section key={s.id} id={s.id} className="scroll-mt-24">
-                  <h2 className="text-lg font-bold text-[#0F172A] mb-3">{s.title}</h2>
-                  <p className="text-slate-600 leading-relaxed text-sm">{s.content}</p>
+                  <h2 className="text-lg font-bold text-primary mb-3">{s.title}</h2>
+                  <p className="text-on-surface-variant leading-relaxed text-sm">{s.content}</p>
                 </section>
               ))}
             </div>
-            <div className="mt-12 pt-8 border-t">
-              <p className="text-xs text-slate-400">
+            <div className="mt-12 pt-8 border-t border-outline-variant">
+              <p className="text-xs text-outline">
                 NaviClin Tecnologia Ltda — CNPJ 00.000.000/0001-00 — contato@naviclin.com
               </p>
             </div>

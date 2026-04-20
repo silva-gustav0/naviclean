@@ -4,7 +4,7 @@ import { Footer } from "@/components/landing/Footer"
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-surface flex flex-col">
       <Navbar />
       <main className="flex-1 flex items-center justify-center px-6 py-20 pt-32">
         <div className="text-center max-w-md">

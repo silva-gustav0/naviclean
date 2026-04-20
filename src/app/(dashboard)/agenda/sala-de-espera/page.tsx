@@ -20,7 +20,7 @@ export default async function SalaDeEsperaPage() {
 
   const { data: appointments } = await supabase
     .from("appointments")
-    .select("id, start_time, status, check_in_at, patient_id, dentist_id, patients(full_name, phone), clinic_members(full_name)")
+    .select("id, start_time, status, patient_id, dentist_id, patients(full_name, phone), clinic_members(full_name)")
     .eq("clinic_id", clinic.id)
     .eq("date", today)
     .in("status", ["waiting_room", "in_progress", "confirmed"])

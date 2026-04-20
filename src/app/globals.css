@@ -1,10 +1,10 @@
+/* ── Material Symbols (must precede all other imports) ────── */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-
-/* ── Material Symbols ─────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined';

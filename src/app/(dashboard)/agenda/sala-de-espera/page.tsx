@@ -96,7 +96,7 @@ export default async function SalaDeEsperaPage() {
                   const patient = a.patients as { full_name: string; phone?: string } | null
                   const dentist = a.clinic_members as { full_name: string } | null
                   const initials = (patient?.full_name ?? "?")[0].toUpperCase()
-                  const elapsed = (a as { check_in_at?: string }).check_in_at ? waitTime((a as { check_in_at: string }).check_in_at) : null
+                  const elapsed = (a as unknown as { check_in_at?: string }).check_in_at ? waitTime((a as unknown as { check_in_at: string }).check_in_at) : null
                   const isLongWait = elapsed && parseInt(elapsed) > 30
 
                   return (

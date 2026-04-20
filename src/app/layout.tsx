@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Manrope, Inter } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
+import { ThemeProvider } from "@/components/ThemeProvider"
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -39,6 +40,7 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       className={`${manrope.variable} ${inter.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
         <link
@@ -47,8 +49,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans">
-        {children}
-        <Toaster richColors position="top-right" />
+        <ThemeProvider>
+          {children}
+          <Toaster richColors position="top-right" />
+        </ThemeProvider>
       </body>
     </html>
   )

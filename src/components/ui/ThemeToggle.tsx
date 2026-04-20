@@ -8,42 +8,60 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
+  /* skeleton enquanto hidrata */
   if (!mounted) {
-    return <div className={`w-9 h-9 rounded-full bg-surface-container ${className}`} />
+    return (
+      <div
+        className={`h-9 w-[72px] rounded-full bg-surface-container-lowest border border-outline-variant/40 ${className}`}
+      />
+    )
   }
 
   const dark = resolvedTheme === "dark"
 
   return (
-    <button
-      onClick={() => setTheme(dark ? "light" : "dark")}
-      aria-label="Alternar tema"
-      className={`relative w-9 h-9 rounded-full flex items-center justify-center border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container transition-all duration-200 hover:scale-105 active:scale-95 ${className}`}
+    <div
+      className={`inline-flex items-center gap-0.5 bg-surface-container-lowest border border-outline-variant/40 rounded-full p-1 shadow-premium-sm ${className}`}
+      role="group"
+      aria-label="Selecionar tema"
     >
-      {/* Sun */}
-      <span
-        className="material-symbols-outlined text-nc-secondary absolute transition-all duration-300"
-        style={{
-          fontSize: 18,
-          fontVariationSettings: "'FILL' 1",
-          opacity: dark ? 0 : 1,
-          transform: dark ? "scale(0.5) rotate(90deg)" : "scale(1) rotate(0deg)",
-        }}
+      {/* Modo claro */}
+      <button
+        onClick={() => setTheme("light")}
+        aria-label="Modo claro"
+        title="Modo claro"
+        className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${
+          !dark
+            ? "bg-nc-secondary/20 text-nc-secondary scale-105"
+            : "text-on-surface-variant/50 hover:text-on-surface-variant hover:bg-surface-container"
+        }`}
       >
-        light_mode
-      </span>
-      {/* Moon */}
-      <span
-        className="material-symbols-outlined text-primary absolute transition-all duration-300"
-        style={{
-          fontSize: 18,
-          fontVariationSettings: "'FILL' 1",
-          opacity: dark ? 1 : 0,
-          transform: dark ? "scale(1) rotate(0deg)" : "scale(0.5) rotate(-90deg)",
-        }}
+        <span
+          className="material-symbols-outlined"
+          style={{ fontSize: 15, fontVariationSettings: !dark ? "'FILL' 1" : "'FILL' 0" }}
+        >
+          light_mode
+        </span>
+      </button>
+
+      {/* Modo escuro */}
+      <button
+        onClick={() => setTheme("dark")}
+        aria-label="Modo escuro"
+        title="Modo escuro"
+        className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${
+          dark
+            ? "bg-primary/15 text-primary scale-105"
+            : "text-on-surface-variant/50 hover:text-on-surface-variant hover:bg-surface-container"
+        }`}
       >
-        dark_mode
-      </span>
-    </button>
+        <span
+          className="material-symbols-outlined"
+          style={{ fontSize: 15, fontVariationSettings: dark ? "'FILL' 1" : "'FILL' 0" }}
+        >
+          dark_mode
+        </span>
+      </button>
+    </div>
   )
 }

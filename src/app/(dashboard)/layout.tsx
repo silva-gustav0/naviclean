@@ -22,6 +22,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
     .join("")
     .toUpperCase() || "?"
 
+  const firstName = fullName.split(" ")[0] || "Usuário"
+
   return (
     <div className="flex h-screen overflow-hidden bg-surface">
       <SidebarNav
@@ -32,27 +34,38 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden md:ml-64">
         {/* Topbar */}
-        <header className="sticky top-0 z-30 bg-surface/80 backdrop-blur-xl flex items-center px-8 py-4 gap-4 shadow-[0px_4px_12px_-4px_rgba(21,28,35,0.04)]">
-          <div className="flex-1 max-w-sm">
-            <div className="relative">
+        <header className="sticky top-0 z-30 glass-header flex items-center px-8 py-4 gap-4 shadow-premium">
+          <div className="flex-1 max-w-xl">
+            <div className="relative group">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">
                 search
               </span>
               <input
                 type="text"
-                placeholder="Buscar paciente, agendamento..."
-                className="w-full pl-10 pr-4 py-2 text-sm bg-surface-container-lowest border-0 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                placeholder="Buscar pacientes, agendamentos..."
+                className="w-full pl-10 pr-4 py-2 text-sm bg-surface-container-low border-none rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
               />
             </div>
           </div>
 
-          <div className="ml-auto flex items-center gap-2">
-            <button className="relative w-10 h-10 rounded-full hover:bg-surface-container-low flex items-center justify-center transition-colors">
-              <span className="material-symbols-outlined text-on-surface text-xl">notifications</span>
-              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-nc-secondary" />
-            </button>
-            <div className="w-10 h-10 rounded-full surgical-gradient flex items-center justify-center text-white text-xs font-bold">
-              {initials}
+          <div className="ml-auto flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <button className="relative w-10 h-10 rounded-full hover:bg-slate-50 flex items-center justify-center transition-colors">
+                <span className="material-symbols-outlined text-primary">notifications</span>
+                <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-nc-secondary" />
+              </button>
+              <button className="w-10 h-10 rounded-full hover:bg-slate-50 flex items-center justify-center transition-colors">
+                <span className="material-symbols-outlined text-primary">help_outline</span>
+              </button>
+            </div>
+            <div className="flex items-center gap-3 pl-6 border-l border-outline-variant/30">
+              <div className="text-right hidden lg:block">
+                <p className="text-sm font-semibold text-primary font-headline">{firstName}</p>
+                <p className="text-[10px] text-outline font-bold uppercase tracking-widest">Administrador</p>
+              </div>
+              <div className="w-10 h-10 rounded-full surgical-gradient flex items-center justify-center text-white text-xs font-bold border-2 border-surface-container-high">
+                {initials}
+              </div>
             </div>
           </div>
         </header>

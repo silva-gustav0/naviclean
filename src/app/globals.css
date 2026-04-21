@@ -23,7 +23,7 @@
 
 :root {
   /* ── shadcn/ui tokens — mapeados para NaviClin ──────────── */
-  --background: #f6faff;
+  --background: #FAFAF7;
   --foreground: #151c23;
   --card: #ffffff;
   --card-foreground: #151c23;
@@ -56,8 +56,8 @@
   /* ── NaviClin Material Design 3 tokens ───────────────────── */
 
   /* Surface */
-  --nc-surface-bright: #f6faff;
-  --nc-surface: #f6faff;
+  --nc-surface-bright: #FAFAF7;
+  --nc-surface: #FAFAF7;
   --nc-surface-dim: #d3dbe4;
   --nc-surface-container-lowest: #ffffff;
   --nc-surface-container-low: #ecf4fd;
@@ -231,8 +231,9 @@
 
   /* ── Fonts ─────────────────────────────────────────────── */
   --font-sans: var(--font-inter);
-  --font-headline: var(--font-manrope);
-  --font-mono: var(--font-geist-mono);
+  --font-headline: var(--font-fraunces);
+  --font-display: var(--font-fraunces);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* ── NaviClin Material Design 3 colors ─────────────────── */
   --color-surface-bright: var(--nc-surface-bright);
@@ -411,6 +412,36 @@ body {
 }
 .btn-pill-arrow:hover .arrow-circle {
   transform: translateX(3px);
+}
+
+/* ── Eyebrow label ───────────────────────────────────────────── */
+.eyebrow {
+  font-family: var(--font-inter);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nc-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--nc-secondary);
+}
+
+/* ── Module grid ─────────────────────────────────────────────── */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--nc-outline-variant);
+  border: 1px solid var(--nc-outline-variant);
+  border-radius: 22px;
+  overflow: hidden;
 }
 
 /* ── Dark mode overrides ─────────────────────────────────────── */

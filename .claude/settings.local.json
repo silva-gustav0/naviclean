@@ -29,7 +29,10 @@
       "Bash(npx vercel:*)",
       "Bash(npx tsc *)",
       "Bash(mkdir -p stitch-export)",
-      "Bash(unzip -o stitch_markdown_execution_engine.zip -d stitch-export)"
+      "Bash(unzip -o stitch_markdown_execution_engine.zip -d stitch-export)",
+      "Bash(vercel *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }

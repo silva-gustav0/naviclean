@@ -1,59 +1,101 @@
-import Link from "next/link"
+"use client"
 
 export function CTASection() {
   return (
-    <section className="max-w-7xl mx-auto px-6 lg:px-8 pb-24 lg:pb-32">
-      <div className="relative rounded-[2.5rem] overflow-hidden animated-gradient-bg p-16 lg:p-24 text-center text-white">
-        {/* Decoration blobs */}
-        <div className="absolute -top-24 -right-24 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-nc-secondary/15 rounded-full blur-3xl pointer-events-none" />
-        {/* Dot grid overlay */}
-        <div className="absolute inset-0 bg-dot-grid opacity-[0.06] pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px)" }} />
+    <section style={{
+      background: "var(--nc-primary)",
+      color: "#fff",
+      position: "relative",
+      overflow: "hidden",
+    }}>
+      {/* Gold glow */}
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        background: "radial-gradient(1000px 600px at 50% 120%, rgba(201,148,58,0.25), transparent 60%)",
+      }} />
 
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-white/10 text-white/80 text-xs font-bold px-5 py-2.5 rounded-full border border-white/20 mb-8">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute h-full w-full rounded-full bg-nc-secondary opacity-75" />
-              <span className="relative h-2 w-2 rounded-full bg-nc-secondary" />
+      <div style={{
+        position: "relative",
+        textAlign: "center",
+        padding: "96px 32px",
+        width: "100%",
+        maxWidth: 1280,
+        margin: "0 auto",
+      }}>
+        <span className="eyebrow" style={{ color: "#E6C78E" }}>
+          Comece hoje — sem compromisso
+        </span>
+
+        <h2 style={{
+          fontFamily: "var(--font-headline)",
+          fontSize: "clamp(32px, 3.6vw, 56px)",
+          fontWeight: 400,
+          color: "#fff",
+          letterSpacing: "-0.02em",
+          lineHeight: 1.05,
+          margin: "20px auto 20px",
+          maxWidth: "20ch",
+        }}>
+          Pronto para elevar o nível da sua{" "}
+          <em style={{ fontStyle: "italic", color: "var(--nc-secondary)" }}>gestão?</em>
+        </h2>
+
+        <p style={{ fontSize: "clamp(17px, 1.25vw, 20px)", color: "rgba(255,255,255,0.72)", margin: "0 auto 32px", maxWidth: "60ch", lineHeight: 1.5 }}>
+          Junte-se a mais de 1.200 clínicas que já transformaram seu atendimento. 14 dias grátis, sem cartão de crédito.
+        </p>
+
+        <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+          <button
+            className="cta-btn-gold"
+            onClick={() => document.getElementById("demoModal")?.classList.add("open")}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 10,
+              padding: "14px 28px", borderRadius: 999,
+              fontWeight: 500, fontSize: 15,
+              background: "var(--nc-secondary)", color: "var(--nc-on-secondary)",
+              boxShadow: "0 8px 32px rgba(201,148,58,0.22)",
+              border: "none", cursor: "pointer",
+              transition: "transform .15s, box-shadow .2s",
+              letterSpacing: "-0.005em",
+            }}
+          >
+            Agendar demonstração
+          </button>
+
+          <a
+            href="#planos"
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 10,
+              padding: "14px 28px", borderRadius: 999,
+              fontWeight: 500, fontSize: 15,
+              border: "1px solid rgba(255,255,255,0.2)",
+              color: "#fff",
+              transition: "border-color .2s",
+              letterSpacing: "-0.005em",
+            }}
+            className="cta-btn-ghost"
+          >
+            Ver planos e preços
+          </a>
+        </div>
+
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 24, marginTop: 32, color: "rgba(255,255,255,0.4)", fontSize: 13 }}>
+          {["Sem contrato de fidelidade", "Cancele quando quiser", "Suporte em português", "LGPD compliance"].map((t) => (
+            <span key={t} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="2">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              {t}
             </span>
-            Comece hoje — sem compromisso
-          </div>
-
-          <h2 className="text-4xl lg:text-6xl font-extrabold tracking-tight leading-[1.05] font-headline mb-6">
-            Pronto para elevar<br />
-            <span className="text-gradient-gold">o nível da sua gestão?</span>
-          </h2>
-
-          <p className="text-xl text-white/70 max-w-xl mx-auto mb-10 leading-relaxed">
-            Junte-se a mais de 500 clínicas que já transformaram seu atendimento.<br />14 dias grátis, sem cartão de crédito.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href="/cadastro">
-              <button className="btn-pill-arrow group flex items-center gap-3 bg-white text-primary font-extrabold text-lg px-10 py-4 rounded-full shadow-[0_8px_40px_rgba(0,0,0,0.2)] hover:bg-surface-container-low hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 font-headline">
-                Criar minha conta grátis
-                <span className="arrow-circle w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-primary" style={{ fontSize: 16 }}>arrow_forward</span>
-                </span>
-              </button>
-            </Link>
-            <Link href="#planos">
-              <button className="flex items-center gap-2 text-white/80 font-semibold text-lg px-8 py-4 rounded-full border-2 border-white/20 hover:bg-white/10 hover:text-white active:scale-[0.97] transition-all duration-200 font-headline">
-                Ver planos e preços
-              </button>
-            </Link>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-6 mt-10 text-white/40 text-sm">
-            {["Sem contrato de fidelidade", "Cancele quando quiser", "Suporte em português", "LGPD compliance"].map((t) => (
-              <span key={t} className="flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-white/30" style={{ fontSize: 14 }}>check_circle</span>
-                {t}
-              </span>
-            ))}
-          </div>
+          ))}
         </div>
       </div>
+
+      <style>{`
+        .cta-btn-gold:hover { transform: translateY(-1px); box-shadow: 0 12px 40px rgba(201,148,58,0.35) !important; }
+        .cta-btn-ghost:hover { border-color: #fff !important; }
+        .eyebrow::before { background: #E6C78E !important; }
+      `}</style>
     </section>
   )
 }

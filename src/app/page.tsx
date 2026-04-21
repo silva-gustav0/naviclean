@@ -1,11 +1,17 @@
-import { Navbar } from "@/components/landing/Navbar"
-import { HeroSection } from "@/components/landing/HeroSection"
-import { SocialProof } from "@/components/landing/SocialProof"
-import { FeaturesSection } from "@/components/landing/FeaturesSection"
-import { PricingSection } from "@/components/landing/PricingSection"
+import { Navbar }            from "@/components/landing/Navbar"
+import { HeroSection }       from "@/components/landing/HeroSection"
+import { FeaturesSection }   from "@/components/landing/FeaturesSection"
+import { DashboardPreview }  from "@/components/landing/DashboardPreview"
+import { TracksSection }     from "@/components/landing/TracksSection"
+import { SocialProof }       from "@/components/landing/SocialProof"
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection"
-import { CTASection } from "@/components/landing/CTASection"
-import { Footer } from "@/components/landing/Footer"
+import { PricingSection }    from "@/components/landing/PricingSection"
+import { FaqSection }        from "@/components/landing/FaqSection"
+import { CTASection }        from "@/components/landing/CTASection"
+import { Footer }            from "@/components/landing/Footer"
+import { ThemeFloater }      from "@/components/landing/ThemeFloater"
+import { DemoModal }         from "@/components/landing/DemoModal"
+import { RevealOnScroll }    from "@/components/landing/RevealOnScroll"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -15,24 +21,30 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NaviClin — Gestão Odontológica com Precisão Clínica",
     description:
-      "A plataforma definitiva para dentistas de alta performance. +500 clínicas confiam no NaviClin.",
+      "A plataforma definitiva para dentistas de alta performance. +1.200 clínicas confiam no NaviClin.",
     type: "website",
   },
 }
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-surface">
+    <>
+      <RevealOnScroll />
       <Navbar />
-      <main className="pt-20">
+      <main>
         <HeroSection />
-        <SocialProof />
         <FeaturesSection />
-        <PricingSection />
+        <DashboardPreview />
+        <TracksSection />
+        <SocialProof />
         <TestimonialsSection />
+        <PricingSection />
+        <FaqSection />
         <CTASection />
       </main>
       <Footer />
-    </div>
+      <ThemeFloater />
+      <DemoModal />
+    </>
   )
 }

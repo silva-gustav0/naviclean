@@ -2,108 +2,187 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { ThemeToggle } from "@/components/ui/ThemeToggle"
 
 const navLinks = [
-  { href: "#funcionalidades", label: "Funcionalidades" },
-  { href: "#planos",          label: "Planos"          },
-  { href: "/blog",            label: "Blog"            },
-  { href: "/sobre",           label: "Sobre"           },
+  { href: "#modulos",       label: "Plataforma"   },
+  { href: "#produto",       label: "Produto"       },
+  { href: "#para-quem",     label: "Para quem"     },
+  { href: "#planos",        label: "Planos"        },
+  { href: "#faq",           label: "Dúvidas"       },
 ]
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("scroll", () => setScrolled(window.scrollY > 8), { passive: true })
+  }
 
   return (
-    <nav className="fixed top-0 w-full z-50 glass-header border-b border-outline-variant/10 shadow-[0_4px_20px_rgba(0,36,74,0.06)]">
-      <div className="flex justify-between items-center px-6 lg:px-8 py-4 max-w-7xl mx-auto">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl flex items-center justify-center text-white font-black text-sm surgical-gradient shadow-glow-navy">
-            N
-          </div>
-          <span className="text-xl font-extrabold tracking-tight text-primary font-headline">NaviClin</span>
-        </Link>
-
-        {/* Desktop nav */}
-        <div className="hidden md:flex gap-8 items-center">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-on-surface-variant hover:text-primary font-medium text-sm tracking-tight transition-colors duration-200"
+    <nav
+      className="fixed top-0 w-full z-50 transition-all duration-300"
+      style={{
+        height: 68,
+        display: "flex",
+        alignItems: "center",
+        background: scrolled
+          ? "color-mix(in oklab, var(--background) 95%, transparent)"
+          : "color-mix(in oklab, var(--background) 82%, transparent)",
+        backdropFilter: "saturate(120%) blur(14px)",
+        WebkitBackdropFilter: "saturate(120%) blur(14px)",
+        borderBottom: scrolled ? "1px solid var(--nc-outline-variant)" : "1px solid transparent",
+      }}
+    >
+      <div className="flex items-center justify-between w-full max-w-[1280px] mx-auto px-8 gap-6">
+        {/* Left: logo + nav */}
+        <div className="flex items-center gap-12">
+          <Link href="/" className="flex items-center gap-2.5">
+            <span
+              className="w-[34px] h-[34px] rounded-[9px] flex items-center justify-center"
+              style={{ background: "var(--nc-primary-container)" }}
             >
-              {link.label}
-            </a>
-          ))}
+              <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                <rect x="4" y="3" width="3" height="14" fill="#fff"/>
+                <rect x="17" y="3" width="3" height="14" fill="#fff"/>
+                <polygon points="7,3 10,3 17,17 14,17" fill="#C9943A"/>
+                <rect x="4" y="18.5" width="16" height="1.8" rx="0.9" fill="#C9943A"/>
+              </svg>
+            </span>
+            <span className="font-headline text-[22px] font-medium tracking-tight" style={{ color: "var(--nc-on-surface)", letterSpacing: "-0.02em" }}>
+              Navi<span style={{ color: "var(--nc-secondary)" }}>Clin</span>
+            </span>
+          </Link>
+
+          {/* Desktop nav links */}
+          <div className="hidden lg:flex gap-7">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="nav-link text-sm font-medium relative py-1.5"
+                style={{ color: "var(--nc-on-surface-variant)" }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
         </div>
 
-        {/* Desktop CTAs */}
-        <div className="hidden md:flex gap-2 items-center">
-          <ThemeToggle />
+        {/* Right: CTAs */}
+        <div className="hidden lg:flex items-center gap-3">
           <Link
             href="/login"
-            className="text-on-surface-variant hover:text-primary font-semibold text-sm px-4 py-2 rounded-full transition-colors"
+            className="btn-ghost"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              padding: "10px 18px",
+              borderRadius: 999,
+              fontWeight: 500,
+              fontSize: 14,
+              border: "1px solid var(--nc-outline-variant)",
+              color: "var(--nc-on-surface)",
+              transition: "border-color .2s, background .2s",
+            }}
           >
             Entrar
           </Link>
-          <Link
-            href="/cadastro"
-            className="btn-pill-arrow group flex items-center gap-2 surgical-gradient text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-glow-navy hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 font-headline"
-          >
-            Começar Grátis
-            <span className="arrow-circle w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
-              <span className="material-symbols-outlined text-white" style={{ fontSize: 12 }}>arrow_forward</span>
-            </span>
-          </Link>
-        </div>
-
-        {/* Mobile: toggle + hamburger */}
-        <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
           <button
-            className="w-9 h-9 rounded-full flex items-center justify-center border border-outline-variant/40 bg-surface-container-lowest text-on-surface-variant hover:text-primary transition-colors"
-            onClick={() => setOpen(!open)}
-            aria-label="Menu"
+            className="btn-gold"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              padding: "10px 18px",
+              borderRadius: 999,
+              fontWeight: 500,
+              fontSize: 14,
+              background: "var(--nc-secondary)",
+              color: "var(--nc-on-secondary)",
+              boxShadow: "0 8px 32px rgba(201,148,58,0.22)",
+              transition: "transform .15s, background .2s",
+              border: "none",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              document.getElementById("demoModal")?.classList.add("open")
+            }}
           >
-            <span className="material-symbols-outlined text-xl">
-              {open ? "close" : "menu"}
-            </span>
+            Agendar demonstração
           </button>
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          className="lg:hidden w-9 h-9 rounded-full flex items-center justify-center border"
+          style={{ borderColor: "var(--nc-outline-variant)", color: "var(--nc-on-surface-variant)" }}
+          onClick={() => setOpen(!open)}
+          aria-label="Menu"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            {open
+              ? <path d="M18 6L6 18M6 6l12 12"/>
+              : <><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></>
+            }
+          </svg>
+        </button>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-surface border-t border-outline-variant/10 px-6 py-5 space-y-3">
+        <div
+          className="lg:hidden absolute top-[68px] left-0 right-0 border-t px-6 py-5 space-y-3"
+          style={{ background: "var(--background)", borderColor: "var(--nc-outline-variant)" }}
+        >
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="block text-on-surface-variant font-medium text-sm hover:text-primary transition-colors py-1"
+              className="block text-sm font-medium py-1"
+              style={{ color: "var(--nc-on-surface-variant)" }}
             >
               {link.label}
             </a>
           ))}
-          <div className="flex flex-col gap-2 pt-3 border-t border-outline-variant/10">
+          <div className="flex flex-col gap-2 pt-3 border-t" style={{ borderColor: "var(--nc-outline-variant)" }}>
             <Link
               href="/login"
               onClick={() => setOpen(false)}
-              className="w-full py-3 text-center border border-outline-variant/30 rounded-2xl text-primary font-bold text-sm font-headline hover:bg-surface-container-low transition-colors"
+              className="w-full py-3 text-center rounded-full text-sm font-medium border"
+              style={{ borderColor: "var(--nc-outline-variant)", color: "var(--nc-on-surface)" }}
             >
               Entrar
             </Link>
-            <Link
-              href="/cadastro"
+            <button
               onClick={() => setOpen(false)}
-              className="w-full py-3 text-center surgical-gradient text-white rounded-2xl font-bold text-sm font-headline shadow-glow-navy"
+              className="w-full py-3 text-center rounded-full text-sm font-semibold"
+              style={{ background: "var(--nc-secondary)", color: "var(--nc-on-secondary)" }}
             >
-              Começar Grátis
-            </Link>
+              Agendar demonstração
+            </button>
           </div>
         </div>
       )}
+
+      <style>{`
+        .nav-link::after {
+          content: "";
+          position: absolute;
+          left: 0; right: 0; bottom: 0;
+          height: 1px;
+          background: var(--nc-secondary);
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform .3s;
+        }
+        .nav-link:hover { color: var(--nc-on-surface) !important; }
+        .nav-link:hover::after { transform: scaleX(1); }
+        .btn-ghost:hover { border-color: var(--nc-on-surface) !important; }
+        .btn-gold:hover { transform: translateY(-1px); }
+      `}</style>
     </nav>
   )
 }

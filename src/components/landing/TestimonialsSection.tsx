@@ -1,121 +1,138 @@
-"use client"
-
 const testimonials = [
   {
     quote: "A transição para o NaviClin foi o divisor de águas da minha clínica. O prontuário digital economiza pelo menos 1 hora de burocracia por dia.",
     name: "Dra. Camila Santos",
     role: "CEO, SmileCare Clinic — São Paulo",
     initials: "CS",
-    rating: 5,
+    wide: true,
   },
   {
     quote: "O controle financeiro é incomparável. Finalmente tenho clareza sobre meus repasses e a lucratividade real de cada procedimento.",
     name: "Dr. Ricardo Menezes",
     role: "Diretor Clínico, Menezes Odontologia — Curitiba",
     initials: "RM",
-    rating: 5,
   },
   {
-    quote: "O agendamento online reduziu 40% as faltas na nossa clínica. Os lembretes automáticos pelo WhatsApp foram um game changer.",
+    quote: "O agendamento online reduziu 40% as faltas. Os lembretes pelo WhatsApp foram um game changer.",
     name: "Dra. Marina Oliveira",
-    role: "Ortodontista, OrtoCenter — Belo Horizonte",
+    role: "Ortodontista, OrtoCenter — BH",
     initials: "MO",
-    rating: 5,
   },
   {
     quote: "Gerenciar 3 unidades ao mesmo tempo parecia impossível. Com o NaviClin tenho visão consolidada de tudo em tempo real.",
     name: "Dr. Felipe Andrade",
     role: "Diretor, Grupo DentalPro — São Paulo",
     initials: "FA",
-    rating: 5,
   },
   {
-    quote: "Interface limpa, intuitiva e a equipe de suporte responde em minutos. É o melhor sistema que já usei em 15 anos de carreira.",
+    quote: "Interface limpa, intuitiva e a equipe de suporte responde em minutos. É o melhor sistema que já usei em 15 anos.",
     name: "Dra. Luciana Freitas",
     role: "Implantodontista, Clínica Freitas — Brasília",
     initials: "LF",
-    rating: 5,
-  },
-  {
-    quote: "O módulo de estoque com importação de NF-e me economiza horas toda semana. E o odontograma interativo é simplesmente perfeito.",
-    name: "Dr. André Pereira",
-    role: "Cirurgião-Dentista, André Pereira Odonto — Porto Alegre",
-    initials: "AP",
-    rating: 5,
   },
 ]
 
-const row1 = testimonials.slice(0, 3)
-const row2 = testimonials.slice(3)
-
-function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
-  return (
-    <div className="flex-none w-80 lg:w-96 bg-surface-container-lowest rounded-3xl p-7 border border-outline-variant/30 shadow-premium-sm mx-3">
-      <div className="flex gap-0.5 mb-5">
-        {[...Array(t.rating)].map((_, i) => (
-          <span key={i} className="material-symbols-outlined text-nc-secondary" style={{ fontSize: 16, fontVariationSettings: "'FILL' 1" }}>star</span>
-        ))}
-      </div>
-      <p className="text-on-surface text-base leading-relaxed mb-6 font-sans">
-        &ldquo;{t.quote}&rdquo;
-      </p>
-      <div className="flex items-center gap-3">
-        <div className="w-11 h-11 rounded-2xl surgical-gradient flex items-center justify-center text-white text-xs font-extrabold shrink-0 font-headline">
-          {t.initials}
-        </div>
-        <div>
-          <p className="font-bold text-primary text-sm font-headline">{t.name}</p>
-          <p className="text-outline text-xs font-sans">{t.role}</p>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-const row1doubled = [...row1, ...row1]
-const row2doubled = [...row2, ...row2]
-
 export function TestimonialsSection() {
   return (
-    <section className="py-24 lg:py-32 bg-surface overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-14">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-          <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 bg-nc-secondary/10 text-nc-secondary text-xs font-bold px-4 py-2 rounded-full mb-5">
-              <span className="material-symbols-outlined" style={{ fontSize: 14, fontVariationSettings: "'FILL' 1" }}>format_quote</span>
-              Depoimentos
+    <section
+      style={{ padding: "96px 0", background: "var(--background)" }}
+    >
+      <div style={{ width: "100%", maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
+        {/* Head */}
+        <div className="reveal" style={{ textAlign: "center", marginBottom: 56 }}>
+          <span className="eyebrow">O que dizem</span>
+          <h2 style={{
+            fontFamily: "var(--font-headline)",
+            fontSize: "clamp(32px, 3.6vw, 56px)",
+            fontWeight: 400,
+            color: "var(--nc-on-surface)",
+            letterSpacing: "-0.02em",
+            lineHeight: 1.05,
+            margin: "12px auto 0",
+            maxWidth: "22ch",
+          }}>
+            Dentistas que transformaram sua gestão
+          </h2>
+        </div>
+
+        {/* Grid */}
+        <div
+          className="reveal test-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1.3fr 1fr 1fr",
+            gridTemplateRows: "auto auto",
+            gap: 16,
+          }}
+        >
+          {testimonials.map((t, i) => (
+            <div
+              key={i}
+              className={`test-card${t.wide ? " test-card-wide" : ""}`}
+              style={{
+                background: t.wide ? "linear-gradient(135deg, var(--nc-primary-container), var(--nc-primary))" : "var(--card)",
+                border: t.wide ? "none" : "1px solid var(--nc-outline-variant)",
+                borderRadius: 22,
+                padding: 32,
+                display: "flex",
+                flexDirection: "column",
+                gap: 20,
+                gridColumn: t.wide ? "span 1" : undefined,
+                gridRow: t.wide ? "span 2" : undefined,
+                transition: "transform .25s, box-shadow .25s",
+                cursor: "pointer",
+              }}
+            >
+              {/* Quote */}
+              <p style={{
+                fontFamily: "var(--font-headline)",
+                fontSize: t.wide ? 28 : 20,
+                lineHeight: 1.35,
+                color: t.wide ? "#fff" : "var(--nc-on-surface)",
+                fontWeight: 400,
+                letterSpacing: "-0.01em",
+                position: "relative",
+                paddingTop: 18,
+                borderTop: `2px solid var(--nc-secondary)`,
+                flex: 1,
+              }}>
+                {t.quote}
+              </p>
+
+              {/* Author */}
+              <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: "auto" }}>
+                <div style={{
+                  width: 44, height: 44, borderRadius: "50%",
+                  background: "rgba(201,148,58,0.14)",
+                  color: "var(--nc-secondary)",
+                  display: "grid", placeItems: "center",
+                  fontFamily: "var(--font-headline)",
+                  fontWeight: 500, fontSize: 16,
+                  flexShrink: 0,
+                }}>
+                  {t.initials}
+                </div>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: 14, color: t.wide ? "#fff" : "var(--nc-on-surface)" }}>{t.name}</div>
+                  <div style={{ fontSize: 13, color: t.wide ? "rgba(255,255,255,0.65)" : "var(--nc-on-surface-variant)" }}>{t.role}</div>
+                </div>
+              </div>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-primary font-headline leading-tight">
-              Dentistas que<br />transformaram sua gestão
-            </h2>
-          </div>
-          <div className="flex flex-col items-center bg-surface-container-lowest rounded-3xl px-8 py-5 border border-outline-variant/30 shadow-premium-sm shrink-0">
-            <div className="flex gap-0.5 mb-1">
-              {[...Array(5)].map((_, i) => <span key={i} className="material-symbols-outlined text-nc-secondary" style={{ fontSize: 18, fontVariationSettings: "'FILL' 1" }}>star</span>)}
-            </div>
-            <span className="text-4xl font-extrabold text-primary font-headline">4.9<span className="text-2xl text-on-surface-variant">/5</span></span>
-            <span className="text-[10px] uppercase font-bold tracking-widest text-outline mt-1">Capterra & G2</span>
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* Row 1 — scrolls left */}
-      <div className="flex mb-4 relative">
-        <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none" />
-        <div className="flex nc-marquee" style={{ animationDuration: "36s" }}>
-          {row1doubled.map((t, i) => <TestimonialCard key={i} t={t} />)}
-        </div>
-      </div>
-
-      {/* Row 2 — scrolls right */}
-      <div className="flex relative">
-        <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none" />
-        <div className="flex" style={{ animation: "nc-slide-left 40s linear infinite reverse" }}>
-          {row2doubled.map((t, i) => <TestimonialCard key={i} t={t} />)}
-        </div>
-      </div>
+      <style>{`
+        .test-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(15,26,68,.08); }
+        @media (max-width: 1024px) {
+          .test-grid { grid-template-columns: 1fr 1fr !important; }
+          .test-card-wide { grid-row: span 1 !important; grid-column: span 2 !important; }
+        }
+        @media (max-width: 640px) {
+          .test-grid { grid-template-columns: 1fr !important; }
+          .test-card-wide { grid-column: span 1 !important; }
+        }
+      `}</style>
     </section>
   )
 }

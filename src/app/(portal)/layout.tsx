@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { ThemeToggle } from "@/components/ui/ThemeToggle"
 
 export default function PortalLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -18,6 +19,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             <Link href="/meus-agendamentos" className="text-on-surface-variant hover:text-on-surface transition-colors">
               Meus agendamentos
             </Link>
+            <ThemeToggle />
             <Link href="/login" className="px-3 py-1.5 surgical-gradient text-white rounded-lg text-xs font-semibold shadow-premium-sm hover:opacity-90 transition-opacity">
               Entrar
             </Link>

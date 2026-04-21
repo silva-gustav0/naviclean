@@ -1,8 +1,14 @@
 import Link from "next/link"
+import { ThemeToggle } from "@/components/ui/ThemeToggle"
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex items-stretch">
+    <div className="min-h-screen flex items-stretch relative">
+      {/* Theme toggle — top right */}
+      <div className="absolute top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+
       {/* Left: form */}
       <section className="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 bg-surface py-12">
         <Link href="/" className="mb-12">

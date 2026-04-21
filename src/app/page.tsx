@@ -9,7 +9,6 @@ import { PricingSection }    from "@/components/landing/PricingSection"
 import { FaqSection }        from "@/components/landing/FaqSection"
 import { CTASection }        from "@/components/landing/CTASection"
 import { Footer }            from "@/components/landing/Footer"
-import { ThemeFloater }      from "@/components/landing/ThemeFloater"
 import { DemoModal }         from "@/components/landing/DemoModal"
 import { RevealOnScroll }    from "@/components/landing/RevealOnScroll"
 import type { Metadata } from "next"
@@ -43,7 +42,6 @@ export default function HomePage() {
         <CTASection />
       </main>
       <Footer />
-      <ThemeFloater />
       <DemoModal />
     </>
   )

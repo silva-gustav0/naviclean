@@ -61,6 +61,18 @@ const modules = [
     desc: "Controle por cadeira, alerta de mínimo, validade de materiais e integração com fornecedores.",
     foot: "Ver estoque",
   },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/>
+        <path d="M12 8v8M8 12h8" strokeWidth="1.5"/>
+      </svg>
+    ),
+    title: "Medicina e Odontologia de Excelência",
+    desc: "Mais de 20 especialidades médicas unidas à odontologia avançada. A saúde do seu corpo e do seu sorriso num só lugar, à distância de um clique.",
+    foot: "Conhecer especialidades",
+    accent: true,
+  },
 ]
 
 export function FeaturesSection() {
@@ -126,13 +138,15 @@ export function FeaturesSection() {
               style={{
                 background: mod.featured
                   ? "linear-gradient(135deg, var(--nc-primary-container), var(--nc-primary))"
+                  : mod.accent
+                  ? "linear-gradient(135deg, rgba(201,148,58,0.08), rgba(201,148,58,0.03))"
                   : "var(--card)",
                 padding: "36px 32px 32px",
                 display: "flex",
                 flexDirection: "column",
                 minHeight: 320,
                 cursor: "pointer",
-                gridColumn: mod.featured ? "span 2" : undefined,
+                gridColumn: mod.featured ? "span 3" : undefined,
                 position: "relative",
                 transition: "background .25s",
               }}
@@ -141,7 +155,7 @@ export function FeaturesSection() {
               <div style={{
                 width: 44, height: 44, borderRadius: 12,
                 background: mod.featured ? "rgba(255,255,255,0.1)" : "rgba(201,148,58,0.14)",
-                color: mod.featured ? "#E6C78E" : "var(--nc-secondary)",
+                color: mod.featured ? "#E6C78E" : mod.accent ? "var(--nc-secondary)" : "var(--nc-secondary)",
                 display: "grid", placeItems: "center",
                 marginBottom: 24,
               }}>
@@ -209,6 +223,9 @@ export function FeaturesSection() {
           .module-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .module-featured { grid-column: span 2 !important; }
           .modules-head { grid-template-columns: 1fr !important; }
+        }
+        @media (min-width: 1025px) {
+          .module-featured { grid-column: span 3 !important; }
         }
         @media (max-width: 640px) {
           .module-grid { grid-template-columns: 1fr !important; }

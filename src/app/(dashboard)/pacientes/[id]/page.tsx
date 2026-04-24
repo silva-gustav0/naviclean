@@ -160,7 +160,7 @@ export default async function PatientChartPage({ params }: { params: Promise<{ i
         <TabsList className="flex flex-wrap h-auto gap-0 bg-transparent p-0 border-b border-surface-container-high/50 w-full justify-start">
           {[
             { value: "dados", icon: "person", label: "Dados Pessoais" },
-            { value: "anamnesis", icon: "clipboard_medical", label: "Anamnese" },
+            { value: "anamnesis", icon: "clinical_notes", label: "Anamnese" },
             { value: "odontogram", icon: "dentistry", label: "Odontograma" },
             { value: "evolutions", icon: "monitor_heart", label: "Evoluções" },
             { value: "appointments", icon: "calendar_month", label: "Agendamentos" },

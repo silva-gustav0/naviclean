@@ -8,12 +8,12 @@ export const metadata: Metadata = {
 }
 
 const pillars = [
-  { icon: "lock",         title: "Criptografia de ponta a ponta", desc: "AES-256 em repouso e TLS 1.3 em trânsito. Todos os dados sensíveis — incluindo prontuários — são criptografados antes de serem armazenados.", iconCls: "bg-blue-50 text-blue-600" },
-  { icon: "database",     title: "Backups automáticos",           desc: "Backups diários criptografados com retenção de 30 dias. Infraestrutura redundante em múltiplas zonas de disponibilidade.",                   iconCls: "bg-emerald-50 text-emerald-600" },
-  { icon: "visibility",   title: "Controle de acesso (RBAC)",     desc: "Cada membro da equipe acessa apenas o que precisa. Logs de auditoria registram toda ação sensível na plataforma.",                          iconCls: "bg-violet-50 text-violet-600" },
-  { icon: "refresh",      title: "Disponibilidade 99.9%",         desc: "SLA garantido de 99.9% de uptime. Monitoramento 24/7 com alertas automáticos para qualquer anomalia.",                                       iconCls: "bg-amber-50 text-amber-600" },
-  { icon: "shield",       title: "Conformidade LGPD",             desc: "Adequação total à Lei nº 13.709/2018. DPO designado, contratos de processamento com fornecedores e mecanismos de direitos dos titulares.",    iconCls: "bg-rose-50 text-rose-600" },
-  { icon: "fact_check",   title: "Pentest e auditoria",           desc: "Testes de penetração semestrais por empresa independente. Resultados e remediações documentados e disponíveis para clientes no plano Pro.",   iconCls: "bg-cyan-50 text-cyan-600" },
+  { icon: "lock",         title: "Criptografia de ponta a ponta", desc: "AES-256 em repouso e TLS 1.3 em trânsito. Todos os dados sensíveis — incluindo prontuários — são criptografados antes de serem armazenados.", iconCls: "bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300" },
+  { icon: "database",     title: "Backups automáticos",           desc: "Backups diários criptografados com retenção de 30 dias. Infraestrutura redundante em múltiplas zonas de disponibilidade.",                   iconCls: "bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300" },
+  { icon: "visibility",   title: "Controle de acesso (RBAC)",     desc: "Cada membro da equipe acessa apenas o que precisa. Logs de auditoria registram toda ação sensível na plataforma.",                          iconCls: "bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-300" },
+  { icon: "refresh",      title: "Disponibilidade 99.9%",         desc: "SLA garantido de 99.9% de uptime. Monitoramento 24/7 com alertas automáticos para qualquer anomalia.",                                       iconCls: "bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300" },
+  { icon: "shield",       title: "Conformidade LGPD",             desc: "Adequação total à Lei nº 13.709/2018. DPO designado, contratos de processamento com fornecedores e mecanismos de direitos dos titulares.",    iconCls: "bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-300" },
+  { icon: "fact_check",   title: "Pentest e auditoria",           desc: "Testes de penetração semestrais por empresa independente. Resultados e remediações documentados e disponíveis para clientes no plano Pro.",   iconCls: "bg-cyan-100 dark:bg-cyan-900/40 text-cyan-600 dark:text-cyan-300" },
 ]
 
 const lgpdRights = [
@@ -33,7 +33,7 @@ export default function SegurancaPage() {
       <Navbar />
       <main className="pt-20">
         <section className="bg-primary/5 border-b border-primary/10 py-20 px-6 text-center">
-          <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             <span className="material-symbols-outlined" style={{ fontSize: 16 }}>shield</span>
             Infraestrutura segura
           </div>
@@ -65,11 +65,8 @@ export default function SegurancaPage() {
               <div>
                 <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-3 py-1 rounded-full mb-4">LGPD</span>
                 <h2 className="font-headline font-extrabold text-2xl text-primary mb-4">Conformidade total com a Lei Geral de Proteção de Dados</h2>
-                <p className="text-on-surface-variant text-sm leading-relaxed mb-4">
-                  O NaviClin foi projetado desde o início com privacy by design. Temos DPO designado, registro de operações de tratamento e processos documentados para atender os direitos dos titulares.
-                </p>
                 <p className="text-on-surface-variant text-sm leading-relaxed">
-                  Exportação e exclusão de dados disponíveis diretamente no painel do paciente e da clínica — sem necessidade de contatar suporte.
+                  O NaviClin foi projetado desde o início com privacy by design. Temos DPO designado, registro de operações de tratamento e processos documentados para atender os direitos dos titulares.
                 </p>
               </div>
               <div className="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-premium-sm">

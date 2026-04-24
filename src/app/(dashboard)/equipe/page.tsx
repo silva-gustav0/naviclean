@@ -108,7 +108,7 @@ export default async function EquipePage() {
           </div>
           <h3 className="font-headline font-semibold text-primary text-base mb-1">Nenhum membro ainda</h3>
           <p className="text-on-surface-variant text-sm mb-6 max-w-xs mx-auto font-sans">
-            Convide dentistas, médicos e recepcionistas para colaborar.
+            Convide profissionais e recepcionistas para colaborar.
           </p>
           <InviteMemberModal />
         </div>

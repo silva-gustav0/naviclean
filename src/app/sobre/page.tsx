@@ -8,17 +8,15 @@ export const metadata: Metadata = {
 }
 
 const team = [
-  { name: "Carlos Andrade",   role: "CEO & Co-fundador",              initials: "CA", cls: "surgical-gradient" },
-  { name: "Juliana Mendes",   role: "CTO & Co-fundadora",             initials: "JM", cls: "surgical-gradient" },
-  { name: "Rafael Lima",      role: "Head de Produto",                initials: "RL", cls: "surgical-gradient" },
-  { name: "Fernanda Costa",   role: "Head de Sucesso do Cliente",     initials: "FC", cls: "surgical-gradient" },
+  { name: "Dr. Matheus Medeiros", role: "CEO & Co-fundador", initials: "MM", cls: "surgical-gradient" },
+  { name: "Gustavo Ramalho",      role: "CTO & Co-fundador", initials: "GR", cls: "surgical-gradient" },
 ]
 
 const values = [
-  { icon: "gps_fixed",    label: "Foco no resultado",        desc: "Cada funcionalidade existe para resolver um problema real de clínicas brasileiras.",                       iconCls: "bg-blue-50 text-blue-600" },
-  { icon: "favorite",     label: "Cuidado humano",           desc: "Acreditamos que tecnologia deve liberar tempo para o que importa: cuidar de pessoas.",                    iconCls: "bg-rose-50 text-rose-600" },
-  { icon: "shield",       label: "Confiança e privacidade",  desc: "Dados de saúde são sagrados. Segurança e conformidade LGPD não são opcionais.",                          iconCls: "bg-emerald-50 text-emerald-600" },
-  { icon: "bolt",         label: "Simplicidade que escala",  desc: "Simples para começar, poderoso para crescer. Sem curva de aprendizado desnecessária.",                    iconCls: "bg-amber-50 text-amber-600" },
+  { icon: "gps_fixed",    label: "Foco no resultado",        desc: "Cada funcionalidade existe para resolver um problema real de clínicas brasileiras.",               iconCls: "bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300" },
+  { icon: "favorite",     label: "Cuidado humano",           desc: "Acreditamos que tecnologia deve liberar tempo para o que importa: cuidar de pessoas.",                iconCls: "bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-300" },
+  { icon: "shield",       label: "Confiança e privacidade",  desc: "Dados de saúde são sagrados. Segurança e conformidade LGPD não são opcionais.",                        iconCls: "bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300" },
+  { icon: "bolt",         label: "Simplicidade que escala",  desc: "Simples para começar, poderoso para crescer. Sem curva de aprendizado desnecessária.",                 iconCls: "bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300" },
 ]
 
 export default function SobrePage() {
@@ -41,13 +39,16 @@ export default function SobrePage() {
           <div className="max-w-3xl mx-auto space-y-4">
             <h2 className="font-headline font-extrabold text-2xl text-primary mb-4">Nossa história</h2>
             <p className="text-on-surface-variant leading-relaxed">
-              Fundado em 2022 por Carlos e Juliana, o NaviClin nasceu após meses de entrevistas com donos de clínicas em todo o Brasil. A pergunta era simples: &ldquo;O que te faz perder mais tempo?&rdquo;. As respostas? Sempre as mesmas — agenda bagunçada, paciente que falta sem avisar, controle financeiro no Excel, prontuário em papel.
+              De um lado, Matheus, imerso na realidade da odontologia e da linha de frente do atendimento. No dia a dia clínico, a frustração era evidente: o tempo e a energia que deveriam ser dedicados exclusivamente à saúde e ao acolhimento dos pacientes eram constantemente engolidos por processos burocráticos. Fichas de papel se perdendo, horários vagos por falta de comunicação e a gestão financeira sendo feita de forma amadora. A burocracia estava limitando o potencial do cuidado humano.
             </p>
             <p className="text-on-surface-variant leading-relaxed">
-              Em 18 meses construímos do zero uma plataforma moderna, integrada e acessível. Hoje, mais de 500 clínicas em 23 estados confiam no NaviClin para rodar o dia a dia — da recepção ao consultório, do financeiro ao marketing.
+              Do outro lado, Gustavo, a mente técnica. Com sua expertise em arquitetura de software, ele via com clareza que a tecnologia para resolver aquele caos já existia, mas os sistemas disponíveis no mercado eram engessados, caros ou desenvolvidos por pessoas que nunca haviam pisado em um consultório.
             </p>
             <p className="text-on-surface-variant leading-relaxed">
-              Nossa missão é clara: dar ao dentista e ao médico brasileiro ferramentas de primeira linha para que possam focar no que escolheram fazer — cuidar de pessoas.
+              A ideia da NaviClin surgiu da fusão dessas duas visões: a vivência clínica de quem entende a dor diária do profissional da saúde, unida à capacidade técnica de quem sabe construir a solução exata.
+            </p>
+            <p className="text-on-surface-variant leading-relaxed">
+              O que começou como um projeto para resolver uma dor próxima logo se tornou uma missão maior. Nós percebemos que não poderíamos guardar essa solução. A motivação passou a ser construir uma plataforma de ponta, com tecnologia de grandes hospitais, mas que fosse acessível e intuitiva para o uso de todos. Queríamos democratizar a gestão de excelência, dando a médicos, dentistas e gestores de todo o Brasil a chance de automatizar seus problemas e voltar a focar naquilo que realmente importa: <strong>cuidar de pessoas.</strong>
             </p>
           </div>
         </section>
@@ -74,14 +75,14 @@ export default function SobrePage() {
         <section className="py-16 px-6">
           <div className="max-w-5xl mx-auto">
             <h2 className="font-headline font-extrabold text-2xl text-primary text-center mb-10">Nosso time</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="flex justify-center gap-8 flex-wrap">
               {team.map((member) => (
                 <div key={member.name} className="text-center">
-                  <div className={`w-20 h-20 rounded-2xl ${member.cls} flex items-center justify-center mx-auto mb-3 text-white text-xl font-bold shadow-premium`}>
+                  <div className={`w-24 h-24 rounded-2xl ${member.cls} flex items-center justify-center mx-auto mb-3 text-white text-2xl font-bold shadow-premium`}>
                     {member.initials}
                   </div>
-                  <p className="font-semibold text-sm text-on-surface">{member.name}</p>
-                  <p className="text-xs text-on-surface-variant mt-0.5">{member.role}</p>
+                  <p className="font-semibold text-base text-on-surface">{member.name}</p>
+                  <p className="text-sm text-on-surface-variant mt-0.5">{member.role}</p>
                 </div>
               ))}
             </div>

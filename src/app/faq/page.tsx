@@ -37,7 +37,7 @@ const categories = [
   {
     name: "Suporte",
     faqs: [
-      { q: "Como funciona o suporte?", a: "Chat, email e WhatsApp. Tempo médio de resposta: 2 horas úteis. Plano Pro inclui suporte prioritário com SLA de 30 minutos." },
+      { q: "Como funciona o suporte?", a: "E-mail e whatsapp. Tempo médio de resposta: 2 horas úteis. Plano profissional e Enterprise inclui suporte prioritário com SLA de em média 30 minutos." },
       { q: "Tem treinamento?", a: "Sim! Ao assinar qualquer plano, você recebe onboarding guiado e acesso à base de conhecimento completa." },
       { q: "E se meu sistema cair?", a: "Temos SLA de 99,9% de uptime. Em caso de incidente, comunicamos por email e WhatsApp em tempo real." },
     ],
@@ -45,7 +45,7 @@ const categories = [
   {
     name: "Financeiro",
     faqs: [
-      { q: "Como funciona o pagamento?", a: "Cartão de crédito ou boleto bancário. Processamento seguro via Stripe." },
+      { q: "Como funciona o pagamento?", a: "Cartão de crédito, cartão de débito e via PIX. Processamento seguro via Mercado Pago." },
       { q: "Emitem nota fiscal?", a: "Sim. NF-e enviada automaticamente por email após cada cobrança." },
       { q: "Posso adicionar mais profissionais depois?", a: "Sim. Você pode fazer upgrade de plano a qualquer momento conforme sua clínica cresce." },
     ],

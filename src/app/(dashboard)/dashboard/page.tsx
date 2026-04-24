@@ -8,14 +8,7 @@ const quickActions = [
   { href: "/financeiro", icon: "payments", label: "Lançamento", description: "Registrar receita" },
   { href: "/tratamentos", icon: "stethoscope", label: "Tratamentos", description: "Gerenciar serviços" },
   { href: "/equipe", icon: "groups", label: "Equipe", description: "Adicionar membro" },
-  { href: "/marketing", icon: "campaign", label: "Marketing", description: "Atrair pacientes" },
-]
-
-const setupSteps = [
-  { href: "/configuracoes/horarios", icon: "schedule", title: "Configure os horários", description: "Defina quando sua clínica atende" },
-  { href: "/tratamentos", icon: "stethoscope", title: "Adicione tratamentos", description: "Cadastre os serviços oferecidos" },
-  { href: "/equipe", icon: "groups", title: "Cadastre sua equipe", description: "Adicione dentistas e recepcionistas" },
-  { href: "/pacientes", icon: "person_add", title: "Primeiro paciente", description: "Cadastre o primeiro paciente" },
+  { href: "/treinamento", icon: "school", label: "Treinamento", description: "Aprender a usar" },
 ]
 
 export default async function DashboardPage() {
@@ -34,9 +27,30 @@ export default async function DashboardPage() {
 
   const firstName = ((user.user_metadata?.full_name as string) ?? "").split(" ")[0] || "Doutor(a)"
 
+  const [
+    { count: horariosCount },
+    { count: servicesCount },
+    { count: membersCount },
+    { count: patientsCount },
+  ] = await Promise.all([
+    supabase.from("working_hours").select("*", { count: "exact", head: true }).eq("clinic_id", clinic.id),
+    supabase.from("services").select("*", { count: "exact", head: true }).eq("clinic_id", clinic.id),
+    supabase.from("clinic_members").select("*", { count: "exact", head: true }).eq("clinic_id", clinic.id),
+    supabase.from("patients").select("*", { count: "exact", head: true }).eq("clinic_id", clinic.id),
+  ])
+
+  const setupSteps = [
+    { href: "/configuracoes/horarios", icon: "schedule", title: "Configure os horários", description: "Defina quando sua clínica atende", done: (horariosCount ?? 0) > 0 },
+    { href: "/tratamentos", icon: "stethoscope", title: "Adicione tratamentos", description: "Cadastre os serviços oferecidos", done: (servicesCount ?? 0) > 0 },
+    { href: "/equipe", icon: "groups", title: "Cadastre sua equipe", description: "Adicione profissionais e recepcionistas", done: (membersCount ?? 0) > 0 },
+    { href: "/pacientes", icon: "person_add", title: "Primeiro paciente", description: "Cadastre o primeiro paciente", done: (patientsCount ?? 0) > 0 },
+  ]
+
+  const completedCount = setupSteps.filter((s) => s.done).length
+
   const stats = [
     { label: "Agendamentos Hoje", value: "0", desc: "Nenhum para hoje", icon: "calendar_month", badge: null },
-    { label: "Pacientes Ativos", value: "0", desc: "Cadastre o primeiro", icon: "groups", badge: null },
+    { label: "Pacientes Ativos", value: String(patientsCount ?? 0), desc: (patientsCount ?? 0) === 0 ? "Cadastre o primeiro" : "pacientes cadastrados", icon: "groups", badge: null },
     { label: "Receita do Mês", value: "R$ 0", desc: "Sem movimentações", icon: "payments", badge: null },
     { label: "Trial Gratuito", value: "14 dias", desc: "Aproveite sem limites", icon: "star", badge: "Ativo" },
   ]
@@ -83,7 +97,7 @@ export default async function DashboardPage() {
                 </span>
               </div>
               {s.badge && (
-                <span className="text-emerald-600 bg-emerald-50 px-2 py-1 rounded text-xs font-bold">
+                <span className="text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/40 px-2 py-1 rounded text-xs font-bold">
                   {s.badge}
                 </span>
               )}
@@ -120,26 +134,46 @@ export default async function DashboardPage() {
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-headline font-bold text-xl text-primary">Configure sua clínica</h3>
           <span className="text-xs text-on-surface-variant bg-surface-container-low px-3 py-1 rounded-full font-sans">
-            0 de {setupSteps.length} concluído
+            {completedCount} de {setupSteps.length} concluído{completedCount !== 1 ? "s" : ""}
           </span>
         </div>
+        {completedCount < setupSteps.length && (
+          <div className="mb-3 w-full bg-surface-container-low rounded-full h-1.5">
+            <div
+              className="h-1.5 rounded-full bg-nc-secondary transition-all"
+              style={{ width: `${(completedCount / setupSteps.length) * 100}%` }}
+            />
+          </div>
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {setupSteps.map((step) => (
             <Link
               key={step.href}
               href={step.href}
-              className="group flex items-center gap-4 p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/10 hover:border-nc-secondary/30 hover:shadow-premium-sm transition-all"
+              className={`group flex items-center gap-4 p-5 rounded-2xl border transition-all ${
+                step.done
+                  ? "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800 opacity-80"
+                  : "bg-surface-container-lowest border-outline-variant/10 hover:border-nc-secondary/30 hover:shadow-premium-sm"
+              }`}
             >
-              <div className="p-3 bg-nc-secondary/10 rounded-xl shrink-0">
-                <span className="material-symbols-outlined text-nc-secondary">{step.icon}</span>
+              <div className={`p-3 rounded-xl shrink-0 ${step.done ? "bg-emerald-100 dark:bg-emerald-900/40" : "bg-nc-secondary/10"}`}>
+                {step.done ? (
+                  <span className="material-symbols-outlined text-emerald-600 dark:text-emerald-400" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    check_circle
+                  </span>
+                ) : (
+                  <span className="material-symbols-outlined text-nc-secondary">{step.icon}</span>
+                )}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-primary">{step.title}</p>
+                <p className={`text-sm font-semibold ${step.done ? "text-emerald-800 dark:text-emerald-300 line-through" : "text-primary"}`}>{step.title}</p>
                 <p className="text-xs text-on-surface-variant mt-0.5">{step.description}</p>
               </div>
-              <span className="material-symbols-outlined text-outline group-hover:text-nc-secondary group-hover:translate-x-0.5 transition-all">
-                arrow_forward
-              </span>
+              {!step.done && (
+                <span className="material-symbols-outlined text-outline group-hover:text-nc-secondary group-hover:translate-x-0.5 transition-all">
+                  arrow_forward
+                </span>
+              )}
             </Link>
           ))}
         </div>
@@ -149,11 +183,11 @@ export default async function DashboardPage() {
       <section className="surgical-gradient p-6 rounded-2xl text-white relative overflow-hidden">
         <div className="relative z-10">
           <h4 className="font-headline font-bold text-lg">Precisa de ajuda?</h4>
-          <p className="text-xs text-on-primary-container mt-2">
+          <p className="text-sm text-white/70 mt-2">
             Conecte-se com nosso suporte dedicado para configurar sua clínica.
           </p>
           <a
-            href="mailto:suporte@naviclin.com"
+            href="/contato"
             className="mt-4 inline-block bg-white text-primary px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-surface-container-low transition-colors"
           >
             Falar com Suporte

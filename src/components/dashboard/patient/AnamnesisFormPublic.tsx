@@ -67,7 +67,7 @@ export function AnamnesisFormPublic({ patientId, clinicId, token, initial }: Pro
           <span className="text-3xl">✓</span>
         </div>
         <h2 className="text-lg font-bold text-emerald-700">Anamnese enviada!</h2>
-        <p className="text-sm text-muted-foreground">Obrigado por preencher. Seu dentista terá acesso antes do atendimento.</p>
+        <p className="text-sm text-muted-foreground">Obrigado por preencher. Seu profissional terá acesso antes do atendimento.</p>
       </div>
     )
   }

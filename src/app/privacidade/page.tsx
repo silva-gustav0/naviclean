@@ -11,12 +11,12 @@ const sections = [
   {
     id: "quem-somos",
     title: "1. Quem somos",
-    content: "NaviClin Tecnologia Ltda, CNPJ 00.000.000/0001-00, com sede em São Paulo/SP, é a controladora dos dados pessoais tratados pela plataforma NaviClin. Nosso DPO pode ser contactado pelo email: dpo@naviclin.com.",
+    content: "NaviClin Tecnologia Ltda, CNPJ 00.000.000/0001-00, com sede em Rio de Janeiro/RJ, é a controladora dos dados pessoais tratados pela plataforma NaviClin.",
   },
   {
     id: "dados-coletados",
     title: "2. Dados que coletamos",
-    content: "Coletamos dados fornecidos diretamente por você (nome, email, CPF, telefone, dados de saúde), dados gerados pelo uso da plataforma (logs de acesso, preferências, agenda), e dados de pagamento processados de forma segura pelo Stripe. Dados de saúde (prontuário, anamnese, evoluções clínicas) são tratados com base legal específica e com controles de segurança reforçados.",
+    content: "Coletamos dados fornecidos diretamente por você (nome, email, CPF, CNPJ CRM, CRO, data de nascimento, telefone, dados de saúde), dados gerados pelo uso da plataforma (logs de acesso, preferências, agenda), e dados de pagamento processados de forma segura pelo Mercado Pago. Dados de saúde (prontuário, anamnese, evoluções clínicas) são tratados com base legal específica e com controles de segurança reforçados.",
   },
   {
     id: "finalidades",
@@ -31,7 +31,7 @@ const sections = [
   {
     id: "compartilhamento",
     title: "5. Compartilhamento de dados",
-    content: "Compartilhamos dados somente com: parceiros técnicos necessários para operação (Supabase para banco de dados, Stripe para pagamentos, Resend para emails), todos com contratos de processamento adequados. Não compartilhamos dados com anunciantes ou para fins de marketing por terceiros.",
+    content: "Compartilhamos dados somente com: parceiros técnicos necessários para operação (Supabase para banco de dados, Mercado Pago para pagamentos, Resend para e-mails), todos com contratos de processamento adequados. Não compartilhamos dados com anunciantes ou para fins de marketing por terceiros.",
   },
   {
     id: "seguranca",
@@ -46,7 +46,7 @@ const sections = [
   {
     id: "seus-direitos",
     title: "8. Seus direitos (LGPD)",
-    content: "Você tem direito a: confirmação de tratamento, acesso, correção, anonimização, portabilidade, eliminação, informação sobre compartilhamento, revogação de consentimento e petição à ANPD. Para exercer seus direitos, acesse Configurações > Segurança ou envie email para dpo@naviclin.com.",
+    content: "Você tem direito a: confirmação de tratamento, acesso, correção, anonimização, portabilidade, eliminação, informação sobre compartilhamento, revogação de consentimento e petição à ANPD. Para exercer seus direitos, acesse Configurações > Segurança.",
   },
   {
     id: "cookies",
@@ -61,7 +61,7 @@ const sections = [
   {
     id: "contato",
     title: "11. Contato e DPO",
-    content: "Dúvidas sobre privacidade? Contate nosso DPO: dpo@naviclin.com — respondemos em até 72 horas úteis.",
+    content: "Dúvidas sobre privacidade? Nos contate pela nossa página de contato em naviclin.com.br/contato — respondemos em até 72 horas úteis.",
   },
 ]
 
@@ -97,7 +97,7 @@ export default function PrivacidadePage() {
               ))}
             </div>
             <div className="mt-12 pt-8 border-t border-outline-variant">
-              <p className="text-xs text-outline">NaviClin Tecnologia Ltda — dpo@naviclin.com</p>
+              <p className="text-xs text-outline">NaviClin Tecnologia Ltda — CNPJ 00.000.000/0001-00</p>
             </div>
           </div>
         </div>

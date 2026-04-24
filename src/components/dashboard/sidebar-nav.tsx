@@ -11,7 +11,7 @@ const navItems = [
   { href: "/equipe", icon: "groups", label: "Equipe" },
   { href: "/tratamentos", icon: "stethoscope", label: "Tratamentos" },
   { href: "/estoque", icon: "inventory_2", label: "Estoque" },
-  { href: "/marketing", icon: "campaign", label: "Marketing" },
+  { href: "/treinamento", icon: "school", label: "Treinamento" },
   { href: "/configuracoes", icon: "settings", label: "Configurações" },
 ]
 
@@ -54,7 +54,7 @@ export function SidebarNav({ clinicName, userEmail, userInitials }: SidebarNavPr
               className={`flex items-center gap-3 px-4 py-3 rounded-lg font-headline font-semibold text-sm transition-all duration-200 hover:translate-x-1 ${
                 isActive
                   ? "bg-surface-container-lowest text-primary shadow-sm"
-                  : "text-slate-500 hover:bg-surface-container-highest/50 hover:text-primary"
+                  : "text-on-surface-variant hover:bg-surface-container-high hover:text-primary"
               }`}
             >
               <span
@@ -92,7 +92,7 @@ export function SidebarNav({ clinicName, userEmail, userInitials }: SidebarNavPr
         <form action="/api/auth/signout" method="post">
           <button
             type="submit"
-            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-headline font-semibold text-slate-500 hover:bg-error-container/20 hover:text-error transition-all duration-200 hover:translate-x-1"
+            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-headline font-semibold text-on-surface-variant hover:bg-error-container/20 hover:text-error transition-all duration-200 hover:translate-x-1"
           >
             <span className="material-symbols-outlined">logout</span>
             Sair

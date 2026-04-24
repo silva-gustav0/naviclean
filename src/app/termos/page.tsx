@@ -16,7 +16,7 @@ const sections = [
   {
     id: "servicos",
     title: "2. Descrição dos serviços",
-    content: "O NaviClin é uma plataforma SaaS (Software as a Service) para gestão de clínicas odontológicas e médicas. Os serviços incluem, mas não se limitam a: agendamento online, prontuário digital, controle financeiro, gestão de estoque, portal do paciente e ferramentas de marketing.",
+    content: "O NaviClin é uma plataforma SaaS (Software as a Service) para gestão de clínicas odontológicas e médicas. Os serviços incluem, mas não se limitam a: agendamento online, prontuário digital, controle financeiro, gestão de estoque e portal do paciente.",
   },
   {
     id: "conta",

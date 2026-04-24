@@ -52,13 +52,13 @@ export default async function DashboardLayout({ children }: { children: React.Re
           <div className="ml-auto flex items-center gap-6">
             <div className="flex items-center gap-2">
               <ThemeToggle />
-              <button className="relative w-10 h-10 rounded-full hover:bg-slate-50 flex items-center justify-center transition-colors">
-                <span className="material-symbols-outlined text-primary">notifications</span>
+              <button className="relative w-10 h-10 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors">
+                <span className="material-symbols-outlined text-on-surface">notifications</span>
                 <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-nc-secondary" />
               </button>
-              <button className="w-10 h-10 rounded-full hover:bg-slate-50 flex items-center justify-center transition-colors">
-                <span className="material-symbols-outlined text-primary">help_outline</span>
-              </button>
+              <a href="/contato" className="w-10 h-10 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors">
+                <span className="material-symbols-outlined text-on-surface">help_outline</span>
+              </a>
             </div>
             <div className="flex items-center gap-3 pl-6 border-l border-outline-variant/30">
               <div className="text-right hidden lg:block">

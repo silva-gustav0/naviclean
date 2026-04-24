@@ -35,7 +35,7 @@ export default function ContatoPage() {
         <section className="bg-primary/5 border-b border-primary/10 py-16 px-6 text-center">
           <h1 className="font-headline font-extrabold text-4xl text-primary mb-3">Fale com a gente</h1>
           <p className="text-on-surface-variant max-w-xl mx-auto">
-            Dúvidas, demos, suporte — estamos aqui para ajudar. Resposta em até 2 horas úteis.
+            Dúvidas, demos, suporte — estamos aqui para ajudar. Resposta em até 1 dia útil.
           </p>
         </section>
 
@@ -93,42 +93,24 @@ export default function ContatoPage() {
             <div className="space-y-6">
               <h2 className="font-headline font-bold text-xl text-primary">Outros canais</h2>
               <div className="space-y-4">
-                <a href="https://wa.me/5511999999999" className="flex items-start gap-4 p-4 border border-outline-variant rounded-xl hover:border-emerald-300 hover:bg-emerald-50 transition-all group">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 group-hover:bg-emerald-100 flex items-center justify-center shrink-0 transition-colors">
-                    <span className="material-symbols-outlined text-emerald-600" style={{ fontSize: 20 }}>chat</span>
+                <a href="https://wa.me/5511999999999" className="flex items-start gap-4 p-4 border border-outline-variant rounded-xl hover:border-emerald-300 dark:hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all group">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 group-hover:bg-emerald-200 dark:group-hover:bg-emerald-800/40 flex items-center justify-center shrink-0 transition-colors">
+                    <span className="material-symbols-outlined text-emerald-600 dark:text-emerald-300" style={{ fontSize: 20 }}>chat</span>
                   </div>
                   <div>
                     <p className="font-semibold text-sm text-on-surface">WhatsApp</p>
                     <p className="text-xs text-on-surface-variant">(11) 99999-9999 — seg a sex, 9h–18h</p>
                   </div>
                 </a>
-                <a href="mailto:contato@naviclin.com" className="flex items-start gap-4 p-4 border border-outline-variant rounded-xl hover:border-blue-300 hover:bg-blue-50 transition-all group">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center shrink-0 transition-colors">
-                    <span className="material-symbols-outlined text-blue-600" style={{ fontSize: 20 }}>mail</span>
+                <a href="mailto:contato@naviclin.com" className="flex items-start gap-4 p-4 border border-outline-variant rounded-xl hover:border-blue-300 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all group">
+                  <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/40 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/40 flex items-center justify-center shrink-0 transition-colors">
+                    <span className="material-symbols-outlined text-blue-600 dark:text-blue-300" style={{ fontSize: 20 }}>mail</span>
                   </div>
                   <div>
                     <p className="font-semibold text-sm text-on-surface">Email</p>
-                    <p className="text-xs text-on-surface-variant">contato@naviclin.com — resposta em até 2h úteis</p>
+                    <p className="text-xs text-on-surface-variant">contato@naviclin.com — resposta em até 1 dia útil</p>
                   </div>
                 </a>
-                <div className="flex items-start gap-4 p-4 border border-outline-variant rounded-xl">
-                  <div className="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 20 }}>phone</span>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm text-on-surface">Telefone</p>
-                    <p className="text-xs text-on-surface-variant">(11) 3000-0000 — seg a sex, 9h–18h</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 p-4 border border-outline-variant rounded-xl">
-                  <div className="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 20 }}>location_on</span>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm text-on-surface">Endereço</p>
-                    <p className="text-xs text-on-surface-variant">Av. Paulista, 1000 — São Paulo, SP — 01310-100</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

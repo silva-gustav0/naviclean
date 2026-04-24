@@ -79,10 +79,10 @@ export function CTASection() {
           </a>
         </div>
 
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 24, marginTop: 32, color: "rgba(255,255,255,0.4)", fontSize: 13 }}>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 24, marginTop: 32, color: "rgba(255,255,255,0.75)", fontSize: 13 }}>
           {["Sem contrato de fidelidade", "Cancele quando quiser", "Suporte em português", "LGPD compliance"].map((t) => (
             <span key={t} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="2">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(201,148,58,0.9)" strokeWidth="2.5">
                 <path d="M20 6L9 17l-5-5"/>
               </svg>
               {t}

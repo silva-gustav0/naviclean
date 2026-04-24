@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NaviClin — Gestão Odontológica com Precisão Clínica",
     description:
-      "A plataforma definitiva para dentistas de alta performance. +1.200 clínicas confiam no NaviClin.",
+      "A plataforma definitiva para profissionais de saúde de alta performance. +1.200 clínicas confiam no NaviClin.",
     type: "website",
   },
 }

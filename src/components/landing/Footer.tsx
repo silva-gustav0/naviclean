@@ -7,10 +7,10 @@ const cols = [
   {
     title: "Produto",
     links: [
-      { label: "Agenda",       href: "#modulos"   },
-      { label: "Prontuário",   href: "#produto"   },
-      { label: "Financeiro",   href: "#produto"   },
-      { label: "Integrações",  href: "/recursos"  },
+      { label: "Agenda",       href: "/agenda-demo"      },
+      { label: "Prontuário",   href: "/prontuario-demo"  },
+      { label: "Financeiro",   href: "/financeiro-demo"  },
+      { label: "Integrações",  href: "/recursos"         },
     ],
   },
   {
@@ -26,8 +26,8 @@ const cols = [
     title: "Suporte",
     links: [
       { label: "Central de ajuda", href: "/faq"        },
-      { label: "Status",           href: "/seguranca"  },
-      { label: "Roadmap",          href: "/recursos"   },
+      { label: "Segurança",        href: "/seguranca"  },
+      { label: "Roadmap",          href: "/roadmap"    },
       { label: "API Docs",         href: "/recursos"   },
     ],
   },
@@ -70,7 +70,7 @@ export function Footer() {
               </span>
             </Link>
             <p style={{ color: "var(--nc-on-surface-variant)", fontSize: 14, maxWidth: "32ch", lineHeight: 1.6 }}>
-              A plataforma de gestão odontológica mais completa do Brasil.
+              Gestão médico-odontológica inteligente. Feito no Brasil, para clínicas que querem crescer com clareza.
             </p>
             <div style={{ display: "flex", gap: 10 }}>
               {[

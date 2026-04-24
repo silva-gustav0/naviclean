@@ -81,7 +81,7 @@
   --nc-on-primary-fixed-variant: #204779;
 
   /* Secondary (gold) */
-  --nc-secondary: #775928;
+  --nc-secondary: #c9943a;
   --nc-secondary-container: #fdd497;
   --nc-secondary-fixed: #ffddaf;
   --nc-secondary-fixed-dim: #e8c085;
@@ -305,7 +305,7 @@ body {
 }
 
 .gold-gradient {
-  background: linear-gradient(135deg, #775928 0%, #b88a3e 100%);
+  background: linear-gradient(135deg, #c9943a 0%, #daa840 100%);
 }
 
 .shadow-premium {
@@ -366,7 +366,7 @@ body {
 
 /* ── Gradient text ──────────────────────────────────────────── */
 .text-gradient-gold {
-  background: linear-gradient(120deg, #775928 0%, #b88a3e 60%, #e8c085 100%);
+  background: linear-gradient(120deg, #c9943a 0%, #daa840 60%, #f0d090 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -386,7 +386,7 @@ body {
 .bg-mesh {
   background:
     radial-gradient(ellipse at 15% 20%, rgba(0,36,74,0.07) 0%, transparent 55%),
-    radial-gradient(ellipse at 85% 80%, rgba(119,89,40,0.06) 0%, transparent 55%);
+    radial-gradient(ellipse at 85% 80%, rgba(201,148,58,0.06) 0%, transparent 55%);
 }
 .animated-gradient-bg {
   background: linear-gradient(135deg, #00244a, #0d3a6b, #1a4f7a, #00244a);
@@ -404,7 +404,7 @@ body {
 
 /* ── Glow shadows ────────────────────────────────────────────── */
 .shadow-glow-navy { box-shadow: 0 8px 40px rgba(0,36,74,0.25); }
-.shadow-glow-gold { box-shadow: 0 8px 32px rgba(119,89,40,0.25); }
+.shadow-glow-gold { box-shadow: 0 8px 32px rgba(201,148,58,0.25); }
 
 /* ── Pill button hover arrow ─────────────────────────────────── */
 .btn-pill-arrow .arrow-circle {

@@ -6,19 +6,19 @@ import { useState } from "react"
 const plans = [
   {
     name: "Básico",
-    sub: "Para clínicas com 1 dentista iniciando a transformação digital.",
-    monthly: 97,
-    annual: 77,
-    features: ["1 dentista", "Agenda digital", "Prontuário básico", "Até 100 pacientes"],
+    sub: "Para clínicas com 1 profissional iniciando a transformação digital.",
+    monthly: 89,
+    annual: 71,
+    features: ["1 profissional", "Agenda digital", "Prontuário básico", "Até 100 pacientes"],
     cta: "Testar grátis",
     href: "/cadastro?plano=basic",
   },
   {
     name: "Profissional",
     sub: "Para clínicas em crescimento que precisam de controle total.",
-    monthly: 197,
-    annual: 157,
-    features: ["Até 5 dentistas", "Pacientes ilimitados", "Prontuário + Odontograma", "Financeiro, comissões e DRE", "WhatsApp automatizado", "Repasse de profissionais"],
+    monthly: 219,
+    annual: 175,
+    features: ["Até 5 profissionais", "Pacientes ilimitados", "Prontuário + Odontograma", "Financeiro, comissões e DRE", "WhatsApp automatizado", "Repasse de profissionais"],
     cta: "Testar grátis",
     href: "/cadastro?plano=professional",
     featured: true,
@@ -27,9 +27,9 @@ const plans = [
   {
     name: "Enterprise",
     sub: "Para redes de clínicas com necessidade de escala e suporte dedicado.",
-    monthly: 397,
-    annual: 317,
-    features: ["Dentistas ilimitados", "Multi-clínica ilimitado", "Todos os módulos", "API REST aberta", "Relatórios avançados", "Suporte premium 24/7"],
+    monthly: null,
+    annual: null,
+    features: ["Profissionais ilimitados", "Multi-clínica ilimitado", "Todos os módulos", "API REST aberta", "Relatórios avançados", "Suporte premium 24/7"],
     cta: "Falar com consultor",
     href: "/contato?origem=enterprise",
   },
@@ -152,17 +152,30 @@ export function PricingSection() {
               </div>
 
               {/* Price */}
-              <div style={{
-                fontFamily: "var(--font-headline)",
-                fontSize: 52, fontWeight: 400,
-                letterSpacing: "-0.03em",
-                color: plan.featured ? "#fff" : "var(--nc-on-surface)",
-                display: "flex", alignItems: "baseline", gap: 6,
-              }}>
-                <span style={{ fontSize: 22, alignSelf: "flex-start", marginTop: 8, color: plan.featured ? "rgba(255,255,255,0.7)" : "var(--nc-on-surface-variant)" }}>R$</span>
-                <span>{annual ? plan.annual : plan.monthly}</span>
-                <span style={{ fontSize: 14, fontFamily: "var(--font-sans)", fontWeight: 400, color: plan.featured ? "rgba(255,255,255,0.65)" : "var(--nc-on-surface-variant)" }}>/mês</span>
-              </div>
+              {plan.monthly === null ? (
+                <div style={{
+                  fontFamily: "var(--font-headline)",
+                  fontSize: 28, fontWeight: 500,
+                  letterSpacing: "-0.02em",
+                  color: plan.featured ? "#fff" : "var(--nc-on-surface)",
+                  paddingTop: 8, paddingBottom: 8,
+                  fontStyle: "italic",
+                }}>
+                  Proposta Exclusiva
+                </div>
+              ) : (
+                <div style={{
+                  fontFamily: "var(--font-headline)",
+                  fontSize: 52, fontWeight: 400,
+                  letterSpacing: "-0.03em",
+                  color: plan.featured ? "#fff" : "var(--nc-on-surface)",
+                  display: "flex", alignItems: "baseline", gap: 6,
+                }}>
+                  <span style={{ fontSize: 22, alignSelf: "flex-start", marginTop: 8, color: plan.featured ? "rgba(255,255,255,0.7)" : "var(--nc-on-surface-variant)" }}>R$</span>
+                  <span>{annual ? plan.annual : plan.monthly}</span>
+                  <span style={{ fontSize: 14, fontFamily: "var(--font-sans)", fontWeight: 400, color: plan.featured ? "rgba(255,255,255,0.65)" : "var(--nc-on-surface-variant)" }}>/mês</span>
+                </div>
+              )}
 
               {/* Features */}
               <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>

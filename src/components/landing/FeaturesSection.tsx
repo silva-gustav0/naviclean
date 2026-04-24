@@ -114,7 +114,7 @@ export function FeaturesSection() {
             </h2>
           </div>
           <p style={{ fontSize: "clamp(17px, 1.25vw, 20px)", color: "var(--nc-on-surface-variant)", lineHeight: 1.5, maxWidth: "60ch" }}>
-            Cada módulo foi desenhado com dentistas, recepcionistas e gestores — para funcionar de verdade no dia a dia da sua clínica.
+            Cada módulo foi desenhado com médicos, dentistas, recepcionistas e gestores — para funcionar de verdade no dia a dia da sua clínica.
           </p>
         </div>
 
@@ -139,7 +139,7 @@ export function FeaturesSection() {
                 background: mod.featured
                   ? "linear-gradient(135deg, var(--nc-primary-container), var(--nc-primary))"
                   : mod.accent
-                  ? "linear-gradient(135deg, rgba(201,148,58,0.08), rgba(201,148,58,0.03))"
+                  ? "var(--nc-secondary-container)"
                   : "var(--card)",
                 padding: "36px 32px 32px",
                 display: "flex",
@@ -175,7 +175,7 @@ export function FeaturesSection() {
               </h3>
 
               <p style={{
-                color: mod.featured ? "rgba(255,255,255,0.7)" : "var(--nc-on-surface-variant)",
+                color: mod.featured ? "rgba(255,255,255,0.7)" : mod.accent ? "var(--nc-on-secondary-container)" : "var(--nc-on-surface-variant)",
                 fontSize: 15,
                 lineHeight: 1.55,
                 flex: 1,

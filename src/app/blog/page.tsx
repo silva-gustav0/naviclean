@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Blog — NaviClin",
-  description: "Artigos sobre gestão de clínicas odontológicas e médicas, marketing para dentistas, financeiro e muito mais.",
+  description: "Artigos sobre gestão de clínicas odontológicas e médicas, marketing para profissionais de saúde, financeiro e muito mais.",
 }
 
 const categories = ["Todos", "Gestão", "Marketing", "Clínico", "Financeiro", "Tecnologia"]

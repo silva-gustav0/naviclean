@@ -2,13 +2,14 @@ import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import { NewPatientModal } from "@/components/dashboard/modals/new-patient-modal"
 import { PatientsList } from "@/components/dashboard/patients-list"
+import { CopyLinkButton } from "@/components/dashboard/copy-link-button"
 
 export default async function PacientesPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect("/login")
 
-  const { data: clinic } = await supabase.from("clinics").select("id").eq("owner_id", user.id).single()
+  const { data: clinic } = await supabase.from("clinics").select("id, slug").eq("owner_id", user.id).single()
   if (!clinic) redirect("/onboarding")
 
   const { data: patients } = await supabase
@@ -28,14 +29,28 @@ export default async function PacientesPage() {
 
   return (
     <div className="space-y-6 max-w-5xl">
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
           <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Pacientes</h2>
           <p className="text-on-surface-variant text-sm mt-1 font-sans">
             {safePatients.length} paciente{safePatients.length !== 1 ? "s" : ""} cadastrado{safePatients.length !== 1 ? "s" : ""}
           </p>
         </div>
-        <NewPatientModal />
+        <div className="flex items-center gap-2 flex-wrap">
+          {/* Link de cadastro */}
+          <CopyLinkButton
+            slug={clinic.slug as string}
+            label="Link de cadastro"
+            icon="link"
+            path="/pacientes/cadastro"
+          />
+          {/* Importar CSV */}
+          <button className="flex items-center gap-2 border border-outline-variant text-primary text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-surface-container transition-colors font-headline">
+            <span className="material-symbols-outlined text-xl">upload_file</span>
+            Importar
+          </button>
+          <NewPatientModal />
+        </div>
       </div>
 
       {safePatients.length > 0 ? (

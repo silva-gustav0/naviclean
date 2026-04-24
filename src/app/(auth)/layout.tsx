@@ -18,7 +18,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           {children}
         </div>
         <div className="mt-auto pt-12 flex items-center gap-6 text-[10px] text-outline font-sans uppercase tracking-widest">
-          <span className="font-bold text-primary">© 2024 NaviClin</span>
+          <span className="font-bold text-primary">© 2026 NaviClin</span>
           <Link href="/privacidade" className="hover:text-primary transition-colors">Privacidade</Link>
           <Link href="/seguranca" className="hover:text-primary transition-colors">Segurança</Link>
         </div>
@@ -42,7 +42,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             </div>
             <div>
               <p className="text-white font-bold font-headline">Dra. Ana Paula Ferreira</p>
-              <p className="text-on-primary-container text-sm font-sans uppercase tracking-wider">
+              <p className="text-white/60 text-sm font-sans uppercase tracking-wider">
                 Diretora Clínica, Sorriso Perfeito
               </p>
             </div>

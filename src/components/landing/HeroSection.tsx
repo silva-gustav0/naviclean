@@ -238,13 +238,31 @@ export function HeroSection() {
           <div style={{ textAlign: "center", fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--nc-on-surface-variant)", marginBottom: 24 }}>
             Confiado por clínicas em todo o Brasil
           </div>
-          <div className="trust-grid" style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 24, opacity: 0.7 }}>
-            {["Odonto Prime", "Sorriso&Co", "Clínica Avanço", "Dentari", "Viva Odonto", "Studio Smile"].map((name) => (
+          <div className="trust-grid" style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 24, opacity: 0.75 }}>
+            {[
+              { name: "Odonto Prime",  initials: "OP" },
+              { name: "Sorriso&Co",    initials: "SC" },
+              { name: "Clínica Avanço",initials: "CA" },
+              { name: "Dentari",       initials: "DN" },
+              { name: "Viva Odonto",   initials: "VO" },
+              { name: "Studio Smile",  initials: "SS" },
+            ].map(({ name, initials }) => (
               <div key={name} style={{
-                height: 36, display: "flex", alignItems: "center", justifyContent: "center",
-                color: "var(--nc-on-surface-variant)", fontFamily: "var(--font-headline)", fontSize: 15, fontWeight: 500,
-                border: "1px dashed var(--nc-outline-variant)", borderRadius: 8,
+                height: 44, display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+                color: "var(--nc-on-surface-variant)", fontFamily: "var(--font-headline)", fontSize: 14, fontWeight: 500,
+                border: "1px solid var(--nc-outline-variant)", borderRadius: 10,
+                padding: "0 14px",
               }}>
+                <div style={{
+                  width: 26, height: 26, borderRadius: "50%",
+                  background: "var(--nc-primary-container)",
+                  color: "#fff",
+                  display: "grid", placeItems: "center",
+                  fontSize: 10, fontWeight: 700, flexShrink: 0,
+                  letterSpacing: "0.02em",
+                }}>
+                  {initials}
+                </div>
                 {name}
               </div>
             ))}

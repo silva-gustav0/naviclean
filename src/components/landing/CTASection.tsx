@@ -23,7 +23,7 @@ export function CTASection() {
         margin: "0 auto",
       }}>
         <span className="eyebrow" style={{ color: "#E6C78E" }}>
-          Comece hoje — sem compromisso
+          Pronto para começar
         </span>
 
         <h2 style={{
@@ -36,12 +36,12 @@ export function CTASection() {
           margin: "20px auto 20px",
           maxWidth: "20ch",
         }}>
-          Pronto para elevar o nível da sua{" "}
-          <em style={{ fontStyle: "italic", color: "var(--nc-secondary)" }}>gestão?</em>
+          Sua clínica merece uma{" "}
+          <em style={{ fontStyle: "italic", color: "var(--nc-secondary)" }}>gestão à altura.</em>
         </h2>
 
         <p style={{ fontSize: "clamp(17px, 1.25vw, 20px)", color: "rgba(255,255,255,0.72)", margin: "0 auto 32px", maxWidth: "60ch", lineHeight: 1.5 }}>
-          Junte-se a mais de 1.200 clínicas que já transformaram seu atendimento. 14 dias grátis, sem cartão de crédito.
+          Veja o NaviClin rodando com os dados da sua clínica em uma demonstração de 30 minutos. Sem compromisso.
         </p>
 
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
@@ -60,6 +60,9 @@ export function CTASection() {
             }}
           >
             Agendar demonstração
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
           </button>
 
           <a
@@ -75,19 +78,8 @@ export function CTASection() {
             }}
             className="cta-btn-ghost"
           >
-            Ver planos e preços
+            Ver planos
           </a>
-        </div>
-
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 24, marginTop: 32, color: "rgba(255,255,255,0.75)", fontSize: 13 }}>
-          {["Sem contrato de fidelidade", "Cancele quando quiser", "Suporte em português", "LGPD compliance"].map((t) => (
-            <span key={t} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(201,148,58,0.9)" strokeWidth="2.5">
-                <path d="M20 6L9 17l-5-5"/>
-              </svg>
-              {t}
-            </span>
-          ))}
         </div>
       </div>
 

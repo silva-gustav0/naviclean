@@ -3,12 +3,12 @@
 import { useState } from "react"
 
 const faqs = [
-  { q: "Preciso instalar alguma coisa?", a: "Não. O NaviClin é 100% web — funciona em qualquer dispositivo com navegador. Sem instalação, sem atualizações manuais." },
-  { q: "Posso migrar meus dados atuais?", a: "Sim. Nossa equipe faz a migração gratuita de qualquer sistema. Importamos pacientes, prontuários e histórico financeiro em até 5 dias úteis." },
-  { q: "Como funciona o período de teste?", a: "14 dias completos, com todos os recursos do plano Profissional. Sem cartão de crédito, sem compromisso. Basta criar sua conta." },
-  { q: "O sistema é seguro e atende à LGPD?", a: "Sim. Usamos criptografia AES-256, backups automáticos a cada 6 horas, hospedagem em nuvem brasileira certificada ISO 27001 e DPA completo." },
-  { q: "Quantos usuários posso ter?", a: "Depende do seu plano. O Básico suporta 1 profissional, o Profissional até 5, e o Enterprise é ilimitado. Usuários administrativos (recepção, financeiro) não contam no limite." },
-  { q: "E se eu precisar cancelar?", a: "Cancele quando quiser, sem multa. Seus dados ficam disponíveis por 30 dias após o cancelamento, e você pode exportar tudo em formato aberto." },
+  { q: "Quanto tempo leva para a clínica estar no ar?", a: "Em média 3 a 5 dias úteis. Importamos sua base de pacientes, configuramos profissionais, agenda e tabela de preços. Você entra na plataforma já operando." },
+  { q: "Meus dados são seguros?", a: "Sim. Dados hospedados no Brasil, criptografia em trânsito e em repouso, backups a cada 4 horas, e conformidade com LGPD e CFM. Você é o proprietário de todos os dados." },
+  { q: "Posso migrar do sistema que uso hoje?", a: "Sim. Importamos pacientes, histórico clínico, agenda e financeiro dos principais sistemas do mercado. Nossa equipe cuida disso sem custo adicional nos planos Profissional e Grupos." },
+  { q: "Funciona no celular?", a: "Funciona. Plataforma 100% responsiva e apps nativos para iOS e Android para agenda, prontuário e consulta rápida." },
+  { q: "Existe fidelidade?", a: "Não. Cancele a qualquer momento sem multa. Acreditamos que você fica porque quer, não porque precisa." },
+  { q: "Emite nota fiscal de serviço?", a: "Sim, com integração direta com as prefeituras suportadas e emissão em lote. Configuração incluída na ativação." },
 ]
 
 export function FaqSection() {
@@ -23,7 +23,7 @@ export function FaqSection() {
         >
           {/* Left */}
           <div className="reveal">
-            <span className="eyebrow">Dúvidas</span>
+            <span className="eyebrow">Perguntas frequentes</span>
             <h2 style={{
               fontFamily: "var(--font-headline)",
               fontSize: "clamp(32px, 3.6vw, 56px)",
@@ -33,14 +33,13 @@ export function FaqSection() {
               lineHeight: 1.05,
               marginTop: 16,
             }}>
-              Perguntas <em style={{ fontStyle: "italic", color: "var(--nc-secondary)" }}>frequentes.</em>
+              Respostas <em style={{ fontStyle: "italic", color: "var(--nc-secondary)" }}>diretas</em>, sem letra miúda.
             </h2>
             <p style={{ fontSize: 16, color: "var(--nc-on-surface-variant)", lineHeight: 1.6, marginTop: 20 }}>
-              Não encontrou o que procura?{" "}
+              Não achou o que procurava?{" "}
               <a href="/contato" style={{ color: "var(--nc-secondary)", borderBottom: "1px solid var(--nc-secondary)", paddingBottom: 2 }}>
-                Fale com a gente
+                Fale com um especialista.
               </a>
-              .
             </p>
           </div>
 

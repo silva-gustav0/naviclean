@@ -18,7 +18,11 @@ export async function updateProfile(formData: FormData) {
 
   if (error) return { error: error.message }
 
+  // Sync auth metadata so layout reads the updated name
+  await supabase.auth.updateUser({ data: { full_name } })
+
   revalidatePath("/configuracoes/perfil")
   revalidatePath("/dashboard")
+  revalidatePath("/", "layout")
   return { success: true }
 }

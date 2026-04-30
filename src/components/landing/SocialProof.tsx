@@ -30,15 +30,33 @@ function CountUp({ target, suffix = "", prefix = "" }: { target: number; suffix?
 }
 
 const stats = [
-  { target: 1200, suffix: "+", prefix: "",  label: "Clínicas ativas" },
-  { target: 42,   suffix: "%", prefix: "",  label: "Menos faltas com lembretes" },
-  { target: 99,   suffix: "%", prefix: "",  label: "Uptime garantido" },
-  { target: 14,   suffix: "",  prefix: "",  label: "Dias de teste grátis" },
+  { target: 42,   suffix: "%", prefix: "",  label: "Menos faltas, com lembretes automáticos por WhatsApp" },
+  { target: 28,   suffix: "%", prefix: "",  label: "Aumento médio de faturamento nos primeiros 6 meses" },
+  { target: 6,    suffix: "h", prefix: "",  label: "Economizadas por semana em tarefas administrativas" },
+  { target: 1200, suffix: "+", prefix: "",  label: "Clínicas ativas em 18 estados brasileiros" },
 ]
 
 export function SocialProof() {
   return (
-    <section style={{ background: "var(--card)" }}>
+    <section style={{ background: "var(--card)", padding: "96px 0" }}>
+      <div style={{ width: "100%", maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
+        <div className="reveal" style={{ textAlign: "center", marginBottom: 56 }}>
+          <span className="eyebrow">Resultados reais</span>
+          <h2 style={{
+            fontFamily: "var(--font-headline)",
+            fontSize: "clamp(32px, 3.6vw, 56px)",
+            fontWeight: 400,
+            color: "var(--nc-on-surface)",
+            letterSpacing: "-0.02em",
+            lineHeight: 1.05,
+            margin: "12px auto 0",
+            maxWidth: "22ch",
+          }}>
+            Clínicas que adotaram o NaviClin{" "}
+            <em style={{ fontStyle: "italic", color: "var(--nc-secondary)" }}>crescem mais rápido.</em>
+          </h2>
+        </div>
+      </div>
       <div style={{
         display: "grid",
         gridTemplateColumns: "repeat(4, 1fr)",
@@ -76,6 +94,7 @@ export function SocialProof() {
       </div>
 
       <style>{`
+
         @media (max-width: 1024px) {
           .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .stat-cell { border-right: none !important; border-bottom: 1px solid var(--nc-outline-variant); }

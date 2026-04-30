@@ -5,33 +5,34 @@ import { useState } from "react"
 
 const plans = [
   {
-    name: "Básico",
-    sub: "Para clínicas com 1 profissional iniciando a transformação digital.",
-    monthly: 89,
-    annual: 71,
-    features: ["1 profissional", "Agenda digital", "Prontuário básico", "Até 100 pacientes"],
-    cta: "Testar grátis",
-    href: "/cadastro?plano=basic",
+    name: "Essencial",
+    sub: "Para consultórios solo começando a digitalizar",
+    monthly: 169,
+    annual: 142,
+    features: ["1 profissional", "Agenda com lembretes", "Prontuário digital e odontograma", "Financeiro básico", "Suporte por email"],
+    cta: "Começar",
+    href: "/cadastro?plano=essencial",
   },
   {
     name: "Profissional",
-    sub: "Para clínicas em crescimento que precisam de controle total.",
-    monthly: 219,
-    annual: 175,
-    features: ["Até 5 profissionais", "Pacientes ilimitados", "Prontuário + Odontograma", "Financeiro, comissões e DRE", "WhatsApp automatizado", "Repasse de profissionais"],
-    cta: "Testar grátis",
-    href: "/cadastro?plano=professional",
+    sub: "Para clínicas com múltiplos profissionais",
+    monthly: 369,
+    annual: 309,
+    features: ["Até 5 profissionais", "Agenda multi-sala", "Comissões e repasses", "Relatórios gerenciais", "Integração WhatsApp", "Suporte prioritário"],
+    cta: "Agendar demonstração",
+    href: "/cadastro?plano=profissional",
+    openDemo: true,
     featured: true,
-    badge: "Mais popular",
+    badge: "Mais escolhido",
   },
   {
-    name: "Enterprise",
-    sub: "Para redes de clínicas com necessidade de escala e suporte dedicado.",
+    name: "Grupos",
+    sub: "Redes e franquias com múltiplas unidades",
     monthly: null,
     annual: null,
-    features: ["Profissionais ilimitados", "Multi-clínica ilimitado", "Todos os módulos", "API REST aberta", "Relatórios avançados", "Suporte premium 24/7"],
+    features: ["Profissionais ilimitados", "Múltiplas unidades", "BI consolidado", "API e integrações", "Gerente de conta dedicado", "SLA garantido"],
     cta: "Falar com consultor",
-    href: "/contato?origem=enterprise",
+    href: "/contato?origem=grupos",
   },
 ]
 
@@ -54,10 +55,10 @@ export function PricingSection() {
             margin: "12px auto 16px",
             maxWidth: "20ch",
           }}>
-            Planos que crescem com <em style={{ fontStyle: "italic", color: "var(--nc-secondary)" }}>sua clínica.</em>
+            Preço justo. <em style={{ fontStyle: "italic", color: "var(--nc-secondary)" }}>Sem surpresa.</em>
           </h2>
           <p style={{ fontSize: "clamp(17px, 1.25vw, 20px)", color: "var(--nc-on-surface-variant)", margin: "0 auto", maxWidth: "60ch", lineHeight: 1.5 }}>
-            Sem taxas de implantação, sem multas, cancele quando quiser.
+            Sem setup. Sem fidelidade. Cancele quando quiser.
           </p>
 
           {/* Billing toggle */}
@@ -71,7 +72,7 @@ export function PricingSection() {
           }}>
             {[
               { id: false, label: "Mensal" },
-              { id: true,  label: "Anual",  save: "-20%" },
+              { id: true,  label: "Anual",  save: "-2 meses" },
             ].map((opt) => (
               <button
                 key={String(opt.id)}
@@ -161,7 +162,7 @@ export function PricingSection() {
                   paddingTop: 8, paddingBottom: 8,
                   fontStyle: "italic",
                 }}>
-                  Proposta Exclusiva
+                  Sob medida
                 </div>
               ) : (
                 <div style={{
@@ -196,31 +197,53 @@ export function PricingSection() {
               </ul>
 
               {/* CTA */}
-              <Link href={plan.href} style={{ display: "block" }}>
-                <button style={{
-                  width: "100%",
-                  padding: "14px 22px",
-                  borderRadius: 999,
-                  fontWeight: 500,
-                  fontSize: 15,
-                  border: plan.featured ? "none" : "1px solid var(--nc-outline-variant)",
-                  cursor: "pointer",
-                  transition: "transform .15s, background .2s, box-shadow .2s",
-                  background: plan.featured ? "var(--nc-secondary)" : "transparent",
-                  color: plan.featured ? "var(--nc-on-secondary)" : "var(--nc-on-surface)",
-                  letterSpacing: "-0.005em",
-                }}
+              {plan.openDemo ? (
+                <button
+                  onClick={() => document.getElementById("demoModal")?.classList.add("open")}
+                  style={{
+                    width: "100%",
+                    padding: "14px 22px",
+                    borderRadius: 999,
+                    fontWeight: 500,
+                    fontSize: 15,
+                    border: "none",
+                    cursor: "pointer",
+                    transition: "transform .15s, box-shadow .2s",
+                    background: "var(--nc-secondary)",
+                    color: "var(--nc-on-secondary)",
+                    letterSpacing: "-0.005em",
+                  }}
                   className="plan-btn"
                 >
                   {plan.cta}
                 </button>
-              </Link>
+              ) : (
+                <Link href={plan.href} style={{ display: "block" }}>
+                  <button style={{
+                    width: "100%",
+                    padding: "14px 22px",
+                    borderRadius: 999,
+                    fontWeight: 500,
+                    fontSize: 15,
+                    border: "1px solid var(--nc-outline-variant)",
+                    cursor: "pointer",
+                    transition: "transform .15s, background .2s, box-shadow .2s",
+                    background: "transparent",
+                    color: "var(--nc-on-surface)",
+                    letterSpacing: "-0.005em",
+                  }}
+                    className="plan-btn"
+                  >
+                    {plan.cta}
+                  </button>
+                </Link>
+              )}
             </div>
           ))}
         </div>
 
         <p style={{ textAlign: "center", color: "var(--nc-on-surface-variant)", fontSize: 14, marginTop: 32 }}>
-          Todos os planos incluem <strong>14 dias grátis</strong> e suporte em português. Sem cartão de crédito.
+          Todos os planos incluem suporte em português. Sem cartão de crédito para começar.
         </p>
       </div>
 

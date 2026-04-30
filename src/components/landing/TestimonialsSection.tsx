@@ -1,34 +1,34 @@
 const testimonials = [
   {
-    quote: "A transição para o NaviClin foi o divisor de águas da minha clínica. O prontuário digital economiza pelo menos 1 hora de burocracia por dia.",
-    name: "Dra. Camila Santos",
-    role: "CEO, SmileCare Clinic — São Paulo",
-    initials: "CS",
+    quote: "Migramos de três sistemas diferentes para o NaviClin e, em 90 dias, nosso faturamento cresceu 31%. Mais do que o número, foi a tranquilidade da equipe — todo mundo olhando os mesmos dados.",
+    name: "Dra. Renata Monteiro",
+    role: "CEO · Odonto Prime · São Paulo",
+    initials: "RM",
     wide: true,
   },
   {
-    quote: "O controle financeiro é incomparável. Finalmente tenho clareza sobre meus repasses e a lucratividade real de cada procedimento.",
-    name: "Dr. Ricardo Menezes",
-    role: "Diretor Clínico, Menezes Odontologia — Curitiba",
-    initials: "RM",
-  },
-  {
-    quote: "O agendamento online reduziu 40% as faltas. Os lembretes pelo WhatsApp foram um game changer.",
-    name: "Dra. Marina Oliveira",
-    role: "Ortodontista, OrtoCenter — BH",
-    initials: "MO",
-  },
-  {
-    quote: "Gerenciar 3 unidades ao mesmo tempo parecia impossível. Com o NaviClin tenho visão consolidada de tudo em tempo real.",
-    name: "Dr. Felipe Andrade",
-    role: "Diretor, Grupo DentalPro — São Paulo",
-    initials: "FA",
-  },
-  {
-    quote: "Interface limpa, intuitiva e a equipe de suporte responde em minutos. É o melhor sistema que já usei em 15 anos.",
-    name: "Dra. Luciana Freitas",
-    role: "Implantodontista, Clínica Freitas — Brasília",
+    quote: "Cortou minha semana em 6 horas. Agora chego mais cedo em casa.",
+    name: "Lucas Ferrari",
+    role: "Dentista · Studio Smile",
     initials: "LF",
+  },
+  {
+    quote: "O odontograma é melhor que qualquer um que testei em 15 anos de clínica.",
+    name: "Dra. Juliana Serra",
+    role: "Viva Odonto · Curitiba",
+    initials: "JS",
+  },
+  {
+    quote: "Finalmente enxergo o dinheiro entrando. O dashboard financeiro é divisor de águas.",
+    name: "Marcos Aguiar",
+    role: "Sócio · Clínica Avanço",
+    initials: "MA",
+  },
+  {
+    quote: "A confirmação automática pelo WhatsApp reduziu nossas faltas quase pela metade.",
+    name: "Bianca Aoki",
+    role: "Coord. · Sorriso&Co",
+    initials: "BA",
   },
 ]
 
@@ -40,7 +40,7 @@ export function TestimonialsSection() {
       <div style={{ width: "100%", maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
         {/* Head */}
         <div className="reveal" style={{ textAlign: "center", marginBottom: 56 }}>
-          <span className="eyebrow">O que dizem</span>
+          <span className="eyebrow">Quem já usa</span>
           <h2 style={{
             fontFamily: "var(--font-headline)",
             fontSize: "clamp(32px, 3.6vw, 56px)",
@@ -51,7 +51,7 @@ export function TestimonialsSection() {
             margin: "12px auto 0",
             maxWidth: "22ch",
           }}>
-            Dentistas que transformaram sua gestão
+            Histórias de clínicas que pararam de apagar incêndio.
           </h2>
         </div>
 

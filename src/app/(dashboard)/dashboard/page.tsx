@@ -42,15 +42,16 @@ export default async function DashboardPage() {
 
   if (!user) redirect("/login")
 
-  const { data: clinic } = await supabase
-    .from("clinics")
-    .select("*")
-    .eq("owner_id", user.id)
-    .single()
+  const [{ data: clinic }, { data: profile }] = await Promise.all([
+    supabase.from("clinics").select("*").eq("owner_id", user.id).single(),
+    supabase.from("profiles").select("full_name").eq("id", user.id).single(),
+  ])
 
   if (!clinic) redirect("/onboarding")
 
-  const fullName = ((user.user_metadata?.full_name as string) ?? "").trim()
+  const fullName = (
+    (profile?.full_name as string) ?? (user.user_metadata?.full_name as string) ?? ""
+  ).trim()
   const firstName = fullName.split(" ")[0] || "Doutor(a)"
   const greeting = getGreeting()
 
@@ -175,7 +176,7 @@ export default async function DashboardPage() {
   const upcoming = (upcomingRaw ?? []) as UpcomingAppointment[]
 
   return (
-    <div className="space-y-6 max-w-6xl">
+    <div className="space-y-6 w-full">
       {/* Hero banner */}
       <section className="relative rounded-2xl overflow-hidden bg-primary">
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-[#0d3a6b] to-[#0a2d58] pointer-events-none" />
@@ -233,11 +234,13 @@ export default async function DashboardPage() {
       </section>
 
       {/* KPI cards */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {kpis.map((s) => (
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 rounded-2xl overflow-hidden shadow-sm">
+        {kpis.map((s, i) => (
           <div
             key={s.label}
-            className="bg-white p-5 rounded-2xl shadow-sm border border-[#c3c6d0]/20"
+            className={`bg-white p-5 transition-colors duration-200 hover:bg-[#FDF6E9] cursor-default ${
+              i < kpis.length - 1 ? "border-r border-[#c3c6d0]/15" : ""
+            }`}
           >
             <div className="flex justify-between items-start mb-3">
               <div className="p-2.5 bg-nc-secondary/10 rounded-xl">
@@ -264,12 +267,12 @@ export default async function DashboardPage() {
       {/* Ações rápidas */}
       <section>
         <h3 className="font-headline font-bold text-sm text-primary mb-3 uppercase tracking-wide">Ações rápidas</h3>
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-0 rounded-2xl overflow-hidden shadow-sm">
           {quickActions.map((action) => (
             <Link
               key={action.href}
               href={action.href}
-              className="bg-white p-4 rounded-xl flex flex-col items-center gap-2 hover:bg-surface-container-low transition-colors shadow-sm border border-[#c3c6d0]/20 group"
+              className="bg-white p-4 rounded-none flex flex-col items-center gap-2 hover:bg-[#FDF6E9] transition-colors duration-200 border-r border-[#c3c6d0]/15 last:border-r-0 group"
             >
               <span
                 className="material-symbols-outlined text-nc-secondary group-hover:scale-110 transition-transform"

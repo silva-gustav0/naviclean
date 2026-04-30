@@ -15,6 +15,7 @@ interface InviteTeamMemberEmailProps {
   clinicName: string
   inviterName: string
   inviteUrl: string
+  role?: string
 }
 
 export function InviteTeamMemberEmail({
@@ -22,6 +23,7 @@ export function InviteTeamMemberEmail({
   clinicName,
   inviterName,
   inviteUrl,
+  role,
 }: InviteTeamMemberEmailProps) {
   return (
     <Html>
@@ -33,7 +35,7 @@ export function InviteTeamMemberEmail({
           <Text style={text}>Olá, {inviteeName}!</Text>
           <Text style={text}>
             <strong>{inviterName}</strong> convidou você para fazer parte da equipe de{" "}
-            <strong>{clinicName}</strong> no NaviClin.
+            <strong>{clinicName}</strong> no NaviClin{role ? ` como ${role}` : ""}.
           </Text>
           <Text style={text}>
             Clique no botão abaixo para aceitar o convite e criar sua conta.

@@ -2,9 +2,10 @@ import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 
 const ROLES = [
-  { key: "clinic_owner", label: "Proprietário" },
+  { key: "clinic_owner", label: "Administrador" },
+  { key: "doctor", label: "Médico Filiado" },
   { key: "dentist", label: "Dentista Filiado" },
-  { key: "independent_professional", label: "Prof. Independente" },
+  { key: "independent_professional", label: "Prof. Independente Filiado" },
   { key: "receptionist", label: "Recepcionista" },
 ]
 
@@ -25,28 +26,31 @@ const PERMISSIONS = [
   { key: "export_data", label: "Exportar dados" },
 ]
 
+// Profissionais filiados (médico, dentista, independente filiado) — acesso individual
+const AFFILIATED_PROFESSIONAL = {
+  view_dashboard: true,  manage_appointments: true,  view_patients: true,
+  edit_patients: true,   view_records: true,          edit_records: true,
+  view_financial: true,  manage_financial: false,     view_stock: false,
+  manage_stock: false,   manage_team: false,          manage_settings: false,
+  view_reports: false,   export_data: false,
+}
+
 const DEFAULT_MATRIX: Record<string, Record<string, boolean>> = {
+  // Administrador: acesso total
   clinic_owner: Object.fromEntries(PERMISSIONS.map((p) => [p.key, true])),
-  dentist: {
-    view_dashboard: true, manage_appointments: true, view_patients: true,
-    edit_patients: false, view_records: true, edit_records: true,
-    view_financial: false, manage_financial: false, view_stock: false,
-    manage_stock: false, manage_team: false, manage_settings: false,
-    view_reports: false, export_data: false,
-  },
-  independent_professional: {
-    view_dashboard: true, manage_appointments: true, view_patients: true,
-    edit_patients: false, view_records: true, edit_records: true,
-    view_financial: true, manage_financial: false, view_stock: false,
-    manage_stock: false, manage_team: false, manage_settings: false,
-    view_reports: true, export_data: false,
-  },
+  // Médico filiado: dashboard, agenda, pacientes, financeiro (repasse), treinamento
+  doctor: AFFILIATED_PROFESSIONAL,
+  // Dentista filiado: mesmo acesso do médico filiado
+  dentist: AFFILIATED_PROFESSIONAL,
+  // Dentista independente filiado: mesmo acesso do profissional filiado
+  independent_professional: AFFILIATED_PROFESSIONAL,
+  // Recepção: dashboard, agenda geral, pacientes, financeiro, estoque, treinamento
   receptionist: {
-    view_dashboard: true, manage_appointments: true, view_patients: true,
-    edit_patients: true, view_records: false, edit_records: false,
-    view_financial: false, manage_financial: false, view_stock: true,
-    manage_stock: false, manage_team: false, manage_settings: false,
-    view_reports: false, export_data: false,
+    view_dashboard: true,  manage_appointments: true,  view_patients: true,
+    edit_patients: true,   view_records: false,         edit_records: false,
+    view_financial: true,  manage_financial: false,     view_stock: true,
+    manage_stock: true,    manage_team: false,          manage_settings: false,
+    view_reports: false,   export_data: false,
   },
 }
 

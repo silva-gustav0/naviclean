@@ -1,68 +1,203 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import { NewPatientModal } from "@/components/dashboard/modals/new-patient-modal"
-import { PatientsList } from "@/components/dashboard/patients-list"
+import { PatientsList, type PatientListItem } from "@/components/dashboard/patients-list"
+import { PatientDetailPanel } from "@/components/dashboard/patient-detail-panel"
 import { CopyLinkButton } from "@/components/dashboard/copy-link-button"
 
-export default async function PacientesPage() {
+type Appointment = {
+  id: string
+  date: string
+  start_time: string
+  status: string
+  patient_id: string
+  services: { name: string } | null
+  clinic_members: { full_name: string } | null
+}
+
+function computeStatus(
+  appointmentCount: number,
+  lastVisitDate: string | null,
+  daysSinceVisit: number | null,
+): PatientListItem["status"] {
+  if (appointmentCount === 0) return "novo"
+  if (daysSinceVisit !== null && daysSinceVisit > 90 && daysSinceVisit <= 180) return "retorno"
+  return "em_dia"
+}
+
+export default async function PacientesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ id?: string }>
+}) {
+  const { id: selectedId } = await searchParams
+
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect("/login")
 
-  const { data: clinic } = await supabase.from("clinics").select("id, slug").eq("owner_id", user.id).single()
+  const { data: clinic } = await supabase
+    .from("clinics")
+    .select("id, slug")
+    .eq("owner_id", user.id)
+    .single()
   if (!clinic) redirect("/onboarding")
 
-  const { data: patients } = await supabase
-    .from("patients")
-    .select("id, full_name, email, phone, date_of_birth")
-    .eq("clinic_id", clinic.id)
-    .order("full_name")
-    .limit(200)
+  // Busca pacientes + estatísticas de consultas em paralelo
+  const [{ data: patients }, { data: allAppointments }] = await Promise.all([
+    supabase
+      .from("patients")
+      .select("id, full_name, email, phone, date_of_birth")
+      .eq("clinic_id", clinic.id)
+      .eq("is_active", true)
+      .order("full_name")
+      .limit(300),
+    supabase
+      .from("appointments")
+      .select("id, date, start_time, status, patient_id, services(name), clinic_members(full_name)")
+      .eq("clinic_id", clinic.id)
+      .order("date", { ascending: false }),
+  ])
 
-  const safePatients = (patients ?? []).map((p) => ({
-    id: p.id as string,
-    full_name: p.full_name as string,
-    email: p.email as string | null,
-    phone: p.phone as string | null,
-    date_of_birth: p.date_of_birth as string | null,
-  }))
+  // Agrupa consultas por paciente
+  const aptMap: Record<string, Appointment[]> = {}
+  for (const apt of (allAppointments ?? []) as Appointment[]) {
+    if (!apt.patient_id) continue
+    if (!aptMap[apt.patient_id]) aptMap[apt.patient_id] = []
+    aptMap[apt.patient_id].push(apt)
+  }
+
+  const today = new Date()
+
+  const patientItems: PatientListItem[] = (patients ?? []).map((p) => {
+    const apts = aptMap[p.id as string] ?? []
+    const completedApts = apts.filter((a) => a.status !== "cancelled")
+    const lastApt = completedApts[0]
+    const lastVisitDate = lastApt?.date ?? null
+    const daysSinceVisit = lastVisitDate
+      ? Math.floor((today.getTime() - new Date(lastVisitDate + "T00:00:00").getTime()) / (1000 * 60 * 60 * 24))
+      : null
+    const status = computeStatus(completedApts.length, lastVisitDate, daysSinceVisit)
+
+    return {
+      id: p.id as string,
+      full_name: p.full_name as string,
+      email: p.email as string | null,
+      phone: p.phone as string | null,
+      date_of_birth: p.date_of_birth as string | null,
+      appointmentCount: completedApts.length,
+      lastVisitDate,
+      daysSinceVisit,
+      status,
+    }
+  })
+
+  // Detalhe do paciente selecionado
+  let selectedPatient = null
+  if (selectedId) {
+    const { data: patientRaw } = await supabase
+      .from("patients")
+      .select("id, full_name, email, phone, date_of_birth, cpf, rg, health_insurance, address_street, address_number, address_city, address_state, gender")
+      .eq("id", selectedId)
+      .eq("clinic_id", clinic.id)
+      .single()
+
+    if (patientRaw) {
+      const apts = aptMap[selectedId] ?? []
+      const completed = apts.filter((a) => a.status !== "cancelled")
+      const lastVisit = completed[0]?.date ?? null
+
+      selectedPatient = {
+        id: patientRaw.id as string,
+        full_name: patientRaw.full_name as string,
+        email: patientRaw.email as string | null,
+        phone: patientRaw.phone as string | null,
+        date_of_birth: patientRaw.date_of_birth as string | null,
+        cpf: patientRaw.cpf as string | null,
+        rg: patientRaw.rg as string | null,
+        health_insurance: patientRaw.health_insurance as string | null,
+        address_street: patientRaw.address_street as string | null,
+        address_number: patientRaw.address_number as string | null,
+        address_city: patientRaw.address_city as string | null,
+        address_state: patientRaw.address_state as string | null,
+        gender: patientRaw.gender as string | null,
+        appointmentCount: completed.length,
+        lastVisitDate: lastVisit,
+        recentAppointments: apts.slice(0, 4),
+      }
+    }
+  }
 
   return (
-    <div className="space-y-6 max-w-5xl">
-      <div className="flex items-start justify-between gap-4 flex-wrap">
+    <div className="flex flex-col h-[calc(100vh-theme(spacing.16))]">
+      {/* Header */}
+      <div className="flex items-start justify-between gap-4 flex-wrap mb-4 shrink-0">
         <div>
           <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Pacientes</h2>
           <p className="text-on-surface-variant text-sm mt-1 font-sans">
-            {safePatients.length} paciente{safePatients.length !== 1 ? "s" : ""} cadastrado{safePatients.length !== 1 ? "s" : ""}
+            {patientItems.length} cadastro{patientItems.length !== 1 ? "s" : ""} — prontuário digital completo
           </p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
-          {/* Link de cadastro */}
           <CopyLinkButton
             slug={clinic.slug as string}
             label="Link de cadastro"
             icon="link"
             path="/pacientes/cadastro"
           />
-          {/* Importar CSV */}
-          <button className="flex items-center gap-2 border border-outline-variant text-primary text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-surface-container transition-colors font-headline">
-            <span className="material-symbols-outlined text-xl">upload_file</span>
+          <button className="flex items-center gap-2 border border-[#c3c6d0]/50 text-primary text-sm font-semibold px-4 py-2 rounded-xl hover:bg-surface-container transition-colors font-headline">
+            <span className="material-symbols-outlined" style={{ fontSize: 18 }}>upload_file</span>
             Importar
           </button>
           <NewPatientModal />
         </div>
       </div>
 
-      {safePatients.length > 0 ? (
-        <PatientsList patients={safePatients} />
+      {/* Split layout */}
+      {patientItems.length > 0 ? (
+        <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-4">
+          {/* Lista à esquerda */}
+          <div className="bg-white rounded-2xl border border-[#c3c6d0]/20 shadow-sm p-3 flex flex-col min-h-0">
+            <PatientsList patients={patientItems} />
+          </div>
+
+          {/* Painel de detalhe à direita */}
+          <div className="min-h-0">
+            {selectedPatient ? (
+              <PatientDetailPanel patient={selectedPatient} />
+            ) : (
+              <div className="bg-white rounded-2xl border border-[#c3c6d0]/20 shadow-sm h-full flex flex-col items-center justify-center text-center p-8">
+                <div className="w-16 h-16 rounded-2xl bg-surface-container-low flex items-center justify-center mb-4">
+                  <span
+                    className="material-symbols-outlined text-outline text-3xl"
+                    style={{ fontVariationSettings: "'FILL' 0" }}
+                  >
+                    person
+                  </span>
+                </div>
+                <h3 className="font-headline font-semibold text-primary text-base mb-1">
+                  Selecione um paciente
+                </h3>
+                <p className="text-on-surface-variant text-sm font-sans max-w-xs">
+                  Clique em um paciente na lista para visualizar os dados e o histórico completo.
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
       ) : (
-        <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 py-16 text-center shadow-premium-sm">
+        <div className="bg-white rounded-2xl border border-[#c3c6d0]/20 py-16 text-center shadow-sm">
           <div className="w-16 h-16 rounded-2xl bg-nc-secondary/10 flex items-center justify-center mx-auto mb-4">
-            <span className="material-symbols-outlined text-nc-secondary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+            <span
+              className="material-symbols-outlined text-nc-secondary text-3xl"
+              style={{ fontVariationSettings: "'FILL' 1" }}
+            >
               groups
             </span>
           </div>
-          <h3 className="font-headline font-semibold text-primary text-base mb-1">Nenhum paciente ainda</h3>
+          <h3 className="font-headline font-semibold text-primary text-base mb-1">
+            Nenhum paciente ainda
+          </h3>
           <p className="text-on-surface-variant text-sm mb-6 max-w-xs mx-auto font-sans">
             Cadastre o primeiro paciente para começar a organizar os atendimentos.
           </p>

@@ -2,15 +2,22 @@ import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 
 export const PERMISSIONS = {
-  'finance:read_all': ['clinic_owner'],
+  // Financeiro: admin e recepção veem tudo; filiados veem só o próprio repasse (filtro no dado)
+  'finance:read_all': ['clinic_owner', 'receptionist'],
+  'finance:read_own': ['clinic_owner', 'receptionist', 'dentist', 'doctor', 'independent_professional'],
   'finance:write': ['clinic_owner'],
-  'stock:manage': ['clinic_owner'],
+  // Estoque: admin e recepção gerenciam; filiados registram saída
+  'stock:manage': ['clinic_owner', 'receptionist'],
   'stock:exit': ['clinic_owner', 'receptionist', 'dentist', 'doctor', 'independent_professional'],
+  // Pacientes: filiados veem dados sensíveis; recepção vê dados básicos
   'patient:read_sensitive': ['clinic_owner', 'dentist', 'doctor', 'independent_professional'],
   'patient:read_basic': ['clinic_owner', 'dentist', 'doctor', 'receptionist', 'independent_professional'],
-  'evolution:write': ['dentist', 'doctor', 'independent_professional', 'clinic_owner'],
+  // Prontuário: apenas profissionais clínicos
+  'evolution:write': ['clinic_owner', 'dentist', 'doctor', 'independent_professional'],
+  // Agenda: admin e recepção gerenciam; filiados apenas visualizam/agendam os próprios
   'appointment:manage': ['clinic_owner', 'receptionist'],
   'appointment:view': ['clinic_owner', 'receptionist', 'dentist', 'doctor', 'independent_professional'],
+  // Configurações e equipe: apenas admin
   'settings:manage': ['clinic_owner'],
   'team:manage': ['clinic_owner'],
 } as const

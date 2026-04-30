@@ -2,6 +2,7 @@ import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { SidebarNav } from "@/components/dashboard/sidebar-nav"
 import { ThemeToggle } from "@/components/ui/ThemeToggle"
+import { ROLE_LABELS } from "@/lib/auth/nav-config"
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -9,63 +10,117 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   if (!user) redirect("/login")
 
-  const { data: clinic } = await supabase
+  let clinicName = "Minha Clínica"
+  let clinicId = ""
+  let effectiveRole = "clinic_owner"
+
+  const { data: ownedClinic } = await supabase
     .from("clinics")
-    .select("name")
+    .select("id, name")
     .eq("owner_id", user.id)
     .single()
 
-  const fullName: string = (user.user_metadata?.full_name as string) ?? user.email ?? ""
+  if (ownedClinic) {
+    clinicName = ownedClinic.name
+    clinicId = ownedClinic.id
+    effectiveRole = "clinic_owner"
+  } else {
+    const { data: membership } = await supabase
+      .from("clinic_members")
+      .select("role, clinic_id")
+      .eq("user_id", user.id)
+      .eq("is_active", true)
+      .single()
+
+    if (!membership) redirect("/onboarding")
+
+    const memberRole = membership.role as string
+    effectiveRole = memberRole === "independent_professional" ? "affiliated_professional" : memberRole
+    clinicId = membership.clinic_id
+
+    const { data: memberClinic } = await supabase
+      .from("clinics")
+      .select("name")
+      .eq("id", membership.clinic_id)
+      .single()
+
+    clinicName = memberClinic?.name ?? "Clínica"
+  }
+
+  // Badge de agendamentos de hoje na sidebar
+  const todayStr = new Date().toISOString().split("T")[0]
+  const { count: agendaBadge } = clinicId
+    ? await supabase
+        .from("appointments")
+        .select("*", { count: "exact", head: true })
+        .eq("clinic_id", clinicId)
+        .eq("date", todayStr)
+    : { count: 0 }
+
+  const fullName: string = (user.user_metadata?.full_name as string) ?? ""
   const initials = fullName
     .split(" ")
     .slice(0, 2)
     .map((n: string) => n[0])
     .join("")
-    .toUpperCase() || "?"
+    .toUpperCase() || (user.email?.[0]?.toUpperCase() ?? "?")
 
   const firstName = fullName.split(" ")[0] || "Usuário"
+  const roleLabel = ROLE_LABELS[effectiveRole] ?? "Usuário"
 
   return (
-    <div className="flex h-screen overflow-hidden bg-surface">
+    <div className="flex h-screen overflow-hidden bg-[#FAFAF7]">
       <SidebarNav
-        clinicName={clinic?.name ?? "Minha Clínica"}
+        clinicName={clinicName}
         userEmail={user.email ?? ""}
         userInitials={initials}
+        userRole={effectiveRole}
+        userRoleLabel={roleLabel}
+        userName={fullName || undefined}
+        agendaBadge={agendaBadge ?? 0}
       />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden md:ml-64">
         {/* Topbar */}
-        <header className="sticky top-0 z-30 glass-header flex items-center px-8 py-4 gap-4 shadow-premium">
-          <div className="flex-1 max-w-xl">
-            <div className="relative group">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">
+        <header className="sticky top-0 z-30 bg-[#FAFAF7] border-b border-[#c3c6d0]/30 flex items-center px-8 py-3 gap-4">
+          <div className="flex-1 max-w-lg">
+            <div className="relative">
+              <span
+                className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline"
+                style={{ fontSize: 18 }}
+              >
                 search
               </span>
               <input
                 type="text"
                 placeholder="Buscar pacientes, agendamentos..."
-                className="w-full pl-10 pr-4 py-2 text-sm bg-surface-container-low border-none rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                className="w-full pl-9 pr-4 py-2 text-sm bg-surface-container-low border border-outline-variant/20 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline/60"
               />
             </div>
           </div>
 
-          <div className="ml-auto flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              <ThemeToggle />
-              <button className="relative w-10 h-10 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors">
-                <span className="material-symbols-outlined text-on-surface">notifications</span>
-                <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-nc-secondary" />
-              </button>
-              <a href="/contato" className="w-10 h-10 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors">
-                <span className="material-symbols-outlined text-on-surface">help_outline</span>
-              </a>
-            </div>
-            <div className="flex items-center gap-3 pl-6 border-l border-outline-variant/30">
+          <div className="ml-auto flex items-center gap-2">
+            <ThemeToggle />
+            <button className="relative w-9 h-9 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors">
+              <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 20 }}>
+                notifications
+              </span>
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-nc-secondary border-2 border-[#FAFAF7]" />
+            </button>
+            <a
+              href="/contato"
+              className="w-9 h-9 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors"
+            >
+              <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 20 }}>
+                help_outline
+              </span>
+            </a>
+            <div className="flex items-center gap-2.5 pl-3 border-l border-outline-variant/30">
               <div className="text-right hidden lg:block">
-                <p className="text-sm font-semibold text-primary font-headline">{firstName}</p>
-                <p className="text-[10px] text-outline font-bold uppercase tracking-widest">Administrador</p>
+                <p className="text-sm font-semibold text-primary font-headline leading-tight">{firstName}</p>
+                <p className="text-[10px] text-outline font-bold uppercase tracking-widest">{roleLabel}</p>
               </div>
-              <div className="w-10 h-10 rounded-full surgical-gradient flex items-center justify-center text-white text-xs font-bold border-2 border-surface-container-high">
+              <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-surface-container-low font-headline">
                 {initials}
               </div>
             </div>

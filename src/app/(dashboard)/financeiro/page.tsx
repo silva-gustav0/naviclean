@@ -11,10 +11,10 @@ function getMonthLabel(offset: number) {
 }
 
 const subPages = [
-  { href: "/financeiro/receitas", label: "Receitas", icon: "trending_up", color: "text-emerald-600", bg: "bg-emerald-50" },
-  { href: "/financeiro/despesas", label: "Despesas", icon: "trending_down", color: "text-red-500", bg: "bg-red-50" },
-  { href: "/financeiro/comissoes", label: "Comissões", icon: "payments", color: "text-nc-secondary", bg: "bg-nc-secondary/10" },
-  { href: "/financeiro/relatorios", label: "Relatórios", icon: "bar_chart", color: "text-primary", bg: "bg-primary/10" },
+  { href: "/financeiro/receitas", label: "Receitas", description: "Listar e filtrar", icon: "trending_up", color: "text-emerald-600", bg: "bg-emerald-50" },
+  { href: "/financeiro/despesas", label: "Despesas", description: "Por categoria", icon: "trending_down", color: "text-red-500", bg: "bg-red-50" },
+  { href: "/financeiro/comissoes", label: "Comissões", description: "Por profissional", icon: "payments", color: "text-nc-secondary", bg: "bg-nc-secondary/10" },
+  { href: "/financeiro/relatorios", label: "Relatórios", description: "DRE e análises", icon: "bar_chart", color: "text-primary", bg: "bg-primary/10" },
 ]
 
 export default async function FinanceiroPage() {
@@ -84,15 +84,21 @@ export default async function FinanceiroPage() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Financeiro</h2>
-          <p className="text-on-surface-variant text-sm mt-1 font-sans">Controle de receitas e despesas</p>
+          <p className="text-on-surface-variant text-sm mt-1 font-sans">Controle de receitas, despesas e comissões</p>
         </div>
-        <NewTransactionModal />
+        <div className="flex items-center gap-2">
+          <button className="text-primary border border-outline-variant text-sm font-semibold px-4 py-2 rounded-xl hover:bg-surface-container transition-colors font-headline flex items-center gap-2">
+            <span className="material-symbols-outlined" style={{ fontSize: 16 }}>download</span>
+            Exportar DRE
+          </button>
+          <NewTransactionModal />
+        </div>
       </div>
 
       {/* KPI cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {kpis.map((kpi) => (
-          <div key={kpi.label} className="bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant/10 shadow-premium-sm">
+          <div key={kpi.label} className="bg-white rounded-2xl p-5 border border-[#c3c6d0]/20 shadow-sm">
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${kpi.bgClass}`}>
               <span className={`material-symbols-outlined text-xl ${kpi.colorClass}`} style={{ fontVariationSettings: "'FILL' 1" }}>
                 {kpi.icon}
@@ -110,15 +116,18 @@ export default async function FinanceiroPage() {
           <Link
             key={p.href}
             href={p.href}
-            className="bg-surface-container-lowest border border-outline-variant/10 rounded-xl p-4 flex items-center gap-3 hover:border-nc-secondary/30 hover:shadow-premium-sm transition-all group"
+            className="bg-white border border-[#c3c6d0]/20 rounded-xl p-4 flex items-center gap-3 hover:border-nc-secondary/30 hover:shadow-sm transition-all group"
           >
             <div className={`w-9 h-9 rounded-xl ${p.bg} flex items-center justify-center shrink-0`}>
               <span className={`material-symbols-outlined text-lg ${p.color}`} style={{ fontVariationSettings: "'FILL' 1" }}>
                 {p.icon}
               </span>
             </div>
-            <span className="text-sm font-semibold text-primary font-headline">{p.label}</span>
-            <span className="material-symbols-outlined text-outline text-lg ml-auto group-hover:translate-x-0.5 transition-transform">
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-primary font-headline">{p.label}</p>
+              <p className="text-[10px] text-on-surface-variant font-sans truncate">{p.description}</p>
+            </div>
+            <span className="material-symbols-outlined text-outline text-lg ml-auto group-hover:translate-x-0.5 transition-transform shrink-0">
               arrow_forward
             </span>
           </Link>
@@ -126,25 +135,24 @@ export default async function FinanceiroPage() {
       </div>
 
       {/* Chart */}
-      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 p-5 shadow-premium-sm">
+      <div className="bg-white rounded-2xl border border-[#c3c6d0]/20 p-5 shadow-sm">
         <h3 className="font-headline font-semibold text-primary text-sm mb-4">Receitas vs Despesas — últimos 6 meses</h3>
         <FinanceiroChart data={chartData} />
       </div>
 
       {/* Recent transactions */}
-      <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 overflow-hidden shadow-premium-sm">
-        <div className="px-5 py-4 border-b border-outline-variant/10 flex items-center justify-between">
+      <div className="bg-white rounded-2xl border border-[#c3c6d0]/20 overflow-hidden shadow-sm">
+        <div className="px-5 py-4 border-b border-[#c3c6d0]/20 flex items-center justify-between">
           <h3 className="font-headline font-semibold text-primary text-sm">Últimas movimentações</h3>
-          <div className="flex gap-3">
-            <Link href="/financeiro/receitas" className="text-xs text-nc-secondary font-semibold hover:underline underline-offset-2 font-sans">Ver receitas</Link>
-            <Link href="/financeiro/despesas" className="text-xs text-nc-secondary font-semibold hover:underline underline-offset-2 font-sans">Ver despesas</Link>
-          </div>
+          <Link href="/financeiro/receitas" className="text-xs text-nc-secondary font-semibold hover:underline underline-offset-2 font-sans">
+            Ver tudo
+          </Link>
         </div>
 
         {recentTx.length > 0 ? (
-          <div className="divide-y divide-outline-variant/10">
+          <div className="divide-y divide-[#c3c6d0]/15">
             {recentTx.map((t) => (
-              <div key={t.id as string} className="flex items-center gap-4 px-5 py-3.5 hover:bg-surface-container-low transition-colors">
+              <div key={t.id as string} className="flex items-center gap-4 px-5 py-3.5 hover:bg-surface-container-low/50 transition-colors">
                 <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
                   t.type === "income" ? "bg-emerald-50" : "bg-red-50"
                 }`}>
@@ -175,14 +183,14 @@ export default async function FinanceiroPage() {
             ))}
           </div>
         ) : (
-          <div className="py-16 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-nc-secondary/10 flex items-center justify-center mx-auto mb-4">
-              <span className="material-symbols-outlined text-nc-secondary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+          <div className="py-14 text-center">
+            <div className="w-14 h-14 rounded-2xl bg-nc-secondary/10 flex items-center justify-center mx-auto mb-4">
+              <span className="material-symbols-outlined text-nc-secondary text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
                 payments
               </span>
             </div>
             <h3 className="font-headline font-semibold text-primary text-base mb-1">Nenhuma movimentação</h3>
-            <p className="text-on-surface-variant text-sm mb-6 max-w-xs mx-auto font-sans">
+            <p className="text-on-surface-variant text-sm mb-5 max-w-xs mx-auto font-sans">
               Registre receitas e despesas para ter controle financeiro completo.
             </p>
             <NewTransactionModal />

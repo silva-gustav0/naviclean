@@ -32,7 +32,8 @@
       "Bash(unzip -o stitch_markdown_execution_engine.zip -d stitch-export)",
       "Bash(vercel *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git commit -m 'fix: substituir ícone clipboard_medical \\(inexistente\\) por clinical_notes *)"
     ]
   }
 }

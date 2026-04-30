@@ -186,16 +186,16 @@ export function PatientDetailPanel({ patient }: { patient: PatientDetail }) {
       <div className="flex-1 overflow-y-auto p-4">
         {activeTab === 0 && (
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-              {statCards.map((s) => (
+            <div className="grid grid-cols-4 gap-0 rounded-2xl overflow-hidden border border-outline-variant/20 shadow-sm">
+              {statCards.map((s, i) => (
                 <div
                   key={s.label}
-                  className="bg-background rounded-xl p-3 border border-outline-variant/20 text-center"
+                  className={`bg-background p-3 text-center ${i < statCards.length - 1 ? "border-r border-outline-variant/20" : ""}`}
                 >
-                  <p className="text-[10px] text-on-surface-variant uppercase tracking-wide font-sans mb-1">
+                  <p className="text-[10px] text-on-surface-variant uppercase tracking-wide font-sans mb-1 truncate">
                     {s.label}
                   </p>
-                  <p className={`font-headline font-bold text-lg ${s.color}`}>{s.value}</p>
+                  <p className={`font-headline font-bold text-base ${s.color}`}>{s.value}</p>
                 </div>
               ))}
             </div>

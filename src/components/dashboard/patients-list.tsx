@@ -111,12 +111,12 @@ export function PatientsList({ patients }: { patients: PatientListItem[] }) {
       </div>
 
       {/* Filter tabs */}
-      <div className="flex items-center gap-1 mb-3">
+      <div className="flex items-center gap-0.5 mb-3 overflow-x-auto scrollbar-none">
         {STATUS_FILTER_TABS.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setFilterTab(tab.key)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-all ${
+            className={`px-2.5 py-1.5 rounded-lg text-[11px] font-semibold font-headline transition-all whitespace-nowrap shrink-0 ${
               filterTab === tab.key
                 ? "bg-primary text-white"
                 : "text-on-surface-variant hover:text-primary"

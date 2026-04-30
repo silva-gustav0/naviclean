@@ -19,6 +19,9 @@ export async function createPatient(formData: FormData) {
   const full_name = (formData.get("full_name") as string).trim()
   if (!full_name || full_name.length < 3) return { error: "Nome deve ter pelo menos 3 caracteres" }
 
+  const assignedTo = (formData.get("assigned_to") as string | null)?.trim() || null
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { error } = await supabase.from("patients").insert({
     clinic_id: clinic.id,
     full_name,
@@ -28,7 +31,8 @@ export async function createPatient(formData: FormData) {
     date_of_birth: (formData.get("date_of_birth") as string) || null,
     cpf: (formData.get("cpf") as string).trim() || null,
     gender: (formData.get("gender") as string) || null,
-  })
+    assigned_to: assignedTo,
+  } as any)  // assigned_to added via migration
 
   if (error) return { error: error.message }
 

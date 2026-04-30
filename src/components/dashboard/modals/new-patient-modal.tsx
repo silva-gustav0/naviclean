@@ -4,7 +4,11 @@ import { useRef, useState, useTransition } from "react"
 import { toast } from "sonner"
 import { createPatient } from "@/app/actions/patients"
 
-export function NewPatientModal() {
+interface Props {
+  members?: { id: string; full_name: string | null }[]
+}
+
+export function NewPatientModal({ members = [] }: Props) {
   const [open, setOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
   const [cepLoading, setCepLoading] = useState(false)
@@ -123,6 +127,19 @@ export function NewPatientModal() {
                   <input name="occupation" type="text" placeholder="Ex: Professor" className={inputCls} />
                 </div>
               </div>
+
+              {/* Profissional responsável */}
+              {members.length > 0 && (
+                <div>
+                  <label className={labelCls}>Profissional responsável</label>
+                  <select name="assigned_to" className={inputCls}>
+                    <option value="">Não atribuído</option>
+                    {members.map((m) => (
+                      <option key={m.id} value={m.id}>{m.full_name ?? "Profissional"}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               {/* Endereço */}
               <div className="border-t border-outline-variant/10 pt-4">

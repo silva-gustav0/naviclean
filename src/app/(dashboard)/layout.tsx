@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server"
 import { SidebarNav } from "@/components/dashboard/sidebar-nav"
 import { ThemeToggle } from "@/components/ui/ThemeToggle"
 import { ROLE_LABELS } from "@/lib/auth/nav-config"
+import { AppointmentReminder } from "@/components/dashboard/agenda/AppointmentReminder"
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -14,6 +15,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   let clinicId = ""
   let effectiveRole = "clinic_owner"
   let displayRoleLabel = "Administrador"
+  let memberId: string | null = null
 
   const [{ data: ownedClinic }, { data: profile }] = await Promise.all([
     supabase.from("clinics").select("id, name").eq("owner_id", user.id).single(),
@@ -28,19 +30,20 @@ export default async function DashboardLayout({ children }: { children: React.Re
     // Check if owner also has a professional role in clinic_members
     const { data: ownerMembership } = await supabase
       .from("clinic_members")
-      .select("role")
+      .select("id, role")
       .eq("user_id", user.id)
       .eq("clinic_id", ownedClinic.id)
       .eq("is_active", true)
       .maybeSingle()
 
+    memberId = ownerMembership?.id ?? null
     displayRoleLabel = ownerMembership?.role
       ? (ROLE_LABELS[ownerMembership.role as string] ?? "Administrador")
       : "Administrador"
   } else {
     const { data: membership } = await supabase
       .from("clinic_members")
-      .select("role, clinic_id")
+      .select("id, role, clinic_id")
       .eq("user_id", user.id)
       .eq("is_active", true)
       .single()
@@ -50,6 +53,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     const memberRole = membership.role as string
     effectiveRole = memberRole === "independent_professional" ? "affiliated_professional" : memberRole
     clinicId = membership.clinic_id
+    memberId = membership.id as string
     displayRoleLabel = ROLE_LABELS[effectiveRole] ?? "Usuário"
 
     const { data: memberClinic } = await supabase
@@ -85,6 +89,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
+      <AppointmentReminder memberId={memberId} clinicId={clinicId} />
       <SidebarNav
         clinicName={clinicName}
         userEmail={user.email ?? ""}

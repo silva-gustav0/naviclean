@@ -13,6 +13,7 @@ export type PatientListItem = {
   lastVisitDate: string | null
   status: "novo" | "em_dia" | "retorno" | "em_debito"
   daysSinceVisit: number | null
+  assignedToName: string | null
 }
 
 const STATUS_CONFIG = {
@@ -171,6 +172,16 @@ export function PatientsList({ patients }: { patients: PatientListItem[] }) {
                   >
                     {p.phone ?? p.email ?? "—"}
                   </p>
+                  {p.assignedToName && (
+                    <p
+                      className={`text-[10px] truncate font-sans mt-0.5 flex items-center gap-0.5 ${
+                        isSelected ? "text-white/50" : "text-outline"
+                      }`}
+                    >
+                      <span className="material-symbols-outlined" style={{ fontSize: 11 }}>stethoscope</span>
+                      {p.assignedToName}
+                    </p>
+                  )}
                 </div>
 
                 {/* Status badge */}

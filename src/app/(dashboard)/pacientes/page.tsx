@@ -43,7 +43,7 @@ export default async function PacientesPage({
     .single()
   if (!clinic) redirect("/onboarding")
 
-  const [{ data: patients }, { data: allAppointments }] = await Promise.all([
+  const [{ data: patients }, { data: allAppointments }, { data: members }] = await Promise.all([
     supabase
       .from("patients")
       .select("id, full_name, email, phone, date_of_birth")
@@ -56,7 +56,31 @@ export default async function PacientesPage({
       .select("id, date, start_time, status, patient_id, services(name), clinic_members(full_name)")
       .eq("clinic_id", clinic.id)
       .order("date", { ascending: false }),
+    supabase
+      .from("clinic_members")
+      .select("id, full_name")
+      .eq("clinic_id", clinic.id)
+      .eq("is_active", true)
+      .order("full_name"),
   ])
+
+  // Fetch assigned_to separately (column added via migration — cast avoids generated-type mismatch)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: assignedRaw } = await (supabase as any)
+    .from("patients")
+    .select("id, assigned_to")
+    .eq("clinic_id", clinic.id)
+    .eq("is_active", true) as { data: { id: string; assigned_to: string | null }[] | null }
+
+  const assignedMap: Record<string, string | null> = {}
+  for (const row of (assignedRaw ?? [])) {
+    assignedMap[row.id] = row.assigned_to
+  }
+
+  const membersMap: Record<string, string> = {}
+  for (const m of (members ?? [])) {
+    if (m.id && m.full_name) membersMap[m.id as string] = m.full_name as string
+  }
 
   const aptMap: Record<string, Appointment[]> = {}
   for (const apt of (allAppointments ?? []) as Appointment[]) {
@@ -76,6 +100,7 @@ export default async function PacientesPage({
       ? Math.floor((today.getTime() - new Date(lastVisitDate + "T00:00:00").getTime()) / (1000 * 60 * 60 * 24))
       : null
     const status = computeStatus(completedApts.length, lastVisitDate, daysSinceVisit)
+    const assignedTo = assignedMap[p.id as string] ?? null
 
     return {
       id: p.id as string,
@@ -87,6 +112,7 @@ export default async function PacientesPage({
       lastVisitDate,
       daysSinceVisit,
       status,
+      assignedToName: assignedTo ? (membersMap[assignedTo] ?? null) : null,
     }
   })
 
@@ -103,6 +129,7 @@ export default async function PacientesPage({
       const apts = aptMap[selectedId] ?? []
       const completed = apts.filter((a) => a.status !== "cancelled")
       const lastVisit = completed[0]?.date ?? null
+      const assignedTo = assignedMap[selectedId] ?? null
 
       const [
         { data: evolutions },
@@ -142,9 +169,15 @@ export default async function PacientesPage({
         faceMarks: (faceMarks ?? []) as PatientDetail["faceMarks"],
         symbols: (toothSymbols ?? []) as PatientDetail["symbols"],
         anamnesis: (anamnesis ?? null) as PatientDetail["anamnesis"],
+        assignedToName: assignedTo ? (membersMap[assignedTo] ?? null) : null,
       }
     }
   }
+
+  const membersList = (members ?? []).map((m) => ({
+    id: m.id as string,
+    full_name: m.full_name as string | null,
+  }))
 
   return (
     <div className="flex flex-col h-[calc(100vh-theme(spacing.16))]">
@@ -167,7 +200,7 @@ export default async function PacientesPage({
             <span className="material-symbols-outlined" style={{ fontSize: 18 }}>upload_file</span>
             Importar
           </button>
-          <NewPatientModal />
+          <NewPatientModal members={membersList} />
         </div>
       </div>
 
@@ -218,7 +251,7 @@ export default async function PacientesPage({
             Cadastre o primeiro paciente para começar a organizar os atendimentos.
           </p>
           <div className="flex justify-center">
-            <NewPatientModal />
+            <NewPatientModal members={membersList} />
           </div>
         </div>
       )}

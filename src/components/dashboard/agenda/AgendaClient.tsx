@@ -38,14 +38,15 @@ const STATUS_LABELS: Record<string, string> = {
 
 const NEXT_STATUSES: Record<string, { status: string; label: string; cls: string }[]> = {
   scheduled: [
-    { status: 'confirmed',    label: 'Confirmar',    cls: 'bg-blue-600 hover:bg-blue-700 text-white' },
-    { status: 'no_show',      label: 'Faltou',       cls: 'bg-red-500 hover:bg-red-600 text-white' },
-    { status: 'cancelled',    label: 'Cancelar',     cls: 'bg-red-400 hover:bg-red-500 text-white' },
+    { status: 'waiting_room', label: 'Paciente chegou',cls: 'bg-amber-500 hover:bg-amber-600 text-white' },
+    { status: 'confirmed',    label: 'Confirmar',      cls: 'bg-blue-600 hover:bg-blue-700 text-white' },
+    { status: 'no_show',      label: 'Faltou',         cls: 'bg-red-500 hover:bg-red-600 text-white' },
+    { status: 'cancelled',    label: 'Cancelar',       cls: 'bg-red-400 hover:bg-red-500 text-white' },
   ],
   confirmed: [
-    { status: 'waiting_room', label: 'Check-in na recepção', cls: 'bg-amber-500 hover:bg-amber-600 text-white' },
-    { status: 'no_show',      label: 'Faltou',               cls: 'bg-red-500 hover:bg-red-600 text-white' },
-    { status: 'cancelled',    label: 'Cancelar',             cls: 'bg-red-400 hover:bg-red-500 text-white' },
+    { status: 'waiting_room', label: 'Paciente chegou', cls: 'bg-amber-500 hover:bg-amber-600 text-white' },
+    { status: 'no_show',      label: 'Faltou',          cls: 'bg-red-500 hover:bg-red-600 text-white' },
+    { status: 'cancelled',    label: 'Cancelar',        cls: 'bg-red-400 hover:bg-red-500 text-white' },
   ],
   waiting_room: [
     { status: 'in_progress',  label: 'Chamar / Iniciar', cls: 'surgical-gradient text-white' },
@@ -347,28 +348,38 @@ export function AgendaClient({ clinicId, today, appointments, members, patients,
                 <p className="text-on-surface-variant text-sm">Nenhum agendamento neste dia</p>
               </div>
             ) : dayAppointments.map((appt) => (
-              <button
-                key={appt.id}
-                onClick={() => setSelectedAppt(appt)}
-                className="w-full flex items-center gap-4 px-5 py-4 hover:bg-surface-container transition-colors text-left group"
-              >
-                <div className={`w-1.5 h-12 rounded-full shrink-0 ${STATUS_DOT[appt.status ?? 'scheduled']}`} />
-                <div className="flex items-center gap-1.5 text-sm font-semibold text-primary w-16 shrink-0">
-                  <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 14 }}>schedule</span>
-                  {appt.start_time.slice(0, 5)}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-sm text-on-surface truncate">{appt.patients?.full_name}</p>
-                  {appt.services && <p className="text-xs text-on-surface-variant">{appt.services.name}</p>}
-                </div>
-                <div className="text-xs text-on-surface-variant shrink-0 flex items-center gap-1">
-                  <span className="material-symbols-outlined" style={{ fontSize: 13 }}>stethoscope</span>
-                  {appt.clinic_members?.full_name?.split(' ')[0] ?? 'Profissional'}
-                </div>
-                <span className={`text-[10px] shrink-0 px-2 py-0.5 rounded-full border font-medium ${STATUS_COLORS[appt.status ?? 'scheduled']}`}>
-                  {STATUS_LABELS[appt.status ?? 'scheduled']}
-                </span>
-              </button>
+              <div key={appt.id} className="flex items-center hover:bg-surface-container transition-colors group">
+                <button
+                  onClick={() => setSelectedAppt(appt)}
+                  className="flex-1 flex items-center gap-4 px-5 py-4 text-left"
+                >
+                  <div className={`w-1.5 h-12 rounded-full shrink-0 ${STATUS_DOT[appt.status ?? 'scheduled']}`} />
+                  <div className="flex items-center gap-1.5 text-sm font-semibold text-primary w-16 shrink-0">
+                    <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 14 }}>schedule</span>
+                    {appt.start_time.slice(0, 5)}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm text-on-surface truncate">{appt.patients?.full_name}</p>
+                    {appt.services && <p className="text-xs text-on-surface-variant">{appt.services.name}</p>}
+                  </div>
+                  <div className="text-xs text-on-surface-variant shrink-0 flex items-center gap-1">
+                    <span className="material-symbols-outlined" style={{ fontSize: 13 }}>stethoscope</span>
+                    {appt.clinic_members?.full_name?.split(' ')[0] ?? 'Profissional'}
+                  </div>
+                  <span className={`text-[10px] shrink-0 px-2 py-0.5 rounded-full border font-medium ${STATUS_COLORS[appt.status ?? 'scheduled']}`}>
+                    {STATUS_LABELS[appt.status ?? 'scheduled']}
+                  </span>
+                </button>
+                {(appt.status === 'scheduled' || appt.status === 'confirmed') && (
+                  <button
+                    onClick={() => handleStatusChange(appt.id, 'waiting_room')}
+                    disabled={isPending}
+                    className="mr-4 shrink-0 text-[10px] font-bold text-amber-700 border border-amber-200 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-800 dark:text-amber-400 px-2.5 py-1.5 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors opacity-0 group-hover:opacity-100 disabled:opacity-40"
+                  >
+                    Chegou
+                  </button>
+                )}
+              </div>
             ))}
           </div>
         )}

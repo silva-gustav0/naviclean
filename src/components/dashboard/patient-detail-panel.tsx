@@ -71,6 +71,7 @@ export type PatientDetail = {
   faceMarks: FaceMark[]
   symbols: ToothSymbol[]
   anamnesis: Anamnesis | null
+  assignedToName: string | null
 }
 
 const TABS = ["Visão geral", "Histórico", "Odontograma", "Documentos", "Financeiro", "Anamnese"]
@@ -147,6 +148,12 @@ export function PatientDetailPanel({ patient }: { patient: PatientDetail }) {
             <span className="text-[10px] font-semibold bg-white/10 text-white/80 px-2 py-0.5 rounded-full font-sans">
               {patient.appointmentCount} consulta{patient.appointmentCount !== 1 ? "s" : ""}
             </span>
+            {patient.assignedToName && (
+              <span className="text-[10px] font-semibold bg-nc-secondary/30 text-nc-secondary px-2 py-0.5 rounded-full font-sans flex items-center gap-0.5">
+                <span className="material-symbols-outlined" style={{ fontSize: 11 }}>stethoscope</span>
+                {patient.assignedToName}
+              </span>
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-1.5 shrink-0">

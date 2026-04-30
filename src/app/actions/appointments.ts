@@ -8,7 +8,7 @@ import { z } from "zod"
 type AppointmentStatus = 'scheduled' | 'confirmed' | 'waiting_room' | 'in_progress' | 'awaiting_payment' | 'completed' | 'cancelled' | 'no_show'
 
 const VALID_TRANSITIONS: Record<AppointmentStatus, AppointmentStatus[]> = {
-  scheduled: ['confirmed', 'cancelled', 'no_show'],
+  scheduled: ['confirmed', 'waiting_room', 'cancelled', 'no_show'],
   confirmed: ['waiting_room', 'cancelled', 'no_show'],
   waiting_room: ['in_progress', 'cancelled', 'no_show'],
   in_progress: ['awaiting_payment', 'completed'],
@@ -147,4 +147,23 @@ export async function createAppointment(values: z.infer<typeof createAppointment
 
   revalidatePath('/agenda')
   return data
+}
+
+export async function getUpcomingAppointments(clinicId: string, memberId: string) {
+  const supabase = await createClient()
+  const today = new Date().toISOString().split("T")[0]
+  const { data } = await supabase
+    .from("appointments")
+    .select("id, start_time, patients(full_name), services(name)")
+    .eq("clinic_id", clinicId)
+    .eq("dentist_id", memberId)
+    .eq("date", today)
+    .not("status", "in", '("completed","cancelled","no_show","in_progress","awaiting_payment")')
+    .order("start_time")
+  return (data ?? []) as {
+    id: string
+    start_time: string
+    patients: { full_name: string } | null
+    services: { name: string } | null
+  }[]
 }

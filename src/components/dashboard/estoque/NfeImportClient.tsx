@@ -112,7 +112,7 @@ export function NfeImportClient({ clinicId, existingItems }: Props) {
 
   if (step === "done") {
     return (
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border py-16 text-center">
+      <div className="bg-card rounded-2xl border py-16 text-center">
         <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-4">
           <CheckCircle className="h-8 w-8 text-emerald-600" />
         </div>
@@ -124,7 +124,7 @@ export function NfeImportClient({ clinicId, existingItems }: Props) {
 
   if (step === "upload") {
     return (
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border p-8">
+      <div className="bg-card rounded-2xl border p-8">
         <label className="flex flex-col items-center justify-center gap-4 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl p-10 cursor-pointer hover:border-blue-300 transition-colors">
           <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center">
             <Upload className="h-7 w-7 text-blue-600" />
@@ -163,7 +163,7 @@ export function NfeImportClient({ clinicId, existingItems }: Props) {
       </div>
 
       {/* Item mapping table */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border overflow-hidden">
+      <div className="bg-card rounded-2xl border overflow-hidden">
         <div className="px-5 py-4 border-b">
           <h2 className="font-semibold text-sm">Mapeamento de itens</h2>
           <p className="text-xs text-muted-foreground mt-0.5">
@@ -193,7 +193,7 @@ export function NfeImportClient({ clinicId, existingItems }: Props) {
                         updateMapping(i, { createNew: false, mappedItemId: e.target.value })
                       }
                     }}
-                    className="w-full text-sm border rounded-lg px-2 py-1.5 bg-white dark:bg-slate-800"
+                    className="w-full text-sm border rounded-lg px-2 py-1.5 bg-card"
                   >
                     <option value="new">+ Criar novo item</option>
                     {existingItems.map((ei) => (
@@ -209,7 +209,7 @@ export function NfeImportClient({ clinicId, existingItems }: Props) {
                     <select
                       value={m.newUnit}
                       onChange={(e) => updateMapping(i, { newUnit: e.target.value })}
-                      className="w-full text-sm border rounded-lg px-2 py-1.5 bg-white dark:bg-slate-800 mt-1"
+                      className="w-full text-sm border rounded-lg px-2 py-1.5 bg-card mt-1"
                     >
                       {UNITS.map((u) => <option key={u} value={u}>{u}</option>)}
                     </select>
@@ -219,7 +219,7 @@ export function NfeImportClient({ clinicId, existingItems }: Props) {
                     <select
                       value={m.newCategory}
                       onChange={(e) => updateMapping(i, { newCategory: e.target.value })}
-                      className="w-full text-sm border rounded-lg px-2 py-1.5 bg-white dark:bg-slate-800 mt-1"
+                      className="w-full text-sm border rounded-lg px-2 py-1.5 bg-card mt-1"
                     >
                       <option value="">Sem categoria</option>
                       {CATEGORIES.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}

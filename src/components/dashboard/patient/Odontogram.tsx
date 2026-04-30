@@ -324,7 +324,7 @@ function FaceMarkEditor({
         <select
           value={condition}
           onChange={(e) => setCondition(e.target.value)}
-          className="w-full text-xs border rounded px-2 py-1 bg-white dark:bg-slate-800"
+          className="w-full text-xs border rounded px-2 py-1 bg-card"
         >
           {TOOTH_CONDITIONS.map((c) => (
             <option key={c.value} value={c.value}>{c.label}</option>

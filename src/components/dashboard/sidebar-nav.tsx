@@ -64,7 +64,7 @@ export function SidebarNav({
     .filter((section) => section.items.length > 0)
 
   return (
-    <aside className="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 z-40 bg-primary">
+    <aside className="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 z-40 bg-[#00244a] dark:bg-[#0a1628]">
       {/* Brand */}
       <div className="flex items-center gap-3 px-5 py-5 border-b border-white/10">
         <div className="w-9 h-9 rounded-lg bg-nc-secondary flex items-center justify-center shrink-0">

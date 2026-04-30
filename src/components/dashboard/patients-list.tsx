@@ -106,7 +106,7 @@ export function PatientsList({ patients }: { patients: PatientListItem[] }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Buscar por nome, email ou telefone..."
-          className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-[#c3c6d0]/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-on-surface placeholder:text-outline/50"
+          className="w-full pl-10 pr-4 py-2.5 text-sm bg-card border border-outline-variant/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-on-surface placeholder:text-outline/50"
         />
       </div>
 

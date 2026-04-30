@@ -139,7 +139,7 @@ export function AnamnesisForm({ patientId, clinicId, initial, readOnly }: Props)
         >
           {values.hasDiabetes && (
             <select
-              className="text-sm border rounded px-2 py-1 bg-white dark:bg-slate-800"
+              className="text-sm border rounded px-2 py-1 bg-card"
               value={values.diabetesType}
               onChange={(e) => set("diabetesType", e.target.value)}
               disabled={readOnly}
@@ -228,7 +228,7 @@ export function AnamnesisForm({ patientId, clinicId, initial, readOnly }: Props)
         >
           {values.smokes && (
             <select
-              className="text-sm border rounded px-2 py-1 bg-white dark:bg-slate-800"
+              className="text-sm border rounded px-2 py-1 bg-card"
               value={values.smokingStatus}
               onChange={(e) => set("smokingStatus", e.target.value)}
               disabled={readOnly}

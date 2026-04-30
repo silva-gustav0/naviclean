@@ -122,7 +122,7 @@ export function PatientDetailPanel({ patient }: { patient: PatientDetail }) {
   ]
 
   return (
-    <div className="flex flex-col h-full bg-white rounded-2xl border border-[#c3c6d0]/20 shadow-sm overflow-hidden">
+    <div className="flex flex-col h-full bg-card rounded-2xl border border-outline-variant/20 shadow-sm overflow-hidden">
       {/* Dark navy header */}
       <div className="bg-primary px-5 py-5 flex items-start gap-4">
         <div className="w-11 h-11 rounded-full bg-nc-secondary flex items-center justify-center text-white font-bold text-sm font-headline shrink-0">
@@ -194,7 +194,7 @@ export function PatientDetailPanel({ patient }: { patient: PatientDetail }) {
           {statCards.map((s) => (
             <div
               key={s.label}
-              className="bg-[#FAFAF7] rounded-xl p-3 border border-[#c3c6d0]/15 text-center"
+              className="bg-background rounded-xl p-3 border border-[#c3c6d0]/15 text-center"
             >
               <p className="text-[10px] text-on-surface-variant uppercase tracking-wide font-sans mb-1">
                 {s.label}
@@ -208,7 +208,7 @@ export function PatientDetailPanel({ patient }: { patient: PatientDetail }) {
         {infoGrid.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {infoGrid.map(({ label, value }) => (
-              <div key={label} className="bg-[#FAFAF7] rounded-xl px-4 py-3 border border-[#c3c6d0]/15">
+              <div key={label} className="bg-background rounded-xl px-4 py-3 border border-[#c3c6d0]/15">
                 <p className="text-[10px] text-on-surface-variant uppercase tracking-wide font-sans mb-1">
                   {label}
                 </p>
@@ -224,7 +224,7 @@ export function PatientDetailPanel({ patient }: { patient: PatientDetail }) {
           {patient.recentAppointments.length > 0 ? (
             <div className="space-y-2">
               {patient.recentAppointments.map((apt) => (
-                <div key={apt.id} className="flex items-start gap-3 p-3 rounded-xl bg-[#FAFAF7] border border-[#c3c6d0]/15">
+                <div key={apt.id} className="flex items-start gap-3 p-3 rounded-xl bg-background border border-[#c3c6d0]/15">
                   <div className="w-1.5 h-1.5 rounded-full bg-nc-secondary mt-2 shrink-0" />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-primary font-headline truncate">

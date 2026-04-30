@@ -157,7 +157,7 @@ export default async function PacientesPage({
       {patientItems.length > 0 ? (
         <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-4">
           {/* Lista à esquerda */}
-          <div className="bg-white rounded-2xl border border-[#c3c6d0]/20 shadow-sm p-3 flex flex-col min-h-0">
+          <div className="bg-card rounded-2xl border border-outline-variant/20 shadow-sm p-3 flex flex-col min-h-0">
             <PatientsList patients={patientItems} />
           </div>
 
@@ -166,7 +166,7 @@ export default async function PacientesPage({
             {selectedPatient ? (
               <PatientDetailPanel patient={selectedPatient} />
             ) : (
-              <div className="bg-white rounded-2xl border border-[#c3c6d0]/20 shadow-sm h-full flex flex-col items-center justify-center text-center p-8">
+              <div className="bg-card rounded-2xl border border-outline-variant/20 shadow-sm h-full flex flex-col items-center justify-center text-center p-8">
                 <div className="w-16 h-16 rounded-2xl bg-surface-container-low flex items-center justify-center mb-4">
                   <span
                     className="material-symbols-outlined text-outline text-3xl"
@@ -186,7 +186,7 @@ export default async function PacientesPage({
           </div>
         </div>
       ) : (
-        <div className="bg-white rounded-2xl border border-[#c3c6d0]/20 py-16 text-center shadow-sm">
+        <div className="bg-card rounded-2xl border border-outline-variant/20 py-16 text-center shadow-sm">
           <div className="w-16 h-16 rounded-2xl bg-nc-secondary/10 flex items-center justify-center mx-auto mb-4">
             <span
               className="material-symbols-outlined text-nc-secondary text-3xl"

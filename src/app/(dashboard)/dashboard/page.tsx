@@ -238,8 +238,8 @@ export default async function DashboardPage() {
         {kpis.map((s, i) => (
           <div
             key={s.label}
-            className={`bg-white p-5 transition-colors duration-200 hover:bg-[#FDF6E9] cursor-default ${
-              i < kpis.length - 1 ? "border-r border-[#c3c6d0]/15" : ""
+            className={`bg-card p-5 transition-colors duration-200 hover:bg-nc-secondary/5 cursor-default ${
+              i < kpis.length - 1 ? "border-r border-outline-variant/20" : ""
             }`}
           >
             <div className="flex justify-between items-start mb-3">
@@ -272,7 +272,7 @@ export default async function DashboardPage() {
             <Link
               key={action.href}
               href={action.href}
-              className="bg-white p-4 rounded-none flex flex-col items-center gap-2 hover:bg-[#FDF6E9] transition-colors duration-200 border-r border-[#c3c6d0]/15 last:border-r-0 group"
+              className="bg-card p-4 rounded-none flex flex-col items-center gap-2 hover:bg-nc-secondary/5 transition-colors duration-200 border-r border-outline-variant/20 last:border-r-0 group"
             >
               <span
                 className="material-symbols-outlined text-nc-secondary group-hover:scale-110 transition-transform"
@@ -292,8 +292,8 @@ export default async function DashboardPage() {
       {/* Próximos atendimentos + Configure sua clínica */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Próximos atendimentos (2/3) */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-[#c3c6d0]/20 overflow-hidden shadow-sm">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-[#c3c6d0]/20">
+        <div className="lg:col-span-2 bg-card rounded-2xl border border-outline-variant/20 overflow-hidden shadow-sm">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-outline-variant/20">
             <h3 className="font-headline font-semibold text-primary text-sm">Próximos atendimentos</h3>
             <Link
               href="/agenda"
@@ -304,7 +304,7 @@ export default async function DashboardPage() {
           </div>
 
           {upcoming.length > 0 ? (
-            <div className="divide-y divide-[#c3c6d0]/15">
+            <div className="divide-y divide-outline-variant/20">
               {upcoming.map((apt) => {
                 const patient = apt.patients
                 const service = apt.services
@@ -358,8 +358,8 @@ export default async function DashboardPage() {
         </div>
 
         {/* Configure sua clínica (1/3) */}
-        <div className="bg-white rounded-2xl border border-[#c3c6d0]/20 overflow-hidden shadow-sm">
-          <div className="px-5 py-4 border-b border-[#c3c6d0]/20">
+        <div className="bg-card rounded-2xl border border-outline-variant/20 overflow-hidden shadow-sm">
+          <div className="px-5 py-4 border-b border-outline-variant/20">
             <div className="flex items-center justify-between mb-2">
               <h3 className="font-headline font-semibold text-primary text-sm">Configure sua clínica</h3>
               <span className="text-[10px] text-on-surface-variant font-sans">
@@ -376,7 +376,7 @@ export default async function DashboardPage() {
               Quase lá, doutor! {completedCount} de {setupSteps.length} concluídos
             </p>
           </div>
-          <div className="divide-y divide-[#c3c6d0]/15">
+          <div className="divide-y divide-outline-variant/20">
             {setupSteps.map((step) => (
               <Link
                 key={step.href}

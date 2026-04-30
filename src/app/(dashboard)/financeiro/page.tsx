@@ -98,7 +98,7 @@ export default async function FinanceiroPage() {
       {/* KPI cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {kpis.map((kpi) => (
-          <div key={kpi.label} className="bg-white rounded-2xl p-5 border border-[#c3c6d0]/20 shadow-sm">
+          <div key={kpi.label} className="bg-card rounded-2xl p-5 border border-outline-variant/20 shadow-sm">
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${kpi.bgClass}`}>
               <span className={`material-symbols-outlined text-xl ${kpi.colorClass}`} style={{ fontVariationSettings: "'FILL' 1" }}>
                 {kpi.icon}
@@ -116,7 +116,7 @@ export default async function FinanceiroPage() {
           <Link
             key={p.href}
             href={p.href}
-            className="bg-white border border-[#c3c6d0]/20 rounded-xl p-4 flex items-center gap-3 hover:border-nc-secondary/30 hover:shadow-sm transition-all group"
+            className="bg-card border border-outline-variant/20 rounded-xl p-4 flex items-center gap-3 hover:border-nc-secondary/30 hover:shadow-sm transition-all group"
           >
             <div className={`w-9 h-9 rounded-xl ${p.bg} flex items-center justify-center shrink-0`}>
               <span className={`material-symbols-outlined text-lg ${p.color}`} style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -135,13 +135,13 @@ export default async function FinanceiroPage() {
       </div>
 
       {/* Chart */}
-      <div className="bg-white rounded-2xl border border-[#c3c6d0]/20 p-5 shadow-sm">
+      <div className="bg-card rounded-2xl border border-outline-variant/20 p-5 shadow-sm">
         <h3 className="font-headline font-semibold text-primary text-sm mb-4">Receitas vs Despesas — últimos 6 meses</h3>
         <FinanceiroChart data={chartData} />
       </div>
 
       {/* Recent transactions */}
-      <div className="bg-white rounded-2xl border border-[#c3c6d0]/20 overflow-hidden shadow-sm">
+      <div className="bg-card rounded-2xl border border-outline-variant/20 overflow-hidden shadow-sm">
         <div className="px-5 py-4 border-b border-[#c3c6d0]/20 flex items-center justify-between">
           <h3 className="font-headline font-semibold text-primary text-sm">Últimas movimentações</h3>
           <Link href="/financeiro/receitas" className="text-xs text-nc-secondary font-semibold hover:underline underline-offset-2 font-sans">

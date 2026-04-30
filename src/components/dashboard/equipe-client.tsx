@@ -165,7 +165,7 @@ export function EquipeClient({ members }: { members: EquipeMember[] }) {
         })}
 
         {/* Card "Convidar membro" */}
-        <div className="bg-white rounded-2xl border-2 border-dashed border-[#c3c6d0]/40 flex flex-col items-center justify-center p-8 min-h-[260px] hover:border-nc-secondary/40 transition-colors group cursor-pointer">
+        <div className="bg-card rounded-2xl border-2 border-dashed border-outline-variant/40 flex flex-col items-center justify-center p-8 min-h-[260px] hover:border-nc-secondary/40 transition-colors group cursor-pointer">
           <div className="w-10 h-10 rounded-full border-2 border-dashed border-[#c3c6d0]/50 flex items-center justify-center mb-3 group-hover:border-nc-secondary/50 transition-colors">
             <span
               className="material-symbols-outlined text-outline group-hover:text-nc-secondary transition-colors"

@@ -84,7 +84,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const roleLabel = displayRoleLabel
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#FAFAF7]">
+    <div className="flex h-screen overflow-hidden bg-background">
       <SidebarNav
         clinicName={clinicName}
         userEmail={user.email ?? ""}
@@ -97,7 +97,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden md:ml-64">
         {/* Topbar */}
-        <header className="sticky top-0 z-30 bg-[#FAFAF7] border-b border-[#c3c6d0]/30 flex items-center px-8 py-3 gap-4">
+        <header className="sticky top-0 z-30 bg-background border-b border-outline-variant/30 flex items-center px-8 py-3 gap-4">
           <div className="flex-1 max-w-lg">
             <div className="relative">
               <span
@@ -135,7 +135,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
                 <p className="text-sm font-semibold text-primary font-headline leading-tight">{firstName}</p>
                 <p className="text-[10px] text-outline font-bold uppercase tracking-widest">{roleLabel}</p>
               </div>
-              <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-surface-container-low font-headline">
+              <div className="w-9 h-9 rounded-full bg-[#00244a] dark:bg-[#1a4070] flex items-center justify-center text-white text-xs font-bold border-2 border-background font-headline">
                 {initials}
               </div>
             </div>

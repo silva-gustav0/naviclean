@@ -93,7 +93,7 @@ export function DirectCostModal({ services }: Props) {
             <select
               value={kind}
               onChange={(e) => setKind(e.target.value as "payment_fee" | "external_service")}
-              className="w-full text-sm border rounded-lg px-3 py-2 bg-white dark:bg-slate-800"
+              className="w-full text-sm border rounded-lg px-3 py-2 bg-card"
             >
               <option value="payment_fee">Taxa de pagamento</option>
               <option value="external_service">Serviço externo (lab, etc)</option>
@@ -130,7 +130,7 @@ export function DirectCostModal({ services }: Props) {
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
-                className="w-full text-sm border rounded-lg px-3 py-2 bg-white dark:bg-slate-800"
+                className="w-full text-sm border rounded-lg px-3 py-2 bg-card"
               >
                 <option value="">Todos</option>
                 {PAYMENT_METHODS.map((m) => (
@@ -145,7 +145,7 @@ export function DirectCostModal({ services }: Props) {
               <select
                 value={serviceId}
                 onChange={(e) => setServiceId(e.target.value)}
-                className="w-full text-sm border rounded-lg px-3 py-2 bg-white dark:bg-slate-800"
+                className="w-full text-sm border rounded-lg px-3 py-2 bg-card"
               >
                 <option value="">Todos</option>
                 {services.map((s) => (

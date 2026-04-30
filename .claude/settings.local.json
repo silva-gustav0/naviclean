@@ -33,7 +33,9 @@
       "Bash(vercel *)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git commit -m 'fix: substituir ícone clipboard_medical \\(inexistente\\) por clinical_notes *)"
+      "Bash(git commit -m 'fix: substituir ícone clipboard_medical \\(inexistente\\) por clinical_notes *)",
+      "Read(//c/Users/gusta/AppData/Local/Temp/naviclean-ref//**)",
+      "Read(//c/Users/gusta/**)"
     ]
   }
 }

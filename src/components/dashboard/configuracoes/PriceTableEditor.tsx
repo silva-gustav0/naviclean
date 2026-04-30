@@ -85,7 +85,7 @@ export function PriceTableEditor({ priceTableId, services, existingPrices }: Pro
                 onChange={(e) => setPrices((p) => ({ ...p, [svc.id]: e.target.value }))}
                 onBlur={() => handleBlur(svc.id)}
                 placeholder={svc.price ? String(Number(svc.price).toFixed(2)) : "0,00"}
-                className="w-28 text-right text-sm border rounded-lg px-3 py-1.5 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                className="w-28 text-right text-sm border rounded-lg px-3 py-1.5 bg-card focus:outline-none focus:ring-2 focus:ring-blue-200"
               />
               {saving[svc.id] && (
                 <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 h-3 w-3 animate-spin text-muted-foreground" />

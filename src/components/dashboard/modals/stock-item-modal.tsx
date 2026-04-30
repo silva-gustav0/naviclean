@@ -103,7 +103,7 @@ export function StockItemModal({ item }: Props) {
               <select
                 value={unit}
                 onChange={(e) => setUnit(e.target.value)}
-                className="w-full text-sm border rounded-lg px-3 py-2 bg-white dark:bg-slate-800"
+                className="w-full text-sm border rounded-lg px-3 py-2 bg-card"
                 required
               >
                 {UNITS.map((u) => <option key={u} value={u}>{u}</option>)}
@@ -116,7 +116,7 @@ export function StockItemModal({ item }: Props) {
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full text-sm border rounded-lg px-3 py-2 bg-white dark:bg-slate-800"
+                className="w-full text-sm border rounded-lg px-3 py-2 bg-card"
               >
                 <option value="">Selecione...</option>
                 {CATEGORIES.map((c) => <option key={c} value={c}>{CATEGORY_LABELS[c]}</option>)}

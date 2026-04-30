@@ -147,7 +147,7 @@ export function EvolutionsTab({ patientId, clinicId, evolutions, memberName }: P
       ) : (
         <div className="space-y-3">
           {evolutions.map((evo) => (
-            <div key={evo.id} className="border rounded-xl p-4 space-y-2 bg-white dark:bg-slate-900">
+            <div key={evo.id} className="border rounded-xl p-4 space-y-2 bg-card">
               <div className="flex items-start justify-between gap-2">
                 <div className="flex-1">
                   <p className="text-sm font-medium">{evo.procedures_performed}</p>

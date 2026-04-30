@@ -81,7 +81,7 @@ export function CommissionRuleModal({ members, services, priceTables }: Props) {
             <select
               value={memberId}
               onChange={(e) => setMemberId(e.target.value)}
-              className="w-full text-sm border rounded-lg px-3 py-2 bg-white dark:bg-slate-800"
+              className="w-full text-sm border rounded-lg px-3 py-2 bg-card"
               required
             >
               <option value="">Selecione...</option>
@@ -95,7 +95,7 @@ export function CommissionRuleModal({ members, services, priceTables }: Props) {
             <select
               value={serviceId}
               onChange={(e) => setServiceId(e.target.value)}
-              className="w-full text-sm border rounded-lg px-3 py-2 bg-white dark:bg-slate-800"
+              className="w-full text-sm border rounded-lg px-3 py-2 bg-card"
             >
               <option value="">Todos os serviços</option>
               {services.map((s) => (
@@ -118,7 +118,7 @@ export function CommissionRuleModal({ members, services, priceTables }: Props) {
             <select
               value={priceTableId}
               onChange={(e) => setPriceTableId(e.target.value)}
-              className="w-full text-sm border rounded-lg px-3 py-2 bg-white dark:bg-slate-800"
+              className="w-full text-sm border rounded-lg px-3 py-2 bg-card"
             >
               <option value="">Todas as tabelas</option>
               {priceTables.map((p) => (

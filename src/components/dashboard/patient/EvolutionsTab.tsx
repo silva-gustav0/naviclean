@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useTransition } from "react"
+import { useRouter } from "next/navigation"
 import { createEvolution, signEvolution } from "@/app/actions/evolutions"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
@@ -21,6 +22,7 @@ interface Props {
 }
 
 export function EvolutionsTab({ patientId, clinicId, evolutions, memberName }: Props) {
+  const router = useRouter()
   const [open, setOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
   const [procedures, setProcedures] = useState("")
@@ -49,6 +51,7 @@ export function EvolutionsTab({ patientId, clinicId, evolutions, memberName }: P
         setObservations("")
         setSignNow(false)
         setOpen(false)
+        router.refresh()
       } catch (e: unknown) {
         toast.error(e instanceof Error ? e.message : "Erro ao salvar evolução")
       }
@@ -60,6 +63,7 @@ export function EvolutionsTab({ patientId, clinicId, evolutions, memberName }: P
       try {
         await signEvolution(evoId, clinicId)
         toast.success("Evolução assinada com sucesso")
+        router.refresh()
       } catch {
         toast.error("Erro ao assinar evolução")
       }

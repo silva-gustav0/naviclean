@@ -178,8 +178,8 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6 w-full">
       {/* Hero banner */}
-      <section className="relative rounded-2xl overflow-hidden bg-primary">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-[#0d3a6b] to-[#0a2d58] pointer-events-none" />
+      <section className="relative rounded-2xl overflow-hidden bg-[#00244a] dark:bg-[#0a1628]">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00244a] via-[#0d3a6b] to-[#0a2d58] dark:from-[#0a1628] dark:via-[#0d2a4a] dark:to-[#061020] pointer-events-none" />
         <div className="relative z-10 px-8 py-7">
           <div className="flex items-start justify-between flex-wrap gap-4 mb-6">
             <div>

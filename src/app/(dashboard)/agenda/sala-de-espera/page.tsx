@@ -61,7 +61,7 @@ export default async function SalaDeEsperaPage() {
                 const dentist = a.clinic_members as { full_name: string } | null
                 const initials = (patient?.full_name ?? "?")[0].toUpperCase()
                 return (
-                  <div key={a.id as string} className="bg-primary rounded-2xl p-5 flex items-center gap-5 relative overflow-hidden shadow-premium">
+                  <div key={a.id as string} className="bg-[#00244a] dark:bg-[#0a1628] rounded-2xl p-5 flex items-center gap-5 relative overflow-hidden shadow-premium">
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-nc-secondary" />
                     <div className="w-12 h-12 rounded-full bg-white/15 flex items-center justify-center text-white font-bold text-lg shrink-0 font-headline border border-white/20">
                       {initials}

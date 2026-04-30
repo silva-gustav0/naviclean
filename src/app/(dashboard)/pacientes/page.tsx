@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import { NewPatientModal } from "@/components/dashboard/modals/new-patient-modal"
 import { PatientsList, type PatientListItem } from "@/components/dashboard/patients-list"
-import { PatientDetailPanel } from "@/components/dashboard/patient-detail-panel"
+import { PatientDetailPanel, type PatientDetail } from "@/components/dashboard/patient-detail-panel"
 import { CopyLinkButton } from "@/components/dashboard/copy-link-button"
 
 type Appointment = {
@@ -43,7 +43,6 @@ export default async function PacientesPage({
     .single()
   if (!clinic) redirect("/onboarding")
 
-  // Busca pacientes + estatísticas de consultas em paralelo
   const [{ data: patients }, { data: allAppointments }] = await Promise.all([
     supabase
       .from("patients")
@@ -59,7 +58,6 @@ export default async function PacientesPage({
       .order("date", { ascending: false }),
   ])
 
-  // Agrupa consultas por paciente
   const aptMap: Record<string, Appointment[]> = {}
   for (const apt of (allAppointments ?? []) as Appointment[]) {
     if (!apt.patient_id) continue
@@ -92,8 +90,7 @@ export default async function PacientesPage({
     }
   })
 
-  // Detalhe do paciente selecionado
-  let selectedPatient = null
+  let selectedPatient: PatientDetail | null = null
   if (selectedId) {
     const { data: patientRaw } = await supabase
       .from("patients")
@@ -106,6 +103,22 @@ export default async function PacientesPage({
       const apts = aptMap[selectedId] ?? []
       const completed = apts.filter((a) => a.status !== "cancelled")
       const lastVisit = completed[0]?.date ?? null
+
+      const [
+        { data: evolutions },
+        { data: faceMarks },
+        { data: toothSymbols },
+        { data: anamnesis },
+      ] = await Promise.all([
+        supabase
+          .from("clinical_evolutions")
+          .select("*")
+          .eq("patient_id", selectedId)
+          .order("created_at", { ascending: false }),
+        supabase.from("tooth_face_marks").select("*").eq("patient_id", selectedId),
+        supabase.from("tooth_symbols").select("*").eq("patient_id", selectedId),
+        supabase.from("anamnesis").select("*").eq("patient_id", selectedId).maybeSingle(),
+      ])
 
       selectedPatient = {
         id: patientRaw.id as string,
@@ -124,6 +137,11 @@ export default async function PacientesPage({
         appointmentCount: completed.length,
         lastVisitDate: lastVisit,
         recentAppointments: apts.slice(0, 4),
+        clinicId: clinic.id as string,
+        evolutions: (evolutions ?? []) as PatientDetail["evolutions"],
+        faceMarks: (faceMarks ?? []) as PatientDetail["faceMarks"],
+        symbols: (toothSymbols ?? []) as PatientDetail["symbols"],
+        anamnesis: (anamnesis ?? null) as PatientDetail["anamnesis"],
       }
     }
   }
@@ -145,7 +163,7 @@ export default async function PacientesPage({
             icon="link"
             path="/pacientes/cadastro"
           />
-          <button className="flex items-center gap-2 border border-[#c3c6d0]/50 text-primary text-sm font-semibold px-4 py-2 rounded-xl hover:bg-surface-container transition-colors font-headline">
+          <button className="flex items-center gap-2 border border-outline-variant/30 text-primary text-sm font-semibold px-4 py-2 rounded-xl hover:bg-surface-container transition-colors font-headline">
             <span className="material-symbols-outlined" style={{ fontSize: 18 }}>upload_file</span>
             Importar
           </button>
@@ -156,15 +174,13 @@ export default async function PacientesPage({
       {/* Split layout */}
       {patientItems.length > 0 ? (
         <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-4">
-          {/* Lista à esquerda */}
           <div className="bg-card rounded-2xl border border-outline-variant/20 shadow-sm p-3 flex flex-col min-h-0">
             <PatientsList patients={patientItems} />
           </div>
 
-          {/* Painel de detalhe à direita */}
           <div className="min-h-0">
             {selectedPatient ? (
-              <PatientDetailPanel patient={selectedPatient} />
+              <PatientDetailPanel key={selectedPatient.id} patient={selectedPatient} />
             ) : (
               <div className="bg-card rounded-2xl border border-outline-variant/20 shadow-sm h-full flex flex-col items-center justify-center text-center p-8">
                 <div className="w-16 h-16 rounded-2xl bg-surface-container-low flex items-center justify-center mb-4">
@@ -201,7 +217,9 @@ export default async function PacientesPage({
           <p className="text-on-surface-variant text-sm mb-6 max-w-xs mx-auto font-sans">
             Cadastre o primeiro paciente para começar a organizar os atendimentos.
           </p>
-          <NewPatientModal />
+          <div className="flex justify-center">
+            <NewPatientModal />
+          </div>
         </div>
       )}
     </div>

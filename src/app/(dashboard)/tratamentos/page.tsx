@@ -38,19 +38,13 @@ export default async function TratamentosPage() {
               key={s.id as string}
               className="bg-surface-container-lowest border border-outline-variant/10 rounded-2xl p-5 hover:border-nc-secondary/30 hover:shadow-premium-sm transition-all"
             >
-              <div className="flex items-start justify-between mb-3">
-                <div className="w-10 h-10 rounded-xl bg-nc-secondary/10 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-nc-secondary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-                    stethoscope
-                  </span>
-                </div>
-                <span className={`text-xs px-2 py-1 rounded-full font-semibold font-sans ${
-                  s.is_active ? "bg-emerald-50 text-emerald-700" : "bg-surface-container-low text-outline"
-                }`}>
+              <div className="flex items-start justify-between mb-2">
+                <span className={`nc-stat-chip ${s.is_active ? "bg-emerald-50 text-emerald-700" : "bg-surface-container-low text-outline"}`}>
                   {s.is_active ? "Ativo" : "Inativo"}
                 </span>
+                <span className="material-symbols-outlined text-outline/25" style={{ fontSize: 14, fontVariationSettings: "'FILL' 0" }}>stethoscope</span>
               </div>
-              <h3 className="font-headline font-semibold text-primary mb-1">{s.name as string}</h3>
+              <h3 className="font-sans font-semibold text-[14px] text-primary mb-1">{s.name as string}</h3>
               {s.description && <p className="text-xs text-on-surface-variant mb-3 line-clamp-2 font-sans">{s.description as string}</p>}
               <div className="flex items-center gap-4 text-xs text-on-surface-variant font-sans">
                 {s.price && (
@@ -77,11 +71,9 @@ export default async function TratamentosPage() {
         </div>
       ) : (
         <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 py-16 text-center shadow-premium-sm">
-          <div className="w-16 h-16 rounded-2xl bg-nc-secondary/10 flex items-center justify-center mx-auto mb-4">
-            <span className="material-symbols-outlined text-nc-secondary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-              stethoscope
-            </span>
-          </div>
+          <span className="material-symbols-outlined text-outline/20 block mx-auto mb-4" style={{ fontSize: 40, fontVariationSettings: "'FILL' 0" }}>
+            stethoscope
+          </span>
           <h3 className="font-headline font-semibold text-primary text-base mb-1">Nenhum tratamento cadastrado</h3>
           <p className="text-on-surface-variant text-sm mb-6 max-w-xs mx-auto font-sans">
             Adicione os serviços oferecidos pela sua clínica para usar no agendamento.

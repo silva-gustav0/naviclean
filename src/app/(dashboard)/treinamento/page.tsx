@@ -7,7 +7,7 @@ const modules = [
     icon: "calendar_month",
     title: "Agenda",
     desc: "Aprenda a gerenciar agendamentos, bloqueios de horário e confirmações automáticas.",
-    color: "bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300",
+    iconCls: "text-blue-500",
     lessons: ["Criar um agendamento", "Bloquear horários", "Configurar confirmação automática", "Sala de espera"],
     href: "/agenda",
   },
@@ -15,7 +15,7 @@ const modules = [
     icon: "assignment_ind",
     title: "Pacientes",
     desc: "Cadastre e gerencie pacientes, históricos e anamneses digitais.",
-    color: "bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-300",
+    iconCls: "text-violet-500",
     lessons: ["Cadastrar novo paciente", "Preencher anamnese", "Ver histórico", "Enviar link de cadastro"],
     href: "/pacientes",
   },
@@ -23,7 +23,7 @@ const modules = [
     icon: "payments",
     title: "Financeiro",
     desc: "Controle receitas, despesas, comissões e gere relatórios completos.",
-    color: "bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300",
+    iconCls: "text-emerald-500",
     lessons: ["Registrar receita", "Lançar despesa", "Configurar comissões", "Gerar DRE"],
     href: "/financeiro",
   },
@@ -31,7 +31,7 @@ const modules = [
     icon: "groups",
     title: "Equipe",
     desc: "Adicione profissionais, defina permissões e gerencie sua equipe.",
-    color: "bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-300",
+    iconCls: "text-orange-500",
     lessons: ["Convidar membro", "Definir permissões", "Ver agenda por profissional", "Comissões da equipe"],
     href: "/equipe",
   },
@@ -39,7 +39,7 @@ const modules = [
     icon: "stethoscope",
     title: "Tratamentos",
     desc: "Cadastre serviços, crie planos de tratamento e tabelas de preço.",
-    color: "bg-cyan-100 dark:bg-cyan-900/40 text-cyan-600 dark:text-cyan-300",
+    iconCls: "text-cyan-500",
     lessons: ["Adicionar serviço", "Criar tabela de preços", "Planos de tratamento", "Categorias"],
     href: "/tratamentos",
   },
@@ -47,7 +47,7 @@ const modules = [
     icon: "inventory_2",
     title: "Estoque",
     desc: "Gerencie produtos, lotes, validades e importação de NF-e.",
-    color: "bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300",
+    iconCls: "text-amber-500",
     lessons: ["Cadastrar produto", "Registrar entrada", "Importar NF-e", "Alertas de mínimo"],
     href: "/estoque",
   },
@@ -55,17 +55,17 @@ const modules = [
     icon: "settings",
     title: "Configurações",
     desc: "Configure horários, perfil da clínica, integrações e plano.",
-    color: "bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-300",
+    iconCls: "text-rose-500",
     lessons: ["Horários de atendimento", "Perfil da clínica", "Integrações", "Plano e assinatura"],
     href: "/configuracoes",
   },
 ]
 
 const guides = [
-  { icon: "rocket_launch", title: "Guia de início rápido", desc: "Configure sua clínica do zero em menos de 15 minutos.", color: "bg-nc-secondary/10 text-nc-secondary" },
-  { icon: "psychology", title: "Boas práticas de agenda", desc: "Como organizar sua agenda para reduzir no-shows e faltas.", color: "bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300" },
-  { icon: "bar_chart", title: "Relatórios financeiros", desc: "Interprete o DRE e monitore a saúde financeira da clínica.", color: "bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300" },
-  { icon: "shield", title: "Segurança e LGPD", desc: "Como o NaviClin protege os dados dos seus pacientes.", color: "bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-300" },
+  { icon: "rocket_launch", title: "Guia de início rápido", desc: "Configure sua clínica do zero em menos de 15 minutos.", iconCls: "text-nc-secondary" },
+  { icon: "psychology", title: "Boas práticas de agenda", desc: "Como organizar sua agenda para reduzir no-shows e faltas.", iconCls: "text-blue-500" },
+  { icon: "bar_chart", title: "Relatórios financeiros", desc: "Interprete o DRE e monitore a saúde financeira da clínica.", iconCls: "text-emerald-500" },
+  { icon: "shield", title: "Segurança e LGPD", desc: "Como o NaviClin protege os dados dos seus pacientes.", iconCls: "text-violet-500" },
 ]
 
 export default async function TreinamentoPage() {
@@ -109,9 +109,7 @@ export default async function TreinamentoPage() {
           {modules.map((mod) => (
             <div key={mod.title} className="bg-surface-container-lowest border border-outline-variant/10 rounded-2xl p-5 shadow-premium-sm flex flex-col gap-4">
               <div className="flex items-start gap-3">
-                <div className={`w-10 h-10 rounded-xl ${mod.color} flex items-center justify-center shrink-0`}>
-                  <span className="material-symbols-outlined" style={{ fontSize: 20, fontVariationSettings: "'FILL' 1" }}>{mod.icon}</span>
-                </div>
+                <span className={`material-symbols-outlined ${mod.iconCls} opacity-70 shrink-0 mt-0.5`} style={{ fontSize: 20, fontVariationSettings: "'FILL' 0" }}>{mod.icon}</span>
                 <div>
                   <h4 className="font-headline font-bold text-sm text-primary">{mod.title}</h4>
                   <p className="text-xs text-on-surface-variant mt-0.5 leading-relaxed">{mod.desc}</p>
@@ -143,9 +141,7 @@ export default async function TreinamentoPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {guides.map((g) => (
             <div key={g.title} className="flex items-start gap-4 p-5 bg-surface-container-lowest border border-outline-variant/10 rounded-2xl shadow-premium-sm hover:border-nc-secondary/30 transition-all cursor-pointer group">
-              <div className={`w-10 h-10 rounded-xl ${g.color} flex items-center justify-center shrink-0`}>
-                <span className="material-symbols-outlined" style={{ fontSize: 20, fontVariationSettings: "'FILL' 1" }}>{g.icon}</span>
-              </div>
+              <span className={`material-symbols-outlined ${g.iconCls} opacity-70 shrink-0 mt-0.5`} style={{ fontSize: 20, fontVariationSettings: "'FILL' 0" }}>{g.icon}</span>
               <div className="flex-1">
                 <p className="font-headline font-semibold text-sm text-primary">{g.title}</p>
                 <p className="text-xs text-on-surface-variant mt-0.5">{g.desc}</p>

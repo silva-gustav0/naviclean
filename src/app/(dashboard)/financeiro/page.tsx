@@ -123,17 +123,15 @@ export default async function FinanceiroPage() {
             href={p.href}
             className="bg-card border border-outline-variant/20 rounded-xl p-4 flex items-center gap-3 hover:border-nc-secondary/25 hover:shadow-card transition-all group"
           >
-            <div className={`w-8 h-8 rounded-xl ${p.bg} flex items-center justify-center shrink-0`}>
-              <span className={`material-symbols-outlined text-base ${p.color}`} style={{ fontVariationSettings: "'FILL' 1", fontSize: 16 }}>
-                {p.icon}
-              </span>
-            </div>
+            <span className={`material-symbols-outlined ${p.color} shrink-0`} style={{ fontVariationSettings: "'FILL' 0", fontSize: 20 }}>
+              {p.icon}
+            </span>
             <div className="flex-1 min-w-0">
               <p className="text-[13px] font-semibold text-primary font-sans leading-tight">{p.label}</p>
               <p className="text-[10px] text-on-surface-variant font-sans truncate mt-0.5">{p.description}</p>
             </div>
-            <span className="material-symbols-outlined text-outline/30 group-hover:text-nc-secondary group-hover:translate-x-0.5 transition-all shrink-0" style={{ fontSize: 14 }}>
-              arrow_forward
+            <span className="material-symbols-outlined text-outline/25 group-hover:text-nc-secondary group-hover:translate-x-0.5 transition-all shrink-0" style={{ fontSize: 13 }}>
+              chevron_right
             </span>
           </Link>
         ))}
@@ -162,13 +160,9 @@ export default async function FinanceiroPage() {
           <div>
             {recentTx.map((t, idx) => (
               <div key={t.id as string} className={`flex items-center gap-4 px-5 py-3.5 hover:bg-surface-container-low/40 transition-colors ${idx < recentTx.length - 1 ? "border-b border-outline-variant/10" : ""}`}>
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
-                  t.type === "income" ? "bg-emerald-50 dark:bg-emerald-900/30" : "bg-red-50 dark:bg-red-900/20"
-                }`}>
-                  <span className={`material-symbols-outlined ${t.type === "income" ? "text-emerald-600" : "text-red-500"}`} style={{ fontSize: 14, fontVariationSettings: "'FILL' 1" }}>
-                    {t.type === "income" ? "arrow_upward" : "arrow_downward"}
-                  </span>
-                </div>
+                <span className={`font-black text-[15px] font-sans shrink-0 w-5 text-center ${t.type === "income" ? "text-emerald-500" : "text-red-400"}`}>
+                  {t.type === "income" ? "+" : "−"}
+                </span>
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-[13px] text-primary truncate font-sans">{t.description as string}</p>
                   <p className="text-[11px] text-on-surface-variant font-sans">

@@ -131,23 +131,21 @@ export default async function ConfiguracoesPage() {
             href={s.href}
             className="group bg-card border border-outline-variant/20 rounded-xl p-4 flex items-center gap-3.5 hover:border-nc-secondary/25 hover:shadow-card transition-all"
           >
-            <div className="w-9 h-9 rounded-xl bg-surface-container flex items-center justify-center shrink-0 group-hover:bg-nc-secondary/10 transition-colors">
-              <span
-                className="material-symbols-outlined text-outline/60 group-hover:text-nc-secondary transition-colors"
-                style={{ fontSize: 18, fontVariationSettings: "'FILL' 1" }}
-              >
-                {s.icon}
-              </span>
-            </div>
+            <span
+              className="material-symbols-outlined text-outline/40 group-hover:text-primary transition-colors shrink-0"
+              style={{ fontSize: 17, fontVariationSettings: "'FILL' 0" }}
+            >
+              {s.icon}
+            </span>
             <div className="flex-1 min-w-0">
               <p className="font-sans font-semibold text-[13px] text-primary leading-tight">{s.label}</p>
               <p className="text-[11px] text-on-surface-variant mt-0.5 leading-snug font-sans">{s.description}</p>
             </div>
             <span
-              className="material-symbols-outlined text-outline/30 group-hover:text-nc-secondary group-hover:translate-x-0.5 transition-all shrink-0"
-              style={{ fontSize: 16 }}
+              className="material-symbols-outlined text-outline/20 group-hover:text-outline/50 group-hover:translate-x-0.5 transition-all shrink-0"
+              style={{ fontSize: 14 }}
             >
-              arrow_forward
+              chevron_right
             </span>
           </Link>
         ))}

@@ -55,11 +55,9 @@ export default async function MarketingPage() {
             href={c.href}
             className="bg-surface-container-lowest border border-outline-variant/10 rounded-2xl p-4 flex flex-col gap-3 hover:border-nc-secondary/30 hover:shadow-premium-sm transition-all group"
           >
-            <div className="w-10 h-10 rounded-xl bg-nc-secondary/10 flex items-center justify-center">
-              <span className="material-symbols-outlined text-nc-secondary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-                {c.icon}
-              </span>
-            </div>
+            <span className="material-symbols-outlined text-nc-secondary/60 group-hover:text-nc-secondary transition-colors" style={{ fontSize: 22, fontVariationSettings: "'FILL' 0" }}>
+              {c.icon}
+            </span>
             <div>
               <p className="font-headline font-semibold text-sm text-primary">{c.label}</p>
               <p className="text-xs text-on-surface-variant font-sans">{c.desc}</p>
@@ -71,9 +69,7 @@ export default async function MarketingPage() {
       {/* Link de agendamento */}
       <div className="bg-surface-container-lowest border border-outline-variant/10 rounded-2xl p-5 shadow-premium-sm">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-9 h-9 rounded-xl bg-nc-secondary/10 flex items-center justify-center">
-            <span className="material-symbols-outlined text-nc-secondary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>link</span>
-          </div>
+          <span className="material-symbols-outlined text-nc-secondary/60" style={{ fontSize: 20, fontVariationSettings: "'FILL' 0" }}>link</span>
           <div>
             <p className="font-headline font-semibold text-sm text-primary">Seu link de agendamento</p>
             <p className="text-xs text-on-surface-variant font-sans">Compartilhe para receber agendamentos online</p>
@@ -133,9 +129,9 @@ export default async function MarketingPage() {
             <div className="divide-y divide-outline-variant/10">
               {leads.map((l) => (
                 <div key={l.id as string} className="flex items-center gap-3 px-5 py-3 hover:bg-surface-container-low transition-colors">
-                  <div className="w-8 h-8 rounded-full bg-nc-secondary/10 flex items-center justify-center text-nc-secondary text-xs font-bold shrink-0 font-headline">
+                  <span className="text-nc-secondary font-black text-base font-headline shrink-0 w-5 text-center">
                     {(l.name as string)?.[0]?.toUpperCase() ?? "?"}
-                  </div>
+                  </span>
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-sm text-primary truncate font-headline">{l.name as string}</p>
                     <p className="text-xs text-on-surface-variant truncate font-sans">{l.email as string}</p>

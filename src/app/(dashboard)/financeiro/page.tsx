@@ -105,7 +105,7 @@ export default async function FinanceiroPage() {
             <div key={kpi.label} className={`p-5 ${i === 0 ? "md:border-l-2 md:border-l-emerald-500/50" : ""}`}>
               <div className="flex items-center justify-between mb-3">
                 <p className="nc-section-label text-outline/70">{kpi.label}</p>
-                <span className={`material-symbols-outlined ${kpi.colorClass} opacity-60`} style={{ fontSize: 16, fontVariationSettings: "'FILL' 1" }}>
+                <span className={`material-symbols-outlined ${kpi.colorClass} opacity-50`} style={{ fontSize: 16, fontVariationSettings: "'FILL' 0" }}>
                   {kpi.icon}
                 </span>
               </div>

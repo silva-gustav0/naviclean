@@ -15,6 +15,7 @@ import {
 import { toast } from "sonner"
 import { Plus, Pencil } from "lucide-react"
 import type { Tables } from "@/types/database"
+import { CatalogCombobox, type CatalogStockRow } from "@/components/ui/catalog-combobox"
 
 type StockItem = Tables<"stock_items">
 
@@ -31,6 +32,14 @@ const CATEGORY_LABELS: Record<string, string> = {
   prosthetic_material: "Material Protético",
 }
 
+function mapStockCategory(catalogCategory: unknown): string {
+  const cat = String(catalogCategory ?? "").toLowerCase()
+  if (cat.includes("medicam") || cat.includes("anest") || cat.includes("fármac") || cat.includes("farmac")) return "medication"
+  if (cat.includes("instrument") || cat.includes("ponta") || cat.includes("broca") || cat.includes("bisturi")) return "instrument"
+  if (cat.includes("protét") || cat.includes("protet") || cat.includes("resina") || cat.includes("cerâm") || cat.includes("ceram")) return "prosthetic_material"
+  return "consumable"
+}
+
 export function StockItemModal({ item }: Props) {
   const [open, setOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
@@ -39,6 +48,12 @@ export function StockItemModal({ item }: Props) {
   const [category, setCategory] = useState(item?.category ?? "")
   const [unit, setUnit] = useState(item?.unit ?? "unit")
   const [minimumStock, setMinimumStock] = useState(String(item?.minimum_stock ?? 0))
+
+  function handleCatalogSelect(raw: Record<string, unknown>) {
+    const catalogItem = raw as CatalogStockRow
+    setName(catalogItem.name)
+    setCategory(mapStockCategory(catalogItem.category))
+  }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -90,8 +105,36 @@ export function StockItemModal({ item }: Props) {
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3 mt-2">
           <div className="space-y-1">
-            <Label className="text-xs">Nome *</Label>
-            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Ex: Luva látex M" required />
+            <Label className="text-xs">
+              Nome *
+              <span className="ml-1.5 text-muted-foreground font-normal">(digite para buscar sugestões)</span>
+            </Label>
+            {item ? (
+              <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Ex: Luva látex M" required />
+            ) : (
+              <CatalogCombobox
+                table="catalog_stock_items"
+                searchColumn="name"
+                placeholder="Ex: Luva látex, Agulha, Resina..."
+                value={name}
+                onChange={setName}
+                onSelect={handleCatalogSelect}
+                required
+                inputClassName="h-10 rounded-md border-input bg-background px-3 py-2 focus:ring-1 focus:ring-ring rounded-xl"
+                renderItem={(raw) => {
+                  const s = raw as CatalogStockRow
+                  return (
+                    <div>
+                      <p className="text-sm font-medium">{s.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {s.category ?? ""}
+                        {s.presentation ? ` · ${s.presentation}` : ""}
+                      </p>
+                    </div>
+                  )
+                }}
+              />
+            )}
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1">

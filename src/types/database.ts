@@ -12,6 +12,99 @@ export type Database = {
   }
   public: {
     Tables: {
+      catalog_fixed_expenses: {
+        Row: {
+          category: string | null
+          code: string
+          description: string
+          estimated_value: number | null
+          id: number
+          periodicity: string | null
+          recipient: string | null
+          type: string | null
+        }
+        Insert: {
+          category?: string | null
+          code: string
+          description: string
+          estimated_value?: number | null
+          id?: number
+          periodicity?: string | null
+          recipient?: string | null
+          type?: string | null
+        }
+        Update: {
+          category?: string | null
+          code?: string
+          description?: string
+          estimated_value?: number | null
+          id?: number
+          periodicity?: string | null
+          recipient?: string | null
+          type?: string | null
+        }
+        Relationships: []
+      }
+      catalog_procedures: {
+        Row: {
+          category: string | null
+          code: string
+          duration_min: number
+          id: number
+          name: string
+          specialty: string | null
+          type: string | null
+        }
+        Insert: {
+          category?: string | null
+          code: string
+          duration_min?: number
+          id?: number
+          name: string
+          specialty?: string | null
+          type?: string | null
+        }
+        Update: {
+          category?: string | null
+          code?: string
+          duration_min?: number
+          id?: number
+          name?: string
+          specialty?: string | null
+          type?: string | null
+        }
+        Relationships: []
+      }
+      catalog_stock_items: {
+        Row: {
+          category: string | null
+          clinic_type: string | null
+          code: string
+          frequency_class: string | null
+          id: number
+          name: string
+          presentation: string | null
+        }
+        Insert: {
+          category?: string | null
+          clinic_type?: string | null
+          code: string
+          frequency_class?: string | null
+          id?: number
+          name: string
+          presentation?: string | null
+        }
+        Update: {
+          category?: string | null
+          clinic_type?: string | null
+          code?: string
+          frequency_class?: string | null
+          id?: number
+          name?: string
+          presentation?: string | null
+        }
+        Relationships: []
+      }
       anamnesis: {
         Row: {
           allergies_list: string | null

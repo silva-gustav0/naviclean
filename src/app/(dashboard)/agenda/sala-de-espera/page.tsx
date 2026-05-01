@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
@@ -34,7 +34,7 @@ export default async function SalaDeEsperaPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Sala de Espera</h2>
+          <h2 className="nc-page-title text-primary">Sala de Espera</h2>
           <p className="text-on-surface-variant text-sm mt-1 font-sans flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
             {waiting.length} aguardando · {inProgress.length} em atendimento
@@ -216,3 +216,4 @@ export default async function SalaDeEsperaPage() {
     </div>
   )
 }
+

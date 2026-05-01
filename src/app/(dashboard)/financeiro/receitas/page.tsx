@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import { NewTransactionModal } from "@/components/dashboard/modals/new-transaction-modal"
 import Link from "next/link"
@@ -54,7 +54,7 @@ export default async function ReceitasPage() {
             <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
             <span className="text-on-surface">Receitas</span>
           </div>
-          <h1 className="font-headline font-extrabold text-3xl text-primary">Receitas</h1>
+          <h1 className="nc-page-title text-primary">Receitas</h1>
           <p className="text-on-surface-variant text-sm mt-0.5">{transactions?.length ?? 0} registros · {fmt(totalPaid)} recebido</p>
         </div>
         <NewTransactionModal />
@@ -67,7 +67,7 @@ export default async function ReceitasPage() {
             <span className="material-symbols-outlined text-emerald-600" style={{ fontSize: 18 }}>trending_up</span>
             <span className="text-xs text-on-surface-variant font-medium">Total</span>
           </div>
-          <p className="font-headline font-extrabold text-2xl text-primary">{fmt(total)}</p>
+          <p className="nc-page-title text-primary">{fmt(total)}</p>
         </div>
         <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 shadow-premium-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110" />
@@ -75,7 +75,7 @@ export default async function ReceitasPage() {
             <span className="material-symbols-outlined text-blue-600" style={{ fontSize: 18 }}>payments</span>
             <span className="text-xs text-on-surface-variant font-medium">Recebido</span>
           </div>
-          <p className="font-headline font-extrabold text-2xl text-primary">{fmt(totalPaid)}</p>
+          <p className="nc-page-title text-primary">{fmt(totalPaid)}</p>
         </div>
       </div>
 
@@ -91,12 +91,12 @@ export default async function ReceitasPage() {
           <table className="w-full text-sm">
             <thead className="bg-surface-container border-b border-outline-variant">
               <tr>
-                <th className="text-left font-medium text-xs text-on-surface-variant px-5 py-3">Descrição</th>
-                <th className="text-left font-medium text-xs text-on-surface-variant px-4 py-3">Paciente</th>
-                <th className="text-left font-medium text-xs text-on-surface-variant px-4 py-3">Método</th>
-                <th className="text-left font-medium text-xs text-on-surface-variant px-4 py-3">Data</th>
-                <th className="text-right font-medium text-xs text-on-surface-variant px-5 py-3">Valor</th>
-                <th className="text-center font-medium text-xs text-on-surface-variant px-4 py-3">Status</th>
+                <th className="text-left px-5 py-3.5"><span className="nc-section-label text-outline/60">Descrição</span></th>
+                <th className="text-left px-4 py-3.5"><span className="nc-section-label text-outline/60">Paciente</span></th>
+                <th className="text-left px-4 py-3.5"><span className="nc-section-label text-outline/60">Método</span></th>
+                <th className="text-left px-4 py-3.5"><span className="nc-section-label text-outline/60">Data</span></th>
+                <th className="text-right px-5 py-3.5"><span className="nc-section-label text-outline/60">Valor</span></th>
+                <th className="text-center px-4 py-3.5"><span className="nc-section-label text-outline/60">Status</span></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-outline-variant/50">
@@ -131,3 +131,4 @@ export default async function ReceitasPage() {
     </div>
   )
 }
+

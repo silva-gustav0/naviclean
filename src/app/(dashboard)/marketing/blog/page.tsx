@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
@@ -20,7 +20,7 @@ export default async function MarketingBlogPage() {
     <div className="space-y-6 max-w-5xl">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="font-headline font-extrabold text-3xl text-primary">Blog da Clínica</h1>
+          <h1 className="nc-page-title text-primary">Blog da Clínica</h1>
           <p className="text-on-surface-variant text-sm mt-0.5">{posts?.length ?? 0} post{(posts?.length ?? 0) !== 1 ? "s" : ""}</p>
         </div>
         <Link
@@ -105,3 +105,4 @@ export default async function MarketingBlogPage() {
     </div>
   )
 }
+

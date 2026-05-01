@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import { NewTransactionModal } from "@/components/dashboard/modals/new-transaction-modal"
 import Link from "next/link"
@@ -46,7 +46,7 @@ export default async function DespesasPage() {
             <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
             <span className="text-on-surface">Despesas</span>
           </div>
-          <h1 className="font-headline font-extrabold text-3xl text-primary">Despesas</h1>
+          <h1 className="nc-page-title text-primary">Despesas</h1>
           <p className="text-on-surface-variant text-sm mt-0.5">{transactions?.length ?? 0} registros · {fmt(totalPaid)} pago</p>
         </div>
         <NewTransactionModal />
@@ -54,17 +54,17 @@ export default async function DespesasPage() {
 
       <div className="grid grid-cols-3 gap-4">
         <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 shadow-premium-sm">
-          <p className="text-xs text-on-surface-variant mb-1 font-medium uppercase tracking-wide">Total</p>
-          <p className="font-headline font-extrabold text-2xl text-primary">{fmt(total)}</p>
+          <p className="nc-section-label text-outline/60 mb-1">Total</p>
+          <p className="nc-page-title text-primary">{fmt(total)}</p>
         </div>
         <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 shadow-premium-sm">
-          <p className="text-xs text-on-surface-variant mb-1 font-medium uppercase tracking-wide">Pago</p>
-          <p className="font-headline font-extrabold text-2xl text-on-surface">{fmt(totalPaid)}</p>
+          <p className="nc-section-label text-outline/60 mb-1">Pago</p>
+          <p className="nc-page-title text-on-surface">{fmt(totalPaid)}</p>
         </div>
         <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 shadow-premium-sm relative overflow-hidden">
           <div className="absolute top-0 right-0 w-20 h-20 bg-amber-50 rounded-bl-full -mr-6 -mt-6" />
-          <p className="text-xs text-on-surface-variant mb-1 font-medium uppercase tracking-wide">A pagar</p>
-          <p className="font-headline font-extrabold text-2xl text-amber-600">{fmt(pending)}</p>
+          <p className="nc-section-label text-outline/60 mb-1">A pagar</p>
+          <p className="nc-page-title text-amber-600">{fmt(pending)}</p>
         </div>
       </div>
 
@@ -80,11 +80,11 @@ export default async function DespesasPage() {
           <table className="w-full text-sm">
             <thead className="bg-surface-container border-b border-outline-variant">
               <tr>
-                <th className="text-left font-medium text-xs text-on-surface-variant px-5 py-3">Descrição</th>
-                <th className="text-left font-medium text-xs text-on-surface-variant px-4 py-3">Categoria</th>
-                <th className="text-left font-medium text-xs text-on-surface-variant px-4 py-3">Vencimento</th>
-                <th className="text-right font-medium text-xs text-on-surface-variant px-5 py-3">Valor</th>
-                <th className="text-center font-medium text-xs text-on-surface-variant px-4 py-3">Status</th>
+                <th className="text-left px-5 py-3.5"><span className="nc-section-label text-outline/60">Descrição</span></th>
+                <th className="text-left px-4 py-3.5"><span className="nc-section-label text-outline/60">Categoria</span></th>
+                <th className="text-left px-4 py-3.5"><span className="nc-section-label text-outline/60">Vencimento</span></th>
+                <th className="text-right px-5 py-3.5"><span className="nc-section-label text-outline/60">Valor</span></th>
+                <th className="text-center px-4 py-3.5"><span className="nc-section-label text-outline/60">Status</span></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-outline-variant/50">
@@ -110,3 +110,4 @@ export default async function DespesasPage() {
     </div>
   )
 }
+

@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { CommissionBatchPay } from "@/components/dashboard/financeiro/CommissionBatchPay"
@@ -55,21 +55,21 @@ export default async function ComissoesFinanceiroPage() {
           <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
           <span className="text-on-surface">Comissões</span>
         </div>
-        <h1 className="font-headline font-extrabold text-3xl text-primary">Comissões</h1>
+        <h1 className="nc-page-title text-primary">Comissões</h1>
         <p className="text-on-surface-variant text-sm mt-0.5">Gestão de repasses para profissionais</p>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 shadow-premium-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-20 h-20 bg-blue-50 rounded-bl-full -mr-6 -mt-6 transition-transform group-hover:scale-110" />
-          <p className="text-xs text-on-surface-variant mb-1 font-medium uppercase tracking-wide">A repassar (liberadas)</p>
-          <p className="font-headline font-extrabold text-2xl text-primary">{fmt(totalReleased)}</p>
+          <p className="nc-section-label text-outline/60 mb-1">A repassar (liberadas)</p>
+          <p className="nc-page-title text-primary">{fmt(totalReleased)}</p>
           <p className="text-xs text-on-surface-variant mt-1">{released.length} comissões</p>
         </div>
         <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 shadow-premium-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-20 h-20 bg-amber-50 rounded-bl-full -mr-6 -mt-6 transition-transform group-hover:scale-110" />
-          <p className="text-xs text-on-surface-variant mb-1 font-medium uppercase tracking-wide">Aguardando pagamento</p>
-          <p className="font-headline font-extrabold text-2xl text-on-surface">{fmt(totalPending)}</p>
+          <p className="nc-section-label text-outline/60 mb-1">Aguardando pagamento</p>
+          <p className="nc-page-title text-on-surface">{fmt(totalPending)}</p>
           <p className="text-xs text-on-surface-variant mt-1">{pending.length} comissões</p>
         </div>
       </div>
@@ -121,13 +121,13 @@ export default async function ComissoesFinanceiroPage() {
           <table className="w-full text-sm">
             <thead className="bg-surface-container border-b border-outline-variant">
               <tr>
-                <th className="text-left font-medium text-xs text-on-surface-variant px-5 py-3">Profissional</th>
-                <th className="text-left font-medium text-xs text-on-surface-variant px-4 py-3">Serviço</th>
-                <th className="text-right font-medium text-xs text-on-surface-variant px-4 py-3">Bruto</th>
-                <th className="text-right font-medium text-xs text-on-surface-variant px-4 py-3">Líquido</th>
-                <th className="text-right font-medium text-xs text-on-surface-variant px-4 py-3">%</th>
-                <th className="text-right font-medium text-xs text-on-surface-variant px-4 py-3">Comissão</th>
-                <th className="text-center font-medium text-xs text-on-surface-variant px-4 py-3">Status</th>
+                <th className="text-left px-5 py-3.5"><span className="nc-section-label text-outline/60">Profissional</span></th>
+                <th className="text-left px-4 py-3.5"><span className="nc-section-label text-outline/60">Serviço</span></th>
+                <th className="text-right px-4 py-3.5"><span className="nc-section-label text-outline/60">Bruto</span></th>
+                <th className="text-right px-4 py-3.5"><span className="nc-section-label text-outline/60">Líquido</span></th>
+                <th className="text-right px-4 py-3.5"><span className="nc-section-label text-outline/60">%</span></th>
+                <th className="text-right px-4 py-3.5"><span className="nc-section-label text-outline/60">Comissão</span></th>
+                <th className="text-center px-4 py-3.5"><span className="nc-section-label text-outline/60">Status</span></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-outline-variant/50">
@@ -166,3 +166,4 @@ export default async function ComissoesFinanceiroPage() {
     </div>
   )
 }
+

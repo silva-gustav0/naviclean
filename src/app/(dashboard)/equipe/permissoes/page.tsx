@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 
 const ROLES = [
@@ -66,7 +66,7 @@ export default async function PermissoesPage() {
     <div className="space-y-6 max-w-5xl">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="font-headline font-extrabold text-3xl text-primary">Permissões por Função</h1>
+          <h1 className="nc-page-title text-primary">Permissões por Função</h1>
           <p className="text-on-surface-variant text-sm mt-0.5">Matriz de acesso para cada papel na clínica</p>
         </div>
         <div className="flex items-center gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 px-3 py-2 rounded-xl">
@@ -120,3 +120,4 @@ export default async function PermissoesPage() {
     </div>
   )
 }
+

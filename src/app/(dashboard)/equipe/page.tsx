@@ -63,10 +63,13 @@ export default async function EquipePage() {
   const activeCount = safeMembers.filter((m) => m.is_active).length
 
   return (
-    <div className="space-y-6 max-w-5xl">
+    <div className="space-y-5 max-w-5xl">
       <div>
-        <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Equipe</h2>
-        <p className="text-on-surface-variant text-sm mt-1 font-sans">
+        <p className="nc-section-label text-outline/60 mb-1.5">Clínica</p>
+        <h2 className="font-headline font-black text-primary tracking-tight" style={{ fontSize: "1.8rem", letterSpacing: "-0.03em" }}>
+          Equipe
+        </h2>
+        <p className="text-on-surface-variant text-[13px] mt-1 font-sans">
           {activeCount} membro{activeCount !== 1 ? "s" : ""} ativo{activeCount !== 1 ? "s" : ""} hoje
         </p>
       </div>

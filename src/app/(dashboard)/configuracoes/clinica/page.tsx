@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { ClinicForm } from "@/components/dashboard/forms/clinic-form"
@@ -18,7 +18,7 @@ export default async function ClinicaConfigPage() {
           <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 18 }}>arrow_back</span>
         </Link>
         <div>
-          <h1 className="font-headline font-extrabold text-2xl text-primary">Informações da Clínica</h1>
+          <h1 className="nc-page-title text-primary">Informações da Clínica</h1>
           <p className="text-on-surface-variant text-sm">Dados públicos da clínica</p>
         </div>
       </div>
@@ -48,3 +48,4 @@ export default async function ClinicaConfigPage() {
     </div>
   )
 }
+

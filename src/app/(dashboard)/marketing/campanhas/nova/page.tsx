@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
@@ -65,7 +65,7 @@ export default function NovaCampanhaPage() {
           <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 18 }}>arrow_back</span>
         </Link>
         <div>
-          <h1 className="font-headline font-extrabold text-2xl text-primary">Nova campanha</h1>
+          <h1 className="nc-page-title text-primary">Nova campanha</h1>
           <p className="text-on-surface-variant text-sm">Passo {step + 1} de {STEPS.length}: {STEPS[step]}</p>
         </div>
       </div>
@@ -203,3 +203,4 @@ export default function NovaCampanhaPage() {
     </div>
   )
 }
+

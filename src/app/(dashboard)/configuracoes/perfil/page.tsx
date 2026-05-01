@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { ProfileForm } from "@/components/dashboard/forms/profile-form"
@@ -19,7 +19,7 @@ export default async function PerfilPage() {
           <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 18 }}>arrow_back</span>
         </Link>
         <div>
-          <h1 className="font-headline font-extrabold text-2xl text-primary">Meu Perfil</h1>
+          <h1 className="nc-page-title text-primary">Meu Perfil</h1>
           <p className="text-on-surface-variant text-sm">Suas informações pessoais</p>
         </div>
       </div>
@@ -40,3 +40,4 @@ export default async function PerfilPage() {
     </div>
   )
 }
+

@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 
 const STATUS_COLORS: Record<string, string> = {
@@ -39,14 +39,14 @@ export default async function LeadsPage() {
   return (
     <div className="space-y-6 max-w-5xl">
       <div>
-        <h1 className="font-headline font-extrabold text-3xl text-primary">Leads</h1>
+        <h1 className="nc-page-title text-primary">Leads</h1>
         <p className="text-on-surface-variant text-sm mt-0.5">{leads?.length ?? 0} leads · {newCount} novos · {convertedCount} convertidos</p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {kpis.map((k) => (
           <div key={k.label} className="bg-surface-container-lowest border border-outline-variant rounded-2xl p-4 shadow-premium-sm">
-            <p className={`font-headline font-extrabold text-2xl ${k.cls}`}>{k.value}</p>
+            <p className={`nc-page-title ${k.cls}`}>{k.value}</p>
             <p className="text-xs text-on-surface-variant mt-0.5">{k.label}</p>
           </div>
         ))}
@@ -100,3 +100,4 @@ export default async function LeadsPage() {
     </div>
   )
 }
+

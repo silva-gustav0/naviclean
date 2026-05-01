@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 
 const integrations = [
@@ -62,7 +62,7 @@ export default async function IntegracoesPage() {
   return (
     <div className="space-y-6 max-w-3xl">
       <div>
-        <h1 className="font-headline font-extrabold text-2xl text-primary">Integrações</h1>
+        <h1 className="nc-page-title text-primary">Integrações</h1>
         <p className="text-on-surface-variant text-sm mt-0.5">Conecte o NaviClin com as ferramentas que você já usa</p>
       </div>
 
@@ -101,3 +101,4 @@ export default async function IntegracoesPage() {
     </div>
   )
 }
+

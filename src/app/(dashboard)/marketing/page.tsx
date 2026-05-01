@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import { CopyLinkButton } from "@/components/dashboard/copy-link-button"
 import Link from "next/link"
@@ -36,7 +36,7 @@ export default async function MarketingPage() {
     <div className="space-y-6 max-w-5xl">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Marketing</h2>
+          <h2 className="nc-page-title text-primary">Marketing</h2>
           <p className="text-on-surface-variant text-sm mt-1 font-sans">Atraia e retenha mais pacientes</p>
         </div>
         <Link
@@ -160,3 +160,4 @@ export default async function MarketingPage() {
     </div>
   )
 }
+

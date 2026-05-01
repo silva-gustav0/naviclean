@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
@@ -80,7 +80,7 @@ export default async function TreinamentoPage() {
     <div className="space-y-8 max-w-5xl">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Treinamento</h2>
+          <h2 className="nc-page-title text-primary">Treinamento</h2>
           <p className="text-on-surface-variant text-sm mt-1 font-sans">Aprenda a usar todos os módulos do NaviClin</p>
         </div>
         <a
@@ -96,7 +96,7 @@ export default async function TreinamentoPage() {
       <div className="surgical-gradient rounded-2xl p-6 text-white relative overflow-hidden">
         <div className="relative z-10 max-w-lg">
           <p className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">Central de Aprendizado</p>
-          <h3 className="font-headline font-extrabold text-2xl mb-2">Tudo que você precisa para dominar o NaviClin</h3>
+          <h3 className="nc-page-title mb-2">Tudo que você precisa para dominar o NaviClin</h3>
           <p className="text-sm text-white/70">Explore os módulos abaixo, leia os guias rápidos e entre em contato com o suporte se precisar de ajuda personalizada.</p>
         </div>
         <span className="material-symbols-outlined absolute -bottom-6 -right-6 text-white/10" style={{ fontSize: 140 }}>school</span>
@@ -171,3 +171,4 @@ export default async function TreinamentoPage() {
     </div>
   )
 }
+

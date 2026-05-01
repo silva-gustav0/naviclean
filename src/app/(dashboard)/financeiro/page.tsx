@@ -80,54 +80,59 @@ export default async function FinanceiroPage() {
   ]
 
   return (
-    <div className="space-y-6 max-w-5xl">
-      <div className="flex items-center justify-between">
+    <div className="space-y-5 max-w-5xl">
+      <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Financeiro</h2>
-          <p className="text-on-surface-variant text-sm mt-1 font-sans">Controle de receitas, despesas e comissões</p>
+          <p className="nc-section-label text-outline/60 mb-1.5">Gestão</p>
+          <h2 className="font-headline font-black text-primary tracking-tight" style={{ fontSize: "1.8rem", letterSpacing: "-0.03em" }}>
+            Financeiro
+          </h2>
+          <p className="text-on-surface-variant text-[13px] mt-1 font-sans">Controle de receitas, despesas e comissões</p>
         </div>
-        <div className="flex items-center gap-2">
-          <button className="text-primary border border-outline-variant text-sm font-semibold px-4 py-2 rounded-xl hover:bg-surface-container transition-colors font-headline flex items-center gap-2">
-            <span className="material-symbols-outlined" style={{ fontSize: 16 }}>download</span>
+        <div className="flex items-center gap-2 pt-1">
+          <button className="text-primary/70 border border-outline-variant/25 text-[12px] font-medium px-3.5 py-2 rounded-xl hover:bg-surface-container transition-colors font-sans flex items-center gap-1.5">
+            <span className="material-symbols-outlined" style={{ fontSize: 14 }}>download</span>
             Exportar DRE
           </button>
           <NewTransactionModal />
         </div>
       </div>
 
-      {/* KPI cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {kpis.map((kpi) => (
-          <div key={kpi.label} className="bg-card rounded-2xl p-5 border border-outline-variant/20 shadow-sm">
-            <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${kpi.bgClass}`}>
-              <span className={`material-symbols-outlined text-xl ${kpi.colorClass}`} style={{ fontVariationSettings: "'FILL' 1" }}>
-                {kpi.icon}
-              </span>
+      {/* KPI strip */}
+      <div className="bg-card rounded-2xl overflow-hidden shadow-card">
+        <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 divide-x divide-outline-variant/15">
+          {kpis.map((kpi, i) => (
+            <div key={kpi.label} className={`p-5 ${i === 0 ? "md:border-l-2 md:border-l-emerald-500/50" : ""}`}>
+              <div className="flex items-center justify-between mb-3">
+                <p className="nc-section-label text-outline/70">{kpi.label}</p>
+                <span className={`material-symbols-outlined ${kpi.colorClass} opacity-60`} style={{ fontSize: 16, fontVariationSettings: "'FILL' 1" }}>
+                  {kpi.icon}
+                </span>
+              </div>
+              <p className="nc-kpi-value text-primary" style={{ fontSize: "1.4rem" }}>{kpi.value}</p>
             </div>
-            <p className="font-headline font-extrabold text-xl text-primary">{kpi.value}</p>
-            <p className="text-xs text-on-surface-variant mt-1 font-sans">{kpi.label}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Sub-page links */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
         {subPages.map((p) => (
           <Link
             key={p.href}
             href={p.href}
-            className="bg-card border border-outline-variant/20 rounded-xl p-4 flex items-center gap-3 hover:border-nc-secondary/30 hover:shadow-sm transition-all group"
+            className="bg-card border border-outline-variant/20 rounded-xl p-4 flex items-center gap-3 hover:border-nc-secondary/25 hover:shadow-card transition-all group"
           >
-            <div className={`w-9 h-9 rounded-xl ${p.bg} flex items-center justify-center shrink-0`}>
-              <span className={`material-symbols-outlined text-lg ${p.color}`} style={{ fontVariationSettings: "'FILL' 1" }}>
+            <div className={`w-8 h-8 rounded-xl ${p.bg} flex items-center justify-center shrink-0`}>
+              <span className={`material-symbols-outlined text-base ${p.color}`} style={{ fontVariationSettings: "'FILL' 1", fontSize: 16 }}>
                 {p.icon}
               </span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-primary font-headline">{p.label}</p>
-              <p className="text-[10px] text-on-surface-variant font-sans truncate">{p.description}</p>
+              <p className="text-[13px] font-semibold text-primary font-sans leading-tight">{p.label}</p>
+              <p className="text-[10px] text-on-surface-variant font-sans truncate mt-0.5">{p.description}</p>
             </div>
-            <span className="material-symbols-outlined text-outline text-lg ml-auto group-hover:translate-x-0.5 transition-transform shrink-0">
+            <span className="material-symbols-outlined text-outline/30 group-hover:text-nc-secondary group-hover:translate-x-0.5 transition-all shrink-0" style={{ fontSize: 14 }}>
               arrow_forward
             </span>
           </Link>
@@ -135,44 +140,48 @@ export default async function FinanceiroPage() {
       </div>
 
       {/* Chart */}
-      <div className="bg-card rounded-2xl border border-outline-variant/20 p-5 shadow-sm">
-        <h3 className="font-headline font-semibold text-primary text-sm mb-4">Receitas vs Despesas — últimos 6 meses</h3>
-        <FinanceiroChart data={chartData} />
+      <div className="bg-card rounded-2xl overflow-hidden shadow-card">
+        <div className="px-5 py-4 border-b border-outline-variant/15">
+          <h3 className="font-sans font-semibold text-[14px] text-primary">Receitas vs Despesas — últimos 6 meses</h3>
+        </div>
+        <div className="p-5">
+          <FinanceiroChart data={chartData} />
+        </div>
       </div>
 
       {/* Recent transactions */}
-      <div className="bg-card rounded-2xl border border-outline-variant/20 overflow-hidden shadow-sm">
-        <div className="px-5 py-4 border-b border-[#c3c6d0]/20 flex items-center justify-between">
-          <h3 className="font-headline font-semibold text-primary text-sm">Últimas movimentações</h3>
-          <Link href="/financeiro/receitas" className="text-xs text-nc-secondary font-semibold hover:underline underline-offset-2 font-sans">
-            Ver tudo
+      <div className="bg-card rounded-2xl overflow-hidden shadow-card">
+        <div className="px-5 py-4 border-b border-outline-variant/15 flex items-center justify-between">
+          <h3 className="font-sans font-semibold text-[14px] text-primary">Últimas movimentações</h3>
+          <Link href="/financeiro/receitas" className="text-[12px] text-nc-secondary font-semibold font-sans hover:opacity-75 transition-opacity">
+            Ver tudo →
           </Link>
         </div>
 
         {recentTx.length > 0 ? (
-          <div className="divide-y divide-[#c3c6d0]/15">
-            {recentTx.map((t) => (
-              <div key={t.id as string} className="flex items-center gap-4 px-5 py-3.5 hover:bg-surface-container-low/50 transition-colors">
-                <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
-                  t.type === "income" ? "bg-emerald-50" : "bg-red-50"
+          <div>
+            {recentTx.map((t, idx) => (
+              <div key={t.id as string} className={`flex items-center gap-4 px-5 py-3.5 hover:bg-surface-container-low/40 transition-colors ${idx < recentTx.length - 1 ? "border-b border-outline-variant/10" : ""}`}>
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
+                  t.type === "income" ? "bg-emerald-50 dark:bg-emerald-900/30" : "bg-red-50 dark:bg-red-900/20"
                 }`}>
-                  <span className={`material-symbols-outlined text-base ${t.type === "income" ? "text-emerald-600" : "text-red-500"}`} style={{ fontVariationSettings: "'FILL' 1" }}>
+                  <span className={`material-symbols-outlined ${t.type === "income" ? "text-emerald-600" : "text-red-500"}`} style={{ fontSize: 14, fontVariationSettings: "'FILL' 1" }}>
                     {t.type === "income" ? "arrow_upward" : "arrow_downward"}
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-sm text-primary truncate font-headline">{t.description as string}</p>
-                  <p className="text-xs text-on-surface-variant font-sans">
+                  <p className="font-medium text-[13px] text-primary truncate font-sans">{t.description as string}</p>
+                  <p className="text-[11px] text-on-surface-variant font-sans">
                     {t.category as string ? `${t.category} · ` : ""}
                     {new Date(t.created_at as string).toLocaleDateString("pt-BR")}
                   </p>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className={`font-semibold text-sm font-headline ${t.type === "income" ? "text-emerald-600" : "text-red-500"}`}>
+                  <p className={`font-semibold text-[13px] font-sans ${t.type === "income" ? "text-emerald-600" : "text-red-500"}`}>
                     {t.type === "income" ? "+" : "-"}{fmt(Number(t.amount))}
                   </p>
                   {t.payment_status !== "paid" && (
-                    <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold font-sans ${
+                    <span className={`nc-stat-chip mt-1 ${
                       t.payment_status === "overdue" ? "bg-red-50 text-red-700" : "bg-nc-secondary/10 text-nc-secondary"
                     }`}>
                       {t.payment_status === "overdue" ? "Vencido" : "Pendente"}
@@ -184,13 +193,14 @@ export default async function FinanceiroPage() {
           </div>
         ) : (
           <div className="py-14 text-center">
-            <div className="w-14 h-14 rounded-2xl bg-nc-secondary/10 flex items-center justify-center mx-auto mb-4">
-              <span className="material-symbols-outlined text-nc-secondary text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-                payments
-              </span>
-            </div>
-            <h3 className="font-headline font-semibold text-primary text-base mb-1">Nenhuma movimentação</h3>
-            <p className="text-on-surface-variant text-sm mb-5 max-w-xs mx-auto font-sans">
+            <span
+              className="material-symbols-outlined text-outline/25 block mb-3"
+              style={{ fontSize: 32, fontVariationSettings: "'FILL' 0" }}
+            >
+              payments
+            </span>
+            <h3 className="font-sans font-semibold text-[14px] text-primary mb-1">Nenhuma movimentação</h3>
+            <p className="text-on-surface-variant text-[13px] mb-5 max-w-xs mx-auto font-sans">
               Registre receitas e despesas para ter controle financeiro completo.
             </p>
             <NewTransactionModal />

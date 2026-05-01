@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { CommissionRuleModal } from "@/components/dashboard/modals/commission-rule-modal"
@@ -55,7 +55,7 @@ export default async function ComissoesConfigPage() {
           <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
           <span className="text-on-surface">Comissões</span>
         </div>
-        <h1 className="font-headline font-extrabold text-2xl text-primary">Comissões e Split</h1>
+        <h1 className="nc-page-title text-primary">Comissões e Split</h1>
         <p className="text-on-surface-variant text-sm mt-0.5">Defina regras de divisão para profissionais</p>
       </div>
 
@@ -159,3 +159,4 @@ export default async function ComissoesConfigPage() {
     </div>
   )
 }
+

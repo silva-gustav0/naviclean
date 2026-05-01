@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { SecurityForm } from "@/components/dashboard/forms/security-form"
@@ -15,7 +15,7 @@ export default async function SegurancaPage() {
           <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 18 }}>arrow_back</span>
         </Link>
         <div>
-          <h1 className="font-headline font-extrabold text-2xl text-primary">Segurança</h1>
+          <h1 className="nc-page-title text-primary">Segurança</h1>
           <p className="text-on-surface-variant text-sm">Proteja sua conta</p>
         </div>
       </div>
@@ -48,3 +48,4 @@ export default async function SegurancaPage() {
     </div>
   )
 }
+

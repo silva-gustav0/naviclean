@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import { NewServiceModal } from "@/components/dashboard/modals/new-service-modal"
 
@@ -22,7 +22,8 @@ export default async function TratamentosPage() {
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Tratamentos</h2>
+          <p className="nc-section-label text-outline/60 mb-1.5">Clínica</p>
+          <h2 className="nc-page-title text-primary">Tratamentos</h2>
           <p className="text-on-surface-variant text-sm mt-1 font-sans">
             {services?.length ?? 0} serviço{(services?.length ?? 0) !== 1 ? "s" : ""} cadastrado{(services?.length ?? 0) !== 1 ? "s" : ""}
           </p>
@@ -91,3 +92,4 @@ export default async function TratamentosPage() {
     </div>
   )
 }
+

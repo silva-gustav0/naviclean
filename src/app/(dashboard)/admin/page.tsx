@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
@@ -45,7 +45,7 @@ export default async function AdminPage() {
           <span className="material-symbols-outlined text-white" style={{ fontSize: 20 }}>admin_panel_settings</span>
         </div>
         <div>
-          <h1 className="font-headline font-extrabold text-2xl text-primary">Painel Admin</h1>
+          <h1 className="nc-page-title text-primary">Painel Admin</h1>
           <p className="text-on-surface-variant text-sm">NaviClin Super Admin</p>
         </div>
       </div>
@@ -111,3 +111,4 @@ export default async function AdminPage() {
     </div>
   )
 }
+

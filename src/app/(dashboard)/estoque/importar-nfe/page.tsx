@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { NfeImportClient } from "@/components/dashboard/estoque/NfeImportClient"
@@ -26,7 +26,7 @@ export default async function ImportarNfePage() {
           <span>/</span>
           <span>Importar NF-e</span>
         </div>
-        <h1 className="font-headline font-extrabold text-2xl text-primary">Importar NF-e</h1>
+        <h1 className="nc-page-title text-primary">Importar NF-e</h1>
         <p className="text-on-surface-variant text-sm">Faça o upload do XML da nota fiscal para importar itens automaticamente</p>
       </div>
 
@@ -42,3 +42,4 @@ export default async function ImportarNfePage() {
     </div>
   )
 }
+

@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 
 function StarRating({ rating }: { rating: number }) {
@@ -45,7 +45,7 @@ export default async function AvaliacoesPage() {
   return (
     <div className="space-y-6 max-w-5xl">
       <div>
-        <h1 className="font-headline font-extrabold text-3xl text-primary">Avaliações dos Pacientes</h1>
+        <h1 className="nc-page-title text-primary">Avaliações dos Pacientes</h1>
         <p className="text-on-surface-variant text-sm mt-0.5">{reviews?.length ?? 0} avaliações recebidas</p>
       </div>
 
@@ -107,3 +107,4 @@ export default async function AvaliacoesPage() {
     </div>
   )
 }
+

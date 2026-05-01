@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
@@ -21,7 +21,7 @@ export default async function CampanhasPage() {
     <div className="space-y-6 max-w-5xl">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="font-headline font-extrabold text-3xl text-primary">Campanhas de Marketing</h1>
+          <h1 className="nc-page-title text-primary">Campanhas de Marketing</h1>
           <p className="text-on-surface-variant text-sm mt-0.5">Comunicações automáticas e manuais</p>
         </div>
         <Link
@@ -101,3 +101,4 @@ export default async function CampanhasPage() {
     </div>
   )
 }
+

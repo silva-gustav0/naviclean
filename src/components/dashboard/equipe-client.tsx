@@ -59,7 +59,7 @@ export function EquipeClient({ members }: { members: EquipeMember[] }) {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-2 rounded-lg text-sm font-headline font-semibold transition-all ${
+              className={`px-4 py-2 rounded-lg text-[13px] font-sans font-medium transition-all ${
                 activeTab === tab.key
                   ? "bg-primary text-white shadow-sm"
                   : "text-on-surface-variant hover:text-primary"
@@ -72,7 +72,7 @@ export function EquipeClient({ members }: { members: EquipeMember[] }) {
         <div className="flex items-center gap-2">
           <Link
             href="/equipe/permissoes"
-            className="text-primary border border-outline-variant text-sm font-semibold px-4 py-2 rounded-xl hover:bg-surface-container transition-colors font-headline"
+            className="text-primary border border-outline-variant text-[13px] font-medium px-4 py-2 rounded-xl hover:bg-surface-container transition-colors font-sans"
           >
             Permissões
           </Link>

@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 
 const PLAN_COLORS: Record<string, string> = {
@@ -24,7 +24,7 @@ export default async function AdminClinicasPage() {
   return (
     <div className="space-y-6 max-w-6xl">
       <div>
-        <h1 className="font-headline font-extrabold text-2xl text-primary">Clínicas</h1>
+        <h1 className="nc-page-title text-primary">Clínicas</h1>
         <p className="text-on-surface-variant text-sm mt-0.5">{clinics?.length ?? 0} clínicas cadastradas</p>
       </div>
 
@@ -93,3 +93,4 @@ export default async function AdminClinicasPage() {
     </div>
   )
 }
+

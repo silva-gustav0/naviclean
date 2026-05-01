@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 
 const DEFAULT_PLANS = [
@@ -18,7 +18,7 @@ export default async function AdminPlanosPage() {
   return (
     <div className="space-y-6 max-w-5xl">
       <div>
-        <h1 className="font-headline font-extrabold text-2xl text-primary">Planos</h1>
+        <h1 className="nc-page-title text-primary">Planos</h1>
         <p className="text-on-surface-variant text-sm mt-0.5">Gestão dos planos de assinatura</p>
       </div>
 
@@ -56,3 +56,4 @@ export default async function AdminPlanosPage() {
     </div>
   )
 }
+

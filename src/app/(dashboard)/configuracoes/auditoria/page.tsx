@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
@@ -37,7 +37,7 @@ export default async function AuditoriaPage() {
           <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
           <span className="text-on-surface">Auditoria</span>
         </div>
-        <h1 className="font-headline font-extrabold text-2xl text-primary">Log de Auditoria</h1>
+        <h1 className="nc-page-title text-primary">Log de Auditoria</h1>
         <p className="text-on-surface-variant text-sm mt-0.5">Registro de atividades sensíveis — LGPD</p>
       </div>
 
@@ -93,3 +93,4 @@ export default async function AuditoriaPage() {
     </div>
   )
 }
+

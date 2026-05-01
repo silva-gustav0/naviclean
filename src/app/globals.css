@@ -316,10 +316,70 @@ body {
   box-shadow: 0px 4px 12px -2px rgba(21, 28, 35, 0.04);
 }
 
+/* Architectural card shadow — ring + soft lift */
+.shadow-card {
+  box-shadow:
+    0 0 0 1px rgba(195, 198, 208, 0.32),
+    0 2px 6px -1px rgba(21, 28, 35, 0.07);
+}
+
 .glass-header {
   background-color: rgba(246, 250, 255, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+
+/* Dashboard topbar glass */
+.nc-topbar {
+  background: rgba(250, 250, 247, 0.90);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+
+/* Sidebar deep navy gradient */
+.nc-sidebar {
+  background: linear-gradient(180deg, #001630 0%, #00244a 55%, #001a38 100%);
+}
+
+/* Page section label — architectural */
+.nc-section-label {
+  font-family: var(--font-inter);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nc-outline);
+}
+
+/* Page title — consistent across all dashboard pages */
+.nc-page-title {
+  font-family: var(--font-fraunces);
+  font-weight: 900;
+  font-size: 1.75rem;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+/* KPI number — display treatment */
+.nc-kpi-value {
+  font-family: var(--font-fraunces);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* Stat chip — inline highlight */
+.nc-stat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 99px;
+  font-family: var(--font-inter);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 /* ── Keyframes ───────────────────────────────────────────────── */
@@ -445,6 +505,18 @@ body {
 }
 
 /* ── Dark mode overrides ─────────────────────────────────────── */
+.dark .shadow-card {
+  box-shadow:
+    0 0 0 1px rgba(36, 48, 64, 0.7),
+    0 2px 6px -1px rgba(0, 0, 0, 0.35);
+}
+.dark .nc-topbar {
+  background: rgba(11, 22, 34, 0.92);
+}
+.dark .nc-sidebar {
+  background: linear-gradient(180deg, #000e1f 0%, #0a1628 55%, #000c1a 100%);
+}
+
 .dark .surgical-gradient {
   background: linear-gradient(135deg, #0d3a6b 0%, #1a5fa0 100%);
 }

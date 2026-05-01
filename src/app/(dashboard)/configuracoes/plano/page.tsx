@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { CheckoutButton, BillingPortalButton } from "@/components/dashboard/billing/BillingButtons"
@@ -100,7 +100,7 @@ export default async function PlanoPage() {
           <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 18 }}>arrow_back</span>
         </Link>
         <div>
-          <h1 className="font-headline font-extrabold text-2xl text-primary">Plano e Cobrança</h1>
+          <h1 className="nc-page-title text-primary">Plano e Cobrança</h1>
           <p className="text-on-surface-variant text-sm">Gerencie sua assinatura NaviClin</p>
         </div>
       </div>
@@ -159,7 +159,7 @@ export default async function PlanoPage() {
                   <p className="text-xs text-on-surface-variant">{plan.description}</p>
                 </div>
                 <div className="flex items-end gap-1">
-                  <span className="font-headline font-extrabold text-3xl text-primary">{plan.priceLabel}</span>
+                  <span className="nc-page-title text-primary">{plan.priceLabel}</span>
                   <span className="text-on-surface-variant text-sm pb-0.5">{plan.period}</span>
                 </div>
                 <ul className="space-y-2 flex-1">
@@ -195,3 +195,4 @@ export default async function PlanoPage() {
     </div>
   )
 }
+

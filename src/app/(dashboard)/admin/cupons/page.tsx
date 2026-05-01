@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 
 export default async function AdminCuponsPage() {
@@ -13,7 +13,7 @@ export default async function AdminCuponsPage() {
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="font-headline font-extrabold text-2xl text-primary">Cupons Promocionais</h1>
+          <h1 className="nc-page-title text-primary">Cupons Promocionais</h1>
           <p className="text-on-surface-variant text-sm mt-0.5">Gerencie cupons de desconto via Stripe</p>
         </div>
         <button className="surgical-gradient text-white text-sm font-semibold flex items-center gap-1.5 px-4 py-2 rounded-xl shadow-premium-sm hover:opacity-90 transition-opacity">
@@ -43,3 +43,4 @@ export default async function AdminCuponsPage() {
     </div>
   )
 }
+

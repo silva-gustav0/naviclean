@@ -184,20 +184,23 @@ export default async function PacientesPage({
       {/* Header */}
       <div className="flex items-start justify-between gap-4 flex-wrap mb-4 shrink-0">
         <div>
-          <h2 className="font-headline font-extrabold text-3xl text-primary tracking-tight">Pacientes</h2>
-          <p className="text-on-surface-variant text-sm mt-1 font-sans">
+          <p className="nc-section-label text-outline/60 mb-1.5">Clínica</p>
+          <h2 className="font-headline font-black text-primary tracking-tight" style={{ fontSize: "1.8rem", letterSpacing: "-0.03em" }}>
+            Pacientes
+          </h2>
+          <p className="text-on-surface-variant text-[13px] mt-1 font-sans">
             {patientItems.length} cadastro{patientItems.length !== 1 ? "s" : ""} — prontuário digital completo
           </p>
         </div>
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap pt-1">
           <CopyLinkButton
             slug={clinic.slug as string}
             label="Link de cadastro"
             icon="link"
             path="/pacientes/cadastro"
           />
-          <button className="flex items-center gap-2 border border-outline-variant/30 text-primary text-sm font-semibold px-4 py-2 rounded-xl hover:bg-surface-container transition-colors font-headline">
-            <span className="material-symbols-outlined" style={{ fontSize: 18 }}>upload_file</span>
+          <button className="flex items-center gap-1.5 border border-outline-variant/25 text-primary/70 text-[12px] font-medium px-3.5 py-2 rounded-xl hover:bg-surface-container transition-colors font-sans">
+            <span className="material-symbols-outlined" style={{ fontSize: 15 }}>upload_file</span>
             Importar
           </button>
           <NewPatientModal members={membersList} />
@@ -207,7 +210,7 @@ export default async function PacientesPage({
       {/* Split layout */}
       {patientItems.length > 0 ? (
         <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-4">
-          <div className="bg-card rounded-2xl border border-outline-variant/20 shadow-sm p-3 flex flex-col min-h-0">
+          <div className="bg-card rounded-2xl shadow-card p-3 flex flex-col min-h-0">
             <PatientsList patients={patientItems} />
           </div>
 

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
@@ -83,7 +83,7 @@ export default function NovaMovimentacaoPage() {
           <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: 18 }}>arrow_back</span>
         </Link>
         <div>
-          <h1 className="font-headline font-extrabold text-2xl text-primary">Nova movimentação</h1>
+          <h1 className="nc-page-title text-primary">Nova movimentação</h1>
           <p className="text-on-surface-variant text-sm">Registre entrada, saída ou ajuste de estoque</p>
         </div>
       </div>
@@ -185,3 +185,4 @@ export default function NovaMovimentacaoPage() {
     </div>
   )
 }
+

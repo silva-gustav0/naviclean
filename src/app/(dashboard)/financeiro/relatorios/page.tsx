@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
@@ -54,7 +54,7 @@ export default async function RelatoriosPage() {
           <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
           <span className="text-on-surface">Relatórios</span>
         </div>
-        <h1 className="font-headline font-extrabold text-3xl text-primary">Relatórios</h1>
+        <h1 className="nc-page-title text-primary">Relatórios</h1>
         <p className="text-on-surface-variant text-sm mt-0.5">Resumo financeiro de {now.getFullYear()}</p>
       </div>
 
@@ -65,8 +65,8 @@ export default async function RelatoriosPage() {
             <div className={`w-9 h-9 ${c.accent} rounded-xl flex items-center justify-center mb-3`}>
               <span className={`material-symbols-outlined ${c.iconCls}`} style={{ fontSize: 18 }}>{c.icon}</span>
             </div>
-            <p className="font-headline font-extrabold text-xl text-on-surface">{c.value}</p>
-            <p className="text-xs text-on-surface-variant mt-1">{c.label}</p>
+            <p className="nc-kpi-value text-xl text-on-surface">{c.value}</p>
+            <p className="nc-section-label text-outline/60 mt-1">{c.label}</p>
           </div>
         ))}
       </div>
@@ -101,10 +101,10 @@ export default async function RelatoriosPage() {
         <table className="w-full text-sm">
           <thead className="bg-surface-container border-b border-outline-variant">
             <tr>
-              <th className="text-left font-medium text-xs text-on-surface-variant px-5 py-3">Descrição</th>
-              <th className="text-left font-medium text-xs text-on-surface-variant px-4 py-3">Tipo</th>
-              <th className="text-left font-medium text-xs text-on-surface-variant px-4 py-3">Data</th>
-              <th className="text-right font-medium text-xs text-on-surface-variant px-5 py-3">Valor</th>
+              <th className="text-left px-5 py-3.5"><span className="nc-section-label text-outline/60">Descrição</span></th>
+              <th className="text-left px-4 py-3.5"><span className="nc-section-label text-outline/60">Tipo</span></th>
+              <th className="text-left px-4 py-3.5"><span className="nc-section-label text-outline/60">Data</span></th>
+              <th className="text-right px-5 py-3.5"><span className="nc-section-label text-outline/60">Valor</span></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-outline-variant/50">
@@ -134,3 +134,4 @@ export default async function RelatoriosPage() {
     </div>
   )
 }
+

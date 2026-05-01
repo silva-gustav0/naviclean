@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { PriceTableModal } from "@/components/dashboard/modals/price-table-modal"
@@ -41,7 +41,7 @@ export default async function TabelasPrecoPage() {
             <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
             <span className="text-on-surface">Tabelas de Preço</span>
           </div>
-          <h1 className="font-headline font-extrabold text-2xl text-primary">Tabelas de Preço</h1>
+          <h1 className="nc-page-title text-primary">Tabelas de Preço</h1>
           <p className="text-on-surface-variant text-sm mt-0.5">{tables?.length ?? 0} tabelas cadastradas</p>
         </div>
         <PriceTableModal insurancePlans={insurancePlans ?? []} />
@@ -105,3 +105,4 @@ export default async function TabelasPrecoPage() {
     </div>
   )
 }
+

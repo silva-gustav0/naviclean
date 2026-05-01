@@ -55,7 +55,7 @@ export default async function ComissoesFinanceiroPage() {
           <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
           <span className="text-on-surface">Comissões</span>
         </div>
-        <h1 className="nc-page-title text-primary">Comissões</h1>
+        <h1 className="font-headline font-black text-primary" style={{ fontSize: "1.75rem", letterSpacing: "-0.03em", lineHeight: 1.1 }}>Comissões</h1>
         <p className="text-on-surface-variant text-sm mt-0.5">Gestão de repasses para profissionais</p>
       </div>
 

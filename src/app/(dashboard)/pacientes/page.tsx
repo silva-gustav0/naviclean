@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import { NewPatientModal } from "@/components/dashboard/modals/new-patient-modal"
 import { PatientsList, type PatientListItem } from "@/components/dashboard/patients-list"
@@ -183,12 +183,12 @@ export default async function PacientesPage({
     <div className="flex flex-col h-[calc(100vh-theme(spacing.16))]">
       {/* Header */}
       <div className="flex items-start justify-between gap-4 flex-wrap mb-4 shrink-0">
-        <div>
-          <p className="nc-section-label text-outline/60 mb-1.5">Clínica</p>
-          <h2 className="font-headline font-black text-primary tracking-tight" style={{ fontSize: "1.8rem", letterSpacing: "-0.03em" }}>
+        <div className="nc-page-header">
+          <p className="nc-section-label text-outline/55 mb-1">Clínica</p>
+          <h2 className="font-headline font-black text-primary" style={{ fontSize: "1.75rem", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
             Pacientes
           </h2>
-          <p className="text-on-surface-variant text-[13px] mt-1 font-sans">
+          <p className="text-on-surface-variant text-[12px] mt-1 font-sans">
             {patientItems.length} cadastro{patientItems.length !== 1 ? "s" : ""} — prontuário digital completo
           </p>
         </div>

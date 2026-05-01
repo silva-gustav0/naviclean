@@ -107,27 +107,28 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden md:ml-64">
         {/* Topbar */}
-        <header className="nc-topbar sticky top-0 z-30 flex items-center px-6 py-2.5 gap-4 border-b border-outline-variant/15">
-          <div className="flex-1 max-w-sm">
+        <header className="nc-topbar sticky top-0 z-30 flex items-center px-5 py-0 gap-3 border-b border-outline-variant/12" style={{ minHeight: 52 }}>
+          {/* Search */}
+          <div className="flex-1 max-w-xs">
             <div className="relative">
               <span
-                className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline/40"
-                style={{ fontSize: 16 }}
+                className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline/35"
+                style={{ fontSize: 15 }}
               >
                 search
               </span>
               <input
                 type="text"
                 placeholder="Buscar..."
-                className="w-full pl-9 pr-4 py-1.5 text-[13px] bg-surface-container-low/70 border border-outline-variant/20 rounded-full focus:outline-none focus:ring-1 focus:ring-primary/15 transition-colors placeholder:text-outline/35 font-sans"
+                className="w-full pl-8 pr-3 py-[7px] text-[12px] bg-surface-container-low/60 border border-outline-variant/15 rounded-full focus:outline-none focus:ring-1 focus:ring-primary/20 transition-colors placeholder:text-outline/30 font-sans"
               />
             </div>
           </div>
 
-          <div className="ml-auto flex items-center gap-1">
+          <div className="ml-auto flex items-center gap-0.5">
             <ThemeToggle />
             <button className="relative w-8 h-8 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors">
-              <span className="material-symbols-outlined text-outline/60" style={{ fontSize: 18 }}>
+              <span className="material-symbols-outlined text-outline/50" style={{ fontSize: 17 }}>
                 notifications
               </span>
               <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-nc-secondary" />
@@ -136,18 +137,25 @@ export default async function DashboardLayout({ children }: { children: React.Re
               href="/contato"
               className="w-8 h-8 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors"
             >
-              <span className="material-symbols-outlined text-outline/60" style={{ fontSize: 18 }}>
+              <span className="material-symbols-outlined text-outline/50" style={{ fontSize: 17 }}>
                 help_outline
               </span>
             </a>
-            <div className="w-px h-5 bg-outline-variant/30 mx-1.5" />
-            <div className="flex items-center gap-2 cursor-default">
-              <div className="text-right hidden lg:block">
-                <p className="text-[12px] font-semibold text-primary leading-tight font-sans">{firstName}</p>
-                <p className="text-[9px] text-outline/60 uppercase tracking-widest font-sans">{roleLabel}</p>
-              </div>
-              <div className="w-8 h-8 rounded-full bg-[#00244a] dark:bg-[#1a4070] flex items-center justify-center text-white text-[11px] font-bold font-headline">
+            <div className="w-px h-4 bg-outline-variant/25 mx-2" />
+            {/* User chip */}
+            <div
+              className="flex items-center gap-2 pl-1 pr-2.5 py-1 rounded-full cursor-default"
+              style={{ background: "rgba(0,36,74,0.06)", border: "1px solid rgba(0,36,74,0.08)" }}
+            >
+              <div
+                className="w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold font-headline"
+                style={{ background: "linear-gradient(135deg, #c9943a 0%, #daa840 100%)" }}
+              >
                 {initials}
+              </div>
+              <div className="hidden lg:block">
+                <p className="text-[11px] font-semibold text-primary leading-none font-sans">{firstName}</p>
+                <p className="text-[8px] text-outline/50 uppercase tracking-widest font-sans mt-0.5">{roleLabel}</p>
               </div>
             </div>
           </div>

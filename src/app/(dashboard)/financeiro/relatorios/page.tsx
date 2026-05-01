@@ -54,7 +54,7 @@ export default async function RelatoriosPage() {
           <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
           <span className="text-on-surface">Relatórios</span>
         </div>
-        <h1 className="nc-page-title text-primary">Relatórios</h1>
+        <h1 className="font-headline font-black text-primary" style={{ fontSize: "1.75rem", letterSpacing: "-0.03em", lineHeight: 1.1 }}>Relatórios</h1>
         <p className="text-on-surface-variant text-sm mt-0.5">Resumo financeiro de {now.getFullYear()}</p>
       </div>
 

@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+﻿import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
@@ -78,7 +78,7 @@ export default async function ConfiguracoesPage() {
   return (
     <div className="space-y-6 max-w-3xl">
       <div>
-        <p className="nc-section-label text-outline/60 mb-1.5">Sistema</p>
+        <p className="nc-section-label text-outline/55 mb-1">Sistema</p>
         <h2 className="font-headline font-black text-primary tracking-tight" style={{ fontSize: "1.8rem", letterSpacing: "-0.03em" }}>
           Configurações
         </h2>

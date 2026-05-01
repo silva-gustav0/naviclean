@@ -44,12 +44,12 @@ export default async function EstoquePage() {
   return (
     <div className="space-y-5 max-w-5xl">
       <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="nc-section-label text-outline/60 mb-1.5">Clínica</p>
-          <h2 className="font-headline font-black text-primary tracking-tight" style={{ fontSize: "1.8rem", letterSpacing: "-0.03em" }}>
+        <div className="nc-page-header">
+          <p className="nc-section-label text-outline/55 mb-1">Clínica</p>
+          <h2 className="font-headline font-black text-primary" style={{ fontSize: "1.75rem", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
             Estoque
           </h2>
-          <p className="text-on-surface-variant text-[13px] mt-1 font-sans">{enriched.length} itens cadastrados</p>
+          <p className="text-on-surface-variant text-[12px] mt-1 font-sans">{enriched.length} itens cadastrados</p>
         </div>
         <div className="flex gap-2 pt-1">
           <Link
@@ -103,14 +103,14 @@ export default async function EstoquePage() {
         ) : (
           <table className="w-full">
             <thead>
-              <tr className="border-b border-outline-variant/15">
-                <th className="text-left px-5 py-3.5"><span className="nc-section-label text-outline/60">Item</span></th>
-                <th className="text-left px-4 py-3.5"><span className="nc-section-label text-outline/60">Categoria</span></th>
-                <th className="text-right px-4 py-3.5"><span className="nc-section-label text-outline/60">Estoque</span></th>
-                <th className="text-right px-4 py-3.5"><span className="nc-section-label text-outline/60">Mínimo</span></th>
-                <th className="text-left px-4 py-3.5"><span className="nc-section-label text-outline/60">Vencimento</span></th>
-                <th className="text-center px-4 py-3.5"><span className="nc-section-label text-outline/60">Status</span></th>
-                <th className="px-4 py-3.5"></th>
+              <tr className="border-b border-outline-variant/12" style={{ background: "rgba(0,36,74,0.025)" }}>
+                <th className="text-left nc-th">Item</th>
+                <th className="text-left nc-th">Categoria</th>
+                <th className="text-right nc-th">Estoque</th>
+                <th className="text-right nc-th">Mínimo</th>
+                <th className="text-left nc-th">Vencimento</th>
+                <th className="text-center nc-th">Status</th>
+                <th className="nc-th"></th>
               </tr>
             </thead>
             <tbody>

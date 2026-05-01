@@ -64,9 +64,9 @@ export default async function EquipePage() {
 
   return (
     <div className="space-y-5 max-w-5xl">
-      <div>
-        <p className="nc-section-label text-outline/60 mb-1.5">Clínica</p>
-        <h2 className="font-headline font-black text-primary tracking-tight" style={{ fontSize: "1.8rem", letterSpacing: "-0.03em" }}>
+      <div className="nc-page-header">
+        <p className="nc-section-label text-outline/55 mb-1">Clínica</p>
+        <h2 className="font-headline font-black text-primary" style={{ fontSize: "1.75rem", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
           Equipe
         </h2>
         <p className="text-on-surface-variant text-[13px] mt-1 font-sans">

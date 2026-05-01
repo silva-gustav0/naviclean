@@ -316,6 +316,32 @@ body {
   box-shadow: 0px 4px 12px -2px rgba(21, 28, 35, 0.04);
 }
 
+/* ── Dot grid overlay for hero sections ───────────────── */
+.bg-dot-grid {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ── Page header rule — gold left border accent ─────── */
+.nc-page-header {
+  display: flex;
+  flex-direction: column;
+  padding-left: 14px;
+  border-left: 3px solid #c9943a;
+  border-image: linear-gradient(180deg, #c9943a 0%, rgba(201,148,58,0.35) 100%) 1;
+}
+
+/* ── Table header cell ─────────────────────────────── */
+.nc-th {
+  font-family: var(--font-inter);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(74,90,108,0.75);
+  padding: 10px 16px;
+}
+
 /* Architectural card shadow — ring + soft lift */
 .shadow-card {
   box-shadow:

@@ -22,7 +22,7 @@ export default async function TratamentosPage() {
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between">
         <div>
-          <p className="nc-section-label text-outline/60 mb-1.5">Clínica</p>
+          <p className="nc-section-label text-outline/55 mb-1">Clínica</p>
           <h2 className="nc-page-title text-primary">Tratamentos</h2>
           <p className="text-on-surface-variant text-sm mt-1 font-sans">
             {services?.length ?? 0} serviço{(services?.length ?? 0) !== 1 ? "s" : ""} cadastrado{(services?.length ?? 0) !== 1 ? "s" : ""}

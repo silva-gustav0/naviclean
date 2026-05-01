@@ -54,7 +54,7 @@ export default async function ReceitasPage() {
             <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
             <span className="text-on-surface">Receitas</span>
           </div>
-          <h1 className="nc-page-title text-primary">Receitas</h1>
+          <h1 className="font-headline font-black text-primary" style={{ fontSize: "1.75rem", letterSpacing: "-0.03em", lineHeight: 1.1 }}>Receitas</h1>
           <p className="text-on-surface-variant text-sm mt-0.5">{transactions?.length ?? 0} registros · {fmt(totalPaid)} recebido</p>
         </div>
         <NewTransactionModal />

@@ -1,9 +1,16 @@
 "use client"
 
 import { useRef, useState, useTransition } from "react"
+import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 import { updateClinic } from "@/app/actions/clinic"
 import { Loader2 } from "lucide-react"
+
+const CLINIC_TYPE_OPTIONS = [
+  { value: "dental", label: "Odontologia", description: "Exclusivamente para dentistas" },
+  { value: "medical", label: "Medicina", description: "Exclusivamente para médicos" },
+  { value: "mixed", label: "Mista", description: "Odontologia e medicina" },
+]
 
 interface ClinicFormProps {
   clinic: {
@@ -12,11 +19,13 @@ interface ClinicFormProps {
     phone: string | null
     address_city: string | null
     address_state: string | null
+    clinic_type: string | null
   }
 }
 
 export function ClinicForm({ clinic }: ClinicFormProps) {
   const [isPending, startTransition] = useTransition()
+  const [selectedType, setSelectedType] = useState(clinic.clinic_type ?? "dental")
   const formRef = useRef<HTMLFormElement>(null)
 
   function handleSubmit(e: React.FormEvent) {
@@ -92,6 +101,30 @@ export function ClinicForm({ clinic }: ClinicFormProps) {
             maxLength={2}
             className="w-full px-4 py-2.5 text-sm border rounded-xl bg-slate-50 dark:bg-slate-800 text-center uppercase focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Tipo de clínica</label>
+        <p className="text-xs text-muted-foreground">Define quais sugestões de autocomplete aparecem para cada profissional.</p>
+        <input type="hidden" name="clinic_type" value={selectedType} />
+        <div className="grid grid-cols-3 gap-2">
+          {CLINIC_TYPE_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => setSelectedType(opt.value)}
+              className={cn(
+                "flex flex-col items-start gap-0.5 px-4 py-3 rounded-xl border text-left transition-colors",
+                selectedType === opt.value
+                  ? "border-blue-600 bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400"
+                  : "border-border hover:bg-muted"
+              )}
+            >
+              <span className="text-sm font-semibold">{opt.label}</span>
+              <span className="text-xs text-muted-foreground leading-tight">{opt.description}</span>
+            </button>
+          ))}
         </div>
       </div>
 

@@ -1,0 +1,78 @@
+-- Clinic type configuration + catalog_procedures tag
+
+ALTER TABLE clinics ADD COLUMN IF NOT EXISTS clinic_type TEXT NOT NULL DEFAULT 'dental';
+CREATE INDEX IF NOT EXISTS idx_clinics_clinic_type ON clinics(clinic_type);
+
+ALTER TABLE catalog_procedures ADD COLUMN IF NOT EXISTS clinic_type TEXT DEFAULT 'Odontologia';
+UPDATE catalog_procedures SET clinic_type = 'Odontologia' WHERE clinic_type IS NULL;
+CREATE INDEX IF NOT EXISTS idx_catalog_proc_clinic_type ON catalog_procedures(clinic_type);
+
+UPDATE catalog_stock_items SET clinic_type = 'Ambos' WHERE clinic_type LIKE 'Ambos%';
+
+INSERT INTO catalog_procedures (code, name, category, specialty, type, duration_min, clinic_type) VALUES
+('MD-001', 'Consulta médica geral', 'Avaliação e Diagnóstico', 'Clínica Geral', 'Médico', 30, 'Medicina'),
+('MD-002', 'Consulta de retorno', 'Avaliação e Diagnóstico', 'Clínica Geral', 'Médico', 20, 'Medicina'),
+('MD-003', 'Consulta de urgência', 'Avaliação e Diagnóstico', 'Clínica Geral', 'Médico', 30, 'Medicina'),
+('MD-004', 'Exame físico completo', 'Avaliação e Diagnóstico', 'Clínica Geral', 'Médico', 45, 'Medicina'),
+('MD-005', 'Check-up anual (adulto)', 'Prevenção e Rastreamento', 'Clínica Geral', 'Médico', 60, 'Medicina'),
+('MD-006', 'Atestado médico / Laudo', 'Documentos', 'Clínica Geral', 'Médico', 15, 'Medicina'),
+('MD-007', 'Solicitação de exames laboratoriais', 'Avaliação e Diagnóstico', 'Clínica Geral', 'Médico', 15, 'Medicina'),
+('MD-008', 'Prescrição médica / Renovação', 'Documentos', 'Clínica Geral', 'Médico', 15, 'Medicina'),
+('MD-009', 'Aferição de pressão arterial', 'Procedimentos', 'Clínica Geral', 'Médico', 10, 'Medicina'),
+('MD-010', 'Aplicação de injeção IM / IV', 'Procedimentos', 'Clínica Geral', 'Médico', 15, 'Medicina'),
+('MD-011', 'Curativo simples', 'Procedimentos', 'Clínica Geral', 'Médico', 15, 'Medicina'),
+('MD-012', 'Curativo complexo', 'Procedimentos', 'Clínica Geral', 'Médico', 30, 'Medicina'),
+('MD-013', 'Sutura simples (até 5 pontos)', 'Procedimentos Cirúrgicos Menores', 'Clínica Geral', 'Médico', 30, 'Medicina'),
+('MD-014', 'Retirada de pontos', 'Procedimentos', 'Clínica Geral', 'Médico', 15, 'Medicina'),
+('MD-015', 'Drenagem de abscesso superficial', 'Procedimentos Cirúrgicos Menores', 'Clínica Geral', 'Médico', 30, 'Medicina'),
+('MD-016', 'Nebulização / Inalação', 'Procedimentos', 'Clínica Geral', 'Médico', 20, 'Medicina'),
+('MD-017', 'Eletrocardiograma (ECG) com laudo', 'Cardiologia', 'Clínica Geral', 'Médico', 20, 'Medicina'),
+('MD-018', 'Oximetria de pulso', 'Procedimentos', 'Clínica Geral', 'Médico', 10, 'Medicina'),
+('MD-019', 'Glicemia capilar (teste rápido)', 'Procedimentos', 'Clínica Geral', 'Médico', 10, 'Medicina'),
+('MD-020', 'Teste de gravidez (urina)', 'Procedimentos', 'Clínica Geral', 'Médico', 10, 'Medicina'),
+('MD-021', 'Consulta cardiológica', 'Avaliação e Diagnóstico', 'Cardiologia', 'Médico', 40, 'Medicina'),
+('MD-022', 'ECG de repouso com laudo cardiológico', 'Cardiologia', 'Cardiologia', 'Médico', 30, 'Medicina'),
+('MD-023', 'Ecocardiograma transtorácico', 'Cardiologia', 'Cardiologia', 'Médico', 60, 'Medicina'),
+('MD-024', 'Holter 24 horas – interpretação', 'Cardiologia', 'Cardiologia', 'Médico', 30, 'Medicina'),
+('MD-025', 'MAPA – interpretação', 'Cardiologia', 'Cardiologia', 'Médico', 30, 'Medicina'),
+('MD-026', 'Teste ergométrico (esteira) com laudo', 'Cardiologia', 'Cardiologia', 'Médico', 60, 'Medicina'),
+('MD-027', 'Consulta ginecológica', 'Avaliação e Diagnóstico', 'Ginecologia e Obstetrícia', 'Médico', 40, 'Medicina'),
+('MD-028', 'Consulta pré-natal', 'Avaliação e Diagnóstico', 'Ginecologia e Obstetrícia', 'Médico', 40, 'Medicina'),
+('MD-029', 'Colpocitologia oncótica (Papanicolau)', 'Ginecologia e Obstetrícia', 'Ginecologia e Obstetrícia', 'Médico', 20, 'Medicina'),
+('MD-030', 'Colposcopia com laudo', 'Ginecologia e Obstetrícia', 'Ginecologia e Obstetrícia', 'Médico', 30, 'Medicina'),
+('MD-031', 'Inserção de DIU', 'Ginecologia e Obstetrícia', 'Ginecologia e Obstetrícia', 'Médico', 30, 'Medicina'),
+('MD-032', 'Retirada de DIU', 'Ginecologia e Obstetrícia', 'Ginecologia e Obstetrícia', 'Médico', 20, 'Medicina'),
+('MD-033', 'Ultrassonografia obstétrica – interpretação', 'Ginecologia e Obstetrícia', 'Ginecologia e Obstetrícia', 'Médico', 30, 'Medicina'),
+('MD-034', 'Vulvoscopia', 'Ginecologia e Obstetrícia', 'Ginecologia e Obstetrícia', 'Médico', 30, 'Medicina'),
+('MD-035', 'Consulta dermatológica', 'Avaliação e Diagnóstico', 'Dermatologia', 'Médico', 40, 'Medicina'),
+('MD-036', 'Dermatoscopia de lesão', 'Dermatologia', 'Dermatologia', 'Médico', 30, 'Medicina'),
+('MD-037', 'Biópsia de pele (punch / excisional)', 'Dermatologia', 'Dermatologia', 'Médico', 30, 'Medicina'),
+('MD-038', 'Crioterapia (nitrogênio líquido) – por lesão', 'Dermatologia', 'Dermatologia', 'Médico', 20, 'Medicina'),
+('MD-039', 'Eletrocoagulação de lesão', 'Dermatologia', 'Dermatologia', 'Médico', 20, 'Medicina'),
+('MD-040', 'Peeling químico (ATA / TCA / Jessner)', 'Dermatologia', 'Dermatologia', 'Médico', 45, 'Medicina'),
+('MD-041', 'Microagulhamento (needling facial)', 'Dermatologia', 'Dermatologia', 'Médico', 60, 'Medicina'),
+('MD-042', 'Laser fracionado ablativo / não ablativo', 'Dermatologia', 'Dermatologia', 'Médico', 60, 'Medicina'),
+('MD-043', 'Fototerapia (NB-UVB) – sessão', 'Dermatologia', 'Dermatologia', 'Médico', 30, 'Medicina'),
+('MD-044', 'Consulta ortopédica', 'Avaliação e Diagnóstico', 'Ortopedia', 'Médico', 40, 'Medicina'),
+('MD-045', 'Infiltração articular com corticosteroide', 'Ortopedia', 'Ortopedia', 'Médico', 30, 'Medicina'),
+('MD-046', 'Infiltração com ácido hialurônico (viscossuplementação)', 'Ortopedia', 'Ortopedia', 'Médico', 30, 'Medicina'),
+('MD-047', 'Punção articular (artrocentese)', 'Ortopedia', 'Ortopedia', 'Médico', 30, 'Medicina'),
+('MD-048', 'Aplicação de PRP (plasma rico em plaquetas)', 'Ortopedia', 'Ortopedia', 'Médico', 45, 'Medicina'),
+('MD-049', 'Imobilização / Confecção de tipoia / tala', 'Ortopedia', 'Ortopedia', 'Médico', 30, 'Medicina'),
+('MD-050', 'Consulta nutricional / nutrológica', 'Avaliação e Diagnóstico', 'Nutrologia', 'Médico', 50, 'Medicina'),
+('MD-051', 'Bioimpedância elétrica (composição corporal)', 'Nutrologia', 'Nutrologia', 'Médico', 20, 'Medicina'),
+('MD-052', 'Consulta endocrinológica', 'Avaliação e Diagnóstico', 'Endocrinologia', 'Médico', 40, 'Medicina'),
+('MD-053', 'Glicemia de jejum + HbA1c – orientação de resultado', 'Endocrinologia', 'Endocrinologia', 'Médico', 20, 'Medicina'),
+('MD-054', 'Consulta pediátrica', 'Avaliação e Diagnóstico', 'Pediatria', 'Médico', 30, 'Medicina'),
+('MD-055', 'Consulta de puericultura (0-2 anos)', 'Avaliação e Diagnóstico', 'Pediatria', 'Médico', 30, 'Medicina'),
+('MD-056', 'Triagem auditiva neonatal (TEOAE)', 'Pediatria', 'Pediatria', 'Médico', 20, 'Medicina'),
+('MD-057', 'Avaliação do desenvolvimento neuropsicomotor', 'Pediatria', 'Pediatria', 'Médico', 30, 'Medicina'),
+('MD-058', 'Aplicação de toxina botulínica (glabela + frontalis + pés de galinha)', 'Harmonização (HOF)', 'Harmonização Orofacial', 'Ambos', 45, 'Ambos'),
+('MD-059', 'Preenchimento labial (ácido hialurônico)', 'Harmonização (HOF)', 'Harmonização Orofacial', 'Ambos', 45, 'Ambos'),
+('MD-060', 'Preenchimento de sulco nasogeniano', 'Harmonização (HOF)', 'Harmonização Orofacial', 'Ambos', 45, 'Ambos'),
+('MD-061', 'Rinomodelação não cirúrgica', 'Harmonização (HOF)', 'Harmonização Orofacial', 'Ambos', 60, 'Ambos'),
+('MD-062', 'Bioestimulador de colágeno (face/pescoço)', 'Harmonização (HOF)', 'Harmonização Orofacial', 'Ambos', 60, 'Ambos'),
+('MD-063', 'Fios de PDO (lifting não cirúrgico)', 'Harmonização (HOF)', 'Harmonização Orofacial', 'Ambos', 90, 'Ambos'),
+('MD-064', 'Bichectomia cirúrgica', 'Cirurgia Facial', 'Harmonização Orofacial', 'Ambos', 90, 'Ambos'),
+('MD-065', 'Lipo de papada (enzimática – Kybella/Belkyra)', 'Harmonização (HOF)', 'Harmonização Orofacial', 'Ambos', 45, 'Ambos')
+ON CONFLICT (code) DO NOTHING;

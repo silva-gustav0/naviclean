@@ -48,6 +48,7 @@ export type Database = {
       catalog_procedures: {
         Row: {
           category: string | null
+          clinic_type: string | null
           code: string
           duration_min: number
           id: number
@@ -57,6 +58,7 @@ export type Database = {
         }
         Insert: {
           category?: string | null
+          clinic_type?: string | null
           code: string
           duration_min?: number
           id?: number
@@ -66,6 +68,7 @@ export type Database = {
         }
         Update: {
           category?: string | null
+          clinic_type?: string | null
           code?: string
           duration_min?: number
           id?: number
@@ -502,6 +505,7 @@ export type Database = {
           appointment_duration_minutes: number | null
           auto_confirm_appointments: boolean | null
           bank_info: Json | null
+          clinic_type: string | null
           cnpj: string | null
           cover_image_url: string | null
           created_at: string | null
@@ -547,6 +551,7 @@ export type Database = {
           appointment_duration_minutes?: number | null
           auto_confirm_appointments?: boolean | null
           bank_info?: Json | null
+          clinic_type?: string | null
           cnpj?: string | null
           cover_image_url?: string | null
           created_at?: string | null
@@ -592,6 +597,7 @@ export type Database = {
           appointment_duration_minutes?: number | null
           auto_confirm_appointments?: boolean | null
           bank_info?: Json | null
+          clinic_type?: string | null
           cnpj?: string | null
           cover_image_url?: string | null
           created_at?: string | null

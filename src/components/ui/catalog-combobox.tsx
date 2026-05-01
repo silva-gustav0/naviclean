@@ -4,10 +4,11 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { Loader2, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useClinicConfig, getCatalogTypeFilter } from "@/lib/clinic-config-context"
 
 export type CatalogProcedureRow = {
   id: number; code: string; name: string
-  category: string | null; specialty: string | null; type: string | null; duration_min: number
+  category: string | null; specialty: string | null; type: string | null; duration_min: number; clinic_type: string | null
 }
 export type CatalogStockRow = {
   id: number; code: string; name: string
@@ -19,6 +20,9 @@ export type CatalogExpenseRow = {
 }
 
 type CatalogTable = "catalog_procedures" | "catalog_stock_items" | "catalog_fixed_expenses"
+
+// catalog_fixed_expenses is clinic-agnostic (costs are the same regardless of specialty)
+const FILTERABLE_TABLES: CatalogTable[] = ["catalog_procedures", "catalog_stock_items"]
 
 interface CatalogComboboxProps {
   table: CatalogTable
@@ -45,6 +49,11 @@ export function CatalogCombobox({
   inputClassName,
   required,
 }: CatalogComboboxProps) {
+  const { clinicType, userRole } = useClinicConfig()
+  const typeFilter = FILTERABLE_TABLES.includes(table)
+    ? getCatalogTypeFilter(clinicType, userRole)
+    : null
+
   const [results, setResults] = useState<Record<string, unknown>[]>([])
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
@@ -60,16 +69,22 @@ export function CatalogCombobox({
       }
       setLoading(true)
       const supabase = createClient()
-      const { data } = await supabase
+      let q = supabase
         .from(table)
         .select("*")
         .ilike(searchColumn, `%${query}%`)
         .limit(8)
+
+      if (typeFilter) {
+        q = q.in("clinic_type", typeFilter)
+      }
+
+      const { data } = await q
       setResults((data as Record<string, unknown>[]) ?? [])
       setOpen((data?.length ?? 0) > 0)
       setLoading(false)
     },
-    [table, searchColumn]
+    [table, searchColumn, typeFilter]
   )
 
   useEffect(() => {

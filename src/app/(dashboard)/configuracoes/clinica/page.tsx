@@ -41,6 +41,7 @@ export default async function ClinicaConfigPage() {
             phone: clinic.phone as string | null,
             address_city: clinic.address_city as string | null,
             address_state: clinic.address_state as string | null,
+            clinic_type: (clinic as Record<string, unknown>).clinic_type as string | null,
           }}
         />
       </div>

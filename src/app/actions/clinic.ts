@@ -13,12 +13,14 @@ export async function updateClinic(formData: FormData) {
   const phone = (formData.get("phone") as string).trim()
   const address_city = (formData.get("address_city") as string).trim()
   const address_state = (formData.get("address_state") as string).trim().toUpperCase()
+  const clinic_type = (formData.get("clinic_type") as string) || "dental"
 
   if (!name || !slug) return { error: "Nome e identificador são obrigatórios" }
+  if (!["dental", "medical", "mixed"].includes(clinic_type)) return { error: "Tipo de clínica inválido" }
 
   const { error } = await supabase
     .from("clinics")
-    .update({ name, slug, phone, address_city, address_state })
+    .update({ name, slug, phone, address_city, address_state, clinic_type })
     .eq("owner_id", user.id)
 
   if (error) {

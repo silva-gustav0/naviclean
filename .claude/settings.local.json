@@ -35,7 +35,9 @@
       "Bash(git commit -m ' *)",
       "Bash(git commit -m 'fix: substituir ícone clipboard_medical \\(inexistente\\) por clinical_notes *)",
       "Read(//c/Users/gusta/AppData/Local/Temp/naviclean-ref//**)",
-      "Read(//c/Users/gusta/**)"
+      "Read(//c/Users/gusta/**)",
+      "mcp__plugin_supabase_supabase__apply_migration",
+      "mcp__plugin_supabase_supabase__generate_typescript_types"
     ]
   }
 }

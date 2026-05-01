@@ -4,6 +4,7 @@ import { SidebarNav } from "@/components/dashboard/sidebar-nav"
 import { ThemeToggle } from "@/components/ui/ThemeToggle"
 import { ROLE_LABELS } from "@/lib/auth/nav-config"
 import { AppointmentReminder } from "@/components/dashboard/agenda/AppointmentReminder"
+import { ClinicConfigProvider, type ClinicType } from "@/lib/clinic-config-context"
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -16,9 +17,10 @@ export default async function DashboardLayout({ children }: { children: React.Re
   let effectiveRole = "clinic_owner"
   let displayRoleLabel = "Administrador"
   let memberId: string | null = null
+  let clinicType: ClinicType = "dental"
 
   const [{ data: ownedClinic }, { data: profile }] = await Promise.all([
-    supabase.from("clinics").select("id, name").eq("owner_id", user.id).single(),
+    supabase.from("clinics").select("id, name, clinic_type").eq("owner_id", user.id).single(),
     supabase.from("profiles").select("full_name").eq("id", user.id).single(),
   ])
 
@@ -26,6 +28,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     clinicName = ownedClinic.name
     clinicId = ownedClinic.id
     effectiveRole = "clinic_owner"
+    clinicType = ((ownedClinic as Record<string, unknown>).clinic_type as ClinicType) ?? "dental"
 
     // Check if owner also has a professional role in clinic_members
     const { data: ownerMembership } = await supabase
@@ -58,11 +61,12 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
     const { data: memberClinic } = await supabase
       .from("clinics")
-      .select("name")
+      .select("name, clinic_type")
       .eq("id", membership.clinic_id)
       .single()
 
     clinicName = memberClinic?.name ?? "Clínica"
+    clinicType = ((memberClinic as Record<string, unknown> | null)?.clinic_type as ClinicType) ?? "dental"
   }
 
   // Badge de agendamentos de hoje na sidebar
@@ -88,6 +92,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const roleLabel = displayRoleLabel
 
   return (
+    <ClinicConfigProvider clinicType={clinicType} userRole={effectiveRole}>
     <div className="flex h-screen overflow-hidden bg-background">
       <AppointmentReminder memberId={memberId} clinicId={clinicId} />
       <SidebarNav
@@ -152,5 +157,6 @@ export default async function DashboardLayout({ children }: { children: React.Re
         </main>
       </div>
     </div>
+    </ClinicConfigProvider>
   )
 }
